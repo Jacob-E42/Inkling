@@ -23,6 +23,7 @@ class User {
 
 	// Registers a new user
 	async register(firstName, lastName, email, password, interests) {
+		console.debug("User.register");
 		// Check if user with the same email already exists
 		const existingUser = await this.getByEmail(email);
 		if (existingUser) {
@@ -30,7 +31,7 @@ class User {
 		}
 
 		// Hash the password
-		const hashedPassword = await bcrypt.hash(password, bcr);
+		const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
 		// Insert new user into the database
 		const newUser = {
@@ -40,7 +41,8 @@ class User {
 			password: hashedPassword,
 			interests
 		};
-		const result = await this.db(this.tableName)
+
+		const result = await this.db("users")
 			.insert(newUser)
 			.returning(["first_name", "last_name", "email", "interests"]);
 
