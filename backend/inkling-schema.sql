@@ -2,7 +2,7 @@ CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
-  email TEXT NOT NULL CHECK (position('@' IN email) > 1),
+  email TEXT NOT NULL CHECK (position('@' IN email) > 1) UNIQUE,
   password TEXT NOT NULL ,
   interests text[] NOT NULL CHECK (cardinality(interests) > 0)
 
