@@ -13,12 +13,14 @@ class User {
 
 	// Retrieves a user by their ID
 	async getById(id) {
-		return this.db(this.tableName).where({ id }).first();
+		const res = await this.db("users").select("*").where({ id: id }).first();
+		console.log(res);
+		return res;
 	}
 
 	// Retrieves a user by their email
 	async getByEmail(email) {
-		return this.db(this.tableName).where({ email }).first();
+		return await this.db(this.tableName).select().where({ email }).first();
 	}
 
 	// Registers a new user

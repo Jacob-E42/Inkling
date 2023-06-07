@@ -1,10 +1,14 @@
 "use strict";
 
-const knex = require("knex");
-const config = require("./knexfile");
+/** Database setup for users. */
 
-// Create a Knex instance for the development environment
-const db = knex(config.development);
+const { Client } = require("pg");
+const { getDatabaseUri } = require("./config");
 
-// Export the Knex instance
+let db = new Client({
+	connectionString: getDatabaseUri()
+});
+
+await db.connect();
+
 module.exports = db;
