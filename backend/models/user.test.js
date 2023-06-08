@@ -141,4 +141,36 @@ describe("User", () => {
 			}
 		});
 	});
+
+	describe("authenticate", function () {
+		test("works", async function () {
+			const res = await user.authenticate("john@example.com", "password");
+			expect(res).toEqual({
+				id: 1,
+				first_name: "John",
+				last_name: "Doe",
+				email: "john@example.com",
+				interests: ["gratitude", "dailyjournal"]
+			});
+		});
+
+		test("unauth if no such user", async function () {
+			try {
+				await user.authenticate("horseface@test.com", "password");
+				fail();
+			} catch (err) {
+				expect(err instanceof UnauthorizedError).toBeTruthy();
+			}
+		});
+
+		test("unauth if wrong password", async function () {
+			try {
+				await user.authenticate("john@example.com", "wrong");
+				fail();
+			} catch (err) {
+				// console.log(err);
+				expect(err instanceof UnauthorizedError).toBeTruthy();
+			}
+		});
+	});
 });

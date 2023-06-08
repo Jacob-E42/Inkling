@@ -37,7 +37,7 @@ class User {
 
 	// Registers a new user
 	async register(firstName, lastName, email, password, interests) {
-		console.debug("User.register");
+		console.debug("register");
 
 		const existingUser = await this.getByEmail(email);
 		if (existingUser) {
@@ -63,6 +63,25 @@ class User {
 
 		const res = await db.query(query);
 		return res.rows[0];
+	}
+
+	async authenticate(email, password) {
+		console.debug("authenticate");
+
+		const user = await this.getByEmail(email);
+		if (!user) {
+			throw new UnauthorizedError("Invalid credentials");
+		}
+
+		const isPasswordValid = await bcrypt.compare(password, user.password);
+		if (!isPasswordValid) {
+			throw new UnauthorizedError("Invalid credentials");
+		}
+
+		delete user.password;
+
+		// Return the authenticated user
+		return user;
 	}
 
 	// Other CRUD methods...
