@@ -5,16 +5,16 @@ const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expres
 const User = require("./user");
 const bcrypt = require("bcrypt");
 const db = require("../db");
-
-// const Pool = require("pg-pool");
-// const pool = new Pool({});
+let user;
 
 describe("User", () => {
-	let user;
-
 	beforeAll(async () => {
 		// Clear all data from the users table
-		await db.query("DELETE FROM users");
+		try {
+			const res = await db.query("DELETE FROM users");
+		} catch (err) {
+			console.error(err);
+		}
 
 		// Insert sample users into the database
 		const hashedPassword = await bcrypt.hash("password", 1);
@@ -44,7 +44,7 @@ describe("User", () => {
 
 		for (const user of userData) {
 			const { id, first_name, last_name, email, password, interests } = user;
-			await client.query(insertQuery, [id, first_name, last_name, email, password, interests]);
+			await db.query(insertQuery, [id, first_name, last_name, email, password, interests]);
 		}
 
 		// Create a new instance of the User class
@@ -62,9 +62,8 @@ describe("User", () => {
 	});
 
 	beforeEach(async () => {
-		await db.query("BEGIN");
-
 		// Start a new transaction
+		await db.query("BEGIN");
 	});
 
 	afterEach(async () => {
@@ -72,20 +71,20 @@ describe("User", () => {
 		await db.query("ROLLBACK");
 	});
 
+	test("user exists", async () => {
+		expect(user).toBeDefined();
+	});
+
 	describe("getById", () => {
 		it("should retrieve a user by their ID", async () => {
-			// console.log(await db.select("*").from("users"));
-			console.log(user);
-
 			const id = 1;
 			const result = await user.getById(id);
-			console.log(result);
+
 			expect(result).toBeDefined();
 			expect(result.id).toBe(id);
 		});
 
 		it("should should return NotFoundError if no such id", async () => {
-			// console.log(await db.select("*").from("users"));
 			try {
 				await user.getById(1000);
 				fail();
@@ -95,51 +94,51 @@ describe("User", () => {
 		});
 	});
 
-	// describe("getByEmail", () => {
-	// 	it("should retrieve a user by their email", async () => {
-	// 		console.log(await db.select("*").from("users"));
-	// 		const email = "test@example.com";
-	// 		const result = await user.getByEmail(email);
-	// 		console.log(await db.select("*").from("users"));
-	// 		expect(result).toBeDefined();
-	// 		console.log(result);
-	// 		expect(result.email).toBe(email);
-	// 	});
-	// });
+	describe("getByEmail", () => {
+		it("should retrieve a user by their email", async () => {
+			const email = "john@example.com";
+			const result = await user.getByEmail(email);
 
-	// describe("register", () => {
-	// 	it("should register a new user", async () => {
-	// 		console.log(await db.select("*").from("users"));
-	// 		const firstName = "John";
-	// 		const lastName = "Doe";
-	// 		const email = "test@example.com";
-	// 		const password = "password";
-	// 		const interests = ["interest1", "interest2"];
+			expect(result).toBeDefined();
 
-	// 		const result = await user.register(firstName, lastName, email, password, interests);
-	// 		console.log(await db.select("*").from("users"));
-	// 		expect(result).toBeDefined();
-	// 		expect(result.first_name).toBe(firstName);
-	// 		expect(result.last_name).toBe(lastName);
-	// 		expect(result.email).toBe(email);
-	// 		expect(result.interests).toEqual(interests);
-	// 	});
+			expect(result.email).toBe(email);
+		});
+		it("should should return null if user with that email doesn't exist", async () => {
+			const res = await user.getByEmail("thiswontwork@email.com");
+			expect(res).toBeNull();
+		});
+	});
 
-	// 	it("should throw BadRequestError if user with the same email already exists", async () => {
-	// 		console.log(await db.select("*").from("users"));
-	// 		const firstName = "John";
-	// 		const lastName = "Doe";
-	// 		const email = "test@example.com";
-	// 		const password = "password";
-	// 		const interests = ["interest1", "interest2"];
+	describe("register", () => {
+		it("should register a new user", async () => {
+			const firstName = "John";
+			const lastName = "Doe";
+			const email = "test@example.com";
+			const password = "password";
+			const interests = ["interest1", "interest2"];
 
-	// 		try {
-	// 			await user.register(firstName, lastName, email, password, interests);
-	// 			console.log(await db.select("*").from("users"));
-	// 		} catch (error) {
-	// 			expect(error).toBeInstanceOf(BadRequestError);
-	// 			expect(error.message).toBe("User with this email already exists");
-	// 		}
-	// 	});
-	// });
+			const result = await user.register(firstName, lastName, email, password, interests);
+
+			expect(result).toBeDefined();
+			expect(result.first_name).toBe(firstName);
+			expect(result.last_name).toBe(lastName);
+			expect(result.email).toBe(email);
+			expect(result.interests).toEqual(interests);
+		});
+
+		it("should throw BadRequestError if user with the same email already exists", async () => {
+			const firstName = "John";
+			const lastName = "Doe";
+			const email = "john@example.com";
+			const password = "password";
+			const interests = ["interest1", "interest2"];
+
+			try {
+				await user.register(firstName, lastName, email, password, interests);
+			} catch (error) {
+				expect(error).toBeInstanceOf(BadRequestError);
+				expect(error.message).toBe("User with this email already exists");
+			}
+		});
+	});
 });

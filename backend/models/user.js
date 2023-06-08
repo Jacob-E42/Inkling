@@ -6,36 +6,46 @@ const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expres
 const { BCRYPT_WORK_FACTOR } = require("../config.js");
 
 class User {
-	constructor() {
-		this.db = db;
-		this.tableName = "users";
-	}
-
 	// Retrieves a user by their ID
 	async getById(id) {
-		const res = await this.db("users").select("*").where({ id: id }).first();
-		console.log(res);
-		return res;
+		const query = {
+			text: "SELECT * FROM users WHERE id = $1",
+			values: [id]
+		};
+
+		const res = await db.query(query);
+		const user = res.rows[0];
+
+		if (!user) throw new NotFoundError(`No user with id: ${id}}`);
+
+		return user;
 	}
 
 	// Retrieves a user by their email
 	async getByEmail(email) {
-		return await this.db(this.tableName).select().where({ email }).first();
+		const query = {
+			text: "SELECT * FROM users WHERE email = $1",
+			values: [email]
+		};
+
+		const res = await db.query(query);
+		const user = res.rows[0];
+
+		if (!user) return null;
+		return user;
 	}
 
 	// Registers a new user
 	async register(firstName, lastName, email, password, interests) {
 		console.debug("User.register");
-		// Check if user with the same email already exists
+
 		const existingUser = await this.getByEmail(email);
 		if (existingUser) {
 			throw new BadRequestError("User with this email already exists");
 		}
 
-		// Hash the password
 		const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
-		// Insert new user into the database
 		const newUser = {
 			first_name: firstName,
 			last_name: lastName,
@@ -44,12 +54,15 @@ class User {
 			interests
 		};
 
-		const result = await this.db("users")
-			.insert(newUser)
-			.returning(["first_name", "last_name", "email", "interests"]);
+		const query = {
+			text: `INSERT INTO users (first_name, last_name, email, password, interests)
+				 VALUES ($1, $2, $3, $4, $5)
+				 RETURNING first_name, last_name, email, interests`,
+			values: [newUser.first_name, newUser.last_name, newUser.email, newUser.password, newUser.interests]
+		};
 
-		// Return the newly created user
-		return result[0];
+		const res = await db.query(query);
+		return res.rows[0];
 	}
 
 	// Other CRUD methods...
