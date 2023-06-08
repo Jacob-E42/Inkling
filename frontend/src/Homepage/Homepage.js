@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Container } from "reactstrap";
 import { Link } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 const Homepage = () => {
+	const { user, setUser } = useContext(UserContext);
 	return (
 		<Container>
+			<p>User: {user}</p>
 			<h1 className="mt-5">Inkling</h1>
 			<p className="lead">A cool slogan here</p>
 			<div className="d-flex justify-content-center">
