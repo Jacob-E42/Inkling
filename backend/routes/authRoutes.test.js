@@ -143,6 +143,19 @@ describe("User", () => {
 			expect(resp.statusCode).toEqual(400);
 		});
 
+		test("bad request with short password", async function () {
+			let resp = await request(app)
+				.post("/auth/signup")
+				.send({
+					firstName: "first",
+					lastName: "last",
+					password: "pass",
+					email: "new@email.com",
+					interests: ["gratitude", "habit building"]
+				});
+			expect(resp.statusCode).toEqual(400);
+		});
+
 		test("bad request with invalid data", async function () {
 			let resp = await request(app)
 				.post("/auth/signup")
@@ -161,6 +174,54 @@ describe("User", () => {
 				password: "password",
 				email: "tst@emial.com",
 				interests: "gratitude"
+			});
+			expect(resp.statusCode).toEqual(400);
+		});
+	});
+
+	describe("POST /auth/login", function () {
+		test("works", async function () {
+			const resp = await request(app).post("/auth/login").send({
+				email: "john@example.com",
+				password: "password"
+			});
+			expect(resp.body).toEqual({
+				token: expect.any(String)
+			});
+		});
+
+		test("unauth with non-existent user", async function () {
+			const resp = await request(app).post("/auth/login").send({
+				email: "none@email.com",
+				password: "password"
+			});
+			expect(resp.statusCode).toEqual(401);
+		});
+
+		test("unauth with wrong password", async function () {
+			const resp = await request(app).post("/auth/login").send({
+				email: "john@example.com",
+				password: "nothappening"
+			});
+			expect(resp.statusCode).toEqual(401);
+		});
+
+		test("bad request with missing data", async function () {
+			let resp = await request(app).post("/auth/login").send({
+				email: "john@example.com"
+			});
+			expect(resp.statusCode).toEqual(400);
+
+			resp = await request(app).post("/auth/login").send({
+				password: "password"
+			});
+			expect(resp.statusCode).toEqual(400);
+		});
+
+		test("bad request with invalid data", async function () {
+			const resp = await request(app).post("/auth/login").send({
+				email: 42,
+				password: "password"
 			});
 			expect(resp.statusCode).toEqual(400);
 		});
