@@ -57,7 +57,7 @@ const SignupForm = () => {
 		if (data.interests.length === 0) {
 			errors.interests = "Select at least one interest";
 		} else if (data.interests.length > 3) {
-			errors.interests = "Select up to three interests";
+			errors.interests = "Select no more than three interests";
 		}
 
 		return errors;
@@ -67,7 +67,7 @@ const SignupForm = () => {
 		// Perform email validation here
 		// You can use regular expressions or other validation libraries
 		// Return true if the email is valid, false otherwise
-		return /\S+@\S+\.\S+/.test(email);
+		return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
 	};
 
 	const isValidPassword = password => {
@@ -129,6 +129,7 @@ const SignupForm = () => {
 			</FormGroup>
 			<FormGroup>
 				<Label for="interests">Interests</Label>
+				<p>Please select one to three interests</p>
 				<div>
 					<Input
 						type="checkbox"
