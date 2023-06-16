@@ -44,7 +44,7 @@ class Request {
 	}
 
 	async getCurrentUser(email) {
-		const response = await this.request("users/", data, "post");
+		const response = await this.request("users/", email, "post");
 		return response.token;
 	}
 }
