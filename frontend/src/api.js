@@ -30,8 +30,18 @@ class Request {
 		}
 	}
 
-	// Other specialized request methods can be added here
-	// For example, methods like get, post, put, delete, etc.
+	// Other specialized request methods
+
+	// Register a new user with the provided username, password, first name, last name, and email
+	async register(firstName, lastName, email, password, interests) {
+		let response = await this.request("auth/signup", { firstName, lastName, email, password, interests }, "post");
+		return response.token;
+	}
+
+	async login(email, password) {
+		const response = await this.request("auth/login", { email, password }, "post");
+		return response.token;
+	}
 }
 
 export default Request;
