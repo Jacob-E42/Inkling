@@ -44,5 +44,22 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
-	return <UserContext.Provider value={{ user, setUser, signup }}>{children}</UserContext.Provider>;
+	const login = formData => {
+		try {
+			const token = request.login(formData);
+			setToken(token);
+			return { success: true };
+		} catch (errors) {
+			console.error("login failed", errors);
+			return { success: false, errors };
+		}
+	};
+
+	/** Handles site-wide logout. */
+	function logout() {
+		setUser(null);
+		setToken(null);
+	}
+
+	return <UserContext.Provider value={{ user, setUser, signup, login, logout }}>{children}</UserContext.Provider>;
 };
