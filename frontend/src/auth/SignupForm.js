@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 const SignupForm = () => {
+	const { signup } = useContext(UserContext);
 	const [formData, setFormData] = useState({
 		firstName: "",
 		lastName: "",
@@ -11,6 +13,7 @@ const SignupForm = () => {
 		interests: []
 	});
 	const [errors, setErrors] = useState({});
+	const navigate = useNavigate();
 
 	const handleChange = e => {
 		const { name, value } = e.target;
@@ -22,10 +25,16 @@ const SignupForm = () => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
+
 		const validationErrors = validateForm(formData);
 		if (Object.keys(validationErrors).length === 0) {
-			// Submit the form
-			console.log("Form submitted:", formData);
+			const result = signup(formData);
+			if (result.success) {
+				console.log("Form submitted:", formData);
+				navigate("/journal");
+			} else {
+				setErrors(result.errors);
+			}
 		} else {
 			setErrors(validationErrors);
 		}
