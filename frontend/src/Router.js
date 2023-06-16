@@ -29,6 +29,10 @@ const AppRouter = () => {
 					path={"/profile"}
 					element={<Profile />}
 				/>
+				<Route
+					exact
+					path={"/journal"}
+				/>
 			</Routes>
 		</Router>
 	);
