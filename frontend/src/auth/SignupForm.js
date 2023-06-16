@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const SignupForm = () => {
 	const [formData, setFormData] = useState({
@@ -175,6 +176,13 @@ const SignupForm = () => {
 				{errors.interests && <div className="error">{errors.interests}</div>}
 			</FormGroup>
 			<Button type="submit">Submit</Button>
+
+			<Button
+				type="button"
+				tag={Link}
+				to="/">
+				Back
+			</Button>
 		</Form>
 	);
 };
