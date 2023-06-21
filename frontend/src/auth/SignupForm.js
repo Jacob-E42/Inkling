@@ -34,12 +34,14 @@ const SignupForm = () => {
 		}
 	};
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
+		console.debug("handleSubmit");
 
 		const validationErrors = validateForm(formData);
 		if (Object.keys(validationErrors).length === 0) {
-			const result = signup(formData);
+			const result = await signup(formData);
+			console.log(result);
 			if (result.success) {
 				console.log("Form submitted:", formData);
 				navigate("/profile");

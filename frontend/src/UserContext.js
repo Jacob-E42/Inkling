@@ -21,6 +21,7 @@ export const UserProvider = ({ children }) => {
 						// put the token on the Api class so it can use it to call the API.
 						request.token = token;
 						const currentUser = await request.getCurrentUser(email);
+						console.log(currentUser);
 						setUser(currentUser);
 					} catch (err) {
 						console.error("App loadUserInfo: problem loading", err);
