@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
-
+import "./auth.css";
 const SignupForm = () => {
 	const { signup } = useContext(UserContext);
 	const [formData, setFormData] = useState({
@@ -96,7 +96,7 @@ const SignupForm = () => {
 		// Perform password validation here
 		// You can use regular expressions or other validation logic
 		// Return true if the password is valid, false otherwise
-		return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/.test(password);
+		return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,}$/.test(password);
 	};
 
 	return (
