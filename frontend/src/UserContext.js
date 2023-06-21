@@ -33,9 +33,11 @@ export const UserProvider = ({ children }) => {
 		[token]
 	);
 
-	const signup = formData => {
+	const signup = async formData => {
+		console.debug("signup");
 		try {
-			const token = request.signup(formData);
+			const token = await request.signup(formData);
+			console.log(token);
 			setToken(token);
 			return { success: true };
 		} catch (errors) {
@@ -44,9 +46,10 @@ export const UserProvider = ({ children }) => {
 		}
 	};
 
-	const login = formData => {
+	const login = async formData => {
+		console.debug("login");
 		try {
-			const token = request.login(formData);
+			const token = await request.login(formData);
 			setToken(token);
 			return { success: true };
 		} catch (errors) {
@@ -57,6 +60,7 @@ export const UserProvider = ({ children }) => {
 
 	/** Handles site-wide logout. */
 	function logout() {
+		console.debug("logout");
 		setUser(null);
 		setToken(null);
 	}

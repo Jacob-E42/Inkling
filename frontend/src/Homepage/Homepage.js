@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../UserContext";
 
 const Homepage = () => {
-	const { user, setUser } = useContext(UserContext);
+	const { user } = useContext(UserContext);
 	return (
 		<Container>
 			<p>User: {user}</p>

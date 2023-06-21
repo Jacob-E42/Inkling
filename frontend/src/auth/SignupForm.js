@@ -16,11 +16,22 @@ const SignupForm = () => {
 	const navigate = useNavigate();
 
 	const handleChange = e => {
-		const { name, value } = e.target;
-		setFormData(prevFormData => ({
-			...prevFormData,
-			[name]: value
-		}));
+		const { name, value, type, checked } = e.target;
+
+		if (type === "checkbox") {
+			// Checkbox input
+			setFormData(prevFormData => ({
+				...prevFormData,
+				interests: checked
+					? [...prevFormData.interests, value]
+					: prevFormData.interests.filter(item => item !== value)
+			}));
+		} else {
+			setFormData(prevFormData => ({
+				...prevFormData,
+				[name]: value
+			}));
+		}
 	};
 
 	const handleSubmit = e => {
@@ -31,7 +42,7 @@ const SignupForm = () => {
 			const result = signup(formData);
 			if (result.success) {
 				console.log("Form submitted:", formData);
-				navigate("/journal");
+				navigate("/profile");
 			} else {
 				setErrors(result.errors);
 			}
@@ -64,6 +75,7 @@ const SignupForm = () => {
 				"Password must be at least 8 characters long and contain at least one letter and one number";
 		}
 
+		console.log(data.interests);
 		if (data.interests.length === 0) {
 			errors.interests = "Select at least one interest";
 		} else if (data.interests.length > 3) {
@@ -84,7 +96,7 @@ const SignupForm = () => {
 		// Perform password validation here
 		// You can use regular expressions or other validation logic
 		// Return true if the password is valid, false otherwise
-		return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+		return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/.test(password);
 	};
 
 	return (
@@ -119,6 +131,7 @@ const SignupForm = () => {
 					type="email"
 					name="email"
 					id="email"
+					autoComplete="email"
 					value={formData.email}
 					onChange={handleChange}
 					invalid={!!errors.email}
@@ -131,6 +144,7 @@ const SignupForm = () => {
 					type="password"
 					name="password"
 					id="password"
+					autoComplete="current-password"
 					value={formData.password}
 					onChange={handleChange}
 					invalid={!!errors.password}
