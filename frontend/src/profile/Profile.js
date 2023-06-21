@@ -5,6 +5,7 @@ import { UserContext } from "../UserContext";
 
 const Profile = () => {
 	const { user, logout } = useContext(UserContext);
+	console.log("user", user);
 	const navigate = useNavigate();
 	const handleLogout = () => {
 		logout();
