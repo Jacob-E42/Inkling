@@ -2,31 +2,23 @@ import React, { useContext, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
+import useForm from "../hooks/useForm";
 
 const LoginForm = () => {
 	const { login } = useContext(UserContext);
-	const [formData, setFormData] = useState({
+	const [formData, handleChange] = useForm({
 		email: "",
 		password: ""
 	});
 	const [errors, setErrors] = useState({});
 	const navigate = useNavigate();
 
-	const handleChange = e => {
-		const { name, value } = e.target;
-
-		setFormData(prevFormData => ({
-			...prevFormData,
-			[name]: value
-		}));
-	};
-
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 
 		const validationErrors = validateForm(formData);
 		if (Object.keys(validationErrors).length === 0) {
-			const result = login(formData);
+			const result = await login(formData);
 			if (result.success) {
 				console.log("Form submitted:", formData);
 				navigate("/profile");
@@ -68,7 +60,7 @@ const LoginForm = () => {
 		// Perform password validation here
 		// You can use regular expressions or other validation logic
 		// Return true if the password is valid, false otherwise
-		return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/.test(password);
+		return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,}$/.test(password);
 	};
 
 	return (
