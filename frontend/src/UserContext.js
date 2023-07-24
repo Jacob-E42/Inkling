@@ -1,45 +1,54 @@
 import React, { createContext, useState, useEffect } from "react";
+import useLocalStorage from "./hooks/useLocalStorage";
 import Request from "./api";
 import jwtDecode from "jwt-decode";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-	const [user, setUser] = useState(null);
-	const [token, setToken] = useState(null);
-
-	const request = new Request();
+	const [user, setUser] = useLocalStorage("user", null);
+	const [token, setToken] = useLocalStorage("token", null);
+	const [infoLoaded, setInfoLoaded] = useState(false);
+	const [msg, setMsg] = useState("");
+	const [color, setColor] = useState("primary");
 
 	useEffect(
 		function loadUserInfo() {
 			console.debug("App useEffect loadUserInfo", "token=", token);
 
 			async function getCurrentUser() {
+				console.debug("getCurrentUser");
 				if (token) {
 					try {
-						const { email } = jwtDecode(token);
+						let { email } = await jwtDecode(token);
+						email = await email.trim();
+						console.log("email", email);
 						// put the token on the Api class so it can use it to call the API.
-						request.token = token;
+						const request = new Request(token);
 						const currentUser = await request.getCurrentUser(email);
-						console.log(currentUser);
 						setUser(currentUser);
+						console.log("current user", currentUser);
 					} catch (err) {
-						console.error("App loadUserInfo: problem loading", err);
+						console.error(err);
 						setUser(null);
 					}
+				} else {
+					console.debug("No Token");
 				}
 			}
 			getCurrentUser();
 		},
-		[token]
+		[token, setUser]
 	);
 
 	const signup = async formData => {
 		console.debug("signup");
 		try {
+			const request = new Request();
 			const token = await request.signup(formData);
 			console.log(token);
-			setToken(token);
+			if (token) setToken(token);
+			else throw new Error("missing sign in token");
 			return { success: true };
 		} catch (errors) {
 			console.error("signup failed", errors);
@@ -50,8 +59,10 @@ export const UserProvider = ({ children }) => {
 	const login = async formData => {
 		console.debug("login");
 		try {
+			const request = new Request();
 			const token = await request.login(formData);
-			setToken(token);
+			if (token) setToken(token);
+			else throw new Error("Log in token in missing");
 			return { success: true };
 		} catch (errors) {
 			console.error("login failed", errors);
