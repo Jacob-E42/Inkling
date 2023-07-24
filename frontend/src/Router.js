@@ -4,7 +4,7 @@ import Homepage from "./Homepage/Homepage";
 import LoginForm from "./auth/LoginForm";
 import SignupForm from "./auth/SignupForm";
 import Profile from "./profile/Profile";
-import { UserContext } from "./UserContext";
+import UserContext from "./UserContext";
 
 const AppRouter = () => {
 	const { user } = useContext(UserContext);

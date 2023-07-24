@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import UserContext from "../UserContext";
 import useForm from "../hooks/useForm";
 
 const LoginForm = () => {
@@ -13,22 +13,27 @@ const LoginForm = () => {
 	const [errors, setErrors] = useState({});
 	const navigate = useNavigate();
 
-	const handleSubmit = async e => {
-		e.preventDefault();
+	const handleSubmit = useCallback(
+		async e => {
+			e.preventDefault();
 
-		const validationErrors = validateForm(formData);
-		if (Object.keys(validationErrors).length === 0) {
-			const result = await login(formData);
-			if (result.success) {
-				console.log("Form submitted:", formData);
-				navigate("/profile");
-			} else {
-				setErrors(result.errors);
+			// const validationErrors = validateForm(formData);
+			// if (Object.keys(validationErrors).length === 0) {
+			try {
+				const result = await login(formData);
+				if (result.success) {
+					console.log("Form submitted:", formData);
+					navigate("/profile");
+				}
+			} catch (err) {
+				console.error(err);
 			}
-		} else {
-			setErrors(validationErrors);
-		}
-	};
+			// } else {
+			// 	setErrors(validationErrors);
+			// }
+		},
+		[login, formData, navigate]
+	);
 
 	const validateForm = data => {
 		const errors = {};
