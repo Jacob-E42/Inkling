@@ -3,8 +3,8 @@ import axios from "axios";
 const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class Request {
-	constructor() {
-		this.token = null;
+	constructor(token = null) {
+		this.token = token;
 	}
 
 	async request(endpoint, data = {}, method = "get") {
@@ -15,10 +15,12 @@ class Request {
 		const params = method === "get" ? data : {};
 
 		try {
-			return (await axios({ url, method, data, params, headers })).data;
+			const response = await axios({ url, method, data, params, headers });
+			console.log("response", response);
+			return response.data;
 		} catch (err) {
-			console.error("API Error:", err, err.response);
-			let message = err.data;
+			console.error("API Error:", err);
+			let message = err.response.data.error.message;
 			throw Array.isArray(message) ? message : [message];
 		}
 	}
@@ -38,7 +40,9 @@ class Request {
 	}
 
 	async getCurrentUser(email) {
-		const response = await this.request("users/", email, "post");
+		console.debug("API getCurrentUser", email);
+		const response = await this.request(`users/`, email);
+		console.log("response", response);
 		return response.token;
 	}
 }
