@@ -12,7 +12,8 @@ function App() {
 	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [msg, setMsg] = useState("");
 	const [color, setColor] = useState("primary");
-	console.log(infoLoaded, setInfoLoaded, msg, setMsg, color, setColor);
+	let jdsl = (infoLoaded, setInfoLoaded, msg, setMsg, color, setColor);
+
 	useEffect(
 		function loadUserInfo() {
 			console.debug("App useEffect loadUserInfo", "token=", token);
@@ -22,7 +23,7 @@ function App() {
 				if (token) {
 					try {
 						let { email } = await jwtDecode(token);
-						email = await email.trim();
+						email = email.trim();
 						console.log("email", email);
 						// put the token on the Api class so it can use it to call the API.
 						const request = new Request(token);
@@ -42,20 +43,23 @@ function App() {
 		[token, setUser]
 	);
 
-	const signup = async formData => {
-		console.debug("signup");
-		try {
-			const request = new Request();
-			const token = await request.signup(formData);
-			console.log(token);
-			if (token) setToken(token);
-			else throw new Error("missing sign in token");
-			return { success: true };
-		} catch (errors) {
-			console.error("signup failed", errors);
-			return { success: false, errors };
-		}
-	};
+	const signup = useCallback(
+		async formData => {
+			console.debug("signup");
+			try {
+				const request = new Request();
+				const token = await request.signup(formData);
+				console.log(token);
+				if (token) setToken(token);
+				else throw new Error("missing sign in token");
+				return { success: true };
+			} catch (errors) {
+				console.error("signup failed", errors);
+				return { success: false, errors };
+			}
+		},
+		[setToken]
+	);
 
 	const login = useCallback(
 		async formData => {
@@ -63,9 +67,10 @@ function App() {
 			try {
 				const request = new Request();
 				const token = await request.login(formData);
-				if (token) setToken(token);
-				else throw new Error("Log in token in missing");
-				return { success: true };
+				if (token) {
+					await setToken(token);
+					return { success: true };
+				} else throw new Error("Log in token in missing");
 			} catch (errors) {
 				console.error("login failed", errors);
 				return { success: false, errors };
@@ -75,11 +80,11 @@ function App() {
 	);
 
 	/** Handles site-wide logout. */
-	function logout() {
+	const logout = useCallback(() => {
 		console.debug("logout");
 		setUser(null);
 		setToken(null);
-	}
+	}, [setUser, setToken]);
 
 	return (
 		<UserContext.Provider value={{ user, setUser, signup, login, logout }}>

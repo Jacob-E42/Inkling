@@ -16,12 +16,12 @@ class Request {
 
 		try {
 			const response = await axios({ url, method, data, params, headers });
-			console.log("response", response);
+			console.log("response", response.data);
 			return response.data;
 		} catch (err) {
 			console.error("API Error:", err);
-			let message = err.response.data.error.message;
-			throw Array.isArray(message) ? message : [message];
+
+			throw new Error(err);
 		}
 	}
 
@@ -29,19 +29,21 @@ class Request {
 
 	// Register a new user with the provided username, password, first name, last name, and email
 	async signup(data) {
+		console.debug("API-signup");
 		let response = await this.request("auth/signup", data, "post");
 		console.log("response", response);
 		return response.token;
 	}
 
 	async login(data) {
+		console.debug("API-login");
 		const response = await this.request("auth/login", data, "post");
 		return response.token;
 	}
 
 	async getCurrentUser(email) {
-		console.debug("API getCurrentUser", email);
-		const response = await this.request(`users/`, email);
+		console.debug("API-getCurrentUser", email);
+		const response = await this.request(`users/${email}`, email);
 		console.log("response", response);
 		return response.token;
 	}

@@ -7,8 +7,6 @@ import Profile from "./profile/Profile";
 import UserContext from "./UserContext";
 
 const AppRouter = () => {
-	const { user } = useContext(UserContext);
-	console.debug("User:", user);
 	return (
 		<Router>
 			<Routes>
