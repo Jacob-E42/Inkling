@@ -5,7 +5,6 @@ const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expres
 const User = require("./user");
 const bcrypt = require("bcrypt");
 const db = require("../db");
-let user;
 
 describe("User", () => {
 	beforeAll(async () => {
@@ -42,13 +41,10 @@ describe("User", () => {
             VALUES ($1, $2, $3, $4, $5, $6)
           `;
 
-		for (const user of userData) {
-			const { id, first_name, last_name, email, password, interests } = user;
+		for (const u of userData) {
+			const { id, first_name, last_name, email, password, interests } = u;
 			await db.query(insertQuery, [id, first_name, last_name, email, password, interests]);
 		}
-
-		// Create a new instance of the User class
-		user = new User();
 	});
 
 	afterAll(async () => {
@@ -72,13 +68,13 @@ describe("User", () => {
 	});
 
 	test("user exists", async () => {
-		expect(user).toBeDefined();
+		expect(User).toBeDefined();
 	});
 
 	describe("getById", () => {
 		it("should retrieve a user by their ID", async () => {
 			const id = 1;
-			const result = await user.getById(id);
+			const result = await User.getById(id);
 
 			expect(result).toBeDefined();
 			expect(result.id).toBe(id);
@@ -86,7 +82,7 @@ describe("User", () => {
 
 		it("should should return NotFoundError if no such id", async () => {
 			try {
-				await user.getById(1000);
+				await User.getById(1000);
 				fail();
 			} catch (err) {
 				expect(err instanceof NotFoundError).toBeTruthy();
@@ -97,15 +93,20 @@ describe("User", () => {
 	describe("getByEmail", () => {
 		it("should retrieve a user by their email", async () => {
 			const email = "john@example.com";
-			const result = await user.getByEmail(email);
+			const result = await User.getByEmail(email);
 
 			expect(result).toBeDefined();
 
 			expect(result.email).toBe(email);
 		});
-		it("should should return null if user with that email doesn't exist", async () => {
-			const res = await user.getByEmail("thiswontwork@email.com");
-			expect(res).toBeNull();
+
+		it("should should return NotFoundError if user with that email doesn't exist", async () => {
+			try {
+				await User.getByEmail("thiswontwork@email.com");
+				fail();
+			} catch (err) {
+				expect(err instanceof NotFoundError).toBeTruthy();
+			}
 		});
 	});
 
@@ -117,7 +118,7 @@ describe("User", () => {
 			const password = "password";
 			const interests = ["interest1", "interest2"];
 
-			const result = await user.register(firstName, lastName, email, password, interests);
+			const result = await User.register(firstName, lastName, email, password, interests);
 
 			expect(result).toBeDefined();
 			expect(result.first_name).toBe(firstName);
@@ -134,7 +135,7 @@ describe("User", () => {
 			const interests = ["interest1", "interest2"];
 
 			try {
-				await user.register(firstName, lastName, email, password, interests);
+				await User.register(firstName, lastName, email, password, interests);
 			} catch (error) {
 				expect(error).toBeInstanceOf(BadRequestError);
 				expect(error.message).toBe("User with this email already exists");
@@ -144,7 +145,7 @@ describe("User", () => {
 
 	describe("authenticate", function () {
 		test("works", async function () {
-			const res = await user.authenticate("john@example.com", "password");
+			const res = await User.authenticate("john@example.com", "password");
 			expect(res).toEqual({
 				id: 1,
 				first_name: "John",
@@ -156,7 +157,7 @@ describe("User", () => {
 
 		test("unauth if no such user", async function () {
 			try {
-				await user.authenticate("horseface@test.com", "password");
+				await User.authenticate("horseface@test.com", "password");
 				fail();
 			} catch (err) {
 				expect(err instanceof UnauthorizedError).toBeTruthy();
@@ -165,7 +166,7 @@ describe("User", () => {
 
 		test("unauth if wrong password", async function () {
 			try {
-				await user.authenticate("john@example.com", "wrong");
+				await User.authenticate("john@example.com", "wrong");
 				fail();
 			} catch (err) {
 				// console.log(err);
