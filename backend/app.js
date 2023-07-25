@@ -25,6 +25,15 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 // app.use("/journals", journalRoutes);
 
+app.get("/", async (req, res, next) => {
+	try {
+		console.debug("app /");
+		return res.send(" Inkling - Start journaling and unlock your potential - Sign Up / Log In");
+	} catch (err) {
+		next(err);
+	}
+});
+
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
 	return next(new NotFoundError());
