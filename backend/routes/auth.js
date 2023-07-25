@@ -18,13 +18,10 @@ router.post("/signup", async (req, res, next) => {
 			throw new BadRequestError(errs);
 		}
 
-		// Create an instance of the User class
-		const user = new User();
-
 		const { firstName, lastName, email, password, interests } = req.body;
 
 		// Create a new user using the User model
-		const newUser = await user.register(firstName, lastName, email, password, interests);
+		const newUser = await User.register(firstName, lastName, email, password, interests);
 
 		// Generate authentication token
 		const authToken = createToken(newUser);
@@ -50,11 +47,8 @@ router.post("/login", async (req, res, next) => {
 
 		const { email, password } = req.body;
 
-		// Create an instance of the User class
-		const user = new User();
-
 		// Authenticate user credentials
-		const authenticatedUser = await user.authenticate(email, password);
+		const authenticatedUser = await User.authenticate(email, password);
 
 		// Generate authentication token
 		const authToken = createToken(authenticatedUser);
