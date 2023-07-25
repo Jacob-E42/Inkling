@@ -3,70 +3,17 @@
 const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
 
 const User = require("./user");
-const bcrypt = require("bcrypt");
+
 const db = require("../db");
 
+const { commonBeforeAll, commonBeforeEach, commonAfterEach, commonAfterAll } = require("./testUtils");
+
+beforeAll(commonBeforeAll);
+beforeEach(commonBeforeEach);
+afterEach(commonAfterEach);
+afterAll(commonAfterAll);
+
 describe("User", () => {
-	beforeAll(async () => {
-		// Clear all data from the users table
-		try {
-			const res = await db.query("DELETE FROM users");
-		} catch (err) {
-			console.error(err);
-		}
-
-		// Insert sample users into the database
-		const hashedPassword = await bcrypt.hash("password", 1);
-		const userData = [
-			{
-				id: 1,
-				first_name: "John",
-				last_name: "Doe",
-				email: "john@example.com",
-				password: hashedPassword,
-				interests: ["gratitude", "dailyjournal"]
-			},
-			{
-				id: 2,
-				first_name: "Jane",
-				last_name: "Smith",
-				email: "jane@example.com",
-				password: hashedPassword,
-				interests: ["gratitude", "daily journal"]
-			}
-		];
-
-		const insertQuery = `
-            INSERT INTO users (id, first_name, last_name, email, password, interests)
-            VALUES ($1, $2, $3, $4, $5, $6)
-          `;
-
-		for (const u of userData) {
-			const { id, first_name, last_name, email, password, interests } = u;
-			await db.query(insertQuery, [id, first_name, last_name, email, password, interests]);
-		}
-	});
-
-	afterAll(async () => {
-		// End the database connection
-		try {
-			await db.end();
-			console.log("Database connection closed");
-		} catch (err) {
-			console.error("Error closing database connection:", err);
-		}
-	});
-
-	beforeEach(async () => {
-		// Start a new transaction
-		await db.query("BEGIN");
-	});
-
-	afterEach(async () => {
-		// Rollback the transaction
-		await db.query("ROLLBACK");
-	});
-
 	test("user exists", async () => {
 		expect(User).toBeDefined();
 	});
