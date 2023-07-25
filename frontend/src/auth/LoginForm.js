@@ -5,6 +5,7 @@ import UserContext from "../UserContext";
 import useForm from "../hooks/useForm";
 
 const LoginForm = () => {
+	console.debug("LoginForm");
 	const { login } = useContext(UserContext);
 	const [formData, handleChange] = useForm({
 		email: "",
