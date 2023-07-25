@@ -8,12 +8,12 @@ class Request {
 	}
 
 	async request(endpoint, data = {}, method = "get") {
-		console.debug("API Call:", endpoint, data, method);
+		console.debug("API Call:", endpoint, data, method, this.token);
 
 		const url = `${BASE_URL}/${endpoint}`;
 		const headers = { Authorization: `Bearer ${this.token}` };
 		const params = method === "get" ? data : {};
-
+		console.log(url, method, data, params, headers);
 		try {
 			const response = await axios({ url, method, data, params, headers });
 			console.log("response", response.data);
@@ -43,9 +43,9 @@ class Request {
 
 	async getCurrentUser(email) {
 		console.debug("API-getCurrentUser", email);
-		const response = await this.request(`users/${email}`, email);
+		const response = await this.request(`users/${email}`);
 		console.log("response", response);
-		return response.token;
+		return response.user;
 	}
 }
 
