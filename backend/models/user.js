@@ -7,7 +7,7 @@ const { BCRYPT_WORK_FACTOR } = require("../config.js");
 
 class User {
 	// Retrieves a user by their ID
-	async getById(id) {
+	static async getById(id) {
 		const query = {
 			text: "SELECT * FROM users WHERE id = $1",
 			values: [id]
@@ -22,26 +22,35 @@ class User {
 	}
 
 	// Retrieves a user by their email
-	async getByEmail(email) {
+	static async getByEmail(email) {
 		const query = {
-			text: "SELECT * FROM users WHERE email = $1",
+			text: `SELECT 
+					id,
+					first_name AS "firstName",
+					last_name AS "lastName",
+					email, 
+					interests FROM users WHERE email = $1`,
 			values: [email]
 		};
 
 		const res = await db.query(query);
 		const user = res.rows[0];
+		console.log("User: getByEmail", user);
 
-		if (!user) return null;
+		if (!user) throw new NotFoundError(`No user with email: ${email}`);
 		return user;
 	}
 
 	// Registers a new user
-	async register(firstName, lastName, email, password, interests) {
+	static async register(firstName, lastName, email, password, interests) {
 		console.debug("register");
 
-		const existingUser = await this.getByEmail(email);
-		if (existingUser) {
-			throw new BadRequestError("User with this email already exists");
+		let existingUser;
+		try {
+			existingUser = await this.getByEmail(email);
+		} catch (err) {
+		} finally {
+			if (existingUser) throw new BadRequestError("User with this email already exists");
 		}
 
 		const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
@@ -65,7 +74,7 @@ class User {
 		return res.rows[0];
 	}
 
-	async authenticate(email, password) {
+	static async authenticate(email, password) {
 		console.debug("authenticate");
 
 		const user = await this.getByEmail(email);
