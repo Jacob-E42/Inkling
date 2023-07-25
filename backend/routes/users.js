@@ -9,10 +9,10 @@ router.get("/:email", async function (req, res, next) {
 	console.debug("/users/email GET ");
 
 	// Create an instance of the User class
-	const user = new User();
 
 	try {
-		const user = await user.getByEmail(req.params.email);
+		const user = await User.getByEmail(req.params.email);
+		console.log("users/", user);
 		return res.json({ user });
 	} catch (err) {
 		return next(err);
