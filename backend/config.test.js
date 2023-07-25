@@ -19,10 +19,10 @@ describe("config can come from env", function () {
 		delete process.env.BCRYPT_WORK_FACTOR;
 		delete process.env.DATABASE_URL;
 
-		expect(newConfig.getDatabaseUri()).toEqual("inkling");
+		expect(newConfig.getDatabaseUri()).toEqual("postgresql:///inkling");
 		process.env.NODE_ENV = "test";
 
-		expect(newConfig.getDatabaseUri()).toEqual("inkling_test");
+		expect(newConfig.getDatabaseUri()).toEqual("postgresql:///inkling_test");
 		process.env.NODE_ENV = "development";
 	});
 });
