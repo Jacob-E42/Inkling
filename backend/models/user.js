@@ -77,7 +77,19 @@ class User {
 	static async authenticate(email, password) {
 		console.debug("authenticate");
 
-		const user = await this.getByEmail(email);
+		const query = {
+			text: `SELECT 
+					id,
+					first_name AS "firstName",
+					last_name AS "lastName",
+					password,
+					email, 
+					interests FROM users WHERE email = $1`,
+			values: [email]
+		};
+
+		const res = await db.query(query);
+		const user = res.rows[0];
 		if (!user) {
 			throw new UnauthorizedError("Invalid credentials");
 		}
