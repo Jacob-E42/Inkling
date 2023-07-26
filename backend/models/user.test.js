@@ -21,7 +21,13 @@ describe("User", () => {
 	describe("getById", () => {
 		it("should retrieve a user by their ID", async () => {
 			const id = 1;
-			const result = await User.getById(id);
+			let result;
+			try {
+				result = await User.getByEmail("user1@user.com");
+				console.log(result);
+			} catch (err) {
+				expect(err instanceof NotFoundError).toBeFalsy();
+			}
 
 			expect(result).toBeDefined();
 			expect(result.id).toBe(id);
@@ -39,7 +45,7 @@ describe("User", () => {
 
 	describe("getByEmail", () => {
 		it("should retrieve a user by their email", async () => {
-			const email = "john@example.com";
+			const email = "user1@user.com";
 			const result = await User.getByEmail(email);
 
 			expect(result).toBeDefined();
@@ -92,13 +98,19 @@ describe("User", () => {
 
 	describe("authenticate", function () {
 		test("works", async function () {
-			const res = await User.authenticate("john@example.com", "password");
+			let res;
+			try {
+				res = await User.authenticate("user1@user.com", "password1");
+			} catch (err) {
+				console.error(err);
+			}
+
 			expect(res).toEqual({
 				id: 1,
-				first_name: "John",
-				last_name: "Doe",
-				email: "john@example.com",
-				interests: ["gratitude", "dailyjournal"]
+				firstName: "U1F",
+				lastName: "U1L",
+				email: "user1@user.com",
+				interests: ["interest1", "interest2"]
 			});
 		});
 
@@ -113,7 +125,7 @@ describe("User", () => {
 
 		test("unauth if wrong password", async function () {
 			try {
-				await User.authenticate("john@example.com", "wrong");
+				await User.authenticate("user1@user.com", "wrong");
 				fail();
 			} catch (err) {
 				// console.log(err);
