@@ -4,8 +4,9 @@ const jsonchema = require("jsonschema");
 const { BadRequestError } = require("../expressError");
 
 const User = require("../models/user");
+const { ensureCorrectUser } = require("../middleware/authMiddleware");
 
-router.get("/:email", async function (req, res, next) {
+router.get("/:email", ensureCorrectUser, async function (req, res, next) {
 	console.debug("/users/email GET ");
 
 	// Create an instance of the User class
