@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-import UserContext from "../UserContext";
+import UserContext from "../context_providers/UserContext";
 import useForm from "../hooks/useForm";
 
 const LoginForm = () => {
@@ -78,6 +78,7 @@ const LoginForm = () => {
 					name="email"
 					id="email"
 					autoComplete="email"
+					placeholder="Enter your email"
 					value={formData.email}
 					onChange={handleChange}
 					invalid={!!errors.email}
@@ -91,6 +92,7 @@ const LoginForm = () => {
 					name="password"
 					id="password"
 					autoComplete="current-password"
+					placeholder="Enter your password"
 					value={formData.password}
 					onChange={handleChange}
 					invalid={!!errors.password}
