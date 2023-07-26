@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Container } from "reactstrap";
 import { Link } from "react-router-dom";
-import UserContext from "../UserContext";
+import UserContext from "../context_providers/UserContext";
 
 const Homepage = () => {
 	const { user } = useContext(UserContext);

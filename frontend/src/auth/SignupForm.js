@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-import UserContext from "../UserContext";
+import UserContext from "../context_providers/UserContext";
 import "./auth.css";
 const SignupForm = () => {
 	const { signup } = useContext(UserContext);

@@ -3,7 +3,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import Request from "./api";
 import jwtDecode from "jwt-decode";
 import Router from "./Router";
-import UserContext from "./UserContext";
+import UserContext from "./context_providers/UserContext";
 import "./App.css";
 
 function App() {

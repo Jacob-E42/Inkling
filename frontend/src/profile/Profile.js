@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from "react";
 import { Container } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import UserContext from "../UserContext";
+import UserContext from "../context_providers/UserContext";
 
 const Profile = () => {
 	const { user, logout } = useContext(UserContext);
