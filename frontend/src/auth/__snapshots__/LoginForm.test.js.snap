@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm matches snapshot 1`] = `
+<DocumentFragment>
+  <form
+    class=""
+  >
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label"
+        for="email"
+      >
+        Email
+      </label>
+      <input
+        aria-invalid="false"
+        autocomplete="email"
+        class="form-control"
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      class="mb-3"
+    >
+      <label
+        class="form-label"
+        for="password"
+      >
+        Password
+      </label>
+      <input
+        aria-invalid="false"
+        autocomplete="current-password"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      class="btn btn-secondary"
+      type="submit"
+    >
+      Submit
+    </button>
+    <a
+      class="btn btn-secondary"
+      href="/"
+      type="button"
+    >
+      Back
+    </a>
+  </form>
+</DocumentFragment>
+`;

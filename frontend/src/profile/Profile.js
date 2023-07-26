@@ -15,7 +15,7 @@ const Profile = () => {
 
 	return (
 		<Container>
-			this is profile
+			This is profile
 			<p>User: {user ? user.first_name : "No user"}</p>
 			<button onClick={handleLogout}>Logout</button>
 		</Container>
