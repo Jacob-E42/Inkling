@@ -11,6 +11,9 @@ async function commonBeforeAll() {
 	// noinspection SqlWithoutWhere
 	await db.query("DELETE FROM users");
 
+	// reset id sequence
+	await db.query("SELECT setval('users_id_seq', 1, false)");
+
 	await User.register("U1F", "U1L", "user1@user.com", "password1", ["interest1", "interest2"]);
 	await User.register("U2F", "U2L", "user2@user.com", "password2", ["interest2", "interest3"]);
 	await User.register("U3F", "U3L", "user3@user.com", "password3", ["interest1", "interest3"]);
