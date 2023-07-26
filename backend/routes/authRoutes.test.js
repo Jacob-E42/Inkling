@@ -7,71 +7,23 @@ const app = require("../app");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const db = require("../db");
-let user;
+
+const {
+	commonBeforeAll,
+	commonBeforeEach,
+	commonAfterEach,
+	commonAfterAll,
+	u1Token,
+	u2Token,
+	u3Token
+} = require("./testUtils.js");
+
+beforeAll(commonBeforeAll);
+beforeEach(commonBeforeEach);
+afterEach(commonAfterEach);
+afterAll(commonAfterAll);
 
 describe("User", () => {
-	beforeAll(async () => {
-		// Clear all data from the users table
-		try {
-			await db.query("DELETE FROM users");
-		} catch (err) {
-			console.error(err);
-		}
-
-		// Insert sample users into the database
-		const hashedPassword = await bcrypt.hash("password", 1);
-		const userData = [
-			{
-				id: 1,
-				first_name: "John",
-				last_name: "Doe",
-				email: "john@example.com",
-				password: hashedPassword,
-				interests: ["gratitude", "dailyjournal"]
-			},
-			{
-				id: 2,
-				first_name: "Jane",
-				last_name: "Smith",
-				email: "jane@example.com",
-				password: hashedPassword,
-				interests: ["gratitude", "daily journal"]
-			}
-		];
-
-		const insertQuery = `
-            INSERT INTO users (id, first_name, last_name, email, password, interests)
-            VALUES ($1, $2, $3, $4, $5, $6)
-          `;
-
-		for (const user of userData) {
-			const { id, first_name, last_name, email, password, interests } = user;
-			await db.query(insertQuery, [id, first_name, last_name, email, password, interests]);
-		}
-
-		// Create a new instance of the User class
-		user = new User();
-	});
-
-	afterAll(async () => {
-		// End the database connection
-		try {
-			await db.end();
-		} catch (err) {
-			console.error("Error closing database connection:", err);
-		}
-	});
-
-	beforeEach(async () => {
-		// Start a new transaction
-		await db.query("BEGIN");
-	});
-
-	afterEach(async () => {
-		// Rollback the transaction
-		await db.query("ROLLBACK");
-	});
-
 	describe("POST /auth/signup", function () {
 		test("works for new user", async function () {
 			const resp = await request(app)
@@ -182,8 +134,8 @@ describe("User", () => {
 	describe("POST /auth/login", function () {
 		test("works", async function () {
 			const resp = await request(app).post("/auth/login").send({
-				email: "john@example.com",
-				password: "password"
+				email: "user1@user.com",
+				password: "password1"
 			});
 			expect(resp.body).toEqual({
 				token: expect.any(String)
@@ -200,7 +152,7 @@ describe("User", () => {
 
 		test("unauth with wrong password", async function () {
 			const resp = await request(app).post("/auth/login").send({
-				email: "john@example.com",
+				email: "user1@user.com",
 				password: "nothappening"
 			});
 			expect(resp.statusCode).toEqual(401);
@@ -208,7 +160,7 @@ describe("User", () => {
 
 		test("bad request with missing data", async function () {
 			let resp = await request(app).post("/auth/login").send({
-				email: "john@example.com"
+				email: "user1@user.com"
 			});
 			expect(resp.statusCode).toEqual(400);
 

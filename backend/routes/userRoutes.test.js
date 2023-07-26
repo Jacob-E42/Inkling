@@ -11,10 +11,9 @@ const {
 	commonBeforeEach,
 	commonAfterEach,
 	commonAfterAll,
-	testJobIds,
 	u1Token,
 	u2Token,
-	adminToken
+	u3Token
 } = require("./testUtils.js");
 
 beforeAll(commonBeforeAll);
@@ -220,7 +219,7 @@ describe("GET /users/:email", function () {
 	});
 
 	test("not found if user not found", async function () {
-		const resp = await request(app).get(`/users/nope`).set("authorization", `Bearer ${adminToken}`);
+		const resp = await request(app).get(`/users/nope`).set("authorization", `Bearer ${u1Token}`);
 		expect(resp.statusCode).toEqual(404);
 	});
 });
