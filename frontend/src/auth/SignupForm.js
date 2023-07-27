@@ -109,6 +109,7 @@ const SignupForm = () => {
 					type="text"
 					name="firstName"
 					id="firstName"
+					placeholder="Enter your first name"
 					value={formData.firstName}
 					onChange={handleChange}
 					invalid={!!errors.firstName}
@@ -121,6 +122,7 @@ const SignupForm = () => {
 					type="text"
 					name="lastName"
 					id="lastName"
+					placeholder="Enter your last name"
 					value={formData.lastName}
 					onChange={handleChange}
 					invalid={!!errors.lastName}
@@ -134,6 +136,7 @@ const SignupForm = () => {
 					name="email"
 					id="email"
 					autoComplete="email"
+					placeholder="Enter your email"
 					value={formData.email}
 					onChange={handleChange}
 					invalid={!!errors.email}
@@ -147,6 +150,7 @@ const SignupForm = () => {
 					name="password"
 					id="password"
 					autoComplete="current-password"
+					placeholder="Enter a password, at least 8 characters"
 					value={formData.password}
 					onChange={handleChange}
 					invalid={!!errors.password}
