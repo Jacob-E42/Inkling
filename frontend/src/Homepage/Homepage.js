@@ -5,6 +5,7 @@ import UserContext from "../context_providers/UserContext";
 
 const Homepage = () => {
 	const { user } = useContext(UserContext);
+
 	return (
 		<Container>
 			<p>User: {user}</p>
