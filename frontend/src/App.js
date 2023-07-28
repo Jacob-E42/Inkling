@@ -4,6 +4,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import Request from "./api";
 import jwtDecode from "jwt-decode";
 import Router from "./routes/Router";
+import LoadingSpinner from "./common/LoadingSpinner";
 import UserContext from "./context_providers/UserContext";
 import AlertContext from "./context_providers/AlertContext";
 import "./App.css";
@@ -38,6 +39,7 @@ function App() {
 						const currentUser = await request.getCurrentUser(email);
 						// Set the user in the state
 						setUser(currentUser);
+						setInfoLoaded(true);
 						console.log("current user", currentUser);
 					} catch (err) {
 						console.error(err);
@@ -48,6 +50,7 @@ function App() {
 					console.debug("No Token");
 				}
 			}
+			setInfoLoaded(false);
 			getCurrentUser();
 		},
 		[token, setUser] // useEffect dependency array
@@ -98,6 +101,8 @@ function App() {
 		setUser(null);
 		setToken(null);
 	}, [setUser, setToken]);
+
+	if (!infoLoaded) return <LoadingSpinner />;
 
 	// Render the App component, providing the user context to children
 	return (
