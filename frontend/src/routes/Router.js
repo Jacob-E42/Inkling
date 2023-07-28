@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Homepage from "./Homepage/Homepage";
-import LoginForm from "./auth/LoginForm";
-import SignupForm from "./auth/SignupForm";
-import Profile from "./profile/Profile";
-import UserContext from "./context_providers/UserContext";
+import Homepage from "../Homepage/Homepage";
+import LoginForm from "../auth/LoginForm";
+import SignupForm from "../auth/SignupForm";
+import Profile from "../profile/Profile";
+import UserContext from "../context_providers/UserContext";
 
 const AppRouter = () => {
 	return (
-		<Router>
+		<>
 			<Routes>
 				<Route
 					exact
@@ -35,7 +35,7 @@ const AppRouter = () => {
 					path={"/journal"}
 				/>
 			</Routes>
-		</Router>
+		</>
 	);
 };
 
