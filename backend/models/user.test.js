@@ -1,24 +1,27 @@
 "use strict";
 
 const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
-
 const User = require("./user");
-
 const db = require("../db");
-
+// The following imports are utility functions for Jest to manage the database state before and after tests
 const { commonBeforeAll, commonBeforeEach, commonAfterEach, commonAfterAll } = require("./testUtils");
 
+// Setting up hooks to manage the database state before and after tests
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);
 afterEach(commonAfterEach);
 afterAll(commonAfterAll);
 
+// Test suite for the User model
 describe("User", () => {
+	// Ensuring User model is properly imported
 	test("user exists", async () => {
 		expect(User).toBeDefined();
 	});
 
+	// Test cases for the getById method
 	describe("getById", () => {
+		// Test if method properly retrieves a user by their ID
 		it("should retrieve a user by their ID", async () => {
 			const id = 1;
 			let result;
@@ -33,7 +36,8 @@ describe("User", () => {
 			expect(result.id).toBe(id);
 		});
 
-		it("should should return NotFoundError if no such id", async () => {
+		// Test if method returns a NotFoundError when no user is found by ID
+		it("should return NotFoundError if no such id", async () => {
 			try {
 				await User.getById(1000);
 				fail();
@@ -42,6 +46,8 @@ describe("User", () => {
 			}
 		});
 	});
+
+	// Similar blocks for getByEmail, register, and authenticate methods
 
 	describe("getByEmail", () => {
 		it("should retrieve a user by their email", async () => {

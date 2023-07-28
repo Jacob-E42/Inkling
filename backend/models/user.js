@@ -1,50 +1,62 @@
 // models/User.js
 
+// Import necessary dependencies
 const bcrypt = require("bcrypt");
 const db = require("../db");
 const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
 const { BCRYPT_WORK_FACTOR } = require("../config.js");
 
+// Define the User class
 class User {
-	// Retrieves a user by their ID
+	// Method to retrieve a user by their ID
+	// Throws a NotFoundError if the user is not found
 	static async getById(id) {
+		// Define the SQL query
 		const query = {
 			text: "SELECT * FROM users WHERE id = $1",
 			values: [id]
 		};
 
+		// Execute the query
 		const res = await db.query(query);
 		const user = res.rows[0];
 
+		// If no user is found, throw an error
 		if (!user) throw new NotFoundError(`No user with id: ${id}}`);
 
+		// If the user is found, return it
 		return user;
 	}
 
-	// Retrieves a user by their email
+	// Method to retrieve a user by their email
+	// Throws a NotFoundError if the user is not found
 	static async getByEmail(email) {
+		// Define the SQL query
 		const query = {
 			text: `SELECT 
-					id,
-					first_name AS "firstName",
-					last_name AS "lastName",
-					email, 
-					interests FROM users WHERE email = $1`,
+                    id,
+                    first_name AS "firstName",
+                    last_name AS "lastName",
+                    email, 
+                    interests FROM users WHERE email = $1`,
 			values: [email]
 		};
 
+		// Execute the query
 		const res = await db.query(query);
 		const user = res.rows[0];
-		console.log("User: getByEmail", user);
 
+		// If no user is found, throw an error
 		if (!user) throw new NotFoundError(`No user with email: ${email}`);
+
+		// If the user is found, return it
 		return user;
 	}
 
-	// Registers a new user
+	// Method to register a new user
+	// Throws a BadRequestError if the email already exists
 	static async register(firstName, lastName, email, password, interests) {
-		console.debug("register");
-
+		// Check for existing user
 		let existingUser;
 		try {
 			existingUser = await this.getByEmail(email);
@@ -53,8 +65,10 @@ class User {
 			if (existingUser) throw new BadRequestError("User with this email already exists");
 		}
 
+		// Hash the password
 		const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
+		// Define the new user object
 		const newUser = {
 			first_name: firstName,
 			last_name: lastName,
@@ -63,42 +77,51 @@ class User {
 			interests
 		};
 
+		// Define the SQL query to insert the new user
 		const query = {
 			text: `INSERT INTO users (first_name, last_name, email, password, interests)
-				 VALUES ($1, $2, $3, $4, $5)
-				 RETURNING first_name, last_name, email, interests`,
+                    VALUES ($1, $2, $3, $4, $5)
+                    RETURNING first_name, last_name, email, interests`,
 			values: [newUser.first_name, newUser.last_name, newUser.email, newUser.password, newUser.interests]
 		};
 
+		// Execute the query to insert the new user and return the result
 		const res = await db.query(query);
 		return res.rows[0];
 	}
 
+	// Method to authenticate a user
+	// Throws an UnauthorizedError if the email or password is incorrect
 	static async authenticate(email, password) {
-		console.debug("authenticate");
-
+		// Define the SQL query
 		const query = {
 			text: `SELECT 
-					id,
-					first_name AS "firstName",
-					last_name AS "lastName",
-					password,
-					email, 
-					interests FROM users WHERE email = $1`,
+                    id,
+                    first_name AS "firstName",
+                    last_name AS "lastName",
+                    password,
+                    email, 
+                    interests FROM users WHERE email = $1`,
 			values: [email]
 		};
 
+		// Execute the query
 		const res = await db.query(query);
 		const user = res.rows[0];
+
+		// If no user is found, throw an error
 		if (!user) {
 			throw new UnauthorizedError("Invalid credentials");
 		}
 
+		// Check if the password is correct
 		const isPasswordValid = await bcrypt.compare(password, user.password);
+		// If the password is incorrect, throw an error
 		if (!isPasswordValid) {
 			throw new UnauthorizedError("Invalid credentials");
 		}
 
+		// Delete the password property from the user object
 		delete user.password;
 
 		// Return the authenticated user
@@ -108,4 +131,5 @@ class User {
 	// Other CRUD methods...
 }
 
+// Export the User class
 module.exports = User;

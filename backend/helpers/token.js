@@ -2,8 +2,12 @@ const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
 const { BadRequestError } = require("../expressError");
 
-/** return signed JWT from user data. */
-
+/**
+ * Creates a JWT token from user data
+ * @param {object} user - User data object
+ * @returns {string} Signed JWT token
+ * @throws {BadRequestError} If no user data is provided
+ */
 function createToken(user) {
 	console.debug("createToken");
 

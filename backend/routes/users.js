@@ -6,6 +6,7 @@ const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
 const { ensureCorrectUser } = require("../middleware/authMiddleware");
 
+//ask about this
 router.get("/:email", ensureCorrectUser, async function (req, res, next) {
 	console.debug("/users/email GET ");
 

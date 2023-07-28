@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jsonchema = require("jsonschema");
 const { BadRequestError } = require("../expressError");
+// Importing JSON schemas for request validation
 const userAuthSchema = require("../schema/userAuthSchema.json");
 const userLoginSchema = require("../schema/userLoginSchema.json");
 const User = require("../models/user");
@@ -18,6 +19,7 @@ router.post("/signup", async (req, res, next) => {
 			throw new BadRequestError(errs);
 		}
 
+		// Extract user data from request body
 		const { firstName, lastName, email, password, interests } = req.body;
 
 		// Create a new user using the User model
@@ -45,6 +47,7 @@ router.post("/login", async (req, res, next) => {
 			throw new BadRequestError(errs);
 		}
 
+		// Extract user data from request body
 		const { email, password } = req.body;
 
 		// Authenticate user credentials

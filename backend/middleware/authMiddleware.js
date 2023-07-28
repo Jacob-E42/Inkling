@@ -1,19 +1,19 @@
 "use strict";
 
-/** Convenience middleware to handle common auth cases in routes. */
+/** This module provides middlewares related to authentication of the user. */
 
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = require("../config");
 const { UnauthorizedError } = require("../expressError");
 
-/** Middleware: Authenticate user.
+/**
+ * Middleware: Authenticate user.
  *
- * If a token was provided, verify it, and, if valid, store the token payload
- * on res.locals (this will include the email.)
+ * If a token was provided in the request header, it verifies the token and if valid,
+ * stores the token payload on res.locals. This will include the email of the user.
  *
- * It's not an error if no token was provided or if the token is not valid.
+ * This function doesn't throw an error if no token was provided or if the token is not valid.
  */
-
 function authenticateJWT(req, res, next) {
 	try {
 		const authHeader = req.headers && req.headers.authorization;
@@ -27,11 +27,11 @@ function authenticateJWT(req, res, next) {
 	}
 }
 
-/** Middleware to use when they must be logged in.
+/**
+ * Middleware: Check if user is logged in.
  *
- * If not, raises Unauthorized.
+ * If the user is not logged in (no user info in res.locals), it throws UnauthorizedError.
  */
-
 function ensureLoggedIn(req, res, next) {
 	try {
 		if (!res.locals.user) throw new UnauthorizedError();
@@ -41,12 +41,12 @@ function ensureLoggedIn(req, res, next) {
 	}
 }
 
-/** Middleware to use when they must provide a valid token & be user matching
- *  email provided as route param.
+/**
+ * Middleware: Check if user is the correct user.
  *
- *  If not, raises Unauthorized.
+ * It checks whether the user from the token matches the user provided as route parameter.
+ * If not, it throws UnauthorizedError.
  */
-
 function ensureCorrectUser(req, res, next) {
 	try {
 		const user = res.locals.user;
