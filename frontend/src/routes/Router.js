@@ -8,28 +8,29 @@ import AlertComponent from "../common/AlertComponent";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 
-const ProtectedRoute = ({ children }) => {
-	const { currentUser } = useContext(UserContext);
-	const { setMsg, setColor } = useContext(AlertContext);
+// const ProtectedRoute = ({ children }) => {
+// 	const { currentUser } = useContext(UserContext);
+// 	const { setMsg, setColor } = useContext(AlertContext);
 
-	if (currentUser) return children;
-	else {
-		setColor("danger");
-		setMsg("You must be logged in to access this page.");
-		return (
-			<>
-				<Navigate
-					to="/login"
-					replace={true}
-				/>
-			</>
-		);
-	}
-};
+// 	if (currentUser) return children;
+// 	else {
+// 		setColor("danger");
+// 		setMsg("You must be logged in to access this page.");
+// 		return (
+// 			<>
+// 				<Navigate
+// 					to="/login"
+// 					replace={true}
+// 				/>
+// 			</>
+// 		);
+// 	}
+// };
 
-const AppRouter = () => {
+const Router = () => {
 	const { msg, color } = useContext(AlertContext);
 	console.debug("msg", msg, "color:", color);
+
 	return (
 		<>
 			{msg && (
@@ -62,10 +63,11 @@ const AppRouter = () => {
 				<Route
 					exact
 					path={"/journal"}
+					element={<Profile />}
 				/>
 			</Routes>
 		</>
 	);
 };
 
-export default AppRouter;
+export default Router;

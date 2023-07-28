@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import AlertComponent from "./Alert";
+import AlertComponent from "./AlertComponent";
 import { AlertProvider } from "../mock";
 
 test("Alert renders without crashing", () => {

@@ -11,10 +11,10 @@ const demoUser = {
 	interests: ["baking", "jetskiing"]
 };
 
-const UserProvider = ({ children, currentUser = demoUser }) => {
+const UserProvider = ({ children, user = demoUser }) => {
 	const [token, setToken] = useState(null);
 
-	return <UserContext.Provider value={{ currentUser }}>{children}</UserContext.Provider>;
+	return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
 };
 
 const AnonUserProvider = ({ children }) => {
@@ -64,4 +64,4 @@ const AlertProvider = ({ children }) => {
 	return <AlertContext.Provider value={{ msg, setMsg, color, setColor }}>{children}</AlertContext.Provider>;
 };
 
-export { UserProvider, AnonUserProvider };
+export { UserProvider, AnonUserProvider, AlertProvider };
