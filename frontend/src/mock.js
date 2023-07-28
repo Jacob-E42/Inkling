@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import UserContext from "./context_providers/UserContext";
-
-// import AlertContext from "./context_providers/AlertContext";
+import AlertContext from "./context_providers/AlertContext";
 import Request from "./api";
 
 const demoUser = {
@@ -58,11 +57,11 @@ const AnonUserProvider = ({ children }) => {
 	return <UserContext.Provider value={{ currentUser, login, signup }}>{children}</UserContext.Provider>;
 };
 
-// const AlertProvider = ({ children }) => {
-// 	const [msg, setMsg] = useState("");
-// 	const [color, setColor] = useState("primary");
+const AlertProvider = ({ children }) => {
+	const [msg, setMsg] = useState("");
+	const [color, setColor] = useState("primary");
 
-// 	return <AlertContext.Provider value={{ msg, setMsg, color, setColor }}>{children}</AlertContext.Provider>;
-// };
+	return <AlertContext.Provider value={{ msg, setMsg, color, setColor }}>{children}</AlertContext.Provider>;
+};
 
 export { UserProvider, AnonUserProvider };
