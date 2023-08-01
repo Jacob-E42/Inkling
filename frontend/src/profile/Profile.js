@@ -5,7 +5,7 @@ import UserContext from "../context_providers/UserContext";
 
 const Profile = () => {
 	const { user, logout } = useContext(UserContext);
-	console.log("user", user);
+	console.debug("Profile", "user=", user);
 	const navigate = useNavigate();
 
 	const handleLogout = useCallback(() => {
@@ -16,7 +16,7 @@ const Profile = () => {
 	return (
 		<Container>
 			This is profile
-			<p>User: {user ? user.firsName : "No user"}</p>
+			<p>User: {user ? user.firstName : "No user"}</p>
 			<button onClick={handleLogout}>Logout</button>
 		</Container>
 	);

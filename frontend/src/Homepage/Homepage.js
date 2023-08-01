@@ -5,10 +5,11 @@ import UserContext from "../context_providers/UserContext";
 
 const Homepage = () => {
 	const { user } = useContext(UserContext);
+	console.debug("Homepage", "user=", user);
 
 	return (
 		<Container>
-			<p>User: {user.firstName}</p>
+			<p>User: {user ? user.firstName : "no user"}</p>
 			<h1 className="mt-5">Inkling</h1>
 			<p className="lead">A cool slogan here</p>
 			<div className="d-flex justify-content-center">
