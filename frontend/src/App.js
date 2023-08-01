@@ -1,12 +1,13 @@
 // Import necessary modules from R/eact, custom hooks, API interface, JWT decoder, Router and context
 import React, { useState, useEffect, useCallback } from "react";
 import useLocalStorage from "./hooks/useLocalStorage";
-import Request from "./api";
+import ApiRequest from "./api";
 import jwtDecode from "jwt-decode";
 import Router from "./routes/Router";
 import LoadingSpinner from "./common/LoadingSpinner";
 import UserContext from "./context_providers/UserContext";
 import AlertContext from "./context_providers/AlertContext";
+import ApiContext from "./context_providers/ApiContext";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 
@@ -14,10 +15,12 @@ function App() {
 	// Use custom hook to persist user and token in localStorage. Initialize infoLoaded, msg and color states
 	const [user, setUser] = useLocalStorage("user", null);
 	const [token, setToken] = useLocalStorage("token", null);
+	const [apiRequest, setApiRequest] = useLocalStorage("apiRequest", null);
 	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [msg, setMsg] = useState("");
 	const [color, setColor] = useState("primary");
-	let jdsl = (infoLoaded, setInfoLoaded);
+
+	console.debug("App", "infoLoaded=", infoLoaded, "user=", user, "token=", token);
 
 	// Load user info from the token if it exists. Called on first render and whenever the token changes
 	useEffect(
@@ -35,11 +38,11 @@ function App() {
 						console.log("email", email);
 						//ask about this
 						// Create an instance of the Request object with the token for authentication
-						const request = new Request(token);
-						const currentUser = await request.getCurrentUser(email);
+
+						const currentUser = await apiRequest.getCurrentUser(email);
 						// Set the user in the state
 						setUser(currentUser);
-						setInfoLoaded(true);
+
 						console.log("current user", currentUser);
 					} catch (err) {
 						console.error(err);
@@ -49,11 +52,12 @@ function App() {
 				} else {
 					console.debug("No Token");
 				}
+				setInfoLoaded(true);
 			}
 			setInfoLoaded(false);
 			getCurrentUser();
 		},
-		[token, setUser] // useEffect dependency array
+		[token, setUser, apiRequest, setApiRequest] // useEffect dependency array
 	);
 
 	// Handle signup function using useCallback to avoid re-creation of function on every render
@@ -62,18 +66,21 @@ function App() {
 			console.debug("signup");
 			try {
 				// Request a signup
-				const request = new Request();
-				const token = await request.signup(formData);
+				const api = new ApiRequest();
+				const token = await api.signup(formData);
 				console.log(token);
-				if (token) setToken(token);
-				else throw new Error("missing sign in token");
+				if (token) {
+					setToken(token);
+					api.setToken(token);
+					setApiRequest(() => api);
+				} else throw new Error("missing sign in token");
 				return { success: true };
 			} catch (errors) {
 				console.error("signup failed", errors);
 				return { success: false, errors };
 			}
 		},
-		[setToken] // useCallback dependency array
+		[setToken, setApiRequest] // useCallback dependency array
 	);
 
 	// Handle login function, similar to signup function
@@ -81,10 +88,12 @@ function App() {
 		async formData => {
 			console.debug("login");
 			try {
-				const request = new Request();
-				const token = await request.login(formData);
+				const api = new ApiRequest();
+				const token = await api.login(formData);
 				if (token) {
-					await setToken(token);
+					setToken(token);
+					api.setToken(token);
+					setApiRequest(() => api);
 					return { success: true };
 				} else throw new Error("Log in token in missing");
 			} catch (errors) {
@@ -92,15 +101,16 @@ function App() {
 				return { success: false, errors };
 			}
 		},
-		[setToken] // useCallback dependency array
+		[setToken, setApiRequest] // useCallback dependency array
 	);
 
 	// Handle logout function to clear user and token from state
 	const logout = useCallback(() => {
 		console.debug("logout");
 		setUser(null);
+		setApiRequest(null);
 		setToken(null);
-	}, [setUser, setToken]);
+	}, [setUser, setToken, setApiRequest]);
 
 	if (!infoLoaded) return <LoadingSpinner />;
 
@@ -108,13 +118,15 @@ function App() {
 	return (
 		<BrowserRouter>
 			<UserContext.Provider value={{ user, setUser, signup, login, logout }}>
-				<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
-					<div className="App">
-						<header className="App-header">
-							<Router />
-						</header>
-					</div>
-				</AlertContext.Provider>
+				<ApiContext.Provider value={{ api: apiRequest }}>
+					<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
+						<div className="App">
+							<header className="App-header">
+								<Router />
+							</header>
+						</div>
+					</AlertContext.Provider>
+				</ApiContext.Provider>
 			</UserContext.Provider>
 		</BrowserRouter>
 	);
