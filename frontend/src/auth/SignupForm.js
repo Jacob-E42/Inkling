@@ -32,16 +32,21 @@ const SignupForm = () => {
 
 	const handleChange = useCallback(e => {
 		e.preventDefault();
+		console.debug("handleChange", "type=", e.target.type, "checked=", e.target.checked);
 		const { name, value, type, checked } = e.target;
 
 		if (type === "checkbox") {
-			// Checkbox input
-			setFormData(prevFormData => ({
-				...prevFormData,
-				interests: checked
-					? [...prevFormData.interests, value]
-					: prevFormData.interests.filter(item => item !== value)
-			}));
+			if (checked) {
+				setFormData(prevFormData => ({
+					...prevFormData,
+					interests: [...prevFormData.interests, value]
+				}));
+			} else {
+				setFormData(prevFormData => ({
+					...prevFormData,
+					interests: [...prevFormData.interests.filter(item => item !== value)]
+				}));
+			}
 		} else {
 			setFormData(formData => ({
 				...formData,
@@ -51,7 +56,7 @@ const SignupForm = () => {
 	}, []);
 
 	const validateForm = useCallback(
-		data => {
+		async data => {
 			const validationErrors = {};
 
 			if (!data.firstName.trim()) {
@@ -92,21 +97,21 @@ const SignupForm = () => {
 			e.preventDefault();
 			console.debug("handleSubmit");
 
-			const validationErrors = validateForm(formData);
-			if (Object.keys(validationErrors).length === 0) {
-				const result = await signup(formData);
-				console.log(result);
-				if (result.success) {
-					console.log("Form submitted:", formData);
-					navigate("/profile");
-				} else {
-					setErrors(result.errors);
+			await validateForm(formData);
+			if (Object.keys(errors).length === 0) {
+				try {
+					const result = await signup(formData);
+					console.log(result);
+					if (result.success) {
+						console.log("Form submitted:", formData);
+						navigate("/profile");
+					}
+				} catch (err) {
+					console.error(err);
 				}
-			} else {
-				setErrors(validationErrors);
 			}
 		},
-		[setErrors]
+		[navigate, errors, formData, signup, validateForm]
 	);
 
 	return (
@@ -165,53 +170,55 @@ const SignupForm = () => {
 				/>
 				{errors.password && <div className="error">{errors.password}</div>}
 			</FormGroup>
-			<FormGroup check>
-				<Label for="interests">Interests</Label>
-				<p>Please select one to three interests</p>
 
-				<Input
-					type="checkbox"
-					name="interests"
-					id="interest1"
-					value="interest1"
-					onChange={handleChange}
-				/>
+			<p>Please select one to three interests</p>
+			<FormGroup check>
 				<Label
 					for="interest1"
 					className="ml-2"
 					check>
 					Interest 1
 				</Label>
-
 				<Input
 					type="checkbox"
 					name="interests"
-					id="interest2"
-					value="interest2"
+					id="interest1"
+					bsSize="lg"
+					value="interest1"
 					onChange={handleChange}
 				/>
+			</FormGroup>
+
+			<FormGroup check>
 				<Label
 					for="interest2"
 					className="ml-2"
 					check>
 					Interest 2
 				</Label>
-
+				<Input
+					type="checkbox"
+					name="interests"
+					id="interest2"
+					bsSize="lg"
+					value="interest2"
+					onChange={handleChange}
+				/>
+			</FormGroup>
+			<FormGroup check>
+				<Label
+					for="interest3"
+					check>
+					Interest 3
+				</Label>
 				<Input
 					type="checkbox"
 					name="interests"
 					id="interest3"
+					bsSize="lg"
 					value="interest3"
 					onChange={handleChange}
 				/>
-				<Label
-					for="interest3"
-					className="ml-2"
-					check>
-					Interest 3
-				</Label>
-
-				{errors.interests && <div className="error">{errors.interests}</div>}
 			</FormGroup>
 			<Button type="submit">Submit</Button>
 
