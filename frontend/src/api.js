@@ -1,9 +1,14 @@
 import axios from "axios";
 
-class Api {
-	constructor(token = null) {
-		this.token = token;
+class ApiRequest {
+	constructor() {
+		this.token = null;
 		this.BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+	}
+
+	// ask about this
+	setToken(token) {
+		this.token = token;
 	}
 
 	async #request(endpoint, data = {}, method = "get") {
@@ -48,4 +53,4 @@ class Api {
 	}
 }
 
-export default Api;
+export default ApiRequest;
