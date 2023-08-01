@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import "./auth.css";
+
 const SignupForm = () => {
 	const { signup } = useContext(UserContext);
 	const [formData, setFormData] = useState({
@@ -15,7 +16,22 @@ const SignupForm = () => {
 	const [errors, setErrors] = useState({});
 	const navigate = useNavigate();
 
-	const handleChange = e => {
+	const isValidEmail = useCallback(email => {
+		// Perform email validation here
+		// You can use regular expressions or other validation libraries
+		// Return true if the email is valid, false otherwise
+		return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+	}, []);
+
+	const isValidPassword = useCallback(password => {
+		// Perform password validation here
+		// You can use regular expressions or other validation logic
+		// Return true if the password is valid, false otherwise
+		return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,}$/.test(password);
+	}, []);
+
+	const handleChange = useCallback(e => {
+		e.preventDefault();
 		const { name, value, type, checked } = e.target;
 
 		if (type === "checkbox") {
@@ -27,79 +43,71 @@ const SignupForm = () => {
 					: prevFormData.interests.filter(item => item !== value)
 			}));
 		} else {
-			setFormData(prevFormData => ({
-				...prevFormData,
+			setFormData(formData => ({
+				...formData,
 				[name]: value
 			}));
 		}
-	};
+	}, []);
 
-	const handleSubmit = async e => {
-		e.preventDefault();
-		console.debug("handleSubmit");
+	const validateForm = useCallback(
+		data => {
+			const validationErrors = {};
 
-		const validationErrors = validateForm(formData);
-		if (Object.keys(validationErrors).length === 0) {
-			const result = await signup(formData);
-			console.log(result);
-			if (result.success) {
-				console.log("Form submitted:", formData);
-				navigate("/profile");
-			} else {
-				setErrors(result.errors);
+			if (!data.firstName.trim()) {
+				validationErrors.firstName = "First name is required";
 			}
-		} else {
+
+			if (!data.lastName.trim()) {
+				validationErrors.lastName = "Last name is required";
+			}
+
+			if (!data.email.trim()) {
+				validationErrors.email = "Email is required";
+			} else if (!isValidEmail(data.email)) {
+				validationErrors.email = "Invalid email address";
+			}
+
+			if (!data.password.trim()) {
+				validationErrors.password = "Password is required";
+			} else if (!isValidPassword(data.password)) {
+				validationErrors.password =
+					"Password must be at least 8 characters long and contain at least one letter and one number";
+			}
+
+			console.log(data.interests);
+			if (data.interests.length === 0) {
+				validationErrors.interests = "Select at least one interest";
+			} else if (data.interests.length > 3) {
+				validationErrors.interests = "Select no more than three interests";
+			}
+
 			setErrors(validationErrors);
-		}
-	};
+		},
+		[setErrors, isValidEmail, isValidPassword]
+	);
 
-	const validateForm = data => {
-		const errors = {};
+	const handleSubmit = useCallback(
+		async e => {
+			e.preventDefault();
+			console.debug("handleSubmit");
 
-		if (!data.firstName.trim()) {
-			errors.firstName = "First name is required";
-		}
-
-		if (!data.lastName.trim()) {
-			errors.lastName = "Last name is required";
-		}
-
-		if (!data.email.trim()) {
-			errors.email = "Email is required";
-		} else if (!isValidEmail(data.email)) {
-			errors.email = "Invalid email address";
-		}
-
-		if (!data.password.trim()) {
-			errors.password = "Password is required";
-		} else if (!isValidPassword(data.password)) {
-			errors.password =
-				"Password must be at least 8 characters long and contain at least one letter and one number";
-		}
-
-		console.log(data.interests);
-		if (data.interests.length === 0) {
-			errors.interests = "Select at least one interest";
-		} else if (data.interests.length > 3) {
-			errors.interests = "Select no more than three interests";
-		}
-
-		return errors;
-	};
-
-	const isValidEmail = email => {
-		// Perform email validation here
-		// You can use regular expressions or other validation libraries
-		// Return true if the email is valid, false otherwise
-		return /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
-	};
-
-	const isValidPassword = password => {
-		// Perform password validation here
-		// You can use regular expressions or other validation logic
-		// Return true if the password is valid, false otherwise
-		return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!@#$%^&*]{8,}$/.test(password);
-	};
+			const validationErrors = validateForm(formData);
+			if (Object.keys(validationErrors).length === 0) {
+				const result = await signup(formData);
+				console.log(result);
+				if (result.success) {
+					console.log("Form submitted:", formData);
+					navigate("/profile");
+				} else {
+					setErrors(result.errors);
+				}
+			} else {
+				setErrors(validationErrors);
+			}
+		},
+		[setErrors]
+	);
 
 	return (
 		<Form onSubmit={handleSubmit}>
@@ -157,51 +165,52 @@ const SignupForm = () => {
 				/>
 				{errors.password && <div className="error">{errors.password}</div>}
 			</FormGroup>
-			<FormGroup>
+			<FormGroup check>
 				<Label for="interests">Interests</Label>
 				<p>Please select one to three interests</p>
-				<div>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="interest1"
-						value="interest1"
-						onChange={handleChange}
-					/>
-					<Label
-						for="interest1"
-						className="ml-2">
-						Interest 1
-					</Label>
-				</div>
-				<div>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="interest2"
-						value="interest2"
-						onChange={handleChange}
-					/>
-					<Label
-						for="interest2"
-						className="ml-2">
-						Interest 2
-					</Label>
-				</div>
-				<div>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="interest3"
-						value="interest3"
-						onChange={handleChange}
-					/>
-					<Label
-						for="interest3"
-						className="ml-2">
-						Interest 3
-					</Label>
-				</div>
+
+				<Input
+					type="checkbox"
+					name="interests"
+					id="interest1"
+					value="interest1"
+					onChange={handleChange}
+				/>
+				<Label
+					for="interest1"
+					className="ml-2"
+					check>
+					Interest 1
+				</Label>
+
+				<Input
+					type="checkbox"
+					name="interests"
+					id="interest2"
+					value="interest2"
+					onChange={handleChange}
+				/>
+				<Label
+					for="interest2"
+					className="ml-2"
+					check>
+					Interest 2
+				</Label>
+
+				<Input
+					type="checkbox"
+					name="interests"
+					id="interest3"
+					value="interest3"
+					onChange={handleChange}
+				/>
+				<Label
+					for="interest3"
+					className="ml-2"
+					check>
+					Interest 3
+				</Label>
+
 				{errors.interests && <div className="error">{errors.interests}</div>}
 			</FormGroup>
 			<Button type="submit">Submit</Button>
