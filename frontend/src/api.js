@@ -23,7 +23,7 @@ class ApiRequest {
 			console.log("response", response.data);
 			return response.data;
 		} catch (err) {
-			console.error("API Error:", err);
+			console.log("API Error:", err);
 
 			throw new Error(err);
 		}

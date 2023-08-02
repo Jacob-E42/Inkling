@@ -36,7 +36,7 @@ function App() {
 						let { email } = await jwtDecode(token);
 						email = email.trim();
 						console.log("email", email);
-						//ask about this
+
 						// Create an instance of the Request object with the token for authentication
 
 						const currentUser = await apiRequest.getCurrentUser(email);
