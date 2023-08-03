@@ -22,10 +22,21 @@ class ApiRequest {
 			const response = await axios({ url, method, data, params, headers });
 			console.log("response", response.data);
 			return response.data;
-		} catch (err) {
-			console.log("API Error:", err);
-
-			throw new Error(err);
+		} catch (error) {
+			console.log(error);
+			if (error.response) {
+				// The request was made, and the server responded with a status code
+				// that falls outside the range of 2xx
+				console.error(error.response.data); // Here's where you'll find the backend's error message
+				// const backendErrorMessage = error.response.data.error;
+				// setErrors({ ...errors, backendError: backendErrorMessage });
+			} else if (error.request) {
+				// The request was made, but no response was received
+				console.error("No response received:", error.request);
+			} else {
+				// Something happened in setting up the request that triggered an error
+				console.error("Request error:", error.message);
+			}
 		}
 	}
 

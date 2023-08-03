@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label, FormFeedback } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import "./auth.css";
@@ -127,7 +127,7 @@ const SignupForm = () => {
 					onChange={handleChange}
 					invalid={!!errors.firstName}
 				/>
-				{errors.firstName && <div className="error">{errors.firstName}</div>}
+				<FormFeedback className="inputError">{errors.firstName}</FormFeedback>
 			</FormGroup>
 			<FormGroup>
 				<Label for="lastName">Last Name</Label>
@@ -140,7 +140,7 @@ const SignupForm = () => {
 					onChange={handleChange}
 					invalid={!!errors.lastName}
 				/>
-				{errors.lastName && <div className="error">{errors.lastName}</div>}
+				<FormFeedback className="inputError">{errors.lastName}</FormFeedback>
 			</FormGroup>
 			<FormGroup>
 				<Label for="email">Email</Label>
@@ -154,7 +154,7 @@ const SignupForm = () => {
 					onChange={handleChange}
 					invalid={!!errors.email}
 				/>
-				{errors.email && <div className="error">{errors.email}</div>}
+				<FormFeedback className="inputError">{errors.email}</FormFeedback>
 			</FormGroup>
 			<FormGroup>
 				<Label for="password">Password</Label>
@@ -168,58 +168,62 @@ const SignupForm = () => {
 					onChange={handleChange}
 					invalid={!!errors.password}
 				/>
-				{errors.password && <div className="error">{errors.password}</div>}
+				<FormFeedback className="inputError">{errors.password}</FormFeedback>
 			</FormGroup>
 
-			<p>Please select one to three interests</p>
-			<FormGroup check>
-				<Label
-					for="interest1"
-					className="ml-2"
-					check>
-					Interest 1
-				</Label>
-				<Input
-					type="checkbox"
-					name="interests"
-					id="interest1"
-					bsSize="lg"
-					value="interest1"
-					onChange={handleChange}
-				/>
+			<FormGroup>
+				<p>Please select one to three interests</p>
+				<FormGroup check>
+					<Label
+						for="interest1"
+						className="ml-2"
+						check>
+						Interest 1
+					</Label>
+					<Input
+						type="checkbox"
+						name="interests"
+						id="interest1"
+						bsSize="lg"
+						value="interest1"
+						onChange={handleChange}
+					/>
+				</FormGroup>
+
+				<FormGroup check>
+					<Label
+						for="interest2"
+						className="ml-2"
+						check>
+						Interest 2
+					</Label>
+					<Input
+						type="checkbox"
+						name="interests"
+						id="interest2"
+						bsSize="lg"
+						value="interest2"
+						onChange={handleChange}
+					/>
+				</FormGroup>
+				<FormGroup check>
+					<Label
+						for="interest3"
+						check>
+						Interest 3
+					</Label>
+					<Input
+						type="checkbox"
+						name="interests"
+						id="interest3"
+						bsSize="lg"
+						value="interest3"
+						onChange={handleChange}
+					/>
+				</FormGroup>
+				{errors.interests && <FormFeedback className="inputError">{errors.interests}</FormFeedback>}
 			</FormGroup>
 
-			<FormGroup check>
-				<Label
-					for="interest2"
-					className="ml-2"
-					check>
-					Interest 2
-				</Label>
-				<Input
-					type="checkbox"
-					name="interests"
-					id="interest2"
-					bsSize="lg"
-					value="interest2"
-					onChange={handleChange}
-				/>
-			</FormGroup>
-			<FormGroup check>
-				<Label
-					for="interest3"
-					check>
-					Interest 3
-				</Label>
-				<Input
-					type="checkbox"
-					name="interests"
-					id="interest3"
-					bsSize="lg"
-					value="interest3"
-					onChange={handleChange}
-				/>
-			</FormGroup>
 			<Button type="submit">Submit</Button>
 
 			<Button
