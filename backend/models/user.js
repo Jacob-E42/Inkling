@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const db = require("../db");
 const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
 const { BCRYPT_WORK_FACTOR } = require("../config.js");
+const { objectDataToSql } = require("../helpers/sql");
 
 // Define the User class
 class User {
@@ -128,7 +129,66 @@ class User {
 		return user;
 	}
 
-	// Other CRUD methods...
+	/** Update user data with `data`.
+	 *
+	 * This is a "partial update" --- it's fine if data doesn't contain
+	 * all the fields; this only changes provided ones.
+	 *
+	 * Data can include:
+	 *   { firstName, lastName, password, email, interests }
+	 *
+	 * Returns { email, firstName, lastName, interests }
+	 *
+	 * Throws NotFoundError if not found.
+	 *
+	 * WARNING: this function can set a new password.
+	 * Callers of this function must be certain they have validated inputs to this
+	 * or a serious security risks are opened.
+	 */
+
+	static async update(email, data) {
+		if (data.password) {
+			data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
+		}
+
+		const { setCols, values } = objectDataToSql(data);
+		const emailVarIdx = "$" + (values.length + 1);
+
+		const query = {
+			text: `UPDATE users 
+						  SET ${setCols} 
+						  WHERE email = ${emailVarIdx} 
+						  RETURNING 
+									first_name AS "firstName",
+									last_name AS "lastName",
+									email,
+									interests`,
+			values: [...values, email]
+		};
+
+		const result = await db.query(query);
+		const user = result.rows[0];
+
+		if (!user) throw new NotFoundError(`No user with email: ${email}`);
+
+		delete user.password;
+		return user;
+	}
+
+	/** Delete given user from database; returns undefined. */
+
+	//   static async remove(email) {
+	// 	let result = await db.query(
+	// 		  `DELETE
+	// 		   FROM users
+	// 		   WHERE email = $1
+	// 		   RETURNING email`,
+	// 		[email],
+	// 	);
+	// 	const user = result.rows[0];
+
+	// 	if (!user) throw new NotFoundError(`No user: ${email}`);
+	//   }
 }
 
 // Export the User class
