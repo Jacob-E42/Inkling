@@ -75,9 +75,10 @@ function App() {
 					setApiRequest(() => api);
 				} else throw new Error("missing sign in token");
 				return { success: true };
-			} catch (errors) {
-				console.error("signup failed", errors);
-				return { success: false, errors };
+			} catch (error) {
+				console.error("signup failed", error);
+				console.log(error);
+				return { success: false, error };
 			}
 		},
 		[setToken, setApiRequest] // useCallback dependency array

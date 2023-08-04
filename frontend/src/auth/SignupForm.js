@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Input, Label, FormFeedback } from "reactstrap"
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import "./auth.css";
+import AlertContext from "../context_providers/AlertContext";
 
 const SignupForm = () => {
 	const { signup } = useContext(UserContext);
@@ -14,6 +15,7 @@ const SignupForm = () => {
 		interests: []
 	});
 	const [errors, setErrors] = useState({});
+	const { setMsg, setColor } = useContext(AlertContext);
 	const navigate = useNavigate();
 
 	const isValidEmail = useCallback(email => {
@@ -105,13 +107,17 @@ const SignupForm = () => {
 					if (result.success) {
 						console.log("Form submitted:", formData);
 						navigate("/profile");
+					} else {
+						setColor("danger");
+						console.log(result.error);
+						setMsg(result.error);
 					}
 				} catch (err) {
 					console.error(err);
 				}
 			}
 		},
-		[navigate, errors, formData, signup, validateForm]
+		[navigate, errors, formData, signup, validateForm, setColor, setMsg]
 	);
 
 	return (
