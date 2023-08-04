@@ -30,6 +30,21 @@ function sqlForPartialUpdate(dataToUpdate, jsToSql) {
 	};
 }
 
+/**
+ * Helper for making selective update queries.
+ *
+ * The calling function can use it to make the SET clause of an SQL UPDATE
+ * statement.
+ *
+ * @param dataToUpdate {Object} {field1: newVal, field2: newVal, ...}
+ 
+ *
+ * @returns {Object} {sqlSetCols, dataToUpdate}
+ *
+ * @example {firstName: 'Aliya', age: 32} =>
+ *   { setCols: '"first_name"=$1, "age"=$2',
+ *     values: ['Aliya', 32] }
+ */
 function objectDataToSql(dataToUpdate) {
 	if (dataToUpdate.firstName) {
 		dataToUpdate["first_name"] = dataToUpdate.firstName;
