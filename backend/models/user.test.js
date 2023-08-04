@@ -139,4 +139,81 @@ describe("User", () => {
 			}
 		});
 	});
+
+	/************************************** update */
+
+	describe("update", function () {
+		const updateData = {
+			firstName: "NewF",
+			lastName: "NewL",
+			email: "new@email.com",
+			interests: ["interest1", "interest3"]
+		};
+
+		test("works", async function () {
+			let user = await User.update("user1@user.com", updateData);
+			console.log(user);
+			expect(user).toEqual({
+				firstName: "NewF",
+				lastName: "NewL",
+				email: "new@email.com",
+				interests: ["interest1", "interest3"]
+			});
+		});
+
+		test("works: set password", async function () {
+			let user = await User.update("user1@user.com", {
+				password: "newfht55"
+			});
+			expect(user).toEqual({
+				firstName: "U1F",
+				lastName: "U1L",
+				email: "user1@user.com",
+				interests: ["interest1", "interest2"]
+			});
+			const found = await db.query("SELECT * FROM users WHERE email = 'user1@user.com'");
+			expect(found.rows.length).toEqual(1);
+			expect(found.rows[0].password.startsWith("$2b$")).toEqual(true);
+		});
+
+		test("not found if no such user", async function () {
+			try {
+				await User.update("nope@email.com", {
+					firstName: "test"
+				});
+				fail();
+			} catch (err) {
+				expect(err instanceof NotFoundError).toBeTruthy();
+			}
+		});
+
+		test("bad request if no data", async function () {
+			expect.assertions(1);
+			try {
+				await User.update("user1@user.com", {});
+				fail();
+			} catch (err) {
+				expect(err instanceof BadRequestError).toBeTruthy();
+			}
+		});
+	});
+
+	/************************************** remove */
+
+	// describe("remove", function () {
+	// 	test("works", async function () {
+	// 		await User.remove("u1");
+	// 		const res = await db.query("SELECT * FROM users WHERE username='u1'");
+	// 		expect(res.rows.length).toEqual(0);
+	// 	});
+
+	// 	test("not found if no such user", async function () {
+	// 		try {
+	// 			await User.remove("nope");
+	// 			fail();
+	// 		} catch (err) {
+	// 			expect(err instanceof NotFoundError).toBeTruthy();
+	// 		}
+	// 	});
+	// });
 });
