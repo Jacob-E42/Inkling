@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
@@ -95,6 +95,12 @@ const Profile = () => {
 						type="submit"
 						color="primary">
 						Submit
+					</Button>
+					<Button
+						type="button"
+						tag={Link}
+						to="/">
+						Back
 					</Button>
 				</Form>
 			)}
