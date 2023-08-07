@@ -8,6 +8,7 @@ import Profile from "../profile/Profile";
 import AlertComponent from "../common/AlertComponent";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
+import JournalEntryPage from "../journal/JournalEntryPage";
 
 // a common way to handle authentication in React
 // It checks whether a user is currently logged in and if not, it redirects to the login page and shows a message
@@ -78,12 +79,13 @@ const Router = () => {
 						</ProtectedRoute>
 					}
 				/>
+
 				<Route
 					exact
-					path={"/journal"}
+					path={"/journal/:date"}
 					element={
 						<ProtectedRoute>
-							<Profile />
+							<JournalEntryPage />
 						</ProtectedRoute>
 					}
 				/>
