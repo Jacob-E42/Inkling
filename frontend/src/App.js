@@ -1,5 +1,6 @@
 // Import necessary modules from R/eact, custom hooks, API interface, JWT decoder, Router and context
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import useLocalStorage from "./hooks/useLocalStorage";
 import ApiRequest from "./api";
 import jwtDecode from "jwt-decode";
@@ -16,11 +17,13 @@ function App() {
 	const [user, setUser] = useLocalStorage("user", null);
 	const [token, setToken] = useLocalStorage("token", null);
 	const [apiRequest, setApiRequest] = useLocalStorage("apiRequest", null);
+	// const { api } = useContext(ApiContext); //this could be a problem
 	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [msg, setMsg] = useState("");
 	const [color, setColor] = useState("primary");
 
 	console.debug("App", "infoLoaded=", infoLoaded, "user=", user, "token=", token);
+	const navigate = useNavigate();
 
 	// Load user info from the token if it exists. Called on first render and whenever the token changes
 	useEffect(
@@ -95,6 +98,7 @@ function App() {
 					setToken(token);
 					api.setToken(token);
 					setApiRequest(() => api);
+					console.log(apiRequest.getCurrentUser);
 					return { success: true };
 				} else throw new Error("Log in token in missing");
 			} catch (errors) {
@@ -109,9 +113,11 @@ function App() {
 	const logout = useCallback(
 		async data => {
 			console.debug("logout");
+
 			setUser(null);
 			setApiRequest(null);
 			setToken(null);
+			navigate("/");
 		},
 		[setUser, setToken, setApiRequest]
 	);

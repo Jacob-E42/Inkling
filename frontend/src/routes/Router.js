@@ -38,6 +38,7 @@ const ProtectedRoute = ({ children }) => {
 const Router = () => {
 	// useContext hook is used to access the AlertContext data
 	const { msg, color } = useContext(AlertContext);
+	const { logout } = useContext(UserContext);
 
 	// Logging message and color for debugging purposes
 	console.debug("msg", msg, "color:", color);
@@ -88,6 +89,11 @@ const Router = () => {
 							<JournalEntryPage />
 						</ProtectedRoute>
 					}
+				/>
+				<Route
+					exact
+					path={"/logout"}
+					element={logout}
 				/>
 			</Routes>
 		</>

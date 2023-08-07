@@ -36,11 +36,6 @@ const Profile = () => {
 		[updateUser, setMsg, setColor, form]
 	);
 
-	const handleLogout = useCallback(() => {
-		logout();
-		navigate("/");
-	}, [logout, navigate]);
-
 	return (
 		<Container>
 			This is profile
@@ -104,7 +99,7 @@ const Profile = () => {
 					</Button>
 				</Form>
 			)}
-			<button onClick={handleLogout}>Logout</button>
+			<button onClick={logout}>Logout</button>
 		</Container>
 	);
 };
