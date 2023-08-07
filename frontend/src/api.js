@@ -43,7 +43,7 @@ class ApiRequest {
 
 	// Other specialized request methods
 
-	// Register a new user with the provided username, password, first name, last name, and email
+	// Register a new user with the provided email, password, first name, last name, and email
 	async signup(data) {
 		console.debug("API-signup");
 		let response = await this.#request("auth/signup", data, "post");
@@ -62,6 +62,13 @@ class ApiRequest {
 		const response = await this.#request(`users/${email}`);
 		console.log("response", response);
 		return response.user;
+	}
+
+	// Edit the current user's information based on the provided email and data
+	async editCurrentUser(email, data) {
+		console.debug("editCurrentUser", email, data);
+		let res = await this.#request(`users/${email}`, data, "patch");
+		return res.user;
 	}
 }
 
