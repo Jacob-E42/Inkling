@@ -6,6 +6,7 @@ import React, { useContext, useEffect } from "react";
 import AlertContext from "../context_providers/AlertContext";
 
 const JournalEntryPage = ({ date }) => {
+	console.debug("JournalEntryPage", "date=", date);
 	const { setMsg, setColor } = useContext(AlertContext);
 	if (!date) {
 		date = new Date();

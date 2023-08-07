@@ -5,11 +5,10 @@ import useForm from "../hooks/useForm";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 
-const Profile = () => {
-	const { user, logout, updateUser } = useContext(UserContext);
+const Profile = ({ logout }) => {
+	const { user, updateUser } = useContext(UserContext);
 	const { setMsg, setColor } = useContext(AlertContext);
 	console.debug("Profile", "user=", user);
-	const navigate = useNavigate();
 
 	// State to store form data
 	const [form, handleChange] = useForm({

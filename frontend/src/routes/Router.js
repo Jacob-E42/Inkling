@@ -1,6 +1,6 @@
 // Importing necessary dependencies and components
-import React, { useContext } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React, { useCallback, useContext, useEffect } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Homepage from "../Homepage/Homepage";
 import LoginForm from "../auth/LoginForm";
 import SignupForm from "../auth/SignupForm";
@@ -42,6 +42,20 @@ const Router = () => {
 
 	// Logging message and color for debugging purposes
 	console.debug("msg", msg, "color:", color);
+	const navigate = useNavigate();
+
+	const handleLogout = useCallback(() => {
+		logout();
+		navigate("/"); // navigate to the homepage or any other route after logout
+	}, [logout, navigate]);
+
+	const Logout = () => {
+		useEffect(() => {
+			handleLogout();
+		}, [navigate]);
+
+		return null; // This component does not render anything
+	};
 
 	return (
 		<>
@@ -76,7 +90,7 @@ const Router = () => {
 					path={"/profile"}
 					element={
 						<ProtectedRoute>
-							<Profile />
+							<Profile logout={handleLogout} />
 						</ProtectedRoute>
 					}
 				/>
@@ -93,7 +107,7 @@ const Router = () => {
 				<Route
 					exact
 					path={"/logout"}
-					element={logout}
+					element={<Logout />}
 				/>
 			</Routes>
 		</>

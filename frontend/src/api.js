@@ -67,8 +67,8 @@ class ApiRequest {
 	// Edit the current user's information based on the provided email and data
 	async editCurrentUser(email, data) {
 		console.debug("editCurrentUser", email, data);
-		let res = await this.#request(`users/${email}`, data, "patch");
-		return res.user;
+		let response = await this.#request(`users/${email}`, data, "patch");
+		return response.user;
 	}
 }
 
