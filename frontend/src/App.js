@@ -106,19 +106,37 @@ function App() {
 	);
 
 	// Handle logout function to clear user and token from state
-	const logout = useCallback(() => {
-		console.debug("logout");
-		setUser(null);
-		setApiRequest(null);
-		setToken(null);
-	}, [setUser, setToken, setApiRequest]);
+	const logout = useCallback(
+		async data => {
+			console.debug("logout");
+			setUser(null);
+			setApiRequest(null);
+			setToken(null);
+		},
+		[setUser, setToken, setApiRequest]
+	);
+
+	//Update the current user's information
+	const updateUser = useCallback(
+		async data => {
+			console.debug("updateCurrentUser:", "data", data);
+			const { email, password } = data;
+
+			if (!password) delete data.password;
+			const updatedUser = await apiRequest.editCurrentUser(email, data);
+			if (updatedUser) {
+				setUser(updatedUser);
+			}
+		},
+		[setUser, apiRequest]
+	); // depends on currentUser and token
 
 	if (!infoLoaded) return <LoadingSpinner />;
 
 	// Render the App component, providing the user context to children
 	return (
 		<BrowserRouter>
-			<UserContext.Provider value={{ user, setUser, signup, login, logout }}>
+			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser }}>
 				<ApiContext.Provider value={{ api: apiRequest }}>
 					<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
 						<div className="App">

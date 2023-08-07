@@ -34,7 +34,6 @@ const SignupForm = () => {
 
 	const handleChange = useCallback(e => {
 		e.preventDefault();
-		console.debug("handleChange", "type=", e.target.type, "checked=", e.target.checked);
 		const { name, value, type, checked } = e.target;
 
 		if (type === "checkbox") {
@@ -106,6 +105,9 @@ const SignupForm = () => {
 					console.log(result);
 					if (result.success) {
 						console.log("Form submitted:", formData);
+						setColor("success");
+						console.log(result.error);
+						setMsg("You signed up!");
 						navigate("/profile");
 					} else {
 						setColor("danger");
