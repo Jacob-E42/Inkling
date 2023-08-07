@@ -13,24 +13,24 @@ import AlertContext from "../context_providers/AlertContext";
 // It checks whether a user is currently logged in and if not, it redirects to the login page and shows a message
 // If the user is logged in, it just renders the children components
 //
-// const ProtectedRoute = ({ children }) => {
-// 	const { currentUser } = useContext(UserContext);
-// 	const { setMsg, setColor } = useContext(AlertContext);
+const ProtectedRoute = ({ children }) => {
+	const { user } = useContext(UserContext);
+	const { setMsg, setColor } = useContext(AlertContext);
 
-// 	if (currentUser) return children;
-// 	else {
-// 		setColor("danger");
-// 		setMsg("You must be logged in to access this page.");
-// 		return (
-// 			<>
-// 				<Navigate
-// 					to="/login"
-// 					replace={true}
-// 				/>
-// 			</>
-// 		);
-// 	}
-// };
+	if (user) return children;
+	else {
+		setColor("danger");
+		setMsg("You must be logged in to access this page.");
+		return (
+			<>
+				<Navigate
+					to="/login"
+					replace={true}
+				/>
+			</>
+		);
+	}
+};
 
 // The Router component is where all the routes of your application are defined
 // The AlertContext is used to show alerts in the application
@@ -72,12 +72,20 @@ const Router = () => {
 				<Route
 					exact
 					path={"/profile"}
-					element={<Profile />}
+					element={
+						<ProtectedRoute>
+							<Profile />
+						</ProtectedRoute>
+					}
 				/>
 				<Route
 					exact
 					path={"/journal"}
-					element={<Profile />}
+					element={
+						<ProtectedRoute>
+							<Profile />
+						</ProtectedRoute>
+					}
 				/>
 			</Routes>
 		</>
