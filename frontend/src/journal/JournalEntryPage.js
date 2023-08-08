@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from "react";
 // import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-// import { useNavigate, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import useForm from "../hooks/useForm";
 // import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 
-const JournalEntryPage = ({ date }) => {
+const JournalEntryPage = () => {
+	const { date } = useParams();
 	console.debug("JournalEntryPage", "date=", date);
 	const { setMsg, setColor } = useContext(AlertContext);
 	if (!date) {
