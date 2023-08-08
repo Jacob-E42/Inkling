@@ -3,6 +3,7 @@ import React, { useCallback, useContext, useEffect } from "react";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Homepage from "../Homepage/Homepage";
 import LoginForm from "../auth/LoginForm";
+import Nav from "./Nav";
 import SignupForm from "../auth/SignupForm";
 import Profile from "../profile/Profile";
 import AlertComponent from "../common/AlertComponent";
@@ -37,7 +38,7 @@ const ProtectedRoute = ({ children }) => {
 // The AlertContext is used to show alerts in the application
 const Router = () => {
 	// useContext hook is used to access the AlertContext data
-	const { msg, color } = useContext(AlertContext);
+	const { msg, color, setMsg, setColor } = useContext(AlertContext);
 	const { logout } = useContext(UserContext);
 
 	// Logging message and color for debugging purposes
@@ -46,19 +47,33 @@ const Router = () => {
 
 	const handleLogout = useCallback(() => {
 		logout();
+		setMsg("You are now logged out");
+		setColor("success");
 		navigate("/"); // navigate to the homepage or any other route after logout
-	}, [logout, navigate]);
+	}, [logout, navigate, setColor, setMsg]);
 
 	const Logout = () => {
 		useEffect(() => {
 			handleLogout();
-		}, [navigate]);
+		}, []);
 
 		return null; // This component does not render anything
 	};
 
+	const RedirectToCurrentDateJournal = () => {
+		const currentDate = new Date().toISOString().slice(0, 10); // e.g., "2023-07-25"
+		return (
+			<Navigate
+				to={`/journal/${currentDate}`}
+				replace
+			/>
+		);
+	};
+
 	return (
 		<>
+			<Nav logout={handleLogout} />
+
 			{/* If there's a message in the AlertContext, show the AlertComponent */}
 			{msg && (
 				<AlertComponent
@@ -66,6 +81,7 @@ const Router = () => {
 					color={color}
 				/>
 			)}
+
 			{/* The Routes component is where all the routes of the application are defined */}
 			<Routes>
 				{/* Each Route represents a page in your application */}
@@ -93,6 +109,10 @@ const Router = () => {
 							<Profile logout={handleLogout} />
 						</ProtectedRoute>
 					}
+				/>
+				<Route
+					path={"/journal/*"}
+					element={<RedirectToCurrentDateJournal />}
 				/>
 
 				<Route
