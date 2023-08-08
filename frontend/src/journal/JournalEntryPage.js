@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from "react";
 // import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useParams } from "react-router-dom";
+import Journal from "./Journal";
 // import useForm from "../hooks/useForm";
 // import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 
 const JournalEntryPage = () => {
-	const { date } = useParams();
+	let { date } = useParams();
 	console.debug("JournalEntryPage", "date=", date);
 	const { setMsg, setColor } = useContext(AlertContext);
 	if (!date) {
@@ -28,9 +29,8 @@ const JournalEntryPage = () => {
 
 	return (
 		<>
-			<nav>nav goes here</nav>
 			<p>Streak goes here</p>
-			<p>journal goes here</p>
+			<Journal date={date} />
 			<p>feedback goes here</p>
 		</>
 	);
