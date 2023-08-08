@@ -62,15 +62,15 @@ const LoginForm = () => {
 					const result = await login(formData);
 					if (result.success) {
 						console.log("Form submitted:", formData);
-						navigate("/profile");
 						setErrors({});
+						navigate("/profile");
 					}
 				} catch (err) {
 					console.error(err);
 				}
 			}
 		},
-		[login, formData, navigate, errors, validateForm]
+		[login, formData, errors, validateForm]
 	);
 
 	return (

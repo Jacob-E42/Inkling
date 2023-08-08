@@ -144,9 +144,7 @@ function App() {
 				<ApiContext.Provider value={{ api: apiRequest }}>
 					<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
 						<div className="App">
-							<header className="App-header">
-								<Router />
-							</header>
+							<Router />
 						</div>
 					</AlertContext.Provider>
 				</ApiContext.Provider>
