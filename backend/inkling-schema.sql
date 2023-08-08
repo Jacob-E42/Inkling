@@ -13,6 +13,6 @@ CREATE TABLE journal_entries (
   user_id INT REFERENCES users(id) ON DELETE CASCADE,
   title TEXT NOT NULL,
   entry_text TEXT NOT NULL,
-  entry_date TIMESTAMP NOT NULL,
+  entry_date DATE NOT NULL,
   emotions JSON
 );
