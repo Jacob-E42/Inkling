@@ -2,21 +2,37 @@
 
 const db = require("../db.js");
 const User = require("../models/user");
+const Journal = require("../models/journal");
 
 const { createToken } = require("../helpers/token.js");
 
 const testJobIds = [];
 
 async function commonBeforeAll() {
-	// noinspection SqlWithoutWhere
 	await db.query("DELETE FROM users");
+	await db.query("DELETE FROM journal_entries");
 
 	// reset id sequence
 	await db.query("SELECT setval('users_id_seq', 1, false)");
+	await db.query("SELECT setval('journal_entries_id_seq', 1, false)");
 
 	await User.register("U1F", "U1L", "user1@user.com", "password1", ["interest1", "interest2"]);
 	await User.register("U2F", "U2L", "user2@user.com", "password2", ["interest2", "interest3"]);
 	await User.register("U3F", "U3L", "user3@user.com", "password3", ["interest1", "interest3"]);
+
+	await Journal.createEntry(1, "My birthday", "Today was my birthday and I had a great day.", "2022-01-04");
+	await Journal.createEntry(
+		2,
+		"How to be more grateful",
+		"I would like to start being more grateful for the little things in life. As part of that I will try to appreciate whatever nice things happen to me unexpectedly.",
+		"2023-01-04"
+	);
+	await Journal.createEntry(
+		3,
+		"Habits",
+		"Today I did a third of my prescribed habits. Hopefully tomorrow I'll hit the ground running and do better.",
+		"2024-01-04"
+	);
 }
 
 async function commonBeforeEach() {
