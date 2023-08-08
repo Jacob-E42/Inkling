@@ -5,14 +5,45 @@ import useForm from "../hooks/useForm";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 
-const Journal = () => {
+const Journal = ({ date }) => {
 	const { setMsg, setColor } = useContext(AlertContext);
+	const [form, handleChange] = useForm({
+		title: "",
+		entry: ""
+	});
 
 	return (
 		<>
-			<p>title and date go here</p>
+			<header>
+				<p>{date}</p>
+				<Form>
+					<FormGroup>
+						<Label for="title">Title</Label>
+						<Input
+							type="text"
+							name="title"
+							id="title"
+							placeholder="title"
+							value={form.title}
+							onChange={handleChange}
+						/>
+					</FormGroup>
+				</Form>
+			</header>
 
-			<p>journal box goes here</p>
+			<Form>
+				<FormGroup>
+					<Label for="entry">Journal Entry</Label>
+					<Input
+						type="textarea"
+						name="entry"
+						id="entry"
+						placeholder="Start your entry here..."
+						value={form.entry}
+						onChange={handleChange}
+					/>
+				</FormGroup>
+			</Form>
 			<Button type="submit">For now I do nothing</Button>
 		</>
 	);
