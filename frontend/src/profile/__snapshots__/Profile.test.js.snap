@@ -7,8 +7,94 @@ exports[`Homepage matches snapshot 1`] = `
   >
     This is profile
     <p>
-      User: 
+      User: testfirst
     </p>
+    <form
+      class="profile-container"
+    >
+      <div
+        class="profile-item mb-3"
+      >
+        <label
+          class="form-label"
+          for="firstName"
+        >
+          First Name
+        </label>
+        <input
+          class="form-control"
+          id="firstName"
+          name="firstName"
+          type="text"
+          value="testfirst"
+        />
+      </div>
+      <div
+        class="profile-item mb-3"
+      >
+        <label
+          class="form-label"
+          for="lastName"
+        >
+          Last Name
+        </label>
+        <input
+          class="form-control"
+          id="lastName"
+          name="lastName"
+          type="text"
+          value="testlast"
+        />
+      </div>
+      <div
+        class="profile-item mb-3"
+      >
+        <label
+          class="form-label"
+          for="email"
+        >
+          Email
+        </label>
+        <input
+          class="form-control"
+          id="email"
+          name="email"
+          type="email"
+          value="test@test.net"
+        />
+      </div>
+      <div
+        class="profile-item mb-3"
+      >
+        <label
+          class="form-label"
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          class="form-control"
+          id="password"
+          name="password"
+          placeholder="Enter new password, if you want it changed"
+          type="password"
+          value=""
+        />
+      </div>
+      <button
+        class="btn btn-primary"
+        type="submit"
+      >
+        Submit
+      </button>
+      <a
+        class="btn btn-secondary"
+        href="/"
+        type="button"
+      >
+        Back
+      </a>
+    </form>
     <button>
       Logout
     </button>

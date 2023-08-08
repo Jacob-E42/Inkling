@@ -24,6 +24,9 @@ exports[`LoginForm matches snapshot 1`] = `
         type="email"
         value=""
       />
+      <div
+        class="inputError invalid-feedback"
+      />
     </div>
     <div
       class="mb-3"
@@ -43,6 +46,9 @@ exports[`LoginForm matches snapshot 1`] = `
         placeholder="Enter your password"
         type="password"
         value=""
+      />
+      <div
+        class="inputError invalid-feedback"
       />
     </div>
     <button

@@ -23,6 +23,9 @@ exports[`SignupForm matches snapshot 1`] = `
         type="text"
         value=""
       />
+      <div
+        class="inputError invalid-feedback"
+      />
     </div>
     <div
       class="mb-3"
@@ -41,6 +44,9 @@ exports[`SignupForm matches snapshot 1`] = `
         placeholder="Enter your last name"
         type="text"
         value=""
+      />
+      <div
+        class="inputError invalid-feedback"
       />
     </div>
     <div
@@ -62,6 +68,9 @@ exports[`SignupForm matches snapshot 1`] = `
         type="email"
         value=""
       />
+      <div
+        class="inputError invalid-feedback"
+      />
     </div>
     <div
       class="mb-3"
@@ -82,63 +91,66 @@ exports[`SignupForm matches snapshot 1`] = `
         type="password"
         value=""
       />
+      <div
+        class="inputError invalid-feedback"
+      />
     </div>
     <div
       class="mb-3"
     >
-      <label
-        class="form-label"
-        for="interests"
-      >
-        Interests
-      </label>
       <p>
         Please select one to three interests
       </p>
-      <div>
+      <div
+        class="form-check"
+      >
+        <label
+          class="ml-2 form-check-label"
+          for="interest1"
+        >
+          Interest 1
+        </label>
         <input
-          class="form-check-input"
+          class="form-control-lg form-check-input"
           id="interest1"
           name="interests"
           type="checkbox"
           value="interest1"
         />
-        <label
-          class="ml-2 form-label"
-          for="interest1"
-        >
-          Interest 1
-        </label>
       </div>
-      <div>
+      <div
+        class="form-check"
+      >
+        <label
+          class="ml-2 form-check-label"
+          for="interest2"
+        >
+          Interest 2
+        </label>
         <input
-          class="form-check-input"
+          class="form-control-lg form-check-input"
           id="interest2"
           name="interests"
           type="checkbox"
           value="interest2"
         />
-        <label
-          class="ml-2 form-label"
-          for="interest2"
-        >
-          Interest 2
-        </label>
       </div>
-      <div>
+      <div
+        class="form-check"
+      >
+        <label
+          class="form-check-label"
+          for="interest3"
+        >
+          Interest 3
+        </label>
         <input
-          class="form-check-input"
+          class="form-control-lg form-check-input"
           id="interest3"
           name="interests"
           type="checkbox"
           value="interest3"
         />
-        <label
-          class="ml-2 form-label"
-          for="interest3"
-        >
-          Interest 3
-        </label>
       </div>
     </div>
     <button

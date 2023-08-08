@@ -2,11 +2,39 @@
 
 exports[`Router matches snapshot 1`] = `
 <DocumentFragment>
+  <nav
+    class="nav"
+  >
+    <a
+      aria-current="page"
+      class="active"
+      href="/"
+    >
+      Inkling
+    </a>
+    <a
+      class=""
+      href="/journal"
+    >
+      Journal
+    </a>
+    <a
+      class=""
+      href="/profile"
+    >
+      Testfirst
+    </a>
+    <button
+      class="link-button"
+    >
+      Log Out
+    </button>
+  </nav>
   <div
     class="container"
   >
     <p>
-      User: 
+      User: testfirst
     </p>
     <h1
       class="mt-5"

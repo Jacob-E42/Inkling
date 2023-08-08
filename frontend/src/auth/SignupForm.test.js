@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
-import { AnonUserProvider } from "../mock";
+import { AlertProvider, AnonUserProvider } from "../mock";
 import { MemoryRouter } from "react-router";
 import SignupForm from "./SignupForm";
 
@@ -12,7 +12,9 @@ test("SignupForm renders without crashing", () => {
 	render(
 		<MemoryRouter>
 			<AnonUserProvider>
-				<SignupForm />
+				<AlertProvider>
+					<SignupForm />
+				</AlertProvider>
 			</AnonUserProvider>
 		</MemoryRouter>
 	);
@@ -22,7 +24,9 @@ test("SignupForm matches snapshot", () => {
 	const { asFragment } = render(
 		<MemoryRouter>
 			<AnonUserProvider>
-				<SignupForm />
+				<AlertProvider>
+					<SignupForm />
+				</AlertProvider>
 			</AnonUserProvider>
 		</MemoryRouter>
 	);
@@ -33,7 +37,9 @@ test("SignupForm displays username and password inputs", () => {
 	render(
 		<MemoryRouter>
 			<AnonUserProvider>
-				<SignupForm />
+				<AlertProvider>
+					<SignupForm />
+				</AlertProvider>
 			</AnonUserProvider>
 		</MemoryRouter>
 	);

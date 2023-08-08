@@ -5,8 +5,8 @@ import Request from "./api";
 
 const demoUser = {
 	id: 11,
-	first_name: "testfirst",
-	last_name: "testlast",
+	firstName: "testfirst",
+	lastName: "testlast",
 	email: "test@test.net",
 	interests: ["baking", "jetskiing"]
 };
