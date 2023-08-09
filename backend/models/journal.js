@@ -3,6 +3,7 @@
 const db = require("../db");
 const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
 const { objectDataToSql } = require("../helpers/sql");
+const formatJournalDate = require("../helpers/formatJournalDate");
 
 class Journal {
 	// Method to retrieve a journal by its ID
@@ -22,7 +23,7 @@ class Journal {
 		if (!journal) throw new NotFoundError(`No journal with id: ${id}}`);
 
 		// If the journal is found, return it
-		return journal;
+		return formatJournalDate(journal);
 	}
 
 	// Method to retrieve a journal by its ID
@@ -37,12 +38,13 @@ class Journal {
 		// Execute the query
 		const res = await db.query(query);
 		const journal = res.rows[0];
+		console.log("journal=", journal);
 
 		// If no journal is found, throw an error
-		if (!journal) throw new NotFoundError(`No journal with id: ${id}}`);
+		if (!journal) throw new NotFoundError(`No journal with id: ${userId}}`);
 
 		// If the journal is found, return it
-		return journal;
+		return formatJournalDate(journal);
 	}
 
 	// Method to register a new user
@@ -56,6 +58,8 @@ class Journal {
 		} finally {
 			if (existingEntry) throw new BadRequestError("A journal entry written on this day already exists");
 		}
+
+		console.log("entry date=", entryDate);
 
 		// // Define the new user object
 		// const newUser = {
@@ -76,7 +80,9 @@ class Journal {
 
 		// Execute the query to insert the new user and return the result
 		const res = await db.query(query);
-		return res.rows[0];
+
+		// console.log(res);
+		return formatJournalDate(res.rows[0]);
 	}
 }
 
