@@ -3,7 +3,7 @@ const router = express.Router();
 const jsonchema = require("jsonschema");
 const { BadRequestError } = require("../expressError");
 // Importing JSON schemas for request validation
-const userAuthSchema = require("../schema/userAuthSchema.json");
+const userSignupSchema = require("../schema/userSignupSchema.json");
 const userLoginSchema = require("../schema/userLoginSchema.json");
 const User = require("../models/user");
 const { createToken } = require("../helpers/token");
@@ -13,7 +13,7 @@ router.post("/signup", async (req, res, next) => {
 	try {
 		console.debug("/auth/signup");
 		// Validate request body against JSON Schema
-		const validationResult = jsonchema.validate(req.body, userAuthSchema);
+		const validationResult = jsonchema.validate(req.body, userSignupSchema);
 		if (!validationResult.valid) {
 			const errs = validationResult.errors.map(e => e.stack);
 			throw new BadRequestError(errs);
