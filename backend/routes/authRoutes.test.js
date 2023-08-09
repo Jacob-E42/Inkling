@@ -16,7 +16,7 @@ const {
 	u1Token,
 	u2Token,
 	u3Token
-} = require("./testUtils.js");
+} = require("../models/testUtils.js");
 
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);

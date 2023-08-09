@@ -15,7 +15,7 @@ const {
 	u2Token,
 	u3Token,
 	nonUserToken
-} = require("./testUtils.js");
+} = require("../models/testUtils.js");
 
 beforeAll(commonBeforeAll);
 beforeEach(commonBeforeEach);
@@ -183,19 +183,6 @@ afterAll(commonAfterAll);
 /************************************** GET /users/:email */
 
 describe("GET /users/:email", function () {
-	test("works for anyone", async function () {
-		const resp = await request(app).get(`/users/user1@user.com`).set("authorization", `Bearer ${u1Token}`);
-		expect(resp.body).toEqual({
-			user: {
-				id: expect.any(Number),
-				firstName: "U1F",
-				lastName: "U1L",
-				email: "user1@user.com",
-				interests: ["interest1", "interest2"]
-			}
-		});
-	});
-
 	test("works for same user", async function () {
 		const resp = await request(app).get(`/users/user1@user.com`).set("authorization", `Bearer ${u1Token}`);
 		expect(resp.body).toEqual({
