@@ -61,9 +61,10 @@ describe("Journal", () => {
 
 		it("should should return NotFoundError if Journal with that date doesn't exist", async () => {
 			try {
-				await Journal.getByDate("2022-08-04");
+				await Journal.getByDate(1, "2022-08-04");
 				fail();
 			} catch (err) {
+				console.log(err);
 				expect(err instanceof NotFoundError).toBeTruthy();
 			}
 		});
