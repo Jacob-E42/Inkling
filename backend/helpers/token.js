@@ -11,11 +11,12 @@ const { BadRequestError } = require("../expressError");
 function createToken(user) {
 	console.debug("createToken");
 
-	if (!user) {
-		throw new BadRequestError("User data is missing");
+	if (!user || !user.id || !user.email) {
+		throw new BadRequestError("User data is missing or incomplete");
 	}
 
 	let payload = {
+		id: user.id,
 		email: user.email
 	};
 
