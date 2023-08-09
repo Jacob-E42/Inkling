@@ -20,7 +20,12 @@ async function commonBeforeAll() {
 	await User.register("U2F", "U2L", "user2@user.com", "password2", ["interest2", "interest3"]);
 	await User.register("U3F", "U3L", "user3@user.com", "password3", ["interest1", "interest3"]);
 
-	await Journal.createEntry(1, "My birthday", "Today was my birthday and I had a great day.", "2022-01-04");
+	const journal1 = await Journal.createEntry(
+		1,
+		"My birthday",
+		"Today was my birthday and I had a great day.",
+		"2022-01-04"
+	);
 	await Journal.createEntry(
 		2,
 		"How to be more grateful",
@@ -33,6 +38,8 @@ async function commonBeforeAll() {
 		"Today I did a third of my prescribed habits. Hopefully tomorrow I'll hit the ground running and do better.",
 		"2024-01-04"
 	);
+
+	console.log(journal1);
 }
 
 async function commonBeforeEach() {
