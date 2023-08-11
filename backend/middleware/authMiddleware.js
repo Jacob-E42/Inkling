@@ -19,6 +19,7 @@ function authenticateJWT(req, res, next) {
 		const authHeader = req.headers && req.headers.authorization;
 		if (authHeader) {
 			const token = authHeader.replace(/^[Bb]earer /, "").trim();
+
 			res.locals.user = jwt.verify(token, SECRET_KEY);
 		}
 		return next();
@@ -62,13 +63,15 @@ function ensureCorrectUserByEmail(req, res, next) {
 /**
  * Middleware: Check if user is the correct user.
  *
- * It checks whether the user from the token matches the user email provided as route parameter.
+ * It checks whether the user from the token matches the user id provided as route parameter.
  * If not, it throws UnauthorizedError.
  */
 function ensureCorrectUserByUserId(req, res, next) {
 	try {
 		const user = res.locals.user;
-		if (!(user && user.email === req.params.email)) {
+		// console.log("user:", user, "User ID from params:", req.params.userId, "user.id", user.id);
+		// console.log(typeof user.id, typeof req.params.userId);
+		if (!(user && String(user.id) === req.params.userId)) {
 			throw new UnauthorizedError();
 		}
 		return next();
