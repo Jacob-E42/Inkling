@@ -16,6 +16,7 @@ function App() {
 	// Use custom hook to persist user and token in localStorage. Initialize infoLoaded, msg and color states
 	const [user, setUser] = useLocalStorage("user", null);
 	const [token, setToken] = useLocalStorage("token", null);
+
 	const [apiRequest, setApiRequest] = useLocalStorage("apiRequest", null);
 	// const { api } = useContext(ApiContext); //this could be a problem
 	const [infoLoaded, setInfoLoaded] = useState(false);
@@ -42,10 +43,9 @@ function App() {
 						// Create an instance of the Request object with the token for authentication
 
 						const currentUser = await apiRequest.getCurrentUser(email);
+						console.log("currentUser=", currentUser);
 						// Set the user in the state
 						setUser(currentUser);
-
-						console.log("current user", currentUser);
 					} catch (err) {
 						console.error(err);
 						// If there's an error, clear the user in the state
@@ -97,6 +97,7 @@ function App() {
 					setToken(token);
 					api.setToken(token);
 					setApiRequest(() => api);
+
 					console.log(api.getCurrentUser);
 					return { success: true };
 				} else throw new Error("Log in token in missing");
@@ -140,7 +141,7 @@ function App() {
 	// Render the App component, providing the user context to children
 	return (
 		<BrowserRouter>
-			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser }}>
+			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser, infoLoaded }}>
 				<ApiContext.Provider value={{ api: apiRequest }}>
 					<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
 						<div className="App">

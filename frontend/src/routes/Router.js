@@ -10,26 +10,35 @@ import AlertComponent from "../common/AlertComponent";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import JournalEntryPage from "../journal/JournalEntryPage";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 // a common way to handle authentication in React
 // It checks whether a user is currently logged in and if not, it redirects to the login page and shows a message
 // If the user is logged in, it just renders the children components
 //
 const ProtectedRoute = ({ children }) => {
-	const { user } = useContext(UserContext);
+	const { user, infoLoaded } = useContext(UserContext);
 	const { setMsg, setColor } = useContext(AlertContext);
 
-	if (user) return children;
-	else {
-		setColor("danger");
-		setMsg("You must be logged in to access this page.");
+	useEffect(() => {
+		if (infoLoaded && !user) {
+			setColor("danger");
+			setMsg("You must be logged in to access this page.");
+		}
+	}, [infoLoaded, user, setColor, setMsg]);
+
+	if (!infoLoaded) {
+		// This will show a loading spinner while waiting for infoLoaded to become true
+		// Replace <div>Loading...</div> with your preferred loading component or spinner
+		return <LoadingSpinner />;
+	} else if (user) {
+		return children;
+	} else {
 		return (
-			<>
-				<Navigate
-					to="/login"
-					replace={true}
-				/>
-			</>
+			<Navigate
+				to="/login"
+				replace={true}
+			/>
 		);
 	}
 };
