@@ -53,10 +53,10 @@ async function commonAfterAll() {
 	}
 }
 
-const u1Token = createToken({ email: "user1@user.com" });
-const u2Token = createToken({ email: "user2@user.com" });
-const u3Token = createToken({ email: "user3@user.com" });
-const nonUserToken = createToken({ email: "nosuchuser@user.com" });
+const u1Token = createToken({ email: "user1@user.com" }, 1);
+const u2Token = createToken({ email: "user2@user.com" }, 2);
+const u3Token = createToken({ email: "user3@user.com" }, 3);
+const nonUserToken = createToken({ email: "nosuchuser@user.com" }, 177);
 
 module.exports = {
 	commonBeforeAll,

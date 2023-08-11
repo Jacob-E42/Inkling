@@ -59,7 +59,7 @@ class Journal {
 			if (existingEntry) throw new BadRequestError("A journal entry written on this day already exists");
 		}
 
-		console.log("entry date=", entryDate);
+		// console.log("entry date=", entryDate);
 
 		// // Define the new user object
 		// const newUser = {
