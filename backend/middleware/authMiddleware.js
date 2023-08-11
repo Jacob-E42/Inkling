@@ -44,10 +44,28 @@ function ensureLoggedIn(req, res, next) {
 /**
  * Middleware: Check if user is the correct user.
  *
- * It checks whether the user from the token matches the user provided as route parameter.
+ * It checks whether the user from the token matches the user email provided as route parameter.
  * If not, it throws UnauthorizedError.
  */
-function ensureCorrectUser(req, res, next) {
+function ensureCorrectUserByEmail(req, res, next) {
+	try {
+		const user = res.locals.user;
+		if (!(user && user.email === req.params.email)) {
+			throw new UnauthorizedError();
+		}
+		return next();
+	} catch (err) {
+		return next(err);
+	}
+}
+
+/**
+ * Middleware: Check if user is the correct user.
+ *
+ * It checks whether the user from the token matches the user email provided as route parameter.
+ * If not, it throws UnauthorizedError.
+ */
+function ensureCorrectUserByUserId(req, res, next) {
 	try {
 		const user = res.locals.user;
 		if (!(user && user.email === req.params.email)) {

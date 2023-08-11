@@ -70,6 +70,12 @@ class ApiRequest {
 		let response = await this.#request(`users/${email}`, data, "patch");
 		return response.user;
 	}
+
+	// async getJournalEntryById(id) {
+	// 	console.debug("editCurrentUser", email, data);
+	// 	let response = await this.#request(`users/${email}`, data, "patch");
+	// 	return response.user;
+	// }
 }
 
 export default ApiRequest;
