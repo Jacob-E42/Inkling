@@ -80,5 +80,6 @@ function ensureCorrectUserByUserId(req, res, next) {
 module.exports = {
 	authenticateJWT,
 	ensureLoggedIn,
-	ensureCorrectUser
+	ensureCorrectUserByEmail,
+	ensureCorrectUserByUserId
 };
