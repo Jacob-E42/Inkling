@@ -8,15 +8,15 @@ const { BadRequestError } = require("../expressError");
  * @returns {string} Signed JWT token
  * @throws {BadRequestError} If no user data is provided
  */
-function createToken(user) {
-	console.debug("createToken");
+function createToken(user, userId) {
+	console.debug("createToken", "user=", user);
 
-	if (!user || !user.id || !user.email) {
+	if (!user || userId || !user.email) {
 		throw new BadRequestError("User data is missing or incomplete");
 	}
 
 	let payload = {
-		id: user.id,
+		id: userId,
 		email: user.email
 	};
 
