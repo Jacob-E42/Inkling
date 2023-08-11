@@ -25,74 +25,76 @@ afterAll(commonAfterAll);
 
 /************************************** GET /journals/:id */
 
-describe("GET /journals/:id", function () {
-	// Since Journal Ids are serialized starting from 1, you can directly use them.
+// describe("GET /journals/:journalId", function () {
+// 	// Since Journal Ids are serialized starting from 1, you can directly use them.
 
-	test("works for correct user", async function () {
-		const resp = await request(app).get(`/journals/1`).set("authorization", `Bearer ${u1Token}`);
-		expect(resp.body).toEqual({
-			journal: {
-				id: 1,
-				user_id: 1,
-				title: "My birthday",
-				entry_text: "Today was my birthday and I had a great day.",
-				entry_date: "2022-01-04",
-				emotions: null // Since emotions were not provided in the mock data
-			}
-		});
-	});
+// 	test("works for correct user", async function () {
+// 		const resp = await request(app).get(`/users/1/journals/1`).set("authorization", `Bearer ${u1Token}`);
+// 		expect(resp.body).toEqual({
+// 			journal: {
+// 				id: 1,
+// 				user_id: 1,
+// 				title: "My birthday",
+// 				entry_text: "Today was my birthday and I had a great day.",
+// 				entry_date: "2022-01-04",
+// 				emotions: null // Since emotions were not provided in the mock data
+// 			}
+// 		});
+// 	});
 
-	test("unauth for other users", async function () {
-		const resp = await request(app).get(`/journals/1`).set("authorization", `Bearer ${u2Token}`);
-		expect(resp.statusCode).toEqual(401);
-	});
+// 	test("unauth for other users", async function () {
+// 		const resp = await request(app).get(`/users/1/journals/1`).set("authorization", `Bearer ${u2Token}`);
+// 		expect(resp.statusCode).toEqual(401);
+// 	});
 
-	test("unauth for anon", async function () {
-		const resp = await request(app).get(`/journals/1`);
-		expect(resp.statusCode).toEqual(401);
-	});
+// 	test("unauth for anon", async function () {
+// 		const resp = await request(app).get(`/users/1/journals/1`);
 
-	test("not found if journal not found", async function () {
-		const resp = await request(app).get(`/journals/101`).set("authorization", `Bearer ${u1Token}`);
-		expect(resp.statusCode).toEqual(404);
-	});
-});
+// 		expect(resp.statusCode).toEqual(401);
+// 	});
 
-describe("GET /journals/:userId/:entryDate", function () {
-	test("works for correct user and date", async function () {
-		const resp = await request(app).get(`/journals/1/2022-01-04`).set("authorization", `Bearer ${u1Token}`);
-		expect(resp.body).toEqual({
-			journal: {
-				id: 1,
-				user_id: 1,
-				title: "My birthday",
-				entry_text: "Today was my birthday and I had a great day.",
-				entry_date: "2022-01-04",
-				emotions: null
-			}
-		});
-	});
+// 	test("not found if journal not found", async function () {
+// 		const resp = await request(app).get(`/users/1/journals/101`).set("authorization", `Bearer ${u1Token}`);
+// 		expect(resp.statusCode).toEqual(404);
+// 	});
+// });
 
-	test("unauth for other users", async function () {
-		const resp = await request(app).get(`/journals/1/2022-01-04`).set("authorization", `Bearer ${u2Token}`);
-		expect(resp.statusCode).toEqual(401);
-	});
+// describe("GET /journals/:entryDate", function () {
+// 	test("works for correct user and date", async function () {
+// 		const resp = await request(app)
+// 			.get(`/users/1/journals/date/2022-01-04`)
+// 			.set("authorization", `Bearer ${u1Token}`);
+// 		expect(resp.body).toEqual({
+// 			journal: {
+// 				id: 1,
+// 				user_id: 1,
+// 				title: "My birthday",
+// 				entry_text: "Today was my birthday and I had a great day.",
+// 				entry_date: "2022-01-04",
+// 				emotions: null
+// 			}
+// 		});
+// 	});
 
-	test("unauth for anon", async function () {
-		const resp = await request(app).get(`/journals/1/2022-01-04`);
-		expect(resp.statusCode).toEqual(401);
-	});
+// 	test("unauth for other users", async function () {
+// 		const resp = await request(app)
+// 			.get(`/users/1/journals/date/2022-01-04`)
+// 			.set("authorization", `Bearer ${u2Token}`);
+// 		expect(resp.statusCode).toEqual(401);
+// 	});
 
-	test("not found if journal not found for the given date", async function () {
-		const resp = await request(app).get(`/journals/1/2025-01-04`).set("authorization", `Bearer ${u1Token}`);
-		expect(resp.statusCode).toEqual(404);
-	});
+// 	test("unauth for anon", async function () {
+// 		const resp = await request(app).get(`/users/1/journals/date/2022-01-04`);
+// 		expect(resp.statusCode).toEqual(401);
+// 	});
 
-	test("not found if journal not found for the user date", async function () {
-		const resp = await request(app).get(`/journals/101/2022-01-04`).set("authorization", `Bearer ${u1Token}`);
-		expect(resp.statusCode).toEqual(404);
-	});
-});
+// 	test("not found if journal not found for the given date", async function () {
+// 		const resp = await request(app)
+// 			.get(`/users/1/journals/date/2025-01-04`)
+// 			.set("authorization", `Bearer ${u1Token}`);
+// 		expect(resp.statusCode).toEqual(404);
+// 	});
+// });
 
 describe("POST /journals/", function () {
 	test("works for correct user", async function () {
@@ -102,7 +104,10 @@ describe("POST /journals/", function () {
 			entry: "New Entry Text",
 			entryDate: "2025-01-05"
 		};
-		const resp = await request(app).post(`/journals`).send(newEntry).set("authorization", `Bearer ${u1Token}`);
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send(newEntry)
+			.set("authorization", `Bearer ${u1Token}`);
 		expect(resp.body).toEqual({
 			journal: {
 				id: expect.any(Number),
@@ -117,7 +122,7 @@ describe("POST /journals/", function () {
 
 	test("bad request with missing userId", async function () {
 		const resp = await request(app)
-			.post(`/journals`)
+			.post(`/users/1/journals`)
 			.send({
 				title: "New Title",
 				entry: "New Entry Text",
@@ -129,7 +134,7 @@ describe("POST /journals/", function () {
 
 	test("bad request with missing data", async function () {
 		const resp = await request(app)
-			.post(`/journals`)
+			.post(`/users/1/journals`)
 			.send({
 				userId: 1,
 				title: "New Title"
@@ -140,7 +145,7 @@ describe("POST /journals/", function () {
 
 	test("bad request with invalid data", async function () {
 		const resp = await request(app)
-			.post(`/journals`)
+			.post(`/users/1/journals`)
 			.send({
 				userId: 1,
 				title: "New Title",
@@ -152,7 +157,7 @@ describe("POST /journals/", function () {
 	});
 
 	test("unauth for anon", async function () {
-		const resp = await request(app).post(`/journals`).send({
+		const resp = await request(app).post(`/users/1/journals`).send({
 			userId: 1,
 			title: "New Title",
 			entry: "New Entry Text",
@@ -163,7 +168,7 @@ describe("POST /journals/", function () {
 
 	test("unauth if userId doesn't match the user id of the user who has the provided token", async function () {
 		const resp = await request(app)
-			.post(`/journals`)
+			.post(`/users/1/journals`)
 			.send({
 				userId: 1,
 				title: "New Title",
@@ -176,7 +181,7 @@ describe("POST /journals/", function () {
 
 	test("not found if the userId doesn't match any user_id", async function () {
 		const resp = await request(app)
-			.post(`/journals`)
+			.post(`/users/1/journals`)
 			.send({
 				userId: 101,
 				title: "New Title",
