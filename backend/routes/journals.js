@@ -4,10 +4,10 @@ const jsonschema = require("jsonschema");
 const journalCreateSchema = require("../schema/journalCreateSchema");
 const { BadRequestError } = require("../expressError");
 const Journal = require("../models/journal");
-const { ensureCorrectUser } = require("../middleware/authMiddleware");
+const { ensureCorrectUser, ensureCorrectUserByEmail } = require("../middleware/authMiddleware");
 
 //ensureCorrectUser as is, is going to lead to errors becuase it only checks for an email param
-router.get("/:id", ensureCorrectUser, async function (req, res, next) {
+router.get("/:id", ensureCorrectUserByEmail, async function (req, res, next) {
 	console.debug("GET /journals/id ");
 
 	try {
@@ -20,7 +20,7 @@ router.get("/:id", ensureCorrectUser, async function (req, res, next) {
 });
 
 //ensureCorrectUser as is, is going to lead to errors becuase it only checks for an email param
-router.get("/:userId/:entryDate", ensureCorrectUser, async function (req, res, next) {
+router.get("/:userId/:entryDate", ensureCorrectUserByEmail, async function (req, res, next) {
 	console.debug("GET /journals/userId/entryDate ");
 
 	try {
@@ -32,7 +32,7 @@ router.get("/:userId/:entryDate", ensureCorrectUser, async function (req, res, n
 	}
 });
 
-router.post("/", ensureCorrectUser, async function (req, res, next) {
+router.post("/", ensureCorrectUserByEmail, async function (req, res, next) {
 	console.debug("POST /journals/ ");
 	try {
 		const validator = jsonschema.validate(req.body, journalCreateSchema);

@@ -26,7 +26,7 @@ router.post("/signup", async (req, res, next) => {
 		const newUser = await User.register(firstName, lastName, email, password, interests);
 
 		// Generate authentication token
-		const authToken = createToken(newUser);
+		const authToken = createToken(newUser, newUser.id);
 
 		// Return the authentication token with a status code of 201 (Created)
 		res.status(201).json({ token: authToken });

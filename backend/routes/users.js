@@ -4,9 +4,9 @@ const jsonschema = require("jsonschema");
 const userUpdateSchema = require("../schema/userUpdateSchema.json");
 const { BadRequestError } = require("../expressError");
 const User = require("../models/user");
-const { ensureCorrectUser } = require("../middleware/authMiddleware");
+const { ensureCorrectUserByEmail } = require("../middleware/authMiddleware");
 
-router.get("/:email", ensureCorrectUser, async function (req, res, next) {
+router.get("/:email", ensureCorrectUserByEmail, async function (req, res, next) {
 	console.debug("/users/email GET ");
 
 	// Create an instance of the User class
@@ -21,7 +21,7 @@ router.get("/:email", ensureCorrectUser, async function (req, res, next) {
 });
 
 //Update a user's firstName, lastName, email or interests
-router.patch("/:email", ensureCorrectUser, async function (req, res, next) {
+router.patch("/:email", ensureCorrectUserByEmail, async function (req, res, next) {
 	try {
 		const validator = jsonschema.validate(req.body, userUpdateSchema);
 		if (!validator.valid) {
