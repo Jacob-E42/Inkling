@@ -26,6 +26,6 @@
 			}
 		}
 	},
-	"required": ["user_id", "title", "entry_text", "entry_date"],
+	"required": ["title", "entry_text", "entry_date"],
 	"additionalProperties": false
 }
