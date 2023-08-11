@@ -9,9 +9,9 @@ const { BadRequestError } = require("../expressError");
  * @throws {BadRequestError} If no user data is provided
  */
 function createToken(user, userId) {
-	console.debug("createToken", "user=", user);
+	// console.debug("createToken", "user=", user);
 
-	if (!user || userId || !user.email) {
+	if (!user || !userId || !user.email) {
 		throw new BadRequestError("User data is missing or incomplete");
 	}
 
