@@ -71,11 +71,17 @@ class ApiRequest {
 		return response.user;
 	}
 
-	// async getJournalEntryById(id) {
-	// 	console.debug("editCurrentUser", email, data);
-	// 	let response = await this.#request(`users/${email}`, data, "patch");
-	// 	return response.user;
-	// }
+	async getJournalEntryById(userId, journalId) {
+		console.debug("getJournalEntryById", userId, journalId);
+		let response = await this.#request(`users/${userId}/journals/${journalId}`);
+		return response.journal;
+	}
+
+	async getJournalEntryByDate(userId, date) {
+		console.debug("getJournalEntryByDate", userId, date);
+		let response = await this.#request(`users/${userId}/journals/date/${date}`);
+		return response.journal;
+	}
 }
 
 export default ApiRequest;
