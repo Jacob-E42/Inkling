@@ -5,11 +5,11 @@ import useForm from "../hooks/useForm";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 
-const Journal = ({ date }) => {
+const Journal = ({ date, title, entryText }) => {
 	const { setMsg, setColor } = useContext(AlertContext);
 	const [form, handleChange] = useForm({
-		title: "",
-		entry: ""
+		title,
+		entryText
 	});
 
 	return (
@@ -39,7 +39,7 @@ const Journal = ({ date }) => {
 						name="entry"
 						id="entry"
 						placeholder="Start your entry here..."
-						value={form.entry}
+						value={form.entryText}
 						onChange={handleChange}
 					/>
 				</FormGroup>
