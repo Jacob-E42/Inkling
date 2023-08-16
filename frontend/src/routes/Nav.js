@@ -24,8 +24,9 @@ const Nav = ({ logout }) => {
 
 			{user && (
 				<>
-					<NavLink to="/profile">{firstName}</NavLink>
 					<NavLink to="/journal">Today's Journal</NavLink>
+					<NavLink to="/profile">{firstName}</NavLink>
+
 					<button
 						className="link-button"
 						onClick={logout}>

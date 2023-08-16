@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 // import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Journal from "./Journal";
@@ -36,9 +36,9 @@ const JournalEntryPage = () => {
 		setMsg(`Today's date is ${date}`);
 		setColor("primary");
 		loadJournalEntry();
-	});
+	}, [journal, setMsg, setColor, date]);
 
-	const loadJournalEntry = async () => {
+	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
 		try {
 			const resp = api.getJournalEntryByDate();
@@ -52,16 +52,18 @@ const JournalEntryPage = () => {
 		} catch (err) {
 			console.error(err);
 		}
-	};
+	}, [setMsg, setColor, setJournal, api]);
 
 	return (
 		<>
 			<p>Streak goes here</p>
-			<Journal
-				date={date}
-				title={journal.title}
-				entryText={journal.entryText}
-			/>
+			{journal && (
+				<Journal
+					date={date}
+					title={journal.title}
+					entryText={journal.entryText}
+				/>
+			)}
 			<p>feedback goes here</p>
 		</>
 	);
