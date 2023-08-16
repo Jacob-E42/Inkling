@@ -56,7 +56,7 @@ describe("Journal", () => {
 			console.log(result);
 			expect(result).toBeDefined();
 
-			expect(result.entry_date).toBe(date);
+			expect(result.entryDate).toBe(date);
 		});
 
 		it("should should return NotFoundError if Journal with that date doesn't exist", async () => {
@@ -72,28 +72,28 @@ describe("Journal", () => {
 
 	describe("createEntry", () => {
 		it("should create a new Journal entry", async () => {
-			const user_id = 1;
+			const userId = 1;
 			const title = "Surprise Visit";
-			const entry_text = "Out of nowhere, my uncle and aunt came over to my house today.";
-			const entry_date = "2022-08-04";
+			const entryText = "Out of nowhere, my uncle and aunt came over to my house today.";
+			const entryDate = "2022-08-04";
 
-			const result = await Journal.createEntry(user_id, title, entry_text, entry_date);
+			const result = await Journal.createEntry(userId, title, entryText, entryDate);
 
 			expect(result).toBeDefined();
 			expect(result.title).toBe(title);
-			expect(result.user_id).toBe(user_id);
-			expect(result.entry_text).toBe(entry_text);
-			expect(result.entry_date).toEqual(entry_date);
+			expect(result.userId).toBe(userId);
+			expect(result.entryText).toBe(entryText);
+			expect(result.entryDate).toEqual(entryDate);
 		});
 
 		it("should throw BadRequestError if Journal with the same date already exists", async () => {
 			const user_id = 1;
 			const title = "Surprise Visit";
-			const entry_text = "Out of nowhere, my uncle and aunt came over to my house today.";
-			const entry_date = "2022-01-04";
+			const entryText = "Out of nowhere, my uncle and aunt came over to my house today.";
+			const entryDate = "2022-01-04";
 
 			try {
-				const result = await Journal.createEntry(user_id, title, entry_text, entry_date);
+				const result = await Journal.createEntry(user_id, title, entryText, entryDate);
 			} catch (error) {
 				expect(error).toBeInstanceOf(BadRequestError);
 				expect(error.message).toBe("A journal entry written on this day already exists");

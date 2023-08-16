@@ -25,76 +25,76 @@ afterAll(commonAfterAll);
 
 /************************************** GET /journals/:id */
 
-// describe("GET /journals/:journalId", function () {
-// 	// Since Journal Ids are serialized starting from 1, you can directly use them.
+describe("GET /journals/:journalId", function () {
+	// Since Journal Ids are serialized starting from 1, you can directly use them.
 
-// 	test("works for correct user", async function () {
-// 		const resp = await request(app).get(`/users/1/journals/1`).set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.body).toEqual({
-// 			journal: {
-// 				id: 1,
-// 				user_id: 1,
-// 				title: "My birthday",
-// 				entry_text: "Today was my birthday and I had a great day.",
-// 				entry_date: "2022-01-04",
-// 				emotions: null // Since emotions were not provided in the mock data
-// 			}
-// 		});
-// 	});
+	test("works for correct user", async function () {
+		const resp = await request(app).get(`/users/1/journals/1`).set("authorization", `Bearer ${u1Token}`);
+		expect(resp.body).toEqual({
+			journal: {
+				id: 1,
+				userId: 1,
+				title: "My birthday",
+				entryText: "Today was my birthday and I had a great day.",
+				entryDate: "2022-01-04",
+				emotions: null // Since emotions were not provided in the mock data
+			}
+		});
+	});
 
-// 	test("unauth for other users", async function () {
-// 		const resp = await request(app).get(`/users/1/journals/1`).set("authorization", `Bearer ${u2Token}`);
-// 		expect(resp.statusCode).toEqual(401);
-// 	});
+	test("unauth for other users", async function () {
+		const resp = await request(app).get(`/users/1/journals/1`).set("authorization", `Bearer ${u2Token}`);
+		expect(resp.statusCode).toEqual(401);
+	});
 
-// 	test("unauth for anon", async function () {
-// 		const resp = await request(app).get(`/users/1/journals/1`);
+	test("unauth for anon", async function () {
+		const resp = await request(app).get(`/users/1/journals/1`);
 
-// 		expect(resp.statusCode).toEqual(401);
-// 	});
+		expect(resp.statusCode).toEqual(401);
+	});
 
-// 	test("not found if journal not found", async function () {
-// 		const resp = await request(app).get(`/users/1/journals/101`).set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(404);
-// 	});
-// });
+	test("not found if journal not found", async function () {
+		const resp = await request(app).get(`/users/1/journals/101`).set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(404);
+	});
+});
 
-// describe("GET /journals/:entryDate", function () {
-// 	test("works for correct user and date", async function () {
-// 		const resp = await request(app)
-// 			.get(`/users/1/journals/date/2022-01-04`)
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.body).toEqual({
-// 			journal: {
-// 				id: 1,
-// 				user_id: 1,
-// 				title: "My birthday",
-// 				entry_text: "Today was my birthday and I had a great day.",
-// 				entry_date: "2022-01-04",
-// 				emotions: null
-// 			}
-// 		});
-// 	});
+describe("GET /journals/:entryDate", function () {
+	test("works for correct user and date", async function () {
+		const resp = await request(app)
+			.get(`/users/1/journals/date/2022-01-04`)
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.body).toEqual({
+			journal: {
+				id: 1,
+				userId: 1,
+				title: "My birthday",
+				entryText: "Today was my birthday and I had a great day.",
+				entryDate: "2022-01-04",
+				emotions: null
+			}
+		});
+	});
 
-// 	test("unauth for other users", async function () {
-// 		const resp = await request(app)
-// 			.get(`/users/1/journals/date/2022-01-04`)
-// 			.set("authorization", `Bearer ${u2Token}`);
-// 		expect(resp.statusCode).toEqual(401);
-// 	});
+	test("unauth for other users", async function () {
+		const resp = await request(app)
+			.get(`/users/1/journals/date/2022-01-04`)
+			.set("authorization", `Bearer ${u2Token}`);
+		expect(resp.statusCode).toEqual(401);
+	});
 
-// 	test("unauth for anon", async function () {
-// 		const resp = await request(app).get(`/users/1/journals/date/2022-01-04`);
-// 		expect(resp.statusCode).toEqual(401);
-// 	});
+	test("unauth for anon", async function () {
+		const resp = await request(app).get(`/users/1/journals/date/2022-01-04`);
+		expect(resp.statusCode).toEqual(401);
+	});
 
-// 	test("not found if journal not found for the given date", async function () {
-// 		const resp = await request(app)
-// 			.get(`/users/1/journals/date/2025-01-04`)
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(404);
-// 	});
-// });
+	test("not found if journal not found for the given date", async function () {
+		const resp = await request(app)
+			.get(`/users/1/journals/date/2025-01-04`)
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(404);
+	});
+});
 
 describe("POST /journals/", function () {
 	test("works for correct user", async function () {
