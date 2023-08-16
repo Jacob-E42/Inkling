@@ -54,7 +54,7 @@ router.post("/login", async (req, res, next) => {
 		const authenticatedUser = await User.authenticate(email, password);
 
 		// Generate authentication token
-		const authToken = createToken(authenticatedUser);
+		const authToken = createToken(authenticatedUser, authenticatedUser.id);
 
 		// Return the authentication token
 		res.json({ token: authToken });

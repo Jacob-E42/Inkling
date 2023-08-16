@@ -1,6 +1,5 @@
 // Import necessary modules from R/eact, custom hooks, API interface, JWT decoder, Router and context
 import React, { useState, useEffect, useCallback } from "react";
-
 import useLocalStorage from "./hooks/useLocalStorage";
 import ApiRequest from "./api";
 import jwtDecode from "jwt-decode";
@@ -10,6 +9,7 @@ import UserContext from "./context_providers/UserContext";
 import AlertContext from "./context_providers/AlertContext";
 import ApiContext from "./context_providers/ApiContext";
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 
 function App() {
