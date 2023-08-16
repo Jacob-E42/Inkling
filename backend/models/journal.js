@@ -50,6 +50,7 @@ class Journal {
 	// Method to register a new user
 	// Throws a BadRequestError if the email already exists
 	static async createEntry(userId, title, entry, entryDate) {
+		console.log("createEntry entryText=", entry);
 		// Check for existing user
 		let existingEntry;
 		try {
@@ -74,7 +75,7 @@ class Journal {
 		const query = {
 			text: `INSERT INTO journal_entries (user_id, title, entry_text, entry_date)
                     VALUES ($1, $2, $3, $4)
-                    RETURNING id, user_id, title, entry_text, entry_date `,
+                    RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions `,
 			values: [userId, title, entry, entryDate]
 		};
 

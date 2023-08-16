@@ -101,7 +101,7 @@ describe("POST /journals/", function () {
 		const newEntry = {
 			userId: 1,
 			title: "New Title",
-			entry: "New Entry Text",
+			entryText: "New Entry Text",
 			entryDate: "2025-01-05"
 		};
 		const resp = await request(app)
@@ -111,10 +111,10 @@ describe("POST /journals/", function () {
 		expect(resp.body).toEqual({
 			journal: {
 				id: expect.any(Number),
-				user_id: 1,
+				userId: 1,
 				title: "New Title",
-				entry_text: "New Entry Text",
-				entry_date: "2025-01-05",
+				entryText: "New Entry Text",
+				entryDate: "2025-01-05",
 				emotions: null
 			}
 		});
@@ -172,7 +172,7 @@ describe("POST /journals/", function () {
 			.send({
 				userId: 1,
 				title: "New Title",
-				entry: "New Entry Text",
+				entryText: "New Entry Text",
 				entryDate: "2025-01-05"
 			})
 			.set("authorization", `Bearer ${u2Token}`);
@@ -185,7 +185,7 @@ describe("POST /journals/", function () {
 			.send({
 				userId: 101,
 				title: "New Title",
-				entry: "New Entry Text",
+				entryText: "New Entry Text",
 				entryDate: "2025-01-05"
 			})
 			.set("authorization", `Bearer ${u1Token}`);

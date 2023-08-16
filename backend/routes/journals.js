@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const jsonschema = require("jsonschema");
 const journalCreateSchema = require("../schema/journalCreateSchema");
-const { BadRequestError } = require("../expressError");
+const { BadRequestError, NotFoundError } = require("../expressError");
 const Journal = require("../models/journal");
 const {
 	ensureCorrectUser,
@@ -37,16 +37,20 @@ router.get("/date/:entryDate", ensureCorrectUserByUserId, async function (req, r
 	}
 });
 
-router.post("/", ensureLoggedIn, async function (req, res, next) {
+router.post("/", ensureCorrectUserByUserId, async function (req, res, next) {
 	console.debug("POST /journals/ ");
+
 	try {
 		const validator = jsonschema.validate(req.body, journalCreateSchema);
 		if (!validator.valid) {
 			const errs = validator.errors.map(e => e.stack);
 			throw new BadRequestError(errs);
 		}
-		const { title, entry, entryDate } = req.body;
-		const journal = await Journal.createEntry(req.params.userId, title, entry, entryDate);
+		if (req.params.userId !== String(req.body.userId)) {
+			throw new NotFoundError("The user id provided doesn't match any known user");
+		}
+		const { title, entryText, entryDate } = req.body;
+		const journal = await Journal.createEntry(req.params.userId, title, entryText, entryDate);
 		return res.json({ journal });
 	} catch (err) {
 		return next(err);
