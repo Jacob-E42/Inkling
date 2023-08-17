@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { AlertProvider, UserProvider } from "../mock";
 import Profile from "./Profile";
 
-test("Homepage renders without crashing", () => {
+test("Profile renders without crashing", () => {
 	render(
 		<MemoryRouter>
 			<UserProvider>
@@ -16,7 +16,7 @@ test("Homepage renders without crashing", () => {
 	);
 });
 
-test("Homepage matches snapshot", () => {
+test("Profile matches snapshot", () => {
 	const { asFragment } = render(
 		<MemoryRouter>
 			<UserProvider>

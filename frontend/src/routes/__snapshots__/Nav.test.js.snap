@@ -20,6 +20,12 @@ exports[`Nav matches snapshot 1`] = `
     </a>
     <a
       class=""
+      href="/journal"
+    >
+      Today's Journal
+    </a>
+    <a
+      class=""
       href="/profile"
     >
       Testfirst
