@@ -42,7 +42,11 @@ const Journal = ({ date, title, entryText }) => {
 					/>
 				</FormGroup>
 			</Form>
-			<Button type="submit">For now I do nothing</Button>
+			<Button
+				type="submit"
+				color="success">
+				Submit
+			</Button>
 		</>
 	);
 };
