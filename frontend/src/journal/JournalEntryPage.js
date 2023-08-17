@@ -11,6 +11,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 
 const JournalEntryPage = () => {
 	let { date } = useParams();
+	if (!date) date = new Date().toISOString().slice(0, 10);
 	const { setMsg, setColor } = useContext(AlertContext);
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
@@ -25,14 +26,14 @@ const JournalEntryPage = () => {
 			const currentDate = new Date().toISOString().slice(0, 10); // e.g., "2023-07-25"
 			if (date === currentDate) isToday = true;
 			console.log("isToday=", isToday, "date=", date, "currentDate=", currentDate);
-			const resp = api.getJournalEntryByDate(user.id, date, isToday);
-			console.debug(resp);
+			const resp = await api.getJournalEntryByDate(user.id, date, isToday);
+			console.debug("Here is the RESPONSE", resp);
 			const { id, userId, entryText, entryDate, title } = resp;
 
-			if (!id || !userId || !entryText || !entryDate || !title) {
-				setMsg("Loading journal failed. Some information is missing");
-				setColor("danger");
-			}
+			// if (!id || !userId || !entryText || !entryDate || !title) {
+			// 	setMsg("Loading journal failed. Some information is missing");
+			// 	setColor("danger");
+			// }
 			setJournal(resp);
 		} catch (err) {
 			console.error(err);
@@ -69,8 +70,14 @@ const JournalEntryPage = () => {
 					color="danger"
 				/>
 			)}
+			{!journal && (
+				<Error
+					msg="A journal could not be found"
+					color="danger"
+				/>
+			)}
 			<p>Streak goes here</p>
-			{journal && (
+			{allInfoDefined && journal && (
 				<Journal
 					date={date}
 					title={journal.title}
