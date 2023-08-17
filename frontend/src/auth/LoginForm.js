@@ -63,14 +63,14 @@ const LoginForm = () => {
 					if (result.success) {
 						console.log("Form submitted:", formData);
 						setErrors({});
-						navigate("/profile");
+						navigate("/journal");
 					}
 				} catch (err) {
 					console.error(err);
 				}
 			}
 		},
-		[login, formData, errors, validateForm]
+		[login, formData, errors, validateForm, navigate]
 	);
 
 	return (
