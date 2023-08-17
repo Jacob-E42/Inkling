@@ -19,11 +19,12 @@ function App() {
 
 	const [apiRequest, setApiRequest] = useLocalStorage("apiRequest", null);
 	// const { api } = useContext(ApiContext); //this could be a problem
-	const [infoLoaded, setInfoLoaded] = useState(false);
-	const [msg, setMsg] = useState("");
-	const [color, setColor] = useState("primary");
+	const [infoLoaded, setInfoLoaded] = useLocalStorage("infoLoaded", false);
+	const [loginPending, setLoginPending] = useState(false);
+	const [msg, setMsg] = useLocalStorage("msg", "");
+	const [color, setColor] = useLocalStorage("color", "primary");
 
-	console.debug("App", "infoLoaded=", infoLoaded, "user=", user, "token=", token);
+	console.debug("App", "infoLoaded=", infoLoaded, "user=", user, "token=", token, "apiRequest=", apiRequest);
 
 	// Load user info from the token if it exists. Called on first render and whenever the token changes
 	useEffect(
@@ -46,10 +47,12 @@ function App() {
 						console.log("currentUser=", currentUser);
 						// Set the user in the state
 						setUser(currentUser);
+						setLoginPending(false);
 					} catch (err) {
 						console.error(err);
 						// If there's an error, clear the user in the state
 						setUser(null);
+						setLoginPending(false);
 					}
 				} else {
 					console.debug("No Token");
@@ -59,7 +62,7 @@ function App() {
 			setInfoLoaded(false);
 			getCurrentUser();
 		},
-		[token, setUser, apiRequest, setApiRequest] // useEffect dependency array
+		[token, setUser, apiRequest, setApiRequest, setInfoLoaded] // useEffect dependency array
 	);
 
 	// Handle signup function using useCallback to avoid re-creation of function on every render
@@ -74,7 +77,8 @@ function App() {
 				if (token) {
 					setToken(token);
 					api.setToken(token);
-					setApiRequest(() => api);
+					setApiRequest(api);
+					setLoginPending(true);
 				} else throw new Error("missing sign in token");
 				return { success: true };
 			} catch (error) {
@@ -96,8 +100,8 @@ function App() {
 				if (token) {
 					setToken(token);
 					api.setToken(token);
-					setApiRequest(() => api);
-
+					setApiRequest(api);
+					setLoginPending(true);
 					console.log(api.getCurrentUser);
 					return { success: true };
 				} else throw new Error("Log in token in missing");
@@ -141,7 +145,7 @@ function App() {
 	// Render the App component, providing the user context to children
 	return (
 		<BrowserRouter>
-			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser, infoLoaded }}>
+			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser, loginPending }}>
 				<ApiContext.Provider value={{ api: apiRequest }}>
 					<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
 						<div className="App">
