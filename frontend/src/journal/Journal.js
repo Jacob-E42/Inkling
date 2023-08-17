@@ -1,12 +1,10 @@
 import React, { useContext } from "react";
-import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import useForm from "../hooks/useForm";
-import UserContext from "../context_providers/UserContext";
-import AlertContext from "../context_providers/AlertContext";
+// import AlertContext from "../context_providers/AlertContext";
 
 const Journal = ({ date, title, entryText }) => {
-	const { setMsg, setColor } = useContext(AlertContext);
+	// const { setMsg, setColor } = useContext(AlertContext);
 	const [form, handleChange] = useForm({
 		title,
 		entryText

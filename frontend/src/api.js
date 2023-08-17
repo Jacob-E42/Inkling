@@ -29,7 +29,7 @@ class ApiRequest {
 				// that falls outside the range of 2xx
 				console.error(error.response.data); // Here's where you'll find the backend's error message
 				const errorMessage = error.response.data.error.message;
-				console.log(typeof errorMessage);
+
 				throw errorMessage;
 			} else if (error.request) {
 				// The request was made, but no response was received
@@ -77,10 +77,16 @@ class ApiRequest {
 		return response.journal;
 	}
 
-	async getJournalEntryByDate(userId, date) {
-		console.debug("getJournalEntryByDate", userId, date);
-		let response = await this.#request(`users/${userId}/journals/date/${date}`);
-		return response.journal;
+	async getJournalEntryByDate(userId, date, isToday = false) {
+		console.debug("getJournalEntryByDate", userId, date, isToday);
+		if (!userId || !date) throw Error("Either userId or date is missing");
+		try {
+			let response = await this.#request(`users/${userId}/journals/date/${date}?isToday=${isToday}`);
+			console.log(response);
+			return response.journal;
+		} catch (err) {
+			console.log(err);
+		}
 	}
 }
 

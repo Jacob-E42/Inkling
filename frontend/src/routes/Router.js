@@ -17,18 +17,18 @@ import LoadingSpinner from "../common/LoadingSpinner";
 // If the user is logged in, it just renders the children components
 //
 const ProtectedRoute = ({ children }) => {
-	const { user, infoLoaded } = useContext(UserContext);
+	const { user, loginPending } = useContext(UserContext);
 	const { setMsg, setColor } = useContext(AlertContext);
 
 	useEffect(() => {
-		if (infoLoaded && !user) {
+		if (!loginPending && !user) {
 			setColor("danger");
 			setMsg("You must be logged in to access this page.");
 		}
-	}, [infoLoaded, user, setColor, setMsg]);
+	}, [loginPending, user, setColor, setMsg]);
 
-	if (!infoLoaded) {
-		// This will show a loading spinner while waiting for infoLoaded to become true
+	if (loginPending) {
+		// This will show a loading spinner while waiting for loginPending to become true
 		// Replace <div>Loading...</div> with your preferred loading component or spinner
 		return <LoadingSpinner />;
 	} else if (user) {

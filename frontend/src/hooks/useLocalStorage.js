@@ -19,7 +19,7 @@ function useLocalStorage(key, initialValue) {
 
 	// Listen for changes to the value associated with our key in other instances of this app
 	useEffect(() => {
-		console.debug("useLocalStorage useEffect", "item=", item);
+		// console.debug("useLocalStorage useEffect", "item=", item);
 
 		if (item === null) {
 			localStorage.removeItem(key);
