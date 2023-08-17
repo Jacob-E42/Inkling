@@ -28,7 +28,8 @@ class Journal {
 
 	// Method to retrieve a journal by its ID
 	// Throws a NotFoundError if the journal is not found
-	static async getByDate(userId, entryDate) {
+	static async getByDate(userId, entryDate, isToday) {
+		console.debug("getByDate", isToday);
 		// Define the SQL query
 		const query = {
 			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions FROM journal_entries WHERE user_id = $1 AND entry_date = $2`,
@@ -41,10 +42,16 @@ class Journal {
 		console.log("journal=", journal);
 
 		// If no journal is found, throw an error
-		if (!journal) throw new NotFoundError(`No journal with id: ${userId}}`);
-
-		// If the journal is found, return it
-		return formatJournalDate(journal);
+		if (!journal && isToday) {
+			console.log("New journal entry is being created");
+			return formatJournalDate(this.createEntry(userId, "", "", entryDate));
+		} else if (!journal) {
+			throw new NotFoundError(`No journal with id: ${userId}`);
+		} else {
+			console.log("else clause");
+			// If the journal is found, return it
+			return formatJournalDate(journal);
+		}
 	}
 
 	// Method to register a new user
