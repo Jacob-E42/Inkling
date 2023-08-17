@@ -2,6 +2,8 @@ import React, { useCallback, useState } from "react";
 import UserContext from "./context_providers/UserContext";
 import AlertContext from "./context_providers/AlertContext";
 import Request from "./api";
+import ApiRequest from "./api";
+import ApiContext from "./context_providers/ApiContext";
 
 const demoUser = {
 	id: 11,
@@ -11,10 +13,8 @@ const demoUser = {
 	interests: ["baking", "jetskiing"]
 };
 
-const UserProvider = ({ children, user = demoUser }) => {
-	const [token, setToken] = useState(null);
-
-	return <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>;
+const UserProvider = ({ children }) => {
+	return <UserContext.Provider value={{ user: demoUser }}>{children}</UserContext.Provider>;
 };
 
 const AnonUserProvider = ({ children }) => {
@@ -64,4 +64,13 @@ const AlertProvider = ({ children }) => {
 	return <AlertContext.Provider value={{ msg, setMsg, color, setColor }}>{children}</AlertContext.Provider>;
 };
 
-export { UserProvider, AnonUserProvider, AlertProvider };
+const ApiProvider = ({ children }) => {
+	const [request, setRequest] = useState(new ApiRequest());
+	request.setToken(
+		`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImVtYWlsIjoidGVzdEB0ZXN0Lm5ldCIsImlhdCI6MTY5MjI5MDkxN30.8e12Cw-TMts0FmZALH61ch03kUMlW5QoCi60dlfhyWY`
+	);
+
+	return <ApiContext.Provider value={{ api: request }}>{children}</ApiContext.Provider>;
+};
+
+export { UserProvider, AnonUserProvider, AlertProvider, ApiProvider };
