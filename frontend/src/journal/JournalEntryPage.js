@@ -9,9 +9,11 @@ import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-const JournalEntryPage = () => {
-	let { date } = useParams();
-	if (!date) date = new Date().toISOString().slice(0, 10);
+const JournalEntryPage = ({ propDate = null }) => {
+	let date = useParams();
+	if (!date && !propDate) date = new Date().toISOString().slice(0, 10);
+	else if (propDate) date = propDate;
+	console.log("date=", date);
 	const { setMsg, setColor } = useContext(AlertContext);
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
@@ -42,15 +44,17 @@ const JournalEntryPage = () => {
 
 	useEffect(() => {
 		console.debug("useEffect - when date changes");
-		loadJournalEntry();
-	}, [date]);
-
-	useEffect(() => {
-		console.debug("useEffect - first render only");
 		setMsg(`Today's date is ${date}`);
 		setColor("primary");
 		loadJournalEntry();
-	}, []);
+	}, [date]);
+
+	// useEffect(() => {
+	// 	console.debug("useEffect - first render only");
+	// 	setMsg(`Today's date is ${date}`);
+	// 	setColor("primary");
+	// 	loadJournalEntry();
+	// }, []);
 
 	// date = new Date();
 
