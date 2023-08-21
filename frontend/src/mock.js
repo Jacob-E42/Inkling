@@ -4,6 +4,7 @@ import AlertContext from "./context_providers/AlertContext";
 import Request from "./api";
 import ApiRequest from "./api";
 import ApiContext from "./context_providers/ApiContext";
+import JournalContext from "./context_providers/JournalContext";
 
 const demoUser = {
 	id: 11,
@@ -11,6 +12,16 @@ const demoUser = {
 	lastName: "testlast",
 	email: "test@test.net",
 	interests: ["baking", "jetskiing"]
+};
+
+const demoJournal = {
+	id: 42,
+	userId: 11,
+	title: "Baking adventure",
+	entryText:
+		"Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.",
+	entryDate: "2023-07-24",
+	emotions: null
 };
 
 const UserProvider = ({ children }) => {
@@ -73,4 +84,8 @@ const ApiProvider = ({ children }) => {
 	return <ApiContext.Provider value={{ api: request }}>{children}</ApiContext.Provider>;
 };
 
-export { UserProvider, AnonUserProvider, AlertProvider, ApiProvider };
+const JournalProvider = ({ children }) => {
+	return <JournalContext.Provider value={{ journal: demoJournal }}>{children}</JournalContext.Provider>;
+};
+
+export { UserProvider, AnonUserProvider, AlertProvider, ApiProvider, JournalProvider };
