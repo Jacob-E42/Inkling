@@ -8,6 +8,7 @@ import LoadingSpinner from "./common/LoadingSpinner";
 import UserContext from "./context_providers/UserContext";
 import AlertContext from "./context_providers/AlertContext";
 import ApiContext from "./context_providers/ApiContext";
+import JournalContext from "./context_providers/JournalContext";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
@@ -146,13 +147,15 @@ function App() {
 	return (
 		<BrowserRouter>
 			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser, loginPending }}>
-				<ApiContext.Provider value={{ api: apiRequest }}>
-					<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
-						<div className="App">
-							<Router />
-						</div>
-					</AlertContext.Provider>
-				</ApiContext.Provider>
+				<JournalContext.Provider value={{ journals: null }}>
+					<ApiContext.Provider value={{ api: apiRequest }}>
+						<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
+							<div className="App">
+								<Router />
+							</div>
+						</AlertContext.Provider>
+					</ApiContext.Provider>
+				</JournalContext.Provider>
 			</UserContext.Provider>
 		</BrowserRouter>
 	);
