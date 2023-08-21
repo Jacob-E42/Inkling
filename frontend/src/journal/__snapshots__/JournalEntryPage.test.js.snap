@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JournalEntryPage matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="alert alert-danger fade"
+    role="alert"
+  >
+    A journal could not be found
+  </div>
+  <p>
+    Streak goes here
+  </p>
+  <p>
+    feedback goes here
+  </p>
+</DocumentFragment>
+`;
