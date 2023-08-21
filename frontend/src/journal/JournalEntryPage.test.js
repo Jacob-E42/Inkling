@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, act, waitFor } from "@testing-library/react";
+import { render, screen, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { AlertProvider, ApiProvider, UserProvider } from "../mock";
 import JournalEntryPage from "./JournalEntryPage";
@@ -60,6 +60,7 @@ test("JournalEntryPage matches snapshot", () => {
 });
 
 test("JournalEntryPage renders expected text", async () => {
+	// eslint-disable-next-line testing-library/no-unnecessary-act
 	await act(async () => {
 		render(
 			<MemoryRouter>
