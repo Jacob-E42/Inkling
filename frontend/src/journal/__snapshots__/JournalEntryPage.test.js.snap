@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`JournalEntryPage crashed, matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="alert alert-danger fade"
+    role="alert"
+  >
+    There was an error loading the journal entry
+  </div>
+  <p>
+    Streak goes here
+  </p>
+  <p>
+    feedback goes here
+  </p>
+</DocumentFragment>
+`;
+
 exports[`JournalEntryPage matches snapshot 1`] = `
 <DocumentFragment>
   <div
@@ -7,6 +24,23 @@ exports[`JournalEntryPage matches snapshot 1`] = `
     role="alert"
   >
     A journal could not be found
+  </div>
+  <p>
+    Streak goes here
+  </p>
+  <p>
+    feedback goes here
+  </p>
+</DocumentFragment>
+`;
+
+exports[`JournalEntryPage rendered correctly matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="alert alert-danger fade"
+    role="alert"
+  >
+    There was an error loading the journal entry
   </div>
   <p>
     Streak goes here
