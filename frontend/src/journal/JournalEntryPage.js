@@ -10,7 +10,8 @@ import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const JournalEntryPage = ({ propDate = null }) => {
-	let date = useParams("date");
+	let { date } = useParams("date");
+
 	console.log("date=", date, typeof date, "propDate=", propDate);
 	if (!date && !propDate) date = new Date().toISOString().slice(0, 10);
 	else if (propDate) date = propDate;

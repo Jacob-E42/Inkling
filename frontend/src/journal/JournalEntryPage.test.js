@@ -44,13 +44,28 @@ test("JournalEntryPage renders without crashing", () => {
 	);
 });
 
-test("JournalEntryPage matches snapshot", () => {
+test("JournalEntryPage rendered correctly matches snapshot", () => {
 	const { asFragment } = render(
 		<MemoryRouter>
 			<UserProvider>
 				<ApiProvider>
 					<AlertProvider>
 						<JournalEntryPage />
+					</AlertProvider>
+				</ApiProvider>
+			</UserProvider>
+		</MemoryRouter>
+	);
+	expect(asFragment()).toMatchSnapshot();
+});
+
+test("JournalEntryPage crashed, matches snapshot", () => {
+	const { asFragment } = render(
+		<MemoryRouter>
+			<UserProvider>
+				<ApiProvider>
+					<AlertProvider>
+						<JournalEntryPage propDate={42} />
 					</AlertProvider>
 				</ApiProvider>
 			</UserProvider>
