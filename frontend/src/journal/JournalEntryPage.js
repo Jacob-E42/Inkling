@@ -10,10 +10,11 @@ import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const JournalEntryPage = ({ propDate = null }) => {
-	let date = useParams();
+	let date = useParams("date");
+	console.log("date=", date, typeof date, "propDate=", propDate);
 	if (!date && !propDate) date = new Date().toISOString().slice(0, 10);
 	else if (propDate) date = propDate;
-	console.log("date=", date);
+	console.log("date=", date, "propDate=", propDate);
 	const { setMsg, setColor } = useContext(AlertContext);
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
@@ -32,11 +33,12 @@ const JournalEntryPage = ({ propDate = null }) => {
 			console.debug("Here is the RESPONSE", resp);
 			const { id, userId, entryText, entryDate, title } = resp;
 
-			// if (!id || !userId || !entryText || !entryDate || !title) {
-			// 	setMsg("Loading journal failed. Some information is missing");
-			// 	setColor("danger");
-			// }
-			setJournal(resp);
+			if (!id || !userId || !entryText || !entryDate || !title) {
+				setMsg("Loading journal failed. Some information is missing");
+				setColor("danger");
+			} else {
+				setJournal(resp);
+			}
 		} catch (err) {
 			console.error(err);
 		}
@@ -47,24 +49,32 @@ const JournalEntryPage = ({ propDate = null }) => {
 		setMsg(`Today's date is ${date}`);
 		setColor("primary");
 		loadJournalEntry();
-	}, [date]);
+	}, [date, setMsg, setColor]);
 
-	// useEffect(() => {
-	// 	console.debug("useEffect - first render only");
-	// 	setMsg(`Today's date is ${date}`);
-	// 	setColor("primary");
-	// 	loadJournalEntry();
-	// }, []);
-
-	// date = new Date();
-
-	// let day = date.getDate();
-	// let month = date.getMonth() + 1;
-	// let year = date.getFullYear();
-
-	// // This arrangement can be altered based on how we want the date's format to appear.
-	// let currentDate = `${year}-${month + 1}-${day}`;
-	// console.log(currentDate); // "17-6-2022"
+	const createJournal = useCallback(async () => {
+		console.debug("JournalEntryPage createJournal");
+		if (!journal) {
+			setMsg("Creating a new journal entry failed!");
+			setColor("danger");
+		} else {
+			console.debug(journal);
+			try {
+				const newJournal = api.createJournalEntry(
+					journal.userId,
+					journal.title,
+					journal.entryText,
+					journal.entryDate
+				);
+				console.debug(newJournal);
+				if (newJournal) {
+					setMsg("New journal entry created!");
+					setColor("success");
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		}
+	}, [journal, setColor, setMsg, api]);
 
 	return (
 		<>
@@ -76,7 +86,7 @@ const JournalEntryPage = ({ propDate = null }) => {
 			)}
 			{!journal && (
 				<Error
-					msg="A journal could not be found"
+					msg="There was an error loading the journal entry"
 					color="danger"
 				/>
 			)}
@@ -86,6 +96,8 @@ const JournalEntryPage = ({ propDate = null }) => {
 					date={date}
 					title={journal.title}
 					entryText={journal.entryText}
+					setJournal={setJournal}
+					createJournal={createJournal}
 				/>
 			)}
 			<p>feedback goes here</p>
