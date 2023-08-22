@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import useForm from "../hooks/useForm";
 import Error from "../common/Error";
-import { all } from "axios";
 import AlertContext from "../context_providers/AlertContext";
 // import AlertContext from "../context_providers/AlertContext";
 
-const Journal = ({ date, title, entryText }) => {
+const Journal = ({ date, title, entryText, setJournal, createJournal }) => {
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && title && entryText;
 	const [form, handleChange] = useForm({
@@ -18,6 +17,19 @@ const Journal = ({ date, title, entryText }) => {
 		setMsg("Required information is missing");
 		setColor("danger");
 	}
+
+	const handleSubmit = useCallback(
+		async e => {
+			e.preventDefault();
+			await setJournal(journal => ({
+				...journal,
+				title: form.title,
+				entryText: form.entryText
+			}));
+			await createJournal();
+		},
+		[setJournal, createJournal, form]
+	);
 
 	return (
 		<>
@@ -40,7 +52,7 @@ const Journal = ({ date, title, entryText }) => {
 						</Form>
 					</header>
 
-					<Form>
+					<Form onSubmit={handleSubmit}>
 						<FormGroup>
 							<Label for="entry">Journal Entry</Label>
 							<Input
@@ -52,12 +64,12 @@ const Journal = ({ date, title, entryText }) => {
 								onChange={handleChange}
 							/>
 						</FormGroup>
+						<Button
+							type="submit"
+							color="success">
+							Submit
+						</Button>
 					</Form>
-					<Button
-						type="submit"
-						color="success">
-						Submit
-					</Button>
 				</div>
 			)}
 
