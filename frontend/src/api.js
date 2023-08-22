@@ -88,6 +88,12 @@ class ApiRequest {
 			console.log(err);
 		}
 	}
+
+	async createJournalEntry(userId, title, entryText, entryDate) {
+		console.debug("createJournalEntry", userId, title, entryText, entryDate);
+		let response = await this.#request(`users/${userId}/journals/`, { title, entryText, entryDate }, "post");
+		return response.journal;
+	}
 }
 
 export default ApiRequest;
