@@ -1,33 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`JournalEntryPage crashed, matches snapshot 1`] = `
+exports[`Failed journal fetch JournalEntryPage renders expected text when allInfoDefined is false 1`] = `
 <DocumentFragment>
+  <p>
+    Streak goes here
+  </p>
   <div
     class="alert alert-danger fade"
     role="alert"
   >
-    There was an error loading the journal entry
+    Error: A date must be provided
   </div>
-  <p>
-    Streak goes here
-  </p>
+  <div
+    class="alert alert-danger fade"
+    role="alert"
+  >
+    Error: A date must be provided
+  </div>
   <p>
     feedback goes here
   </p>
 </DocumentFragment>
 `;
 
-exports[`JournalEntryPage rendered correctly matches snapshot 1`] = `
+exports[`Failed journal fetch JournalEntryPage renders expected text when the date passed doesn't have an associated journal entry 1`] = `
 <DocumentFragment>
+  <p>
+    Streak goes here
+  </p>
   <div
     class="alert alert-danger fade"
     role="alert"
   >
-    There was an error loading the journal entry
+    Error: There is no journal entry for date: 2020-07-04
   </div>
-  <p>
-    Streak goes here
-  </p>
   <p>
     feedback goes here
   </p>
