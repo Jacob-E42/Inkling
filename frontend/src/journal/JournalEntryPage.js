@@ -48,7 +48,7 @@ const JournalEntryPage = ({ propDate = null }) => {
 			console.debug("Here is the RESPONSE", resp);
 			const { id, userId, entryText, entryDate, title } = resp;
 
-			if (!id || !userId || !entryText || !entryDate || !title) {
+			if (!id || !userId || !(entryText || entryText === "") || !entryDate || !(title || title === "")) {
 				setMsg("Loading journal failed. Some information is missing");
 				setColor("danger");
 			} else {
@@ -58,7 +58,7 @@ const JournalEntryPage = ({ propDate = null }) => {
 		} catch (err) {
 			console.error(err);
 		}
-	}, [setMsg, setColor, setJournal, api, date, user]);
+	}, [setMsg, setColor, setJournal, api, date, user, setCurrentJournal]);
 
 	useEffect(() => {
 		console.debug("useEffect - when date changes");
