@@ -29,7 +29,7 @@ const UserProvider = ({ children }) => {
 };
 
 const AnonUserProvider = ({ children }) => {
-	const [currentUser, setCurrentUser] = useState(null);
+	const [user, setUser] = useState(null);
 
 	const login = useCallback(
 		async formData => {
@@ -37,7 +37,7 @@ const AnonUserProvider = ({ children }) => {
 				const request = new Request();
 				const token = await request.login(formData);
 				if (token) {
-					setCurrentUser(demoUser);
+					setUser(demoUser);
 					return { success: true };
 				} else throw new Error("Log in token in missing");
 			} catch (errors) {
@@ -45,7 +45,7 @@ const AnonUserProvider = ({ children }) => {
 				return { success: false, errors };
 			}
 		},
-		[setCurrentUser]
+		[setUser]
 	);
 
 	const signup = useCallback(
@@ -54,7 +54,7 @@ const AnonUserProvider = ({ children }) => {
 				const request = new Request();
 				const token = await request.signup(formData);
 				console.log(token);
-				if (token) setCurrentUser(demoUser);
+				if (token) setUser(demoUser);
 				else throw new Error("missing sign in token");
 				return { success: true };
 			} catch (errors) {
@@ -62,10 +62,10 @@ const AnonUserProvider = ({ children }) => {
 				return { success: false, errors };
 			}
 		},
-		[setCurrentUser]
+		[setUser]
 	);
 
-	return <UserContext.Provider value={{ currentUser, login, signup }}>{children}</UserContext.Provider>;
+	return <UserContext.Provider value={{ user, login, signup }}>{children}</UserContext.Provider>;
 };
 
 const AlertProvider = ({ children }) => {
