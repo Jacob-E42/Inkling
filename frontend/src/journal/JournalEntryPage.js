@@ -10,6 +10,15 @@ import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 import JournalContext from "../context_providers/JournalContext";
 
+const verifyDependentInfo = (date, user, api) => {
+	if (!(date && user && api)) return false;
+	if (typeof date !== "string") return false;
+	if (date.length === 0) return false;
+	if (typeof user !== "object") return false;
+	if (typeof api !== "object") return false;
+	return true;
+};
+
 const JournalEntryPage = ({ propDate = null }) => {
 	let { date } = useParams("date");
 
@@ -17,12 +26,14 @@ const JournalEntryPage = ({ propDate = null }) => {
 	if (!date && !propDate) date = new Date().toISOString().slice(0, 10);
 	else if (propDate) date = propDate;
 
-	const { setMsg, setColor } = useContext(AlertContext);
+	const { setMsg, setColor, msg } = useContext(AlertContext);
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
-	const allInfoDefined = !(!date || !user || !api);
+	const allInfoDefined = verifyDependentInfo(date, user, api);
+
 	const [journal, setJournal] = useLocalStorage("journal", null);
 	const { setCurrentJournal } = useContext(JournalContext);
+
 	console.debug(
 		"JournalEntryPage",
 		"date=",
@@ -40,16 +51,23 @@ const JournalEntryPage = ({ propDate = null }) => {
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
 		try {
-			let isToday;
+			let isToday = false;
 			const currentDate = new Date().toISOString().slice(0, 10); // e.g., "2023-07-25"
 			if (date === currentDate) isToday = true;
 			console.log("isToday=", isToday, "date=", date, "currentDate=", currentDate);
+
 			const resp = await api.getJournalEntryByDate(user.id, date, isToday);
+
+			if (resp == null) {
+				setMsg(`Error: There is no journal entry for date: ${date}`);
+				setColor("danger");
+				return;
+			}
 			console.debug("Here is the RESPONSE", resp);
 			const { id, userId, entryText, entryDate, title } = resp;
 
 			if (!id || !userId || !(entryText || entryText === "") || !entryDate || !(title || title === "")) {
-				setMsg("Loading journal failed. Some information is missing");
+				setMsg("Loading journal failed. Information is missing.");
 				setColor("danger");
 			} else {
 				setJournal(resp);
@@ -64,7 +82,11 @@ const JournalEntryPage = ({ propDate = null }) => {
 		console.debug("useEffect - when date changes");
 		setMsg(`Today's date is ${date}`);
 		setColor("primary");
-		loadJournalEntry();
+		if (allInfoDefined) loadJournalEntry();
+		else {
+			setMsg("Error: A date must be provided");
+			setColor("danger");
+		}
 	}, [date, setMsg, setColor]);
 
 	const createJournal = useCallback(async () => {
@@ -94,19 +116,19 @@ const JournalEntryPage = ({ propDate = null }) => {
 
 	return (
 		<>
+			<p>Streak goes here</p>
 			{!allInfoDefined && (
 				<Error
-					msg="A date and a user must be provided"
+					msg={msg}
 					color="danger"
 				/>
 			)}
 			{!journal && (
 				<Error
-					msg="There was an error loading the journal entry"
+					msg={msg}
 					color="danger"
 				/>
 			)}
-			<p>Streak goes here</p>
 			{allInfoDefined && journal && (
 				<Journal
 					date={date}
