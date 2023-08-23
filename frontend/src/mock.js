@@ -85,7 +85,12 @@ const ApiProvider = ({ children }) => {
 };
 
 const JournalProvider = ({ children }) => {
-	return <JournalContext.Provider value={{ journal: demoJournal }}>{children}</JournalContext.Provider>;
+	const [currentJournal, setCurrentJournal] = useState(null);
+	return (
+		<JournalContext.Provider value={{ journal: demoJournal, journals: null, currentJournal, setCurrentJournal }}>
+			{children}
+		</JournalContext.Provider>
+	);
 };
 
 export { UserProvider, AnonUserProvider, AlertProvider, ApiProvider, JournalProvider };
