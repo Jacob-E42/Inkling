@@ -17,11 +17,10 @@ function App() {
 	// Use custom hook to persist user and token in localStorage. Initialize infoLoaded, msg and color states
 	const [user, setUser] = useLocalStorage("user", null);
 	const [token, setToken] = useLocalStorage("token", null);
-
 	const [apiRequest, setApiRequest] = useLocalStorage("apiRequest", null);
-	// const { api } = useContext(ApiContext); //this could be a problem
+	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [infoLoaded, setInfoLoaded] = useLocalStorage("infoLoaded", false);
-	const [loginPending, setLoginPending] = useState(false);
+	const [loginPending, setLoginPending] = useLocalStorage("loginPending", false);
 	const [msg, setMsg] = useLocalStorage("msg", "");
 	const [color, setColor] = useLocalStorage("color", "primary");
 
@@ -122,8 +121,11 @@ function App() {
 			setUser(null);
 			setApiRequest(null);
 			setToken(null);
+			setCurrentJournal(null);
+			setInfoLoaded(false);
+			setLoginPending(false);
 		},
-		[setUser, setToken, setApiRequest]
+		[setUser, setToken, setApiRequest, setCurrentJournal, setInfoLoaded, setLoginPending]
 	);
 
 	//Update the current user's information
@@ -147,7 +149,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser, loginPending }}>
-				<JournalContext.Provider value={{ journals: null }}>
+				<JournalContext.Provider value={{ journals: null, currentJournal, setCurrentJournal }}>
 					<ApiContext.Provider value={{ api: apiRequest }}>
 						<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
 							<div className="App">
