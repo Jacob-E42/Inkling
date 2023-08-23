@@ -98,6 +98,10 @@ test("JournalEntryPage renders expected text", async () => {
 		);
 	});
 
+	// const dateText = await screen.get
+
+	expect(screen.getByText("2023-07-04")).toBeInTheDocument();
+	expect(screen.getByText("Journal Entry")).toBeInTheDocument();
 	expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
 	expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
 });
