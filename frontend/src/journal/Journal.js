@@ -6,6 +6,7 @@ import AlertContext from "../context_providers/AlertContext";
 // import AlertContext from "../context_providers/AlertContext";
 
 const Journal = ({ date, title, entryText, setJournal, createJournal }) => {
+	console.debug("Journal", date, title, entryText);
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && title && entryText;
 	const [form, handleChange] = useForm({

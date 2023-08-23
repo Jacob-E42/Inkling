@@ -8,6 +8,7 @@ import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
+import JournalContext from "../context_providers/JournalContext";
 
 const JournalEntryPage = ({ propDate = null }) => {
 	let { date } = useParams("date");
@@ -15,13 +16,26 @@ const JournalEntryPage = ({ propDate = null }) => {
 	console.log("date=", date, typeof date, "propDate=", propDate);
 	if (!date && !propDate) date = new Date().toISOString().slice(0, 10);
 	else if (propDate) date = propDate;
-	console.log("date=", date, "propDate=", propDate);
+
 	const { setMsg, setColor } = useContext(AlertContext);
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
 	const allInfoDefined = !(!date || !user || !api);
-	console.debug("JournalEntryPage", "date=", date, "user=", user, "api=", api, "allInfoDefined=", allInfoDefined);
 	const [journal, setJournal] = useLocalStorage("journal", null);
+	const { setCurrentJournal } = useContext(JournalContext);
+	console.debug(
+		"JournalEntryPage",
+		"date=",
+		date,
+		"user=",
+		user,
+		"api=",
+		api,
+		"allInfoDefined=",
+		allInfoDefined,
+		"journal=",
+		journal
+	);
 
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
@@ -39,6 +53,7 @@ const JournalEntryPage = ({ propDate = null }) => {
 				setColor("danger");
 			} else {
 				setJournal(resp);
+				setCurrentJournal(resp);
 			}
 		} catch (err) {
 			console.error(err);
