@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, act } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import { AlertProvider, ApiProvider, UserProvider } from "../mock";
+import { AlertProvider, ApiProvider, JournalProvider, UserProvider } from "../mock";
 import JournalEntryPage from "./JournalEntryPage";
 import axios from "axios";
 jest.mock("axios");
@@ -34,11 +34,13 @@ test("JournalEntryPage renders without crashing", () => {
 	render(
 		<MemoryRouter>
 			<UserProvider>
-				<ApiProvider>
-					<AlertProvider>
-						<JournalEntryPage />
-					</AlertProvider>
-				</ApiProvider>
+				<JournalProvider>
+					<ApiProvider>
+						<AlertProvider>
+							<JournalEntryPage />
+						</AlertProvider>
+					</ApiProvider>
+				</JournalProvider>
 			</UserProvider>
 		</MemoryRouter>
 	);
@@ -48,11 +50,13 @@ test("JournalEntryPage rendered correctly matches snapshot", () => {
 	const { asFragment } = render(
 		<MemoryRouter>
 			<UserProvider>
-				<ApiProvider>
-					<AlertProvider>
-						<JournalEntryPage />
-					</AlertProvider>
-				</ApiProvider>
+				<JournalProvider>
+					<ApiProvider>
+						<AlertProvider>
+							<JournalEntryPage />
+						</AlertProvider>
+					</ApiProvider>
+				</JournalProvider>
 			</UserProvider>
 		</MemoryRouter>
 	);
@@ -63,11 +67,13 @@ test("JournalEntryPage crashed, matches snapshot", () => {
 	const { asFragment } = render(
 		<MemoryRouter>
 			<UserProvider>
-				<ApiProvider>
-					<AlertProvider>
-						<JournalEntryPage propDate={42} />
-					</AlertProvider>
-				</ApiProvider>
+				<JournalProvider>
+					<ApiProvider>
+						<AlertProvider>
+							<JournalEntryPage propDate={42} />
+						</AlertProvider>
+					</ApiProvider>
+				</JournalProvider>
 			</UserProvider>
 		</MemoryRouter>
 	);
@@ -80,11 +86,13 @@ test("JournalEntryPage renders expected text", async () => {
 		render(
 			<MemoryRouter>
 				<UserProvider>
-					<ApiProvider>
-						<AlertProvider>
-							<JournalEntryPage propDate="2023-07-24" />
-						</AlertProvider>
-					</ApiProvider>
+					<JournalProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<JournalEntryPage propDate="2023-07-04" />
+							</AlertProvider>
+						</ApiProvider>
+					</JournalProvider>
 				</UserProvider>
 			</MemoryRouter>
 		);
