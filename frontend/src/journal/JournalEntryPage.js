@@ -1,9 +1,8 @@
 import React, { useCallback, useContext, useEffect } from "react";
-// import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useParams } from "react-router-dom";
 import Journal from "./Journal";
 import Error from "../common/Error";
-// import useForm from "../hooks/useForm";
+import LoadingSpinner from "../common/LoadingSpinner";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
@@ -19,20 +18,25 @@ const verifyDependentInfo = (date, user, api) => {
 	return true;
 };
 
-const JournalEntryPage = ({ propDate = null }) => {
-	let { date } = useParams("date");
-
-	console.log("date=", date, typeof date, "propDate=", propDate);
-	if (!date && !propDate) date = new Date().toISOString().slice(0, 10);
+const determineDate = (propDate, paramDate) => {
+	console.log("paramDate=", paramDate, "propDate=", propDate);
+	let date;
+	if (!paramDate && !propDate) date = new Date().toISOString().slice(0, 10);
 	else if (propDate) date = propDate;
+	else date = paramDate;
+	return date;
+};
 
-	const { setMsg, setColor, msg } = useContext(AlertContext);
+const JournalEntryPage = ({ propDate = null }) => {
+	const { paramDate } = useParams("date");
+	const date = determineDate(propDate, paramDate);
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
 	const allInfoDefined = verifyDependentInfo(date, user, api);
 
-	const [journal, setJournal] = useLocalStorage("journal", null);
-	const { setCurrentJournal } = useContext(JournalContext);
+	const { setMsg, setColor } = useContext(AlertContext);
+	const { currentJournal, setCurrentJournal } = useContext(JournalContext);
+	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
 
 	console.debug(
 		"JournalEntryPage",
@@ -45,8 +49,29 @@ const JournalEntryPage = ({ propDate = null }) => {
 		"allInfoDefined=",
 		allInfoDefined,
 		"journal=",
-		journal
+		currentJournal
 	);
+
+	useEffect(() => {
+		console.debug(
+			"useEffect  -- JournalEntryPage",
+			"date=",
+			date,
+			"currentJournal=",
+			currentJournal,
+			typeof currentJournal === null
+		);
+
+		if (!allInfoDefined) {
+			setJournalLoaded(false);
+			setMsg("Error: A date must be provided");
+			setColor("danger");
+			//add in a method to fetch the date
+			return;
+		}
+		if (currentJournal && currentJournal.entryDate === date) {
+		}
+	});
 
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
@@ -70,32 +95,20 @@ const JournalEntryPage = ({ propDate = null }) => {
 				setMsg("Loading journal failed. Information is missing.");
 				setColor("danger");
 			} else {
-				setJournal(resp);
 				setCurrentJournal(resp);
 			}
 		} catch (err) {
 			console.error(err);
 		}
-	}, [setMsg, setColor, setJournal, api, date, user, setCurrentJournal]);
-
-	useEffect(() => {
-		console.debug("useEffect - when date changes");
-		setMsg(`Today's date is ${date}`);
-		setColor("primary");
-		if (allInfoDefined) loadJournalEntry();
-		else {
-			setMsg("Error: A date must be provided");
-			setColor("danger");
-		}
-	}, [date, setMsg, setColor]);
+	}, [setMsg, setColor, api, date, user, setCurrentJournal]);
 
 	const createJournal = useCallback(async () => {
 		console.debug("JournalEntryPage createJournal");
-		if (!journal) {
+		if (!currentJournal) {
 			setMsg("Creating a new journal entry failed!");
 			setColor("danger");
 		} else {
-			console.debug(journal);
+			console.debug(currentJournal);
 			try {
 				const newJournal = api.createJournalEntry(
 					journal.userId,
@@ -114,6 +127,8 @@ const JournalEntryPage = ({ propDate = null }) => {
 		}
 	}, [journal, setColor, setMsg, api]);
 
+	if (!journalLoaded) return <LoadingSpinner />;
+
 	return (
 		<>
 			<p>Streak goes here</p>
@@ -123,18 +138,18 @@ const JournalEntryPage = ({ propDate = null }) => {
 					color="danger"
 				/>
 			)}
-			{!journal && (
+			{!currentJournal && (
 				<Error
 					msg={msg}
 					color="danger"
 				/>
 			)}
-			{allInfoDefined && journal && (
+			{allInfoDefined && currentJournal && (
 				<Journal
 					date={date}
-					title={journal.title}
-					entryText={journal.entryText}
-					setJournal={setJournal}
+					title={currentJournal.title}
+					entryText={currentJournal.entryText}
+					setJournal={setCurrentJournal}
 					createJournal={createJournal}
 				/>
 			)}

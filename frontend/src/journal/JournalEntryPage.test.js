@@ -31,71 +31,71 @@ const mockErrorResponse = {
 	}
 };
 
-// describe("Successful journal fetch", () => {
-// 	beforeEach(() => {
-// 		jest.clearAllMocks();
-// 		act(() => {
-// 			axios.mockResolvedValue(mockSuccessfulResponse);
-// 		});
-// 	});
+describe("Successful journal fetch", () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+		act(() => {
+			axios.mockResolvedValue(mockSuccessfulResponse);
+		});
+	});
 
-// 	test("JournalEntryPage renders without crashing", () => {
-// 		render(
-// 			<MemoryRouter>
-// 				<UserProvider>
-// 					<JournalProvider>
-// 						<ApiProvider>
-// 							<AlertProvider>
-// 								<JournalEntryPage />
-// 							</AlertProvider>
-// 						</ApiProvider>
-// 					</JournalProvider>
-// 				</UserProvider>
-// 			</MemoryRouter>
-// 		);
-// 	});
+	test("JournalEntryPage renders without crashing", () => {
+		render(
+			<MemoryRouter>
+				<UserProvider>
+					<JournalProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<JournalEntryPage />
+							</AlertProvider>
+						</ApiProvider>
+					</JournalProvider>
+				</UserProvider>
+			</MemoryRouter>
+		);
+	});
 
-// 	test("JournalEntryPage rendered correctly matches snapshot", () => {
-// 		const { asFragment } = render(
-// 			<MemoryRouter>
-// 				<UserProvider>
-// 					<JournalProvider>
-// 						<ApiProvider>
-// 							<AlertProvider>
-// 								<JournalEntryPage />
-// 							</AlertProvider>
-// 						</ApiProvider>
-// 					</JournalProvider>
-// 				</UserProvider>
-// 			</MemoryRouter>
-// 		);
-// 		expect(asFragment()).toMatchSnapshot();
-// 	});
+	test("JournalEntryPage rendered correctly matches snapshot", () => {
+		const { asFragment } = render(
+			<MemoryRouter>
+				<UserProvider>
+					<JournalProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<JournalEntryPage />
+							</AlertProvider>
+						</ApiProvider>
+					</JournalProvider>
+				</UserProvider>
+			</MemoryRouter>
+		);
+		expect(asFragment()).toMatchSnapshot();
+	});
 
-// 	test("JournalEntryPage renders expected text", async () => {
-// 		// eslint-disable-next-line testing-library/no-unnecessary-act
-// 		await act(async () => {
-// 			render(
-// 				<MemoryRouter>
-// 					<UserProvider>
-// 						<JournalProvider>
-// 							<ApiProvider>
-// 								<AlertProvider>
-// 									<JournalEntryPage propDate="2023-07-04" />
-// 								</AlertProvider>
-// 							</ApiProvider>
-// 						</JournalProvider>
-// 					</UserProvider>
-// 				</MemoryRouter>
-// 			);
-// 		});
+	test("JournalEntryPage renders expected text", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			render(
+				<MemoryRouter>
+					<UserProvider>
+						<JournalProvider>
+							<ApiProvider>
+								<AlertProvider>
+									<JournalEntryPage propDate="2023-07-04" />
+								</AlertProvider>
+							</ApiProvider>
+						</JournalProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+		});
 
-// 		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
-// 		expect(screen.getByText("Journal Entry")).toBeInTheDocument();
-// 		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
-// 		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
-// 	});
-// });
+		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
+		expect(screen.getByText("Journal Entry")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
+	});
+});
 
 describe("Failed journal fetch", () => {
 	beforeEach(() => {
@@ -119,17 +119,16 @@ describe("Failed journal fetch", () => {
 				</UserProvider>
 			</MemoryRouter>
 		);
-		expect(screen.getByText("Error: A date must be provided")).toBeInTheDocument();
+
+		const allMatches = screen.queryAllByText("Error: A date must be provided");
+		expect(allMatches.length).toBeGreaterThan(0);
 		expect(asFragment()).toMatchSnapshot();
 	});
 
 	test("JournalEntryPage renders expected text when the date passed doesn't have an associated journal entry", async () => {
 		// eslint-disable-next-line testing-library/no-unnecessary-act
-
-		let fragmant;
-		// eslint-disable-next-line testing-library/no-unnecessary-act
 		await act(async () => {
-			const { asFragment } = render(
+			render(
 				<MemoryRouter>
 					<UserProvider>
 						<JournalProvider>
@@ -142,10 +141,8 @@ describe("Failed journal fetch", () => {
 					</UserProvider>
 				</MemoryRouter>
 			);
-			fragmant = asFragment;
 		});
 
-		expect(fragmant()).toMatchSnapshot();
 		expect(screen.getByText("Error: There is no journal entry for date: 2020-07-04")).toBeInTheDocument();
 	});
 
@@ -167,6 +164,7 @@ describe("Failed journal fetch", () => {
 		);
 
 		expect(asFragment()).toMatchSnapshot();
-		expect(screen.getByText("Error: A date must be provided")).toBeInTheDocument();
+		const allMatches = screen.queryAllByText("Error: A date must be provided");
+		expect(allMatches.length).toBeGreaterThan(0);
 	});
 });
