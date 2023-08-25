@@ -86,8 +86,7 @@ class ApiRequest {
 			return response.journal;
 		} catch (err) {
 			console.log(err);
-			if (err.status === 404) return null;
-			else return Error(err);
+			return err.errorMessage;
 		}
 	}
 
