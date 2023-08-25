@@ -28,8 +28,11 @@ class Journal {
 
 	// Method to retrieve a journal by its ID
 	// Throws a NotFoundError if the journal is not found
-	static async getByDate(userId, entryDate, isToday) {
-		console.debug("getByDate", userId, entryDate, isToday);
+	static async getByDate(userId, entryDate) {
+		console.debug("getByDate", userId, entryDate);
+
+		const currentDate = new Date().toISOString().slice(0, 10);
+		const isToday = currentDate === entryDate;
 		// Define the SQL query
 		const query = {
 			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions FROM journal_entries WHERE user_id = $1 AND entry_date = $2`,

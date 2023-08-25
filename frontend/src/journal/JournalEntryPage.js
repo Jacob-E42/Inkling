@@ -7,7 +7,6 @@ import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
-import JournalContext from "../context_providers/JournalContext";
 
 const verifyDependentInfo = (date, user, api) => {
 	if (!(date && user && api)) return false;
@@ -35,7 +34,7 @@ const JournalEntryPage = ({ propDate = null }) => {
 	const allInfoDefined = verifyDependentInfo(date, user, api);
 
 	const { setMsg, setColor } = useContext(AlertContext);
-	const { currentJournal, setCurrentJournal } = useContext(JournalContext);
+	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
 
 	console.debug(
@@ -76,12 +75,9 @@ const JournalEntryPage = ({ propDate = null }) => {
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
 		try {
-			let isToday = false;
-			const currentDate = new Date().toISOString().slice(0, 10); // e.g., "2023-07-25"
-			if (date === currentDate) isToday = true;
-			console.log("isToday=", isToday, "date=", date, "currentDate=", currentDate);
+			console.log("date=", date);
 
-			const resp = await api.getJournalEntryByDate(user.id, date, isToday);
+			const resp = await api.getJournalEntryByDate(user.id, date);
 
 			if (resp == null) {
 				setMsg(`Error: There is no journal entry for date: ${date}`);
@@ -111,10 +107,10 @@ const JournalEntryPage = ({ propDate = null }) => {
 			console.debug(currentJournal);
 			try {
 				const newJournal = api.createJournalEntry(
-					journal.userId,
-					journal.title,
-					journal.entryText,
-					journal.entryDate
+					currentJournal.userId,
+					currentJournal.title,
+					currentJournal.entryText,
+					currentJournal.entryDate
 				);
 				console.debug(newJournal);
 				if (newJournal) {
@@ -125,14 +121,14 @@ const JournalEntryPage = ({ propDate = null }) => {
 				console.log(err);
 			}
 		}
-	}, [journal, setColor, setMsg, api]);
+	}, [currentJournal, setColor, setMsg, api]);
 
 	if (!journalLoaded) return <LoadingSpinner />;
 
 	return (
 		<>
 			<p>Streak goes here</p>
-			{!allInfoDefined && (
+			{/* {!allInfoDefined && (
 				<Error
 					msg={msg}
 					color="danger"
@@ -143,8 +139,8 @@ const JournalEntryPage = ({ propDate = null }) => {
 					msg={msg}
 					color="danger"
 				/>
-			)}
-			{allInfoDefined && currentJournal && (
+			)} */}
+			{allInfoDefined && journalLoaded && (
 				<Journal
 					date={date}
 					title={currentJournal.title}

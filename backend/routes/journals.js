@@ -27,9 +27,9 @@ router.get("/:journalId", ensureCorrectUserByUserId, async function (req, res, n
 //ensureCorrectUser as is, is going to lead to errors becuase it only checks for an email param
 router.get("/date/:entryDate", ensureCorrectUserByUserId, async function (req, res, next) {
 	console.debug("/journals/date/entryDate GET");
-	console.log(`Entry date:`, req.params.entryDate, `User ID is: ${req.params.userId}`, "isToday=", req.query.isToday);
+	console.log(`Entry date:`, req.params.entryDate, `User ID is: ${req.params.userId}`);
 	try {
-		const journal = await Journal.getByDate(req.params.userId, req.params.entryDate, req.query.isToday);
+		const journal = await Journal.getByDate(req.params.userId, req.params.entryDate);
 		console.log("journals/", journal);
 		return res.json({ journal });
 	} catch (err) {

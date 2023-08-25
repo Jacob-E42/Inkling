@@ -77,11 +77,11 @@ class ApiRequest {
 		return response.journal;
 	}
 
-	async getJournalEntryByDate(userId, date, isToday = false) {
-		console.debug("getJournalEntryByDate", userId, date, isToday);
+	async getJournalEntryByDate(userId, date) {
+		console.debug("getJournalEntryByDate", userId, date);
 		if (!userId || !date) throw Error("Either userId or date is missing");
 		try {
-			let response = await this.#request(`users/${userId}/journals/date/${date}?isToday=${isToday}`);
+			let response = await this.#request(`users/${userId}/journals/date/${date}`);
 			console.log(response);
 			return response.journal;
 		} catch (err) {
