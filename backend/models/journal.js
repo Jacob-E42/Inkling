@@ -49,7 +49,7 @@ class Journal {
 			console.log("New journal entry is being created");
 			return formatJournalDate(this.createEntry(userId, "", "", entryDate));
 		} else if (!journal) {
-			throw new NotFoundError(`No journal with date: ${entryDate}`);
+			throw new NotFoundError(`Error: No journal with date: ${entryDate}`);
 		} else {
 			console.log("else clause");
 			// If the journal is found, return it
