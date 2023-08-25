@@ -1,5 +1,5 @@
 // Import necessary modules from R/eact, custom hooks, API interface, JWT decoder, Router and context
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import useLocalStorage from "./hooks/useLocalStorage";
 import ApiRequest from "./api";
 import jwtDecode from "jwt-decode";
@@ -9,16 +9,19 @@ import UserContext from "./context_providers/UserContext";
 import AlertContext from "./context_providers/AlertContext";
 import ApiContext from "./context_providers/ApiContext";
 import JournalContext from "./context_providers/JournalContext";
+import DateContext from "./context_providers/DateContext";
+import { BrowserRouter } from "react-router-dom";
+import getCurrentDate from "./common/getCurrentDate";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter } from "react-router-dom";
 
 function App() {
 	// Use custom hook to persist user and token in localStorage. Initialize infoLoaded, msg and color states
 	const [user, setUser] = useLocalStorage("user", null);
 	const [token, setToken] = useLocalStorage("token", null);
 	const [apiRequest, setApiRequest] = useLocalStorage("apiRequest", null);
-	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
+	const [journalDate, setJounalDate] = useLocalStorage("journalDate", getCurrentDate());
+
 	const [infoLoaded, setInfoLoaded] = useLocalStorage("infoLoaded", false);
 	const [loginPending, setLoginPending] = useLocalStorage("loginPending", false);
 	const [msg, setMsg] = useLocalStorage("msg", "");
@@ -62,7 +65,7 @@ function App() {
 			setInfoLoaded(false);
 			getCurrentUser();
 		},
-		[token, setUser, apiRequest, setApiRequest, setInfoLoaded] // useEffect dependency array
+		[token, setUser, apiRequest, setApiRequest, setInfoLoaded, setLoginPending] // useEffect dependency array
 	);
 
 	// Handle signup function using useCallback to avoid re-creation of function on every render
@@ -87,7 +90,7 @@ function App() {
 				return { success: false, error };
 			}
 		},
-		[setToken, setApiRequest] // useCallback dependency array
+		[setToken, setApiRequest, setLoginPending] // useCallback dependency array
 	);
 
 	// Handle login function, similar to signup function
@@ -110,7 +113,7 @@ function App() {
 				return { success: false, errors };
 			}
 		},
-		[setToken, setApiRequest] // useCallback dependency array
+		[setToken, setApiRequest, setLoginPending] // useCallback dependency array
 	);
 
 	// Handle logout function to clear user and token from state
@@ -121,11 +124,11 @@ function App() {
 			setUser(null);
 			setApiRequest(null);
 			setToken(null);
-			setCurrentJournal(null);
+
 			setInfoLoaded(false);
 			setLoginPending(false);
 		},
-		[setUser, setToken, setApiRequest, setCurrentJournal, setInfoLoaded, setLoginPending]
+		[setUser, setToken, setApiRequest, setInfoLoaded, setLoginPending]
 	);
 
 	//Update the current user's information
@@ -149,7 +152,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser, loginPending }}>
-				<JournalContext.Provider value={{ journals: null, currentJournal, setCurrentJournal }}>
+				<DateContext.Provider value={{ journalDate, setJounalDate }}>
 					<ApiContext.Provider value={{ api: apiRequest }}>
 						<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
 							<div className="App">
@@ -157,7 +160,7 @@ function App() {
 							</div>
 						</AlertContext.Provider>
 					</ApiContext.Provider>
-				</JournalContext.Provider>
+				</DateContext.Provider>
 			</UserContext.Provider>
 		</BrowserRouter>
 	);
