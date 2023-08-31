@@ -6,8 +6,6 @@ const Journal = require("../models/journal");
 
 const { createToken } = require("../helpers/token.js");
 
-const testJobIds = [];
-
 async function commonBeforeAll() {
 	await db.query("DELETE FROM users");
 	await db.query("DELETE FROM journal_entries");
