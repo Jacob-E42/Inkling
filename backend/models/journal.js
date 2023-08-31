@@ -20,7 +20,7 @@ class Journal {
 		const journal = res.rows[0];
 
 		// If no journal is found, throw an error
-		if (!journal) throw new NotFoundError(`No journal with id: ${id}}`);
+		if (!journal) throw new NotFoundError(`No journal with id: ${id}`);
 
 		// If the journal is found, return it
 		return formatJournalDate(journal);
@@ -29,10 +29,10 @@ class Journal {
 	// Method to retrieve a journal by its ID
 	// Throws a NotFoundError if the journal is not found
 	static async getByDate(userId, entryDate) {
-		console.debug("getByDate", userId, entryDate);
-
 		const currentDate = new Date().toISOString().slice(0, 10);
 		const isToday = currentDate === entryDate;
+		console.debug("getByDate", userId, entryDate, isToday);
+
 		// Define the SQL query
 		const query = {
 			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions FROM journal_entries WHERE user_id = $1 AND entry_date = $2`,
@@ -47,8 +47,12 @@ class Journal {
 		// If no journal is found, throw an error
 		if (!journal && isToday) {
 			console.log("New journal entry is being created");
-			return formatJournalDate(this.createEntry(userId, "", "", entryDate));
+			return formatJournalDate(
+				this.createEntry(userId, `Journal Entry: ${entryDate}`, "Start your entry here...", entryDate)
+			);
 		} else if (!journal) {
+			// throw new NotFoundError(`Error: No journal with date: ${entryDate}`);
+			console.log(`No journal with date: ${entryDate}`);
 			throw new NotFoundError(`Error: No journal with date: ${entryDate}`);
 		} else {
 			console.log("else clause");
