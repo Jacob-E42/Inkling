@@ -2,18 +2,11 @@
 
 exports[`Failed journal fetch JournalEntryPage crashed, matches snapshot 1`] = `
 <DocumentFragment>
-  <p>
-    Streak goes here
-  </p>
   <div
-    class="alert alert-danger fade"
-    role="alert"
+    class="LoadingSpinner"
   >
-    Error: A date must be provided
+    Loading ...
   </div>
-  <p>
-    feedback goes here
-  </p>
 </DocumentFragment>
 `;
 
@@ -22,97 +15,6 @@ exports[`Failed journal fetch JournalEntryPage renders expected text when allInf
   <p>
     Streak goes here
   </p>
-  <div
-    class="alert alert-danger fade"
-    role="alert"
-  >
-    Error: A date must be provided
-  </div>
-  <p>
-    feedback goes here
-  </p>
-</DocumentFragment>
-`;
-
-exports[`Failed journal fetch JournalEntryPage renders expected text when the date passed doesn't have an associated journal entry 1`] = `
-<DocumentFragment>
-  <p>
-    Streak goes here
-  </p>
-  <div>
-    <header>
-      <p>
-        2020-07-04
-      </p>
-      <form
-        class=""
-      >
-        <div
-          class="mb-3"
-        >
-          <label
-            class="form-label"
-            for="title"
-          >
-            Title
-          </label>
-          <input
-            class="form-control"
-            id="title"
-            name="title"
-            placeholder="title"
-            type="text"
-            value="Baking adventure"
-          />
-        </div>
-      </form>
-    </header>
-    <form
-      class=""
-    >
-      <div
-        class="mb-3"
-      >
-        <label
-          class="form-label"
-          for="entry"
-        >
-          Journal Entry
-        </label>
-        <textarea
-          class="form-control"
-          id="entry"
-          name="entry"
-          placeholder="Start your entry here..."
-        >
-          Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.
-        </textarea>
-      </div>
-      <button
-        class="btn btn-success"
-        type="submit"
-      >
-        Submit
-      </button>
-    </form>
-  </div>
-  <p>
-    feedback goes here
-  </p>
-</DocumentFragment>
-`;
-
-exports[`Successful journal fetch JournalEntryPage rendered correctly matches snapshot 1`] = `
-<DocumentFragment>
-  <p>
-    Streak goes here
-  </p>
-  <div
-    class="alert alert-danger fade"
-    role="alert"
-  >
-    Today's date is 2023-08-24
-  </div>
   <p>
     feedback goes here
   </p>
