@@ -1,39 +1,41 @@
 import React, { useCallback, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Journal from "./Journal";
+import NoJournalEntry from "./NoJournalEntry";
 import Error from "../common/Error";
 import LoadingSpinner from "../common/LoadingSpinner";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
+import getCurrentDate from "../common/getCurrentDate";
 
 const verifyDependentInfo = (date, user, api) => {
 	if (!(date && user && api)) return false;
 	if (typeof date !== "string") return false;
-	if (date.length === 0) return false;
+	if (date.length < 10) return false;
 	if (typeof user !== "object") return false;
 	if (typeof api !== "object") return false;
 	return true;
 };
 
-const determineDate = (propDate, paramDate) => {
-	console.log("paramDate=", paramDate, "propDate=", propDate);
-	let date;
-	if (!paramDate && !propDate) date = new Date().toISOString().slice(0, 10);
-	else if (propDate) date = propDate;
-	else date = paramDate;
-	return date;
-};
+// const determineDate = date => {
+// 	console.log("date=", date);
+// 	let date;
+// 	if (!date) date = new Date().toISOString().slice(0, 10);
+// 	else if (propDate) date = propDate;
+// 	else date = paramDate;
+// 	return date;
+// };
 
-const JournalEntryPage = ({ propDate = null }) => {
-	const { paramDate } = useParams("date");
-	const date = determineDate(propDate, paramDate);
+const JournalEntryPage = () => {
+	let { date } = useParams("date");
+	if (!date) date = getCurrentDate();
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
-	const allInfoDefined = verifyDependentInfo(date, user, api);
-
 	const { setMsg, setColor } = useContext(AlertContext);
+	const allInfoDefined = verifyDependentInfo(date, user, api); //only verifies date, user, and qpi. Not setMsg, or setColor
+
 	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
 
@@ -52,51 +54,34 @@ const JournalEntryPage = ({ propDate = null }) => {
 	);
 
 	useEffect(() => {
-		console.debug(
-			"useEffect  -- JournalEntryPage",
-			"date=",
-			date,
-			"currentJournal=",
-			currentJournal,
-			typeof currentJournal === null
-		);
+		console.debug("useEffect - JournalEntryPage", "date=", date, "currentJournal=", currentJournal);
 
 		if (!allInfoDefined) {
-			setJournalLoaded(false);
-			setMsg("Error: A date must be provided");
+			setMsg("Error: Required info is missing");
 			setColor("danger");
-			//add in a method to fetch the date
-			return;
-		}
-		if (currentJournal && currentJournal.entryDate === date) {
-		}
-	});
+		} else loadJournalEntry();
+	}, [date]);
 
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
 		try {
 			console.log("date=", date);
-
 			const resp = await api.getJournalEntryByDate(user.id, date);
-
-			if (resp == null) {
-				setMsg(`Error: There is no journal entry for date: ${date}`);
-				setColor("danger");
-				return;
-			}
 			console.debug("Here is the RESPONSE", resp);
-			const { id, userId, entryText, entryDate, title } = resp;
+			if (typeof resp !== "object") throw new Error("Response returned was invalid");
 
-			if (!id || !userId || !(entryText || entryText === "") || !entryDate || !(title || title === "")) {
-				setMsg("Loading journal failed. Information is missing.");
-				setColor("danger");
-			} else {
-				setCurrentJournal(resp);
-			}
+			setCurrentJournal(resp);
+			setJournalLoaded(true);
 		} catch (err) {
 			console.error(err);
+			setMsg(err.errorMessage);
+			setColor("danger");
+			setJournalLoaded(false);
+			if (err.status === 404) {
+				setJournalLoaded(true);
+			}
 		}
-	}, [setMsg, setColor, api, date, user, setCurrentJournal]);
+	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded]);
 
 	const createJournal = useCallback(async () => {
 		console.debug("JournalEntryPage createJournal");
@@ -128,19 +113,7 @@ const JournalEntryPage = ({ propDate = null }) => {
 	return (
 		<>
 			<p>Streak goes here</p>
-			{/* {!allInfoDefined && (
-				<Error
-					msg={msg}
-					color="danger"
-				/>
-			)}
-			{!currentJournal && (
-				<Error
-					msg={msg}
-					color="danger"
-				/>
-			)} */}
-			{allInfoDefined && journalLoaded && (
+			{allInfoDefined && currentJournal && (
 				<Journal
 					date={date}
 					title={currentJournal.title}
@@ -149,9 +122,28 @@ const JournalEntryPage = ({ propDate = null }) => {
 					createJournal={createJournal}
 				/>
 			)}
+			{allInfoDefined && !currentJournal && (
+				<NoJournalEntry
+					date={date}
+					title={`There is No Journal Entry For Date: ${date}`}
+					entryText={`There is No Journal Entry For Date: ${date}`}
+				/>
+			)}
 			<p>feedback goes here</p>
 		</>
 	);
 };
+// if (resp == null) {
+// 	setMsg(`Error: There is no journal entry for date: ${date}`);
+// 	setColor("danger");
+// 	return;
+// }
+
+// const { id, userId, entryText, entryDate, title } = resp;
+
+// if (!id || !userId || !(entryText || entryText === "") || !entryDate || !(title || title === "")) {
+// 	setMsg("Loading journal failed. Information is missing.");
+// 	setColor("danger");
+// } else {
 
 export default JournalEntryPage;
