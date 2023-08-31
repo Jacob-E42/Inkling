@@ -30,7 +30,7 @@ class ApiRequest {
 				console.error(error.response.data); // Here's where you'll find the backend's error message
 				const errorMessage = error.response.data.error.message;
 
-				throw { errorMessage, status: error.response.status };
+				throw new Error(errorMessage);
 			} else if (error.request) {
 				// The request was made, but no response was received
 				console.error("No response received:", error.request);
@@ -86,7 +86,7 @@ class ApiRequest {
 			return response.journal;
 		} catch (err) {
 			console.log(err);
-			return err.errorMessage;
+			return err;
 		}
 	}
 
