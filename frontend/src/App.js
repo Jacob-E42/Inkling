@@ -8,10 +8,7 @@ import LoadingSpinner from "./common/LoadingSpinner";
 import UserContext from "./context_providers/UserContext";
 import AlertContext from "./context_providers/AlertContext";
 import ApiContext from "./context_providers/ApiContext";
-import JournalContext from "./context_providers/JournalContext";
-import DateContext from "./context_providers/DateContext";
 import { BrowserRouter } from "react-router-dom";
-import getCurrentDate from "./common/getCurrentDate";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -20,7 +17,6 @@ function App() {
 	const [user, setUser] = useLocalStorage("user", null);
 	const [token, setToken] = useLocalStorage("token", null);
 	const [apiRequest, setApiRequest] = useLocalStorage("apiRequest", null);
-	const [journalDate, setJounalDate] = useLocalStorage("journalDate", getCurrentDate());
 
 	const [infoLoaded, setInfoLoaded] = useLocalStorage("infoLoaded", false);
 	const [loginPending, setLoginPending] = useLocalStorage("loginPending", false);
@@ -152,15 +148,13 @@ function App() {
 	return (
 		<BrowserRouter>
 			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser, loginPending }}>
-				<DateContext.Provider value={{ journalDate, setJounalDate }}>
-					<ApiContext.Provider value={{ api: apiRequest }}>
-						<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
-							<div className="App">
-								<Router />
-							</div>
-						</AlertContext.Provider>
-					</ApiContext.Provider>
-				</DateContext.Provider>
+				<ApiContext.Provider value={{ api: apiRequest }}>
+					<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
+						<div className="App">
+							<Router />
+						</div>
+					</AlertContext.Provider>
+				</ApiContext.Provider>
 			</UserContext.Provider>
 		</BrowserRouter>
 	);
