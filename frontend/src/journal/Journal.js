@@ -3,7 +3,6 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import useForm from "../hooks/useForm";
 import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
-// import AlertContext from "../context_providers/AlertContext";
 
 const Journal = ({ date, title, entryText, setJournal, createJournal }) => {
 	console.debug("Journal", date, "Title=", title, "entryText=", entryText);
