@@ -103,7 +103,45 @@ describe("Journal", () => {
 
 	/************************************** update */
 
-	// describe("update", function () {
+	describe("updateEntry", function () {
+		const updateData = {
+			title: "Updated Title",
+			entryText: "Updated entry text"
+		};
+
+		test("works", async function () {
+			let updatedJournal = await Journal.updateEntry(1, "Updated Title", "Updated entry text", "2022-01-04");
+			expect(updatedJournal).toEqual({
+				id: 1,
+				userId: 1,
+				title: "Updated Title",
+				entryText: "Updated entry text",
+				entryDate: "2022-01-04",
+				emotions: null // Expecting a JSON string here
+			});
+		});
+
+		test("not found if no such journal entry", async function () {
+			try {
+				await Journal.updateEntry(1, "New Title", "New Text", ["Sad"], "2025-01-04");
+				fail();
+			} catch (err) {
+				expect(err instanceof NotFoundError).toBeTruthy();
+			}
+		});
+
+		test("bad request if no data", async function () {
+			expect.assertions(1);
+			try {
+				await Journal.updateEntry(1, null, null, null, "2022-01-04");
+				fail();
+			} catch (err) {
+				expect(err instanceof BadRequestError).toBeTruthy();
+			}
+		});
+	});
+
+	// describe("updateEntry", function () {
 	// 	const updateData = {
 	// 		firstName: "NewF",
 	// 		lastName: "NewL",
