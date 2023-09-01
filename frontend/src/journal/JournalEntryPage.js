@@ -35,7 +35,6 @@ const JournalEntryPage = () => {
 	const { api } = useContext(ApiContext);
 	const { setMsg, setColor } = useContext(AlertContext);
 	const allInfoDefined = verifyDependentInfo(date, user, api); //only verifies date, user, and qpi. Not setMsg, or setColor
-
 	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
 
@@ -50,7 +49,9 @@ const JournalEntryPage = () => {
 		"allInfoDefined=",
 		allInfoDefined,
 		"journal=",
-		currentJournal
+		currentJournal,
+		"journalLoaded=",
+		journalLoaded
 	);
 
 	useEffect(() => {
@@ -59,6 +60,7 @@ const JournalEntryPage = () => {
 		if (!allInfoDefined) {
 			setMsg("Error: Required info is missing");
 			setColor("danger");
+			setJournalLoaded(false);
 		} else loadJournalEntry();
 	}, [date]);
 
@@ -77,6 +79,7 @@ const JournalEntryPage = () => {
 			setMsg(err.errorMessage);
 			setColor("danger");
 			setJournalLoaded(false);
+			setCurrentJournal(null);
 			if (err.status === 404) {
 				setJournalLoaded(true);
 			}
@@ -125,8 +128,8 @@ const JournalEntryPage = () => {
 			{allInfoDefined && !currentJournal && (
 				<NoJournalEntry
 					date={date}
-					title={`There is No Journal Entry For Date: ${date}`}
-					entryText={`There is No Journal Entry For Date: ${date}`}
+					title={`Error: No journal with date: ${date}`}
+					entryText={`Error: No journal with date: ${date}`}
 				/>
 			)}
 			<p>feedback goes here</p>

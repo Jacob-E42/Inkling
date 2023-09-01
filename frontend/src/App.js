@@ -33,7 +33,7 @@ function App() {
 			async function getCurrentUser() {
 				console.debug("getCurrentUser");
 				// If a token is present, try to get the current user
-				if (token) {
+				if (token && apiRequest) {
 					try {
 						// Decode token to extract email
 						let { email } = await jwtDecode(token);

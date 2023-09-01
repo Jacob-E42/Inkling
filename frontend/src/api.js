@@ -1,4 +1,5 @@
 import axios from "axios";
+import ApiError from "./ApiError";
 
 class ApiRequest {
 	constructor() {
@@ -30,7 +31,7 @@ class ApiRequest {
 				console.error(error.response.data); // Here's where you'll find the backend's error message
 				const errorMessage = error.response.data.error.message;
 
-				throw new Error(errorMessage);
+				throw new ApiError(errorMessage, error.response.status);
 			} else if (error.request) {
 				// The request was made, but no response was received
 				console.error("No response received:", error.request);
@@ -86,7 +87,7 @@ class ApiRequest {
 			return response.journal;
 		} catch (err) {
 			console.log(err);
-			return err;
+			throw err;
 		}
 	}
 

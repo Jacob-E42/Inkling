@@ -5,16 +5,83 @@ exports[`Failed journal fetch JournalEntryPage crashed, matches snapshot 1`] = `
   <div
     class="LoadingSpinner"
   >
-    Loading ...
+    Loading...
   </div>
 </DocumentFragment>
 `;
 
 exports[`Failed journal fetch JournalEntryPage renders expected text when allInfoDefined is false 1`] = `
 <DocumentFragment>
+  <div
+    class="LoadingSpinner"
+  >
+    Loading...
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Successful journal fetch JournalEntryPage rendered correctly, matches snapshot 1`] = `
+<DocumentFragment>
   <p>
     Streak goes here
   </p>
+  <div>
+    <header>
+      <p>
+        2023-07-04
+      </p>
+      <form
+        class=""
+      >
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label"
+            for="title"
+          >
+            Title
+          </label>
+          <input
+            class="form-control"
+            id="title"
+            name="title"
+            placeholder="title"
+            type="text"
+            value="Baking adventure"
+          />
+        </div>
+      </form>
+    </header>
+    <form
+      class=""
+    >
+      <div
+        class="mb-3"
+      >
+        <label
+          class="form-label"
+          for="entry"
+        >
+          Journal Entry
+        </label>
+        <textarea
+          class="form-control"
+          id="entry"
+          name="entry"
+          placeholder="Start your entry here..."
+        >
+          Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.
+        </textarea>
+      </div>
+      <button
+        class="btn btn-success"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
   <p>
     feedback goes here
   </p>

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, act } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
-import { AlertProvider, AnonUserProvider, ApiProvider, JournalProvider, UserProvider, DateProvider } from "../mock";
+import { AlertProvider, AnonUserProvider, ApiProvider, UserProvider } from "../mock";
 import JournalEntryPage from "./JournalEntryPage";
 import axios from "axios";
 jest.mock("axios");
@@ -31,86 +31,89 @@ const mockErrorResponse = {
 	}
 };
 
-// describe("Successful journal fetch", () => {
-// 	beforeEach(() => {
-// 		jest.clearAllMocks();
-// 		act(() => {
-// 			axios.mockResolvedValue(mockSuccessfulResponse);
-// 		});
-// 	});
+describe("Successful journal fetch", () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+		act(() => {
+			axios.mockResolvedValue(mockSuccessfulResponse);
+		});
+	});
 
-// 	test("JournalEntryPage renders without crashing", () => {
-// 		render(
-// 			<MemoryRouter>
-// 				<UserProvider>
-// 					<ApiProvider>
-// 						<AlertProvider>
-// 							<Routes>
-// 								<Route
-// 									path="/journal/:date"
-// 									element={<JournalEntryPage />}
-// 								/>
-// 							</Routes>
-// 						</AlertProvider>
-// 					</ApiProvider>
-// 				</UserProvider>
-// 			</MemoryRouter>
-// 		);
-// 	});
+	test("JournalEntryPage renders without crashing", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			render(
+				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+		});
+	});
 
-// 	test("JournalEntryPage rendered correctly matches snapshot", async () => {
-// 		let asFragment;
-// 		// eslint-disable-next-line testing-library/no-unnecessary-act
-// 		await act(async () => {
-// 			const view = render(
-// 				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
-// 					<UserProvider>
-// 						<ApiProvider>
-// 							<AlertProvider>
-// 								<Routes>
-// 									<Route
-// 										path="/journal/:date"
-// 										element={<JournalEntryPage />}
-// 									/>
-// 								</Routes>
-// 							</AlertProvider>
-// 						</ApiProvider>
-// 					</UserProvider>
-// 				</MemoryRouter>
-// 			);
-// 			asFragment = view.asFragment;
-// 		});
+	test("JournalEntryPage rendered correctly, matches snapshot", async () => {
+		let asFragment;
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			const view = render(
+				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+			asFragment = view.asFragment;
+		});
 
-// 		expect(asFragment()).toMatchSnapshot();
-// 	});
+		expect(asFragment()).toMatchSnapshot();
+	});
 
-// 	test("JournalEntryPage renders expected text", async () => {
-// 		// eslint-disable-next-line testing-library/no-unnecessary-act
-// 		await act(async () => {
-// 			const view = render(
-// 				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
-// 					<UserProvider>
-// 						<ApiProvider>
-// 							<AlertProvider>
-// 								<Routes>
-// 									<Route
-// 										path="/journal/:date"
-// 										element={<JournalEntryPage />}
-// 									/>
-// 								</Routes>
-// 							</AlertProvider>
-// 						</ApiProvider>
-// 					</UserProvider>
-// 				</MemoryRouter>
-// 			);
-// 		});
+	test("JournalEntryPage renders expected text", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			const view = render(
+				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+		});
 
-// 		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
-// 		expect(screen.getByText("Journal Entry")).toBeInTheDocument();
-// 		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
-// 		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
-// 	});
-// });
+		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
+		expect(screen.getByText("Journal Entry")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
+	});
+});
 
 describe("Failed journal fetch", () => {
 	beforeEach(() => {
@@ -120,33 +123,33 @@ describe("Failed journal fetch", () => {
 		});
 	});
 
-	// test("JournalEntryPage crashed, matches snapshot", async () => {
-	// 	let asFragment;
-	// 	// eslint-disable-next-line testing-library/no-unnecessary-act
-	// 	await act(async () => {
-	// 		const view = render(
-	// 			<MemoryRouter initialEntries={["/journal/42"]}>
-	// 				<UserProvider>
-	// 					<ApiProvider>
-	// 						<AlertProvider>
-	// 							<Routes>
-	// 								<Route
-	// 									path="/journal/:date"
-	// 									element={<JournalEntryPage />}
-	// 								/>
-	// 							</Routes>
-	// 						</AlertProvider>
-	// 					</ApiProvider>
-	// 				</UserProvider>
-	// 			</MemoryRouter>
-	// 		);
-	// 		asFragment = view.asFragment;
-	// 	});
+	test("JournalEntryPage crashed, matches snapshot", async () => {
+		let asFragment;
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			const view = render(
+				<MemoryRouter initialEntries={["/journal/42"]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+			asFragment = view.asFragment;
+		});
 
-	// 	expect(asFragment()).toMatchSnapshot();
-	// 	expect(screen.getByText("Loading ...")).toBeInTheDocument();
-	// 	expect(screen.queryByText("42")).not.toBeInTheDocument();
-	// });
+		expect(asFragment()).toMatchSnapshot();
+		expect(screen.getByText("Loading...")).toBeInTheDocument();
+		expect(screen.queryByText("42")).not.toBeInTheDocument();
+	});
 
 	test("JournalEntryPage renders expected text when the date passed doesn't have an associated journal entry", async () => {
 		// eslint-disable-next-line testing-library/no-unnecessary-act
@@ -169,36 +172,35 @@ describe("Failed journal fetch", () => {
 			);
 		});
 
-		expect(screen.getByText("Error: There is no journal entry for date: 2020-07-04")).toBeInTheDocument();
+		expect(screen.getByText("Error: No journal with date: 2020-07-04")).toBeInTheDocument();
 	});
 
-	// test("JournalEntryPage renders expected text when allInfoDefined is false", async () => {
-	// 	// eslint-disable-next-line testing-library/no-unnecessary-act
+	test("JournalEntryPage renders expected text when allInfoDefined is false", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
 
-	// 	let asFragment;
-	// 	// eslint-disable-next-line testing-library/no-unnecessary-act
-	// 	await act(async () => {
-	// 		const view = render(
-	// 			<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
-	// 				<AnonUserProvider>
-	// 					<ApiProvider>
-	// 						<AlertProvider>
-	// 							<Routes>
-	// 								<Route
-	// 									path="/journal/:date"
-	// 									element={<JournalEntryPage />}
-	// 								/>
-	// 							</Routes>
-	// 						</AlertProvider>
-	// 					</ApiProvider>
-	// 				</AnonUserProvider>
-	// 			</MemoryRouter>
-	// 		);
-	// 		asFragment = view.asFragment;
-	// 	});
+		let asFragment;
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			const view = render(
+				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
+					<AnonUserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</AnonUserProvider>
+				</MemoryRouter>
+			);
+			asFragment = view.asFragment;
+		});
 
-	// 	expect(asFragment()).toMatchSnapshot();
-	// 	const allMatches = screen.queryAllByText("Error: A date must be provided");
-	// 	expect(allMatches.length).toBeGreaterThan(0);
-	// });
+		expect(asFragment()).toMatchSnapshot();
+		expect(screen.getByText("Loading...")).toBeInTheDocument();
+	});
 });

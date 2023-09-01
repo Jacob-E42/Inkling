@@ -26,6 +26,7 @@ const NoJournalEntry = ({ date, title, entryText }) => {
 							id="title"
 							placeholder="title"
 							value={title}
+							readOnly
 						/>
 					</header>
 
@@ -34,8 +35,8 @@ const NoJournalEntry = ({ date, title, entryText }) => {
 						type="textarea"
 						name="entry"
 						id="entry"
-						placeholder="Start your entry here..."
 						value={entryText}
+						readOnly
 					/>
 				</div>
 			)}

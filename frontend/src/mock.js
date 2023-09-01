@@ -4,8 +4,6 @@ import AlertContext from "./context_providers/AlertContext";
 import Request from "./api";
 import ApiRequest from "./api";
 import ApiContext from "./context_providers/ApiContext";
-import DateContext from "./context_providers/DateContext";
-import JournalContext from "./context_providers/JournalContext";
 import getCurrentDate from "./common/getCurrentDate";
 
 const demoUser = {
@@ -86,18 +84,18 @@ const ApiProvider = ({ children }) => {
 	return <ApiContext.Provider value={{ api: request }}>{children}</ApiContext.Provider>;
 };
 
-const JournalProvider = ({ children }) => {
-	const [currentJournal, setCurrentJournal] = useState(null);
-	return (
-		<JournalContext.Provider value={{ journal: demoJournal, journals: null, currentJournal, setCurrentJournal }}>
-			{children}
-		</JournalContext.Provider>
-	);
-};
+// const JournalProvider = ({ children }) => {
+// 	const [currentJournal, setCurrentJournal] = useState(null);
+// 	return (
+// 		<JournalContext.Provider value={{ journal: demoJournal, journals: null, currentJournal, setCurrentJournal }}>
+// 			{children}
+// 		</JournalContext.Provider>
+// 	);
+// };
 
-const DateProvider = ({ children }) => {
-	const [journalDate, setJournalDate] = useState(getCurrentDate);
-	return <DateContext.Provider value={{ journalDate, setJournalDate }}>{children}</DateContext.Provider>;
-};
+// const DateProvider = ({ children }) => {
+// 	const [journalDate, setJournalDate] = useState(getCurrentDate);
+// 	return <DateContext.Provider value={{ journalDate, setJournalDate }}>{children}</DateContext.Provider>;
+// };
 
-export { UserProvider, AnonUserProvider, AlertProvider, ApiProvider, JournalProvider, DateProvider };
+export { UserProvider, AnonUserProvider, AlertProvider, ApiProvider };
