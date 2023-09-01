@@ -99,6 +99,38 @@ class Journal {
 		// console.log(res);
 		return formatJournalDate(res.rows[0]);
 	}
+
+	static async updateEntry(userId, title, entryText, entryDate, emotions = null) {
+		// First, check to see if the journal entry exists for the given date and user ID
+		let existingEntry;
+		try {
+			existingEntry = await this.getByDate(userId, entryDate);
+		} catch (err) {
+			throw new BadRequestError("Journal entry for this date does not exist");
+		}
+
+		if (!existingEntry) {
+			throw new BadRequestError("Journal entry for this date does not exist");
+		}
+
+		// Define the SQL query to update the existing journal entry
+		const query = {
+			text: `UPDATE journal_entries 
+				   SET title = $1, entry_text = $2, emotions = $3
+				   WHERE user_id = $4 AND entry_date = $5
+				   RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions`,
+			values: [title, entryText, emotions, userId, entryDate]
+		};
+
+		// Execute the query to update the journal entry and return the result
+		const res = await db.query(query);
+
+		if (res.rows.length === 0) {
+			throw new Error("Could not update journal entry");
+		}
+
+		return formatJournalDate(res.rows[0]);
+	}
 }
 
 // Export the Journal class

@@ -86,7 +86,7 @@ const JournalEntryPage = () => {
 		}
 	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded]);
 
-	const createJournal = useCallback(async () => {
+	const updateJournal = useCallback(async () => {
 		console.debug("JournalEntryPage createJournal");
 		if (!currentJournal) {
 			setMsg("Creating a new journal entry failed!");
