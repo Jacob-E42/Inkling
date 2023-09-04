@@ -123,9 +123,11 @@ describe("Journal", () => {
 
 		test("not found if no such journal entry", async function () {
 			try {
-				await Journal.updateEntry(1, "New Title", "New Text", ["Sad"], "2025-01-04");
+				const resp = await Journal.updateEntry(1, "New Title", "New Text", "2025-01-04");
+				console.log("resp=", resp);
 				fail();
 			} catch (err) {
+				console.log(err);
 				expect(err instanceof NotFoundError).toBeTruthy();
 			}
 		});
@@ -133,7 +135,8 @@ describe("Journal", () => {
 		test("bad request if no data", async function () {
 			expect.assertions(1);
 			try {
-				await Journal.updateEntry(1, null, null, null, "2022-01-04");
+				const resp = await Journal.updateEntry(1, null, null, "2022-01-04", null);
+				console.log("resp=", resp);
 				fail();
 			} catch (err) {
 				expect(err instanceof BadRequestError).toBeTruthy();
