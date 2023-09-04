@@ -101,16 +101,16 @@ class Journal {
 	}
 
 	static async updateEntry(userId, title, entryText, entryDate, emotions = null) {
+		if (!(userId && title && entryText && entryDate)) {
+			throw new BadRequestError("Required information is missing");
+		}
 		// First, check to see if the journal entry exists for the given date and user ID
 		let existingEntry;
 		try {
 			existingEntry = await this.getByDate(userId, entryDate);
 		} catch (err) {
-			throw new BadRequestError("Journal entry for this date does not exist");
-		}
-
-		if (!existingEntry) {
-			throw new BadRequestError("Journal entry for this date does not exist");
+			console.error(err);
+			if (err instanceof NotFoundError) throw err;
 		}
 
 		// Define the SQL query to update the existing journal entry
