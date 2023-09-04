@@ -59,6 +59,8 @@ describe("GET /journals/:journalId", function () {
 	});
 });
 
+/************************************** GET /journals/date/:entryDate */
+
 describe("GET /journals/:entryDate", function () {
 	test("works for correct user and date", async function () {
 		const resp = await request(app)
@@ -95,6 +97,8 @@ describe("GET /journals/:entryDate", function () {
 		expect(resp.statusCode).toEqual(404);
 	});
 });
+
+/************************************** POST /journals/ */
 
 describe("POST /journals/", function () {
 	test("works for correct user", async function () {
@@ -187,6 +191,121 @@ describe("POST /journals/", function () {
 				title: "New Title",
 				entryText: "New Entry Text",
 				entryDate: "2025-01-05"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(404);
+	});
+});
+
+/************************************** PATCH /journals/date/:entryDate */
+describe("PATCH /journals/date/:entryDate", function () {
+	test("works for correct user", async function () {
+		const updateData = {
+			userId: 1,
+			title: "Updated Title",
+			entryText: "Updated Entry Text",
+			emotions: { joy: 0.4, sad: 0.7 }
+		};
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send(updateData)
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.body).toEqual({
+			journal: {
+				id: expect.any(Number),
+				userId: 1,
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				entryDate: "2022-01-04",
+				emotions: { joy: 0.4, sad: 0.7 }
+			}
+		});
+	});
+	test("bad request with missing data", async function () {
+		let resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+		resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				userId: 1,
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+		resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				userId: 1,
+				title: "Updated Title",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+	});
+
+	test("bad request with invalid data", async function () {
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: "happy"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+
+		let resp2 = await request(app)
+			.patch(`/users/1/journals/date/42`)
+			.send({
+				userId: 1,
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		// console.log(resp);
+		expect(resp2.statusCode).toEqual(400);
+	});
+
+	test("unauth for anon", async function () {
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			});
+		expect(resp.statusCode).toEqual(401);
+	});
+
+	test("unauth if userId doesn't match the user id of the user who has the provided token", async function () {
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u2Token}`);
+		expect(resp.statusCode).toEqual(401);
+	});
+
+	test("not found if no journal entry for the given date", async function () {
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2030-01-05`)
+			.send({
+				userId: 1,
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
 			})
 			.set("authorization", `Bearer ${u1Token}`);
 		expect(resp.statusCode).toEqual(404);
