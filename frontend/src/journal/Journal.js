@@ -3,32 +3,47 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import useForm from "../hooks/useForm";
 import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
+import getCurrentDate from "../common/getCurrentDate";
 
-const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
-	console.debug("Journal", date, "Title=", title, "entryText=", entryText);
+const Journal = ({ date, title, entryText, setJournal, editJournal, currentJournal }) => {
+	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
-	const [form, handleChange] = useForm({
-		title,
-		entryText
-	});
+	// const [form, set] = useForm({
+	// 	title: title,
+	// 	entryText: entryText
+	// });
 
 	if (!allInfoPresent) {
 		setMsg("Required information is missing");
 		setColor("danger");
 	}
 
+	const handleChange = useCallback(
+		async e => {
+			e.preventDefault();
+			const { name, value } = e.target;
+			setJournal(journal => ({
+				...journal,
+				[name]: value
+			}));
+		},
+		[setJournal]
+	);
+
 	const handleSubmit = useCallback(
 		async e => {
 			e.preventDefault();
-			await setJournal(journal => ({
-				...journal,
-				title: form.title,
-				entryText: form.entryText
-			}));
+
+			// await setJournal({
+			// 	...journal,
+			// 	title: form.title,
+			// 	entryText: form.entryText
+			// });
+			console.log(currentJournal);
 			await editJournal();
 		},
-		[setJournal, editJournal, form]
+		[editJournal, currentJournal]
 	);
 
 	return (
@@ -45,7 +60,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 									name="title"
 									id="title"
 									placeholder="title"
-									value={form.title}
+									value={currentJournal.title}
 									onChange={handleChange}
 								/>
 							</FormGroup>
@@ -60,7 +75,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 								name="entry"
 								id="entry"
 								placeholder="Start your entry here..."
-								value={form.entryText}
+								value={currentJournal.entryText}
 								onChange={handleChange}
 							/>
 						</FormGroup>
