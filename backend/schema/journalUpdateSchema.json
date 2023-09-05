@@ -19,6 +19,10 @@
 			"type": "string",
 			"minLength": 1
 		},
+		"entryDate": {
+			"type": "string",
+			"minLength": 10
+		},
 		"emotions": {
 			"type": ["object", "null"],
 			"additionalProperties": {
