@@ -62,6 +62,7 @@ const JournalEntryPage = () => {
 			setColor("danger");
 			setJournalLoaded(false);
 		} else loadJournalEntry();
+		// eslint-disable-next-line
 	}, [date]);
 
 	const loadJournalEntry = useCallback(async () => {
@@ -93,7 +94,7 @@ const JournalEntryPage = () => {
 		} else {
 			console.debug(currentJournal);
 			try {
-				const updateJournal = api.editJournalEntry(
+				const updateJournal = await api.editJournalEntry(
 					currentJournal.userId,
 					currentJournal.title,
 					currentJournal.entryText,
@@ -121,6 +122,7 @@ const JournalEntryPage = () => {
 					title={currentJournal.title}
 					entryText={currentJournal.entryText}
 					setJournal={setCurrentJournal}
+					currentJournal={currentJournal}
 					editJournal={editJournal}
 				/>
 			)}
