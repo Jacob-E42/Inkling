@@ -98,12 +98,10 @@ class ApiRequest {
 	}
 	async editJournalEntry(userId, title, entryText, entryDate, emotions = null) {
 		console.debug("editJournalEntry", userId, title, entryText, entryDate, emotions);
-		let response = await this.#request(
-			`users/${userId}/journals/date/${entryDate}`,
-			{ title, entryText, emotions },
-			"patch"
-		);
-		console.log(response);
+		const data = { userId: userId, title: title, entryText: entryText, entryDate: entryDate, emotions: emotions };
+		console.log("1st log", data);
+		let response = await this.#request(`users/${userId}/journals/date/${entryDate}`, data, "patch");
+		console.log("2nd log", data, response);
 		return response.journal;
 	}
 }
