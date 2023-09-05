@@ -4,7 +4,7 @@ import useForm from "../hooks/useForm";
 import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
 
-const Journal = ({ date, title, entryText, setJournal, createJournal }) => {
+const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 	console.debug("Journal", date, "Title=", title, "entryText=", entryText);
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
@@ -26,9 +26,9 @@ const Journal = ({ date, title, entryText, setJournal, createJournal }) => {
 				title: form.title,
 				entryText: form.entryText
 			}));
-			await createJournal();
+			await editJournal();
 		},
-		[setJournal, createJournal, form]
+		[setJournal, editJournal, form]
 	);
 
 	return (

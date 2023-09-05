@@ -103,6 +103,7 @@ class ApiRequest {
 			{ title, entryText, emotions },
 			"patch"
 		);
+		console.log(response);
 		return response.journal;
 	}
 }
