@@ -101,6 +101,19 @@ class Journal {
 	}
 
 	static async updateEntry(userId, title, entryText, entryDate, emotions = null) {
+		console.debug(
+			"updateEntry",
+			"userId=",
+			userId,
+			"title=",
+			title,
+			"entryText=",
+			entryText,
+			"entryDate=",
+			entryDate,
+			"emotions=",
+			emotions
+		);
 		if (!(userId && title && entryText && entryDate)) {
 			throw new BadRequestError("Required information is missing");
 		}

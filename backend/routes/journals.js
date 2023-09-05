@@ -67,8 +67,9 @@ router.patch("/date/:entryDate", ensureCorrectUserByUserId, async function (req,
 	}
 	console.log("date=", date);
 	try {
+		// const allReqKeys = { ...req.body, entryDate: req.params.entryDate, userId: Number(req.params.userId) };
 		const validator = jsonschema.validate(req.body, journalUpdateSchema);
-		console.log(req.body.emotions, validator.valid);
+		console.log(req.body);
 		if (!validator.valid) {
 			const errs = validator.errors.map(e => e.stack);
 			throw new BadRequestError(errs);
