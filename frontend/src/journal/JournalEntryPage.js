@@ -78,30 +78,29 @@ const JournalEntryPage = () => {
 			console.error(err);
 			setMsg(err.errorMessage);
 			setColor("danger");
-			setJournalLoaded(false);
 			setCurrentJournal(null);
 			if (err.status === 404) {
 				setJournalLoaded(true);
-			}
+			} else setJournalLoaded(false);
 		}
 	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded]);
 
-	const updateJournal = useCallback(async () => {
-		console.debug("JournalEntryPage createJournal");
+	const editJournal = useCallback(async () => {
+		console.debug("JournalEntryPage editJounal");
 		if (!currentJournal) {
 			setMsg("Creating a new journal entry failed!");
 			setColor("danger");
 		} else {
 			console.debug(currentJournal);
 			try {
-				const newJournal = api.createJournalEntry(
+				const updateJournal = api.editJournalEntry(
 					currentJournal.userId,
 					currentJournal.title,
 					currentJournal.entryText,
 					currentJournal.entryDate
 				);
-				console.debug(newJournal);
-				if (newJournal) {
+				console.debug(updateJournal);
+				if (updateJournal) {
 					setMsg("New journal entry created!");
 					setColor("success");
 				}
@@ -122,7 +121,7 @@ const JournalEntryPage = () => {
 					title={currentJournal.title}
 					entryText={currentJournal.entryText}
 					setJournal={setCurrentJournal}
-					createJournal={createJournal}
+					editJournal={editJournal}
 				/>
 			)}
 			{allInfoDefined && !currentJournal && (
