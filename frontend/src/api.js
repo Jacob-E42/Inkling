@@ -96,6 +96,15 @@ class ApiRequest {
 		let response = await this.#request(`users/${userId}/journals/`, { title, entryText, entryDate }, "post");
 		return response.journal;
 	}
+	async editJournalEntry(userId, title, entryText, entryDate, emotions = null) {
+		console.debug("editJournalEntry", userId, title, entryText, entryDate, emotions);
+		let response = await this.#request(
+			`users/${userId}/journals/date/${entryDate}`,
+			{ title, entryText, emotions },
+			"patch"
+		);
+		return response.journal;
+	}
 }
 
 export default ApiRequest;
