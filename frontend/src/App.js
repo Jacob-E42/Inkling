@@ -42,7 +42,7 @@ function App() {
 			async function getCurrentUser() {
 				console.debug("getCurrentUser");
 				// If a token is present, try to get the current user
-				if (token && api) {
+				if (token && api.current) {
 					try {
 						// Decode token to extract email
 						let { email } = await jwtDecode(token);
@@ -51,7 +51,7 @@ function App() {
 
 						// Create an instance of the Request object with the token for authentication
 
-						const currentUser = await api.getCurrentUser(email);
+						const currentUser = await api.current.getCurrentUser(email);
 						console.log("currentUser=", currentUser);
 						// Set the user in the state
 						setUser(currentUser);
@@ -140,7 +140,7 @@ function App() {
 			const { email, password } = data;
 
 			if (!password) delete data.password;
-			const updatedUser = await api.editCurrentUser(email, data);
+			const updatedUser = await api.current.editCurrentUser(email, data);
 			if (updatedUser) {
 				setUser(updatedUser);
 			}
