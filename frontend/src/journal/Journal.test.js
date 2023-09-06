@@ -1,8 +1,10 @@
 import React from "react";
 import { render, screen, act } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route } from "react-router-dom";
 import { AlertProvider, ApiProvider, UserProvider } from "../mock";
 import Journal from "./Journal";
+import NoJournalEntry from "./NoJournalEntry";
+import JournalEntryPage from "./JournalEntryPage";
 
 test("Journal renders without crashing", () => {
 	render(
@@ -18,22 +20,33 @@ test("Journal renders without crashing", () => {
 	);
 });
 
-test("Journal matches snapshot when rendered correctly", () => {
+test("Journal matches snapshot when rendered correctly", async () => {
+	const currentJournal = {
+		title: "Baking adventure",
+		date: "2023-07-04",
+		entryText:
+			" Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun."
+	};
+	// let asFragment;
+	// eslint-disable-next-line testing-library/no-unnecessary-act
+	// await act(async () => {
 	const { asFragment } = render(
-		<MemoryRouter>
+		<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
 			<UserProvider>
 				<ApiProvider>
 					<AlertProvider>
 						<Journal
-							date="2023-07-24"
-							title="Baking adventure"
-							entryText="Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun."
+							date={currentJournal.date}
+							entryText={currentJournal.entryText}
+							title={currentJournal.title}
 						/>
 					</AlertProvider>
 				</ApiProvider>
 			</UserProvider>
 		</MemoryRouter>
 	);
+	// asFragment = view.asFragment;
+	// });
 
 	expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
 	expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
