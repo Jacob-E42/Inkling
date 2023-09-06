@@ -1,9 +1,7 @@
 import React, { useCallback, useContext } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import useForm from "../hooks/useForm";
 import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
-import getCurrentDate from "../common/getCurrentDate";
 
 const Journal = ({ date, title, entryText, setJournal, editJournal, currentJournal }) => {
 	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
