@@ -58,8 +58,6 @@ const JournalEntryPage = () => {
 		console.debug("useEffect - JournalEntryPage", "date=", date, "currentJournal=", currentJournal);
 
 		if (!allInfoDefined) {
-			setMsg("Error: Required info is missing");
-			setColor("danger");
 			setJournalLoaded(false);
 		} else loadJournalEntry();
 		// eslint-disable-next-line
@@ -137,17 +135,5 @@ const JournalEntryPage = () => {
 		</>
 	);
 };
-// if (resp == null) {
-// 	setMsg(`Error: There is no journal entry for date: ${date}`);
-// 	setColor("danger");
-// 	return;
-// }
-
-// const { id, userId, entryText, entryDate, title } = resp;
-
-// if (!id || !userId || !(entryText || entryText === "") || !entryDate || !(title || title === "")) {
-// 	setMsg("Loading journal failed. Information is missing.");
-// 	setColor("danger");
-// } else {
 
 export default JournalEntryPage;
