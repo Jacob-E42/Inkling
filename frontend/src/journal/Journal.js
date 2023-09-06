@@ -3,14 +3,10 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
 
-const Journal = ({ date, title, entryText, setJournal, editJournal, currentJournal }) => {
+const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
-	// const [form, set] = useForm({
-	// 	title: title,
-	// 	entryText: entryText
-	// });
 
 	if (!allInfoPresent) {
 		setMsg("Required information is missing");
@@ -32,16 +28,9 @@ const Journal = ({ date, title, entryText, setJournal, editJournal, currentJourn
 	const handleSubmit = useCallback(
 		async e => {
 			e.preventDefault();
-
-			// await setJournal({
-			// 	...journal,
-			// 	title: form.title,
-			// 	entryText: form.entryText
-			// });
-			console.log(currentJournal);
 			await editJournal();
 		},
-		[editJournal, currentJournal]
+		[editJournal]
 	);
 
 	return (
@@ -58,7 +47,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal, currentJourn
 									name="title"
 									id="title"
 									placeholder="title"
-									value={currentJournal.title}
+									value={title}
 									onChange={handleChange}
 								/>
 							</FormGroup>
@@ -73,7 +62,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal, currentJourn
 								name="entry"
 								id="entry"
 								placeholder="Start your entry here..."
-								value={currentJournal.entryText}
+								value={entryText}
 								onChange={handleChange}
 							/>
 						</FormGroup>
