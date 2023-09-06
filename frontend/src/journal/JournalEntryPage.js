@@ -63,12 +63,12 @@ const JournalEntryPage = () => {
 			setJournalLoaded(false);
 		} else loadJournalEntry();
 		// eslint-disable-next-line
-	}, [date]);
+	}, [date, api]);
 
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
 		try {
-			console.log("date=", date);
+			console.log("date=", date, "api=", api);
 			const resp = await api.getJournalEntryByDate(user.id, date);
 			console.debug("Here is the RESPONSE", resp);
 			if (typeof resp !== "object") throw new Error("Response returned was invalid");
