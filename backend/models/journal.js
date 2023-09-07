@@ -29,9 +29,7 @@ class Journal {
 	// Method to retrieve a journal by its ID
 	// Throws a NotFoundError if the journal is not found
 	static async getByDate(userId, entryDate) {
-		const currentDate = new Date().toISOString().slice(0, 10);
-		const isToday = currentDate === entryDate;
-		console.debug("getByDate", userId, entryDate, isToday);
+		console.debug("getByDate", userId, entryDate);
 
 		// Define the SQL query
 		const query = {
@@ -44,14 +42,7 @@ class Journal {
 		const journal = res.rows[0];
 		console.log("journal=", journal);
 
-		// If no journal is found, throw an error
-		if (!journal && isToday) {
-			console.log("New journal entry is being created");
-			return formatJournalDate(
-				this.createEntry(userId, `Journal Entry: ${entryDate}`, "Start your entry here...", entryDate)
-			);
-		} else if (!journal) {
-			// throw new NotFoundError(`Error: No journal with date: ${entryDate}`);
+		if (!journal) {
 			console.log(`No journal with date: ${entryDate}`);
 			throw new NotFoundError(`Error: No journal with date: ${entryDate}`);
 		} else {
@@ -65,25 +56,6 @@ class Journal {
 	// Throws a BadRequestError if the email already exists
 	static async createEntry(userId, title, entry, entryDate) {
 		console.log("createEntry entryText=", entry);
-		// Check for existing user
-		let existingEntry;
-		try {
-			existingEntry = await this.getByDate(userId, entryDate);
-		} catch (err) {
-		} finally {
-			if (existingEntry) throw new BadRequestError("A journal entry written on this day already exists");
-		}
-
-		// console.log("entry date=", entryDate);
-
-		// // Define the new user object
-		// const newUser = {
-		// 	first_name: firstName,
-		// 	last_name: lastName,
-		// 	email,
-		// 	password: hashedPassword,
-		// 	interests
-		// };
 
 		// Define the SQL query to insert the new journal
 		const query = {
