@@ -15,4 +15,5 @@ CREATE TABLE journal_entries (
   entry_text TEXT NOT NULL,
   entry_date DATE NOT NULL,
   emotions JSON
+  UNIQUE(user_id, entry_date)
 );
