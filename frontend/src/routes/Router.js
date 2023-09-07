@@ -51,8 +51,6 @@ const Router = () => {
 	const { msg, color, setMsg, setColor } = useContext(AlertContext);
 	const { logout } = useContext(UserContext);
 
-	// Logging message and color for debugging purposes
-	console.debug("msg", msg, "color:", color);
 	const navigate = useNavigate();
 
 	const handleLogout = useCallback(() => {
