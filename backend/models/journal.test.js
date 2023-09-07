@@ -5,6 +5,7 @@ const Journal = require("./journal");
 const db = require("../db");
 // The following imports are utility functions for Jest to manage the database state before and after tests
 const { commonBeforeAll, commonBeforeEach, commonAfterEach, commonAfterAll } = require("./testUtils");
+const { DatabaseError } = require("pg");
 
 // Setting up hooks to manage the database state before and after tests
 beforeAll(commonBeforeAll);
@@ -86,17 +87,19 @@ describe("Journal", () => {
 			expect(result.entryDate).toEqual(entryDate);
 		});
 
-		it("should throw BadRequestError if Journal with the same date already exists", async () => {
+		it("should throw Database Error if Journal with the same date already exists", async () => {
 			const user_id = 1;
 			const title = "Surprise Visit";
 			const entryText = "Out of nowhere, my uncle and aunt came over to my house today.";
 			const entryDate = "2022-01-04";
 
+			let result;
 			try {
-				const result = await Journal.createEntry(user_id, title, entryText, entryDate);
+				result = await Journal.createEntry(user_id, title, entryText, entryDate);
 			} catch (error) {
-				expect(error).toBeInstanceOf(BadRequestError);
-				expect(error.message).toBe("A journal entry written on this day already exists");
+				console.log(error);
+				expect(error).toBeInstanceOf(DatabaseError);
+				expect(error.message).toBe('duplicate key value violates unique constraint "unique_user_date"');
 			}
 		});
 	});

@@ -1,11 +1,7 @@
 "use strict";
 
 const request = require("supertest");
-
-const db = require("../db.js");
 const app = require("../app");
-const User = require("../models/user");
-const Journal = require("../models/journal");
 
 const {
 	commonBeforeAll,
@@ -155,6 +151,19 @@ describe("POST /journals/", function () {
 				title: "New Title",
 				entry: "New Entry Text",
 				entryDate: 2025
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+	});
+
+	test("BadRequestError if Journal with the same date already exists", async () => {
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send({
+				user_id: 1,
+				title: "Surprise Visit",
+				entryText: "Out of nowhere, my uncle and aunt came over to my house today.",
+				entryDate: "2022-01-04"
 			})
 			.set("authorization", `Bearer ${u1Token}`);
 		expect(resp.statusCode).toEqual(400);
