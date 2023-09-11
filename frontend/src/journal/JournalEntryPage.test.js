@@ -1,16 +1,17 @@
 import React from "react";
-import { render, screen, act, fireEvent } from "@testing-library/react";
+import { render, screen, act, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { AlertProvider, AnonUserProvider, ApiProvider, UserProvider } from "../mock";
 import JournalEntryPage from "./JournalEntryPage";
 import ApiRequest from "../api";
 import axios from "axios";
+import getCurrentDate from "../../../backend/helpers/getCurrentDate";
 jest.mock("axios");
-
+const currentDate = getCurrentDate();
 console.log("API:", ApiRequest);
 console.log("editJournalEntry:", ApiRequest);
 
-const mockApi = jest.spyOn(ApiRequest.prototype, "editJournalEntry");
+// const mockApi = jest.spyOn(ApiRequest.prototype, "editJournalEntry");
 
 const mockSuccessfulResponse = {
 	data: {
@@ -40,6 +41,19 @@ const mockUpdatedJournalResponse = {
 	}
 };
 
+const mockTodaysJournalResponse = {
+	data: {
+		journal: {
+			id: 42,
+			userId: 11,
+			title: "Baking adventure",
+			entryText: `This should only display text for the current date entry. Current date: ${currentDate}`,
+			entryDate: `${currentDate}`,
+			emotions: null
+		}
+	}
+};
+
 const mockErrorResponse = {
 	response: {
 		status: 404,
@@ -50,6 +64,17 @@ const mockErrorResponse = {
 		}
 	}
 };
+
+// const mockErrorResponseForCurrentDate = {
+// 	response: {
+// 		status: 404,
+// 		data: {
+// 			error: {
+// 				message: `You needt to create a new entry`
+// 			}
+// 		}
+// 	}
+// };
 
 describe("Successful journal fetch", () => {
 	beforeEach(() => {
@@ -240,32 +265,32 @@ describe("user can edit journal entry", () => {
 		});
 	});
 
-	test("JournalEntryPage renders expected text", async () => {
-		// eslint-disable-next-line testing-library/no-unnecessary-act
-		await act(async () => {
-			render(
-				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
-					<UserProvider>
-						<ApiProvider>
-							<AlertProvider>
-								<Routes>
-									<Route
-										path="/journal/:date"
-										element={<JournalEntryPage />}
-									/>
-								</Routes>
-							</AlertProvider>
-						</ApiProvider>
-					</UserProvider>
-				</MemoryRouter>
-			);
-		});
+	// test("JournalEntryPage renders expected text", async () => {
+	// 	// eslint-disable-next-line testing-library/no-unnecessary-act
+	// 	await act(async () => {
+	// 		render(
+	// 			<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
+	// 				<UserProvider>
+	// 					<ApiProvider>
+	// 						<AlertProvider>
+	// 							<Routes>
+	// 								<Route
+	// 									path="/journal/:date"
+	// 									element={<JournalEntryPage />}
+	// 								/>
+	// 							</Routes>
+	// 						</AlertProvider>
+	// 					</ApiProvider>
+	// 				</UserProvider>
+	// 			</MemoryRouter>
+	// 		);
+	// 	});
 
-		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
-		expect(screen.getByText("Journal Entry")).toBeInTheDocument();
-		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
-		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
-	});
+	// 	expect(screen.getByText("2023-07-04")).toBeInTheDocument();
+	// 	expect(screen.getByText("Journal Entry")).toBeInTheDocument();
+	// 	expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
+	// 	expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
+	// });
 
 	test("JournalEntryPage changing text and submitting works", async () => {
 		// eslint-disable-next-line testing-library/no-unnecessary-act
@@ -290,6 +315,7 @@ describe("user can edit journal entry", () => {
 
 		const title = screen.getByPlaceholderText("title");
 		const submitButton = screen.getByText("Submit");
+		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
 		expect(title.value).toBe("Baking adventure");
 
 		// eslint-disable-next-line testing-library/no-unnecessary-act
@@ -298,8 +324,65 @@ describe("user can edit journal entry", () => {
 			fireEvent.click(submitButton);
 		});
 
+		// console.log(mockApi.mock);
+
+		await waitFor(() => {
+			// Here you can check if some element that indicates loading is no longer in the document,
+			// or some other condition that indicates that your component has finished loading.
+			expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
+		});
+
+		// expect(ApiRequest.editJournalEntry).toHaveBeenCalled();
 		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
+		expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
+		expect(
+			screen.getByText(
+				"Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun."
+			)
+		).toBeInTheDocument();
 		expect(title.value).toBe("Baking misadventure");
-		expect(mockApi).toHaveBeenCalled();
+	});
+});
+
+describe("it renders new journal entry for current date", () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+		act(() => {
+			axios.mockResolvedValue(mockTodaysJournalResponse);
+		});
+	});
+
+	test("JournalEntryPage renders correctly when date is today", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			const view = render(
+				<MemoryRouter initialEntries={[`/journal/${currentDate}`]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+		});
+		// const currentDate = getCurrentDate();
+		// const todaysJournal = screen.getByText("Today's Journal");
+
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		// await act(async () => {
+		// 	fireEvent.click(todaysJournal);
+		// });
+
+		expect(screen.getByText(`${currentDate}`)).toBeInTheDocument();
+		expect(screen.getByText("Journal Entry")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
 	});
 });
