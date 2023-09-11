@@ -68,7 +68,7 @@ class Journal {
 		// Execute the query to insert the new user and return the result
 		const res = await db.query(query);
 
-		// console.log(res);
+		// console.log(res.rows[0]);
 		return formatJournalDate(res.rows[0]);
 	}
 

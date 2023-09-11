@@ -37,11 +37,15 @@ router.get("/date/:entryDate", ensureCorrectUserByUserId, async function (req, r
 		console.log("error=", err);
 		const currentDate = new Date().toISOString().slice(0, 10);
 		const isToday = currentDate === entryDate;
-		if (typeof err === NotFoundError && isToday) {
-			console.log("New journal entry is being created");
-			return this.createEntry(userId, `Journal Entry: ${entryDate}`, `Start your entry here...`, entryDate);
-		}
-		return next(err);
+		if (err instanceof NotFoundError && isToday) {
+			const newJournal = await Journal.createEntry(
+				userId,
+				`Journal Entry: ${entryDate}`,
+				`Start your entry here...`,
+				entryDate
+			);
+			return res.json({ newJournal });
+		} else return next(err);
 	}
 });
 
