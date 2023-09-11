@@ -84,6 +84,7 @@ class ApiRequest {
 		try {
 			let response = await this.#request(`users/${userId}/journals/date/${date}`);
 			console.log(response);
+
 			return response.journal;
 		} catch (err) {
 			console.log(err);

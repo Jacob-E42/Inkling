@@ -75,7 +75,7 @@ const JournalEntryPage = () => {
 			setJournalLoaded(true);
 		} catch (err) {
 			console.error(err);
-			setMsg(err.errorMessage);
+			setMsg(err);
 			setColor("danger");
 			setCurrentJournal(null);
 			if (err.status === 404) {
@@ -84,30 +84,36 @@ const JournalEntryPage = () => {
 		}
 	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded]);
 
-	const editJournal = useCallback(async () => {
-		console.debug("JournalEntryPage editJounal");
-		if (!currentJournal) {
-			setMsg("Creating a new journal entry failed!");
-			setColor("danger");
-		} else {
-			console.debug(currentJournal);
-			try {
-				const updateJournal = await api.editJournalEntry(
-					currentJournal.userId,
-					currentJournal.title,
-					currentJournal.entryText,
-					currentJournal.entryDate
-				);
-				console.debug(updateJournal);
-				if (updateJournal) {
-					setMsg("New journal entry created!");
-					setColor("success");
+	const editJournal = useCallback(
+		async data => {
+			console.debug("JournalEntryPage editJournal", "currentJournal=", currentJournal, "data=", data);
+			setJournalLoaded(false);
+			if (!currentJournal) {
+				setMsg("Creating a new journal entry failed!");
+				setColor("danger");
+			} else {
+				try {
+					console.log(currentJournal, data);
+					const updateJournal = await api.editJournalEntry(
+						currentJournal.userId,
+						data.title,
+						data.entryText,
+						currentJournal.entryDate
+					);
+					console.log(updateJournal);
+					if (updateJournal) {
+						setMsg("Journal entry updated!");
+						setColor("success");
+						setJournalLoaded(true);
+					}
+				} catch (err) {
+					console.log(err);
+					setJournalLoaded(true);
 				}
-			} catch (err) {
-				console.log(err);
 			}
-		}
-	}, [currentJournal, setColor, setMsg, api]);
+		},
+		[currentJournal, setColor, setMsg, api, setJournalLoaded]
+	);
 
 	if (!journalLoaded) return <LoadingSpinner />;
 
