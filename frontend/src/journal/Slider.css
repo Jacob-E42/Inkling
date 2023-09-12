@@ -8,3 +8,7 @@
 	background-color: black;
 	margin: 5px;
 }
+
+.DayBlock {
+	border: solid 1px;
+}
