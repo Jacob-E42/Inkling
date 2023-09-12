@@ -8,7 +8,8 @@ import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
-import getCurrentDate from "../common/getCurrentDate";
+import getCurrentDate from "../common/dateHelpers";
+import HorizontalSlider from "./StreakSlider";
 
 const verifyDependentInfo = (date, user, api) => {
 	if (!(date && user && api)) return false;
@@ -119,7 +120,7 @@ const JournalEntryPage = () => {
 
 	return (
 		<>
-			<p>Streak goes here</p>
+			<HorizontalSlider date={date} />
 			{allInfoDefined && currentJournal && (
 				<Journal
 					date={date}
