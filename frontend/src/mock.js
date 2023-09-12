@@ -4,7 +4,7 @@ import AlertContext from "./context_providers/AlertContext";
 import Request from "./api";
 import ApiRequest from "./api";
 import ApiContext from "./context_providers/ApiContext";
-import getCurrentDate from "./common/getCurrentDate";
+import getCurrentDate from "./common/dateHelpers";
 
 const demoUser = {
 	id: 11,
