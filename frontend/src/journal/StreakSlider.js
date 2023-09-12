@@ -1,9 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slider.css";
+import DayBlock from "./DayBlock";
 import { getPreviousTenDays } from "../common/dateHelpers";
 
 const StreakSlider = ({ date }) => {
@@ -19,40 +19,21 @@ const StreakSlider = ({ date }) => {
 	};
 
 	const previousTenDays = getPreviousTenDays(date);
-	console.log("prev 10 days", previousTenDays);
+	const dayBlocks = previousTenDays.map((day, index) => {
+		console.log(day);
+		return (
+			<DayBlock
+				day={day}
+				key={index}
+			/>
+		);
+	});
+	console.log(previousTenDays, dayBlocks);
 
 	return (
 		<div className="StreakSlider">
 			<h2> Streak </h2>
-			<Slider {...settings}>
-				<div>
-					<h3>1</h3>
-				</div>
-				<div>
-					<h3>2</h3>
-				</div>
-				<div>
-					<h3>3</h3>
-				</div>
-				<div>
-					<h3>4</h3>
-				</div>
-				<div>
-					<h3>5</h3>
-				</div>
-				<div>
-					<h3>6</h3>
-				</div>
-				<div>
-					<h3>7</h3>
-				</div>
-				<div>
-					<h3>8</h3>
-				</div>
-				<div>
-					<h3>9</h3>
-				</div>
-			</Slider>
+			<Slider {...settings}>{dayBlocks}</Slider>
 		</div>
 	);
 };
