@@ -1,0 +1,10 @@
+.HorizontalSlider {
+	border: solid 1px;
+	margin: 20px;
+}
+
+.slick-arrow {
+	/* color: black; */
+	background-color: black;
+	margin: 5px;
+}
