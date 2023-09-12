@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
@@ -7,6 +7,10 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
+	const [tempJournal, setTempJournal] = useState({
+		title: title,
+		entryText: entryText
+	});
 
 	if (!allInfoPresent) {
 		setMsg("Required information is missing");
@@ -17,20 +21,24 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 		async e => {
 			e.preventDefault();
 			const { name, value } = e.target;
-			setJournal(journal => ({
-				...journal,
+			setTempJournal(tempJournal => ({
+				...tempJournal,
 				[name]: value
 			}));
+			console.log(tempJournal);
 		},
-		[setJournal]
+		[setTempJournal, tempJournal]
 	);
 
 	const handleSubmit = useCallback(
 		async e => {
 			e.preventDefault();
-			await editJournal();
+			console.log(tempJournal);
+			setJournal(tempJournal);
+
+			await editJournal(tempJournal);
 		},
-		[editJournal]
+		[editJournal, setJournal, tempJournal]
 	);
 
 	return (
@@ -47,7 +55,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 									name="title"
 									id="title"
 									placeholder="title"
-									value={title}
+									value={tempJournal.title}
 									onChange={handleChange}
 								/>
 							</FormGroup>
@@ -62,7 +70,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 								name="entry"
 								id="entry"
 								placeholder="Start your entry here..."
-								value={entryText}
+								value={tempJournal.entryText}
 								onChange={handleChange}
 							/>
 						</FormGroup>
