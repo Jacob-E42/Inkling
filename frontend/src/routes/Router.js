@@ -11,7 +11,7 @@ import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import JournalEntryPage from "../journal/JournalEntryPage";
 import LoadingSpinner from "../common/LoadingSpinner";
-import getCurrentDate from "../common/getCurrentDate";
+import getCurrentDate from "../common/dateHelpers";
 
 // a common way to handle authentication in React
 // It checks whether a user is currently logged in and if not, it redirects to the login page and shows a message
