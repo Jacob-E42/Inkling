@@ -9,7 +9,7 @@ import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 import getCurrentDate from "../common/dateHelpers";
-import HorizontalSlider from "./StreakSlider";
+import StreakSlider from "./StreakSlider";
 
 const verifyDependentInfo = (date, user, api) => {
 	if (!(date && user && api)) return false;
@@ -76,7 +76,7 @@ const JournalEntryPage = () => {
 			setJournalLoaded(true);
 		} catch (err) {
 			console.error(err);
-			setMsg(err);
+			setMsg(err.message);
 			setColor("danger");
 			setCurrentJournal(null);
 			if (err.status === 404) {
@@ -120,7 +120,7 @@ const JournalEntryPage = () => {
 
 	return (
 		<>
-			<HorizontalSlider date={date} />
+			<StreakSlider date={date} />
 			{allInfoDefined && currentJournal && (
 				<Journal
 					date={date}
@@ -131,7 +131,7 @@ const JournalEntryPage = () => {
 					editJournal={editJournal}
 				/>
 			)}
-			{allInfoDefined && !currentJournal && (
+			{allInfoDefined && !currentJournal && date && (
 				<NoJournalEntry
 					date={date}
 					title={`Error: No journal with date: ${date}`}
