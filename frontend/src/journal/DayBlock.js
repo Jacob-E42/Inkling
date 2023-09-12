@@ -1,4 +1,3 @@
-import react from "react";
 import { Link } from "react-router-dom";
 import { getDayOfWeek } from "../common/dateHelpers";
 
