@@ -87,6 +87,10 @@ class ApiRequest {
 
 			return response.journal;
 		} catch (err) {
+			if (err instanceof ApiError) {
+				console.log(err.message, err.status);
+				throw new ApiError(err.message, err.status);
+			}
 			console.log(err);
 			throw err;
 		}
