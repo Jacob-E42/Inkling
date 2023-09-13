@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
+import "./Journal.css";
 
 const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
@@ -44,9 +45,9 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 	return (
 		<>
 			{allInfoPresent && (
-				<div>
+				<div className="JournalEntry">
 					<header>
-						<p>{date}</p>
+						<h2>{date}</h2>
 						<Form>
 							<FormGroup>
 								<Label for="title">Title</Label>

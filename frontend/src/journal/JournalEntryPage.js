@@ -9,7 +9,8 @@ import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 import getCurrentDate from "../common/dateHelpers";
-import StreakSlider from "./StreakSlider";
+import StreakSlider from "../streak/StreakSlider";
+import "./Journal.css";
 
 const verifyDependentInfo = (date, user, api) => {
 	if (!(date && user && api)) return false;
