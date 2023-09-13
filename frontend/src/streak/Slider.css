@@ -4,9 +4,13 @@
 }
 
 .slick-arrow {
-	/* color: black; */
+	color: black;
 	background-color: black;
 	margin: 5px;
+}
+
+.slick-dots {
+	margin: 20px;
 }
 
 .DayBlock {

@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slider.css";
 import DayBlock from "./DayBlock";
-import { getPreviousTenDays } from "../common/dateHelpers";
+import getCurrentDate, { getPrevious30Days, getPreviousXDays } from "../common/dateHelpers";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const StreakSlider = ({ date }) => {
 	if (!date) throw new Error("StreakSlider is missing a date!");
+	const [currentDate, setCurrentDate] = useLocalStorage("currentDate", getCurrentDate());
+	const [prevMonthsDates, setPrevMonthsDates] = useLocalStorage("prevMonthsDates", null);
+
 	const settings = {
 		accessability: true,
 		arrows: true,
@@ -18,9 +22,13 @@ const StreakSlider = ({ date }) => {
 		slidesToScroll: 3
 	};
 
-	const previousTenDays = getPreviousTenDays(date);
+	useEffect(() => {
+		setPrevMonthsDates(getPrevious30Days(currentDate));
+	}, [currentDate]);
+
+	const previousTenDays = get(date);
+
 	const dayBlocks = previousTenDays.map((day, index) => {
-		console.log(day);
 		return (
 			<DayBlock
 				day={day}
