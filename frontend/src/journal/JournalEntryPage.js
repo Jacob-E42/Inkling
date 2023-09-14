@@ -8,7 +8,7 @@ import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
-import getCurrentDate from "../common/dateHelpers";
+import { getCurrentDate } from "../common/dateHelpers";
 import StreakSlider from "../streak/StreakSlider";
 import "./Journal.css";
 
