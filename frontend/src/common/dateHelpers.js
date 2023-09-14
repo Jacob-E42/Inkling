@@ -34,9 +34,7 @@ const getPreviousNumDays = (dateString, num) => {
 const getNextNumDays = (dateString, num) => {
 	if (num === 0) return [];
 	const date = parseISO(dateString);
-	console.log(dateString, num);
 	let days = eachDayOfInterval({ start: addDays(date, 1), end: addDays(date, num) });
-	console.log(days);
 	const daysStrings = days.map(date => {
 		return format(date, "yyyy-MM-dd");
 	});
@@ -67,10 +65,8 @@ function getDateRange(dateString) {
 	const nextDays = difference <= 30 ? getNextNumDays(dateString, difference) : getNextNumDays(dateString, 30);
 
 	const dateRange = [...prevDays, ...nextDays];
-	// for (let date of dateRange) {
-	// 	date = format(date, "yyyy-MM-dd", { weekStartsOn: 0 });
-	// }
-	console.log("difference=", difference, "prevDays=", prevDays, "nextDays=", nextDays);
+
+	// console.log("difference=", difference, "prevDays=", prevDays, "nextDays=", nextDays);
 	return dateRange;
 }
 
