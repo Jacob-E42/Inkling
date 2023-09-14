@@ -1,5 +1,5 @@
 import { getPreviousNumDays, getDayOfWeek, getCurrentDate, getNextNumDays, getDateRange } from "./dateHelpers"; // change `yourHelperFile` to your actual file name
-import { addDays, format, parseISO, subDays, toDate } from "date-fns";
+import { addDays, format, parse, parseISO, subDays, toDate } from "date-fns";
 
 describe("Date Helper Functions", () => {
 	describe("getCurrentDate()", () => {
@@ -81,25 +81,25 @@ describe("Date Helper Functions", () => {
 			const today = new Date();
 			const dateString = format(today, "yyyy-MM-dd");
 			const result = getDateRange(dateString);
-			// This one is more complex, you might want to set a specific test scenario
-			// For now, just checking if it's an array of length 61 (30 days before, current day, 30 days after)
+
 			expect(result).toHaveLength(31);
 			expect(result[30]).toEqual(dateString);
 		});
 		it("should return the date range for the StreakSlider when the 'date' is yesterday", () => {
 			const today = new Date();
+			const date = subDays(today, 1);
+			console.log(today, date);
 			const todayString = format(today, "yyyy-MM-dd");
-			const dateString = subDays(todayString, 1);
+			const dateString = format(date, "yyyy-MM-dd");
 			const result = getDateRange(dateString);
-			// This one is more complex, you might want to set a specific test scenario
-			// For now, just checking if it's an array of length 61 (30 days before, current day, 30 days after)
+
 			expect(result).toHaveLength(32);
 			expect(result[31]).toEqual(todayString);
 		});
 		it("should return a RangeError when the date is in the future", () => {
 			const today = new Date();
-			const todayString = format(today, "yyyy-MM-dd");
-			const dateString = addDays(todayString, 1);
+			const date = addDays(today, 1);
+			const dateString = format(date, "yyyy-MM-dd");
 			const result = getDateRange(dateString);
 			// This one is more complex, you might want to set a specific test scenario
 			// For now, just checking if it's an array of length 61 (30 days before, current day, 30 days after)
@@ -107,21 +107,20 @@ describe("Date Helper Functions", () => {
 		});
 		it("should return the date range for the StreakSlider when the 'date' is 30 days or less in the past", () => {
 			const today = new Date();
-			const todayString = format(today, "yyyy-MM-dd");
-			const dateString = subDays(todayString, 15);
+			const date = subDays(today, 15);
+			const dateString = format(date, "yyyy-MM-dd");
 			const result = getDateRange(dateString);
-			// This one is more complex, you might want to set a specific test scenario
-			// For now, just checking if it's an array of length 61 (30 days before, current day, 30 days after)
+			const todayString = format(today, "yyyy-MM-dd");
+
 			expect(result).toHaveLength(46);
 			expect(result[45]).toEqual(todayString);
 		});
 		it("should return the date range for the StreakSlider when the 'date' is more than 30 days in the past", () => {
 			const today = new Date();
-			const todayString = format(today, "yyyy-MM-dd");
-			const dateString = subDays(todayString, 60);
+			const date = subDays(today, 60);
+			const dateString = format(date, "yyyy-MM-dd");
 			const result = getDateRange(dateString);
-			// This one is more complex, you might want to set a specific test scenario
-			// For now, just checking if it's an array of length 61 (30 days before, current day, 30 days after)
+
 			expect(result).toHaveLength(61);
 			expect(result[30]).toEqual(dateString);
 		});
