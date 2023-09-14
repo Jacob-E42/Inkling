@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slider.css";
 import DayBlock from "./DayBlock";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { getDateRange } from "../common/dateHelpers";
+import useValidateDate from "../hooks/useVerifyDate";
+import { getCurrentDate, getDateRange } from "../common/dateHelpers";
+import { parseISO, isAfter } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import AlertContext from "../context_providers/AlertContext";
 
 const StreakSlider = ({ date }) => {
-	if (!date) throw new Error("StreakSlider is missing a date!");
 	const [datesToRender, setDatesToRender] = useLocalStorage("datesToRender", null);
+
+	const navigate = useNavigate();
+	if (!useValidateDate(date)) navigate(`journal/${getCurrentDate()}`);
 
 	const settings = {
 		accessability: true,
