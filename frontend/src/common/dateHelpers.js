@@ -1,13 +1,4 @@
-import {
-	eachDayOfInterval,
-	format,
-	parse,
-	parseISO,
-	subDays,
-	getDay,
-	differenceInCalendarDays,
-	addDays
-} from "date-fns";
+import { eachDayOfInterval, format, parseISO, subDays, getDay, differenceInCalendarDays, addDays } from "date-fns";
 
 // Return today's date in format "yyyy-mm-dd"
 function getCurrentDate() {
