@@ -4,13 +4,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Slider.css";
 import DayBlock from "./DayBlock";
-import getCurrentDate, { getPrevious30Days, getPreviousXDays } from "../common/dateHelpers";
 import useLocalStorage from "../hooks/useLocalStorage";
+import { getDateRange } from "../common/dateHelpers";
 
 const StreakSlider = ({ date }) => {
 	if (!date) throw new Error("StreakSlider is missing a date!");
-	const [currentDate, setCurrentDate] = useLocalStorage("currentDate", getCurrentDate());
-	const [prevMonthsDates, setPrevMonthsDates] = useLocalStorage("prevMonthsDates", null);
+	const [datesToRender, setDatesToRender] = useLocalStorage("datesToRender", null);
 
 	const settings = {
 		accessability: true,
@@ -23,12 +22,10 @@ const StreakSlider = ({ date }) => {
 	};
 
 	useEffect(() => {
-		setPrevMonthsDates(getPrevious30Days(currentDate));
-	}, [currentDate]);
+		setDatesToRender(getDateRange(date));
+	}, [date, setDatesToRender]);
 
-	const previousTenDays = get(date);
-
-	const dayBlocks = previousTenDays.map((day, index) => {
+	const dayBlocks = datesToRender.map((day, index) => {
 		return (
 			<DayBlock
 				day={day}
@@ -36,7 +33,7 @@ const StreakSlider = ({ date }) => {
 			/>
 		);
 	});
-	console.log(previousTenDays, dayBlocks);
+	console.log(datesToRender, dayBlocks);
 
 	return (
 		<div className="StreakSlider">
