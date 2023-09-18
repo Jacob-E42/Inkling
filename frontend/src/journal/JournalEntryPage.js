@@ -21,15 +21,6 @@ const verifyDependentInfo = (date, user, api) => {
 	return true;
 };
 
-// const determineDate = date => {
-// 	console.log("date=", date);
-// 	let date;
-// 	if (!date) date = new Date().toISOString().slice(0, 10);
-// 	else if (propDate) date = propDate;
-// 	else date = paramDate;
-// 	return date;
-// };
-
 const JournalEntryPage = () => {
 	let { date } = useParams("date");
 	if (!date) date = getCurrentDate();
@@ -68,9 +59,9 @@ const JournalEntryPage = () => {
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
 		try {
-			console.log("date=", date, "api=", api);
+			// console.log("date=", date, "api=", api);
 			const resp = await api.getJournalEntryByDate(user.id, date);
-			console.debug("Here is the RESPONSE", resp);
+			// console.debug("Here is the RESPONSE", resp);
 			if (typeof resp !== "object") throw new Error("Response returned was invalid");
 
 			setCurrentJournal(resp);
@@ -95,21 +86,21 @@ const JournalEntryPage = () => {
 				setColor("danger");
 			} else {
 				try {
-					console.log(currentJournal, data);
+					// console.log(currentJournal, data);
 					const updateJournal = await api.editJournalEntry(
 						currentJournal.userId,
 						data.title,
 						data.entryText,
 						currentJournal.entryDate
 					);
-					console.log(updateJournal);
+					// console.log(updateJournal);
 					if (updateJournal) {
 						setMsg("Journal entry updated!");
 						setColor("success");
 						setJournalLoaded(true);
 					}
 				} catch (err) {
-					console.log(err);
+					// console.log(err);
 					setJournalLoaded(true);
 				}
 			}
