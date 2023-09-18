@@ -20,6 +20,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 
 	const handleChange = useCallback(
 		async e => {
+			console.log("handleChange");
 			e.preventDefault();
 			const { name, value } = e.target;
 			setTempJournal(tempJournal => ({
@@ -68,7 +69,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 							<Label for="entry">Journal Entry</Label>
 							<Input
 								type="textarea"
-								name="entry"
+								name="entryText"
 								id="entry"
 								placeholder="Start your entry here..."
 								value={tempJournal.entryText}
