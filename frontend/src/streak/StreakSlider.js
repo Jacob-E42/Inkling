@@ -34,7 +34,8 @@ const StreakSlider = ({ date }) => {
 
 	if (!slidesLoaded) return <LoadingSpinner />;
 
-	const totalSlides = daySlides.length;
+	const totalSlides = datesToRender.length;
+
 	const settings = {
 		accessability: true,
 		arrows: true,
