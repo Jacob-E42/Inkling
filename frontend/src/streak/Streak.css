@@ -1,0 +1,38 @@
+.StreakSlider {
+	border: solid 1px;
+	margin: 20px;
+}
+
+.slick-arrow {
+	color: black;
+	background-color: black;
+	margin: 5px;
+}
+
+.slick-dots {
+	margin: 20px;
+}
+
+.DayBlock {
+	border: solid 1px;
+}
+
+.streak-container {
+	display: flex;
+	overflow-x: auto;
+	gap: 5px;
+}
+
+.day-link {
+	padding: 5px;
+	border: 1px solid transparent;
+	transition: border-color 0.2s;
+}
+
+.day-link:hover {
+	border-color: #333; /* Change as per your theme */
+}
+
+.day-link.active {
+	border: 1px solid #333; /* Highlight the active date */
+}
