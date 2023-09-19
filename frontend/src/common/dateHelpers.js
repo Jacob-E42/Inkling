@@ -13,6 +13,7 @@ function getCurrentDate() {
 //dateString has format: "yyyy-mm-dd"
 const getPreviousNumDays = (dateString, num) => {
 	const date = parseISO(dateString);
+	// console.log("date=", dateString, date);
 	let days = eachDayOfInterval({ start: subDays(date, num), end: date });
 	const daysStrings = days.map(date => {
 		return format(date, "yyyy-MM-dd");
@@ -61,4 +62,16 @@ function getDateRange(dateString) {
 	return dateRange;
 }
 
-export { getPreviousNumDays, getDayOfWeek, getCurrentDate, getNextNumDays, getDateRange };
+function getPastDate(dateString, num) {
+	const currentDate = parseISO(dateString);
+	let pastDate = subDays(currentDate, num);
+	return format(pastDate, "yyyy-MM-dd");
+}
+
+function getFutureDate(dateString, num) {
+	const currentDate = parseISO(dateString);
+	let fututeDate = addDays(currentDate, num);
+	return format(fututeDate, "yyyy-MM-dd");
+}
+
+export { getPreviousNumDays, getDayOfWeek, getCurrentDate, getNextNumDays, getDateRange, getPastDate, getFutureDate };
