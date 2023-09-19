@@ -9,7 +9,7 @@ import AlertContext from "../context_providers/AlertContext";
 import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { getCurrentDate } from "../common/dateHelpers";
-import StreakSlider from "../streak/StreakSlider";
+import StreakDisplay from "../streak/StreakDisplay";
 import "./Journal.css";
 
 const verifyDependentInfo = (date, user, api) => {
@@ -112,7 +112,7 @@ const JournalEntryPage = () => {
 
 	return (
 		<>
-			<StreakSlider date={date} />
+			<StreakDisplay date={date} />
 			{allInfoDefined && currentJournal && (
 				<Journal
 					date={date}

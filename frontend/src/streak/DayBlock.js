@@ -11,7 +11,7 @@ const DayBlock = ({ day }) => {
 		<Link
 			className="DayBlock"
 			to={`/journal/${day}`}>
-			<p>{dayOfWeek}</p>
+			<p>{getDayOfWeek(day)}</p>
 			<p>{dayOfMonth}</p>
 		</Link>
 	);
