@@ -18,7 +18,7 @@ const StreakDisplay = ({ date }) => {
 	const [daysArray, setDaysArray] = useLocalStorage("datesToRender", [date]);
 	const [slidesLoaded, setSlidesLoaded] = useLocalStorage("slidesLoaded", false);
 	// const startDate = daysArray[0];
-	const endDate = daysArray[daysArray.length - 1];
+	// const endDate = daysArray[daysArray.length - 1];
 	// const daysArray = eachDayOfInterval({ start: new Date(startDate), end: new Date(endDate) }).reverse(); // reverse to have endDate at one end
 	useEffect(() => {
 		setDaysArray(getDateRange(date));
@@ -55,16 +55,14 @@ const StreakDisplay = ({ date }) => {
 
 	return (
 		<div className="streak-container">
-			<h2> Streak </h2>
-			<br />
-			{daysArray.map(date => (
+			{daysArray.map(day => (
 				<Link
-					key={date}
-					to={`/journal/${date}`}
-					className={`day-link ${date === endDate ? "active" : ""}`}>
-					{getDayOfWeek(date)}
+					key={day}
+					to={`/journal/${day}`}
+					className={`day-link ${day === date ? "active" : ""}`}>
+					{getDayOfWeek(day)}
 					<br />
-					{format(parseISO(date), "dd")}
+					{format(parseISO(day), "dd")}
 				</Link>
 			))}
 		</div>
