@@ -2,11 +2,13 @@
 
 exports[`Journal matches snapshot when rendered correctly 1`] = `
 <DocumentFragment>
-  <div>
+  <div
+    class="JournalEntry"
+  >
     <header>
-      <p>
+      <h2>
         2023-07-04
-      </p>
+      </h2>
       <form
         class=""
       >
@@ -45,7 +47,7 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
         <textarea
           class="form-control"
           id="entry"
-          name="entry"
+          name="entryText"
           placeholder="Start your entry here..."
         >
            Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.

@@ -6,10 +6,11 @@ import JournalEntryPage from "./JournalEntryPage";
 import ApiRequest from "../api";
 import axios from "axios";
 import getCurrentDate from "../../../backend/helpers/getCurrentDate";
+import { getPastDate } from "../common/dateHelpers";
 jest.mock("axios");
 const currentDate = getCurrentDate();
-console.log("API:", ApiRequest);
-console.log("editJournalEntry:", ApiRequest);
+// console.log("API:", ApiRequest);
+// console.log("editJournalEntry:", ApiRequest);
 
 // const mockApi = jest.spyOn(ApiRequest.prototype, "editJournalEntry");
 
@@ -22,6 +23,20 @@ const mockSuccessfulResponse = {
 			entryText:
 				"Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.",
 			entryDate: "2023-07-24",
+			emotions: null
+		}
+	}
+};
+
+const mockSecondResponse = {
+	data: {
+		journal: {
+			id: 42,
+			userId: 11,
+			title: "Baking adventure",
+			entryText:
+				"Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.",
+			entryDate: getPastDate(currentDate, 1),
 			emotions: null
 		}
 	}
@@ -348,14 +363,15 @@ describe("it renders new journal entry for current date", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
 		act(() => {
-			axios.mockResolvedValue(mockTodaysJournalResponse);
+			axios.mockResolvedValueOnce(mockTodaysJournalResponse);
+			axios.mockResolvedValue(mockSecondResponse);
 		});
 	});
 
 	test("JournalEntryPage renders correctly when date is today", async () => {
 		// eslint-disable-next-line testing-library/no-unnecessary-act
 		await act(async () => {
-			const view = render(
+			render(
 				<MemoryRouter initialEntries={[`/journal/${currentDate}`]}>
 					<UserProvider>
 						<ApiProvider>
@@ -372,17 +388,46 @@ describe("it renders new journal entry for current date", () => {
 				</MemoryRouter>
 			);
 		});
-		// const currentDate = getCurrentDate();
-		// const todaysJournal = screen.getByText("Today's Journal");
-
-		// eslint-disable-next-line testing-library/no-unnecessary-act
-		// await act(async () => {
-		// 	fireEvent.click(todaysJournal);
-		// });
 
 		expect(screen.getByText(`${currentDate}`)).toBeInTheDocument();
 		expect(screen.getByText("Journal Entry")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
+	});
+
+	test("JournalEntryPage renders correct title and entry text after switching days", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			render(
+				<MemoryRouter initialEntries={[`/journal/${currentDate}`]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+		});
+
+		const prevDay = screen.getByText(new RegExp(`${mockSecondResponse.data.journal.entryDate.slice(-2)}`, "i"));
+
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			fireEvent.click(prevDay);
+		});
+
+		const title = screen.getByLabelText("Title");
+		const entryText = screen.getByLabelText("Journal Entry");
+
+		expect(screen.getByText(mockSecondResponse.data.journal.entryDate)).toBeInTheDocument();
+		expect(title.value).toBe(mockSecondResponse.data.journal.title);
+		expect(entryText.value).toBe(mockSecondResponse.data.journal.entryText);
 	});
 });

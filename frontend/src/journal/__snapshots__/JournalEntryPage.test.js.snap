@@ -22,14 +22,505 @@ exports[`Failed journal fetch JournalEntryPage renders expected text when allInf
 
 exports[`Successful journal fetch JournalEntryPage rendered correctly, matches snapshot 1`] = `
 <DocumentFragment>
-  <p>
-    Streak goes here
-  </p>
-  <div>
+  <div
+    class="streak-container"
+  >
+    <a
+      class="day-link "
+      href="/journal/2023-06-04"
+    >
+      Sun
+      <br />
+      04
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-05"
+    >
+      Mon
+      <br />
+      05
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-06"
+    >
+      Tue
+      <br />
+      06
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-07"
+    >
+      Wed
+      <br />
+      07
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-08"
+    >
+      Thu
+      <br />
+      08
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-09"
+    >
+      Fri
+      <br />
+      09
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-10"
+    >
+      Sat
+      <br />
+      10
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-11"
+    >
+      Sun
+      <br />
+      11
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-12"
+    >
+      Mon
+      <br />
+      12
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-13"
+    >
+      Tue
+      <br />
+      13
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-14"
+    >
+      Wed
+      <br />
+      14
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-15"
+    >
+      Thu
+      <br />
+      15
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-16"
+    >
+      Fri
+      <br />
+      16
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-17"
+    >
+      Sat
+      <br />
+      17
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-18"
+    >
+      Sun
+      <br />
+      18
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-19"
+    >
+      Mon
+      <br />
+      19
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-20"
+    >
+      Tue
+      <br />
+      20
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-21"
+    >
+      Wed
+      <br />
+      21
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-22"
+    >
+      Thu
+      <br />
+      22
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-23"
+    >
+      Fri
+      <br />
+      23
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-24"
+    >
+      Sat
+      <br />
+      24
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-25"
+    >
+      Sun
+      <br />
+      25
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-26"
+    >
+      Mon
+      <br />
+      26
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-27"
+    >
+      Tue
+      <br />
+      27
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-28"
+    >
+      Wed
+      <br />
+      28
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-29"
+    >
+      Thu
+      <br />
+      29
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-06-30"
+    >
+      Fri
+      <br />
+      30
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-01"
+    >
+      Sat
+      <br />
+      01
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-02"
+    >
+      Sun
+      <br />
+      02
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-03"
+    >
+      Mon
+      <br />
+      03
+    </a>
+    <a
+      class="day-link active"
+      href="/journal/2023-07-04"
+    >
+      Tue
+      <br />
+      04
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-05"
+    >
+      Wed
+      <br />
+      05
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-06"
+    >
+      Thu
+      <br />
+      06
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-07"
+    >
+      Fri
+      <br />
+      07
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-08"
+    >
+      Sat
+      <br />
+      08
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-09"
+    >
+      Sun
+      <br />
+      09
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-10"
+    >
+      Mon
+      <br />
+      10
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-11"
+    >
+      Tue
+      <br />
+      11
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-12"
+    >
+      Wed
+      <br />
+      12
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-13"
+    >
+      Thu
+      <br />
+      13
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-14"
+    >
+      Fri
+      <br />
+      14
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-15"
+    >
+      Sat
+      <br />
+      15
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-16"
+    >
+      Sun
+      <br />
+      16
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-17"
+    >
+      Mon
+      <br />
+      17
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-18"
+    >
+      Tue
+      <br />
+      18
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-19"
+    >
+      Wed
+      <br />
+      19
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-20"
+    >
+      Thu
+      <br />
+      20
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-21"
+    >
+      Fri
+      <br />
+      21
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-22"
+    >
+      Sat
+      <br />
+      22
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-23"
+    >
+      Sun
+      <br />
+      23
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-24"
+    >
+      Mon
+      <br />
+      24
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-25"
+    >
+      Tue
+      <br />
+      25
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-26"
+    >
+      Wed
+      <br />
+      26
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-27"
+    >
+      Thu
+      <br />
+      27
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-28"
+    >
+      Fri
+      <br />
+      28
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-29"
+    >
+      Sat
+      <br />
+      29
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-30"
+    >
+      Sun
+      <br />
+      30
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-07-31"
+    >
+      Mon
+      <br />
+      31
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-08-01"
+    >
+      Tue
+      <br />
+      01
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-08-02"
+    >
+      Wed
+      <br />
+      02
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-08-03"
+    >
+      Thu
+      <br />
+      03
+    </a>
+  </div>
+  <div
+    class="JournalEntry"
+  >
     <header>
-      <p>
+      <h2>
         2023-07-04
-      </p>
+      </h2>
       <form
         class=""
       >
@@ -68,7 +559,7 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
         <textarea
           class="form-control"
           id="entry"
-          name="entry"
+          name="entryText"
           placeholder="Start your entry here..."
         >
           Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.
