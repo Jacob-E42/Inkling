@@ -56,6 +56,8 @@ const JournalEntryPage = () => {
 		// eslint-disable-next-line
 	}, [date, api]);
 
+	useEffect(() => {}, [currentJournal]);
+
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
 		try {
@@ -64,8 +66,8 @@ const JournalEntryPage = () => {
 			// console.debug("Here is the RESPONSE", resp);
 			if (typeof resp !== "object") throw new Error("Response returned was invalid");
 
-			setCurrentJournal(resp);
-			setJournalLoaded(true);
+			await setCurrentJournal(resp);
+			await setJournalLoaded(true);
 		} catch (err) {
 			console.error(err);
 			setMsg(err.message);
@@ -109,7 +111,7 @@ const JournalEntryPage = () => {
 	);
 
 	if (!journalLoaded) return <LoadingSpinner />;
-
+	// console.log("this is annoying", currentJournal.title, currentJournal.entryText);
 	return (
 		<>
 			<StreakDisplay date={date} />
