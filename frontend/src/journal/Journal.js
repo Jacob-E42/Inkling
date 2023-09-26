@@ -1,17 +1,24 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
 import "./Journal.css";
 
 const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
-	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
+	console.debug("Journal", date, "Title=", title, "entryText=", entryText);
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
 	const [tempJournal, setTempJournal] = useState({
 		title: title,
 		entryText: entryText
 	});
+
+	useEffect(() => {
+		setTempJournal({
+			title: title,
+			entryText: entryText
+		});
+	}, [title, entryText]);
 
 	if (!allInfoPresent) {
 		setMsg("Required information is missing");
@@ -20,7 +27,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 
 	const handleChange = useCallback(
 		async e => {
-			console.log("handleChange");
+			console.debug("handleChange");
 			e.preventDefault();
 			const { name, value } = e.target;
 			setTempJournal(tempJournal => ({
@@ -34,6 +41,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 
 	const handleSubmit = useCallback(
 		async e => {
+			console.debug("handleSubmit");
 			e.preventDefault();
 			console.log(tempJournal);
 			setJournal(tempJournal);
@@ -43,6 +51,7 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 		[editJournal, setJournal, tempJournal]
 	);
 
+	console.log(title, tempJournal.title, entryText, tempJournal.entryText);
 	return (
 		<>
 			{allInfoPresent && (
