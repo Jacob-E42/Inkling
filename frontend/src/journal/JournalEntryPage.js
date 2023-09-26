@@ -10,6 +10,7 @@ import ApiContext from "../context_providers/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { getCurrentDate } from "../common/dateHelpers";
 import StreakDisplay from "../streak/StreakDisplay";
+import Feedback from "../feedback/Feedback";
 import "./Journal.css";
 
 const verifyDependentInfo = (date, user, api) => {
@@ -30,6 +31,7 @@ const JournalEntryPage = () => {
 	const allInfoDefined = verifyDependentInfo(date, user, api); //only verifies date, user, and qpi. Not setMsg, or setColor
 	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
+	const [feedbackReceived, setFeedbackReceived] = useLocalStorage("feedbackReceived", false);
 
 	console.debug(
 		"JournalEntryPage",
@@ -132,7 +134,7 @@ const JournalEntryPage = () => {
 					entryText={`Error: No journal with date: ${date}`}
 				/>
 			)}
-			<p>feedback goes here</p>
+			{feedbackReceived && <Feedback />}
 		</>
 	);
 };
