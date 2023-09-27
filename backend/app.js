@@ -11,8 +11,10 @@ const { authenticateJWT } = require("./middleware/authMiddleware");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const journalRoutes = require("./routes/journals");
+const feedbackRoutes = require("./routes/feedback");
 
 const morgan = require("morgan");
+const { default: Feedback } = require("../frontend/src/feedback/Feedback");
 
 const app = express();
 
@@ -24,6 +26,7 @@ app.use(authenticateJWT);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/users/:userId/journals", journalRoutes);
+app.use("/feedback", feedbackRoutes);
 
 app.get("/", async (req, res, next) => {
 	try {
