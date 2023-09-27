@@ -1,5 +1,5 @@
-import { Configuration, OpenAIApi } from "openai";
-import { BadRequestError, ExpressError } from "../expressError";
+const { Configuration, OpenAIApi } = require("openai");
+const { BadRequestError, ExpressError } = require("../expressError");
 
 const configuration = new Configuration({
 	apiKey: process.env.OPENAI_API_KEY
@@ -24,27 +24,21 @@ async function getCompletion(req, res) {
 		});
 		return completion.data.choices[0].text;
 	} catch (error) {
-		// Consider adjusting the error handling logic for your use case
 		if (error.response) {
 			console.error(error.response.status, error.response.data);
-			res.status(error.response.status).json(error.response.data);
+			return error.response.data;
 		} else {
 			console.error(`Error with OpenAI API request: ${error.message}`);
-
 			throw new ExpressError("An error occurred during your request.");
 		}
 	}
 }
 
 function generatePrompt(entryText) {
-	return `Suggest three names for an entryText that is a superhero.
-
-entryText: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-entryText: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-entryText: ${entryText}
-Names:`;
+	if (entryText.length < 1) return null;
+	return `Please give some feedback for this journal entry. 
+	It was written by someone who's just getting into the habit of journaling: 
+	${entryText}`;
 }
 
-module.exports = { getCompletion };
+module.exports = { getCompletion, generatePrompt };
