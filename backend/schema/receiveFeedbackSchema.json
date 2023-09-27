@@ -1,0 +1,37 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://example.com/journalEntry.json",
+	"type": "object",
+	"properties": {
+		"id": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"userId": {
+			"type": "integer",
+			"minimum": 1
+		},
+		"title": {
+			"type": "string",
+			"minLength": 1
+		},
+		"entryText": {
+			"type": "string",
+			"minLength": 1
+		},
+		"entryDate": {
+			"type": "string",
+			"minLength": 10
+		},
+		"emotions": {
+			"type": ["object", "null"],
+			"additionalProperties": {
+				"type": "number",
+				"minimum": 0,
+				"maximum": 1
+			}
+		}
+	},
+	"required": ["entryText"],
+	"additionalProperties": false
+}
