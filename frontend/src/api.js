@@ -28,10 +28,10 @@ class ApiRequest {
 			if (error.response) {
 				// The request was made, and the server responded with a status code
 				// that falls outside the range of 2xx
-				console.error(error.response.data); // Here's where you'll find the backend's error message
-				const errorMessage = error.response.data.error.message;
+				console.error(error.response.status, error.response.data); // Here's where you'll find the backend's error message
+				// const errorMessage = error.response.data.error.message;
 
-				throw new ApiError(errorMessage, error.response.status);
+				throw new ApiError(error.response.data, error.response.status);
 			} else if (error.request) {
 				// The request was made, but no response was received
 				console.error("No response received:", error.request);
