@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const jsonschema = require("jsonschema");
 const receiveFeedbackSchema = require("../schema/receiveFeedbackSchema.json");
 const { BadRequestError, NotFoundError } = require("../expressError");
-const { generatePrompt } = require("../feedbackAPI/promptGenerator");
+const { generatePrompt } = require("../feedbackAPI/prompts");
 const {
 	ensureCorrectUser,
 	ensureCorrectUserByEmail,
