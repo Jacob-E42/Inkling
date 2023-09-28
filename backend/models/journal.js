@@ -55,7 +55,7 @@ class Journal {
 	// Method to register a new user
 	// Throws a BadRequestError if the email already exists
 	static async createEntry(userId, title, entry, entryDate) {
-		console.log("createEntry entryText=", entry);
+		// console.log("createEntry entryText=", entry);
 
 		// Define the SQL query to insert the new journal
 		const query = {

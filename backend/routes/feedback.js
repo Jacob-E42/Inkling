@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const jsonschema = require("jsonschema");
 const receiveFeedbackSchema = require("../schema/receiveFeedbackSchema.json");
 const { BadRequestError, NotFoundError } = require("../expressError");
-const { generatePrompt } = require("../feedbackAPI/prompts");
+const { generatePrompt, getCompletion } = require("../feedbackAPI/prompts");
 const {
 	ensureCorrectUser,
 	ensureCorrectUserByEmail,
@@ -24,8 +24,8 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
 		// 	throw new NotFoundError("The user id provided doesn't match any known user");
 		// }
 		//desctructure for readability
-
-		const feedback = generatePrompt(req.body.entryText);
+		const entryText = req.body.entryText || "";
+		const feedback = getCompletion(entryText);
 		return res.json({ feedback });
 	} catch (err) {
 		return next(err);
