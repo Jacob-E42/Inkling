@@ -1,10 +1,12 @@
 const { Configuration, OpenAIApi } = require("openai");
+const { OPENAI_API_KEY } = require("../config");
 const { BadRequestError, ExpressError } = require("../expressError");
 
 const configuration = new Configuration({
-	apiKey: process.env.OPENAI_API_KEY
+	apiKey: OPENAI_API_KEY
 });
-console.log(configuration.apiKey);
+
+// console.log(configuration.apiKey);
 const openai = new OpenAIApi(configuration);
 
 async function getCompletion(entryText) {
