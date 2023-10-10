@@ -10,44 +10,42 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 async function getCompletion(entryText) {
-	async function main() {
-		const chatCompletion = await openai.createChatCompletion({
-			messages: [{ role: "user", content: "Say this is a test" }],
-			model: "gpt-3.5-turbo"
-		});
-
-		// console.log(chatCompletion.choices);
+	if (!configuration.apiKey) {
+		console.log(configuration, "apiKey=", process.env.OPENAI_API_KEY);
+		throw new ExpressError("OpenAI API key not configured, please follow instructions in README.md");
 	}
 
-	main();
-	// if (!configuration.apiKey) {
-	// 	console.log(configuration, "apiKey=", process.env.OPENAI_API_KEY);
-	// 	throw new ExpressError("OpenAI API key not configured, please follow instructions in README.md");
-	// }
+	if (entryText.trim().length === 0) {
+		throw new BadRequestError("Please enter a valid entryText");
+	}
 
-	// if (entryText.trim().length === 0) {
-	// 	throw new BadRequestError("Please enter a valid entryText");
-	// }
+	const chatCompletion = await openai.createChatCompletion({
+		messages: [{ role: "user", content: "Say this is a test" }],
+		model: "gpt-3.5-turbo"
+	});
 
-	// try {
-	// 	console.log(openai);
-	// 	const completion = await openai.create.createCompletion({
-	// 		model: "gpt-3.5-turbo",
-	// 		prompt: generatePrompt(entryText),
-	// 		temperature: 0.6
-	// 	});
+	console.log(chatCompletion.data.choices[0], chatCompletion.data.choices[0].message.content);
+	return chatCompletion.data.choices[0].message.content;
 
-	// 	console.log(completion.data);
-	// 	return completion.data.choices[0].text;
-	// } catch (error) {
-	// 	if (error.response) {
-	// 		console.error(error.response.status, error.response.data);
-	// 		return error.response.data;
-	// 	} else {
-	// 		console.error(`Error with OpenAI API request: ${error.message}`);
-	// 		throw new ExpressError("An error occurred during your request.");
-	// 	}
-	// }
+	try {
+		console.log(openai);
+		const completion = await openai.create.createCompletion({
+			model: "gpt-3.5-turbo",
+			prompt: generatePrompt(entryText),
+			temperature: 0.6
+		});
+
+		console.log(completion.data);
+		return completion.data.choices[0].text;
+	} catch (error) {
+		if (error.response) {
+			console.error(error.response.status, error.response.data);
+			return error.response.data;
+		} else {
+			console.error(`Error with OpenAI API request: ${error.message}`);
+			throw new ExpressError("An error occurred during your request.");
+		}
+	}
 }
 
 function generatePrompt(entryText) {
