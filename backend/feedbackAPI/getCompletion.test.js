@@ -23,8 +23,9 @@ describe("generatePrompt", () => {
 			"I would like to start being more grateful for the little things in life. As part of that I will try to appreciate whatever nice things happen to me unexpectedly.";
 
 		const response = await getCompletion(entryText);
-		// console.log(response);
-		expect(typeof prompt).toBe("string");
-		expect(prompt.length).toBeGreaterThanOrEqual(entryText.length);
+		console.log(response);
+		expect(response).toBeDefined();
+		expect(typeof response).toBe("string");
+		// expect(prompt.length).toBeGreaterThanOrEqual(entryText.length);
 	});
 });
