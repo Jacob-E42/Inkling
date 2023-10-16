@@ -180,13 +180,18 @@ const SignupForm = () => {
 			</FormGroup>
 
 			<FormGroup>
-				<p>Please select one to three interests</p>
+				<p>Please select one to three types of journaling that you are interested in</p>
+				<p>Feedback for your journal entries will be tailored for your selection.</p>
+				<li>
+					dream journal, gratitude journal, daily journal, stream of consciousness journal, reflective, bullet
+					journal
+				</li>
 				<FormGroup check>
 					<Label
 						for="interest1"
 						className="ml-2"
 						check>
-						Interest 1
+						Dream Journaling
 					</Label>
 					<Input
 						type="checkbox"
@@ -203,7 +208,7 @@ const SignupForm = () => {
 						for="interest2"
 						className="ml-2"
 						check>
-						Interest 2
+						Gratitude Journaling
 					</Label>
 					<Input
 						type="checkbox"
@@ -218,7 +223,7 @@ const SignupForm = () => {
 					<Label
 						for="interest3"
 						check>
-						Interest 3
+						Daily Journal
 					</Label>
 					<Input
 						type="checkbox"
@@ -226,6 +231,54 @@ const SignupForm = () => {
 						id="interest3"
 						bsSize="lg"
 						value="interest3"
+						onChange={handleChange}
+					/>
+				</FormGroup>
+				<FormGroup check>
+					<Label
+						for="interest2"
+						className="ml-2"
+						check>
+						Stream-of-consciousness Journaling
+					</Label>
+					<Input
+						type="checkbox"
+						name="interests"
+						id="interest2"
+						bsSize="lg"
+						value="interest2"
+						onChange={handleChange}
+					/>
+				</FormGroup>
+				<FormGroup check>
+					<Label
+						for="interest2"
+						className="ml-2"
+						check>
+						Reflective Journaling
+					</Label>
+					<Input
+						type="checkbox"
+						name="interests"
+						id="interest2"
+						bsSize="lg"
+						value="interest2"
+						onChange={handleChange}
+					/>
+				</FormGroup>
+				<FormGroup check>
+					<Label
+						for="interest2"
+						className="ml-2"
+						check>
+						Gratitude Journaling
+					</Label>
+					<Input
+						type="checkbox"
+						name="interests"
+						id="interest2"
+						bsSize="lg"
+						value="interest2"
 						onChange={handleChange}
 					/>
 				</FormGroup>
