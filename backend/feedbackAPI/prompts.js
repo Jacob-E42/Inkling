@@ -18,25 +18,14 @@ async function getCompletion(entryText) {
 	if (entryText.trim().length === 0) {
 		throw new BadRequestError("Please enter a valid entryText");
 	}
-
-	const chatCompletion = await openai.createChatCompletion({
-		messages: [{ role: "user", content: "Say this is a test" }],
-		model: "gpt-3.5-turbo"
-	});
-
-	console.log(chatCompletion.data.choices[0], chatCompletion.data.choices[0].message.content);
-	return chatCompletion.data.choices[0].message.content;
-
 	try {
-		console.log(openai);
-		const completion = await openai.create.createCompletion({
-			model: "gpt-3.5-turbo",
-			prompt: generatePrompt(entryText),
-			temperature: 0.6
+		const chatCompletion = await openai.createChatCompletion({
+			messages: [{ role: "user", content: "Say this is a test" }],
+			model: "gpt-3.5-turbo"
 		});
 
-		console.log(completion.data);
-		return completion.data.choices[0].text;
+		console.log(chatCompletion.data.choices[0], chatCompletion.data.choices[0].message.content);
+		return chatCompletion.data.choices[0].message.content;
 	} catch (error) {
 		if (error.response) {
 			console.error(error.response.status, error.response.data);
@@ -46,6 +35,14 @@ async function getCompletion(entryText) {
 			throw new ExpressError("An error occurred during your request.");
 		}
 	}
+
+	const completion = await openai.create.createCompletion({
+		model: "gpt-3.5-turbo",
+		prompt: generatePrompt(entryText),
+		temperature: 0.6
+	});
+
+	return completion.data.choices[0].text;
 }
 
 function generatePrompt(entryText) {

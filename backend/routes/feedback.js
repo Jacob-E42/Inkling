@@ -25,7 +25,7 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
 		// }
 		//desctructure for readability
 		const entryText = req.body.entryText || "";
-		const feedback = getCompletion(entryText);
+		const feedback = await getCompletion(entryText);
 		return res.json({ feedback });
 	} catch (err) {
 		return next(err);
