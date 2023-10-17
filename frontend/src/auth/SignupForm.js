@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, Form, FormGroup, Input, Label, FormFeedback } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label, FormFeedback, FormText } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import "./auth.css";
@@ -14,7 +14,7 @@ const SignupForm = () => {
 		password: "",
 		interests: []
 	});
-	const [errors, setErrors] = useState({});
+
 	const { setMsg, setColor } = useContext(AlertContext);
 	const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const SignupForm = () => {
 	}, []);
 
 	const handleChange = useCallback(e => {
-		e.preventDefault();
+		// e.preventDefault();
 		const { name, value, type, checked } = e.target;
 
 		if (type === "checkbox") {
@@ -58,39 +58,35 @@ const SignupForm = () => {
 
 	const validateForm = useCallback(
 		async data => {
-			const validationErrors = {};
-
-			if (!data.firstName.trim()) {
-				validationErrors.firstName = "First name is required";
+			if (
+				!data.firstName.trim() ||
+				!data.lastName.trim() ||
+				!data.email.trim() ||
+				!data.password.trim() ||
+				!data.interests
+			) {
+				return { isValid: false, message: "Required information is missing" };
 			}
 
-			if (!data.lastName.trim()) {
-				validationErrors.lastName = "Last name is required";
+			if (!isValidEmail(data.email)) {
+				return { isValid: false, message: "Invalid email address" };
 			}
 
-			if (!data.email.trim()) {
-				validationErrors.email = "Email is required";
-			} else if (!isValidEmail(data.email)) {
-				validationErrors.email = "Invalid email address";
-			}
-
-			if (!data.password.trim()) {
-				validationErrors.password = "Password is required";
-			} else if (!isValidPassword(data.password)) {
-				validationErrors.password =
-					"Password must be at least 8 characters long and contain at least one letter and one number";
+			if (!isValidPassword(data.password)) {
+				return {
+					isValid: false,
+					message:
+						"Password must be at least 8 characters long and contain at least one letter and one number"
+				};
 			}
 
 			console.log(data.interests);
-			if (data.interests.length === 0) {
-				validationErrors.interests = "Select at least one interest";
-			} else if (data.interests.length > 3) {
-				validationErrors.interests = "Select no more than three interests";
+			if (data.interests.length < 1 || data.interests.length > 3) {
+				return { isValid: false, message: "Select at least one interest, but no more than 3." };
 			}
-
-			setErrors(validationErrors);
+			return { isValid: true };
 		},
-		[setErrors, isValidEmail, isValidPassword]
+		[isValidEmail, isValidPassword]
 	);
 
 	const handleSubmit = useCallback(
@@ -98,8 +94,9 @@ const SignupForm = () => {
 			e.preventDefault();
 			console.debug("handleSubmit");
 
-			await validateForm(formData);
-			if (Object.keys(errors).length === 0) {
+			const { isValid, message } = await validateForm(formData);
+			console.log(isValid);
+			if (isValid) {
 				try {
 					const result = await signup(formData);
 					console.log(result);
@@ -117,9 +114,13 @@ const SignupForm = () => {
 				} catch (err) {
 					console.error(err);
 				}
+			} else {
+				console.error(message);
+				setColor("danger");
+				setMsg(`${message}`);
 			}
 		},
-		[navigate, errors, formData, signup, validateForm, setColor, setMsg]
+		[navigate, formData, signup, validateForm, setColor, setMsg]
 	);
 
 	return (
@@ -133,9 +134,8 @@ const SignupForm = () => {
 					placeholder="Enter your first name"
 					value={formData.firstName}
 					onChange={handleChange}
-					invalid={!!errors.firstName}
+					required
 				/>
-				<FormFeedback className="inputError">{errors.firstName}</FormFeedback>
 			</FormGroup>
 			<FormGroup>
 				<Label for="lastName">Last Name</Label>
@@ -146,9 +146,8 @@ const SignupForm = () => {
 					placeholder="Enter your last name"
 					value={formData.lastName}
 					onChange={handleChange}
-					invalid={!!errors.lastName}
+					required
 				/>
-				<FormFeedback className="inputError">{errors.lastName}</FormFeedback>
 			</FormGroup>
 			<FormGroup>
 				<Label for="email">Email</Label>
@@ -160,9 +159,8 @@ const SignupForm = () => {
 					placeholder="Enter your email"
 					value={formData.email}
 					onChange={handleChange}
-					invalid={!!errors.email}
+					required
 				/>
-				<FormFeedback className="inputError">{errors.email}</FormFeedback>
 			</FormGroup>
 			<FormGroup>
 				<Label for="password">Password</Label>
@@ -174,115 +172,109 @@ const SignupForm = () => {
 					placeholder="Enter a password, at least 8 characters"
 					value={formData.password}
 					onChange={handleChange}
-					invalid={!!errors.password}
+					required
 				/>
-				<FormFeedback className="inputError">{errors.password}</FormFeedback>
 			</FormGroup>
 
-			<FormGroup>
+			<FormGroup className="journalingInterests">
 				<p>Please select one to three types of journaling that you are interested in</p>
 				<p>Feedback for your journal entries will be tailored for your selection.</p>
-				<li>
-					dream journal, gratitude journal, daily journal, stream of consciousness journal, reflective, bullet
-					journal
-				</li>
-				<FormGroup check>
+
+				<FormGroup>
 					<Label
-						for="interest1"
-						className="ml-2"
-						check>
+						for="Dream Journaling"
+						className="ml-2">
 						Dream Journaling
 					</Label>
 					<Input
 						type="checkbox"
 						name="interests"
-						id="interest1"
-						bsSize="lg"
-						value="interest1"
+						id="Dream Journaling"
+						value="Dream Journaling"
 						onChange={handleChange}
 					/>
+					<FormText>A journal to record and help interpret your dreams</FormText>
 				</FormGroup>
 
-				<FormGroup check>
+				<FormGroup>
 					<Label
-						for="interest2"
-						className="ml-2"
-						check>
+						for="Gratitude Journaling"
+						className="ml-2">
 						Gratitude Journaling
 					</Label>
 					<Input
 						type="checkbox"
 						name="interests"
-						id="interest2"
-						bsSize="lg"
-						value="interest2"
+						id="Gratitude Journaling"
+						value="Gratitude Journaling"
 						onChange={handleChange}
 					/>
+					<FormText>A journal for noting down things you are grateful for</FormText>
 				</FormGroup>
-				<FormGroup check>
+
+				<FormGroup>
 					<Label
-						for="interest3"
-						check>
+						for="Daily Journal"
+						className="ml-2">
 						Daily Journal
 					</Label>
 					<Input
 						type="checkbox"
 						name="interests"
-						id="interest3"
-						bsSize="lg"
-						value="interest3"
+						id="Daily Journal"
+						value="Daily Journal"
 						onChange={handleChange}
 					/>
+					<FormText>A journal for daily events and thoughts</FormText>
 				</FormGroup>
-				<FormGroup check>
+
+				<FormGroup>
 					<Label
-						for="interest2"
-						className="ml-2"
-						check>
+						for="Stream-of-consciousness Journaling"
+						className="ml-2">
 						Stream-of-consciousness Journaling
 					</Label>
 					<Input
 						type="checkbox"
 						name="interests"
-						id="interest2"
-						bsSize="lg"
-						value="interest2"
+						id="Stream-of-consciousness Journaling"
+						value="Stream-of-consciousness Journaling"
 						onChange={handleChange}
 					/>
+					<FormText>A journal for free-flowing thoughts and ideas</FormText>
 				</FormGroup>
-				<FormGroup check>
+
+				<FormGroup>
 					<Label
-						for="interest2"
-						className="ml-2"
-						check>
+						for="Reflective Journaling"
+						className="ml-2">
 						Reflective Journaling
 					</Label>
 					<Input
 						type="checkbox"
 						name="interests"
-						id="interest2"
-						bsSize="lg"
-						value="interest2"
+						id="Reflective Journaling"
+						value="Reflective Journaling"
 						onChange={handleChange}
 					/>
+					<FormText>A journal for reflection and introspection</FormText>
 				</FormGroup>
-				<FormGroup check>
+
+				<FormGroup>
 					<Label
-						for="interest2"
-						className="ml-2"
-						check>
-						Gratitude Journaling
+						for="Bullet Journaling"
+						className="ml-2">
+						Bullet Journaling
 					</Label>
 					<Input
 						type="checkbox"
 						name="interests"
-						id="interest2"
-						bsSize="lg"
-						value="interest2"
+						id="Bullet Journaling"
+						value="Bullet Journaling"
 						onChange={handleChange}
 					/>
+					<FormText>A journal for tracking tasks, events, and notes</FormText>
 				</FormGroup>
-				{errors.interests && <FormFeedback className="inputError">{errors.interests}</FormFeedback>}
 			</FormGroup>
 
 			<Button type="submit">Submit</Button>
