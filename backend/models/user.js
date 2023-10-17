@@ -82,7 +82,7 @@ class User {
 		const query = {
 			text: `INSERT INTO users (first_name, last_name, email, password, interests)
                     VALUES ($1, $2, $3, $4, $5)
-                    RETURNING first_name, last_name, email, interests`,
+                    RETURNING id, first_name, last_name, email, interests`,
 			values: [newUser.first_name, newUser.last_name, newUser.email, newUser.password, newUser.interests]
 		};
 
