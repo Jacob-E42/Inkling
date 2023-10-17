@@ -23,9 +23,9 @@ router.post("/", ensureLoggedIn, async function (req, res, next) {
 		// if (req.params.userId !== String(req.body.userId)) {
 		// 	throw new NotFoundError("The user id provided doesn't match any known user");
 		// }
-		//desctructure for readability
+
 		const entryText = req.body.entryText || "";
-		const feedback = await getCompletion(entryText);
+		const feedback = await getCompletion(entryText, req.body.interest, req.body.userId);
 		return res.json({ feedback });
 	} catch (err) {
 		return next(err);
