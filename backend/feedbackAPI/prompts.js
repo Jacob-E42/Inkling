@@ -1,6 +1,7 @@
 const { Configuration, OpenAIApi } = require("openai");
 const { OPENAI_API_KEY } = require("../config");
 const { BadRequestError, ExpressError } = require("../expressError");
+const { generateSystemMessage } = require("./generateSystemMessage");
 
 const configuration = new Configuration({
 	apiKey: OPENAI_API_KEY
@@ -9,7 +10,10 @@ const configuration = new Configuration({
 // console.log(configuration.apiKey);
 const openai = new OpenAIApi(configuration);
 
-async function getCompletion(entryText) {
+async function getCompletion(entryText, interests, userId) {
+	if (!configuration || !openai) {
+		throw new ExpressError("openai instance or configuration are missing");
+	}
 	if (!configuration.apiKey) {
 		console.log(configuration, "apiKey=", process.env.OPENAI_API_KEY);
 		throw new ExpressError("OpenAI API key not configured, please follow instructions in README.md");
@@ -18,10 +22,14 @@ async function getCompletion(entryText) {
 	if (entryText.trim().length === 0) {
 		throw new BadRequestError("Please enter a valid entryText");
 	}
+
+	const chatOptions = configureChat(entryText, interests, userId);
+
 	try {
 		const chatCompletion = await openai.createChatCompletion({
-			messages: [{ role: "user", content: "Say this is a test" }],
-			model: "gpt-3.5-turbo"
+			// messages: [{ role: "user", content: "Say this is a test" }],
+			// model: "gpt-3.5-turbo"
+			...chatOptions
 		});
 
 		console.log(chatCompletion.data.choices[0], chatCompletion.data.choices[0].message.content);
@@ -35,21 +43,23 @@ async function getCompletion(entryText) {
 			throw new ExpressError("An error occurred during your request.");
 		}
 	}
-
-	const completion = await openai.create.createCompletion({
-		model: "gpt-3.5-turbo",
-		prompt: generatePrompt(entryText),
-		temperature: 0.6
-	});
-
-	return completion.data.choices[0].text;
 }
 
-function generatePrompt(entryText) {
+function configureChat(entryText, interests, userId) {
+	const model = "gpt-3.5-turbo";
+	const presence_penalty = null;
+	const max_tokens = 4000;
+	const temperature = 1;
+	const n = 1;
+	const top_p = 1;
+	const user = `${userId}`;
+	const messages = generateMessages(entryText, interests); // figure out how to hash this
+}
+
+function generateMessages(entryText, interests) {
 	if (entryText.length < 1) return null;
-	return `Please give some feedback for this journal entry. 
-	It was written by someone who's just getting into the habit of journaling: 
-	${entryText}`;
+	if (interests.length < 1) return null;
+	const systemMessage = generateSystemMessage(interests) || "";
 }
 
-module.exports = { getCompletion, generatePrompt };
+module.exports = { getCompletion, generateMessages };
