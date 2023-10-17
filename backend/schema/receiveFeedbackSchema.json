@@ -30,8 +30,9 @@
 				"minimum": 0,
 				"maximum": 1
 			}
-		}
+		},
+		"interests": { "type": "array", "items": { "type": "string" } }
 	},
-	"required": ["entryText"],
+	"required": ["entryText", "interests", "id", "userId", "title", "entryDate"],
 	"additionalProperties": false
 }
