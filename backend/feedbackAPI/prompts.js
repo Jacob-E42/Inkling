@@ -19,16 +19,14 @@ async function getCompletion(entryText, interests, userId) {
 		throw new ExpressError("OpenAI API key not configured, please follow instructions in README.md");
 	}
 
-	if (entryText.trim().length === 0) {
-		throw new BadRequestError("Please enter a valid entryText");
+	if (!entryText || !interests || !userId) {
+		throw new BadRequestError("Journal information is missing.");
 	}
 
 	const chatOptions = configureChat(entryText, interests, userId);
 
 	try {
 		const chatCompletion = await openai.createChatCompletion({
-			// messages: [{ role: "user", content: "Say this is a test" }],
-			// model: "gpt-3.5-turbo"
 			...chatOptions
 		});
 
@@ -46,20 +44,28 @@ async function getCompletion(entryText, interests, userId) {
 }
 
 function configureChat(entryText, interests, userId) {
-	const model = "gpt-3.5-turbo";
-	const presence_penalty = null;
-	const max_tokens = 4000;
-	const temperature = 1;
-	const n = 1;
-	const top_p = 1;
-	const user = `${userId}`;
-	const messages = generateMessages(entryText, interests); // figure out how to hash this
+	let model = "gpt-3.5-turbo";
+	let presence_penalty = null;
+	let max_tokens = 4096;
+	let temperature = 1;
+	let n = 1;
+	let top_p = 1;
+	let user = `${userId}`;
+	let messages = generateMessages(entryText, interests); // figure out how to hash this
+
+	return { model, presence_penalty, max_tokens, temperature, n, top_p, user, messages };
 }
 
 function generateMessages(entryText, interests) {
 	if (entryText.length < 1) return null;
 	if (interests.length < 1) return null;
+	let messages = [];
 	const systemMessage = generateSystemMessage(interests) || "";
+	messages.push({ role: "system", content: `${systemMessage}` });
+	messages.push({ role: "user", content: `${entryText}` });
+
+	console.log(messages.length);
+	return messages;
 }
 
 module.exports = { getCompletion, generateMessages };
