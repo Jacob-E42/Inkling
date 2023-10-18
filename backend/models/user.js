@@ -39,7 +39,7 @@ class User {
                     first_name AS "firstName",
                     last_name AS "lastName",
                     email, 
-                    interests FROM users WHERE email = $1`,
+                    FROM users WHERE email = $1`,
 			values: [email]
 		};
 
@@ -80,10 +80,10 @@ class User {
 
 		// Define the SQL query to insert the new user
 		const query = {
-			text: `INSERT INTO users (first_name, last_name, email, password, interests)
+			text: `INSERT INTO users (first_name, last_name, email, password)
                     VALUES ($1, $2, $3, $4, $5)
-                    RETURNING id, first_name, last_name, email, interests`,
-			values: [newUser.first_name, newUser.last_name, newUser.email, newUser.password, newUser.interests]
+                    RETURNING id, first_name, last_name, email`,
+			values: [newUser.first_name, newUser.last_name, newUser.email, newUser.password]
 		};
 
 		// Execute the query to insert the new user and return the result
@@ -101,8 +101,8 @@ class User {
                     first_name AS "firstName",
                     last_name AS "lastName",
                     password,
-                    email, 
-                    interests FROM users WHERE email = $1`,
+                    email 
+					FROM users WHERE email = $1`,
 			values: [email]
 		};
 
