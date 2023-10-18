@@ -11,7 +11,7 @@ class Journal {
 	static async getById(id) {
 		// Define the SQL query
 		const query = {
-			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions FROM journal_entries WHERE id = $1`,
+			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS journalType FROM journal_entries WHERE id = $1`,
 			values: [id]
 		};
 
@@ -33,7 +33,7 @@ class Journal {
 
 		// Define the SQL query
 		const query = {
-			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions FROM journal_entries WHERE user_id = $1 AND entry_date = $2`,
+			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS journalType FROM journal_entries WHERE user_id = $1 AND entry_date = $2`,
 			values: [userId, entryDate]
 		};
 
@@ -54,15 +54,15 @@ class Journal {
 
 	// Method to register a new user
 	// Throws a BadRequestError if the email already exists
-	static async createEntry(userId, title, entry, entryDate) {
+	static async createEntry(userId, title, entry, entryDate, journalType) {
 		// console.log("createEntry entryText=", entry);
 
 		// Define the SQL query to insert the new journal
 		const query = {
-			text: `INSERT INTO journal_entries (user_id, title, entry_text, entry_date)
-                    VALUES ($1, $2, $3, $4)
-                    RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions `,
-			values: [userId, title, entry, entryDate]
+			text: `INSERT INTO journal_entries (user_id, title, entry_text, entry_date, journal_type)
+                    VALUES ($1, $2, $3, $4, $5)
+                    RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", journal_type AS journalType`,
+			values: [userId, title, entry, entryDate, journalType]
 		};
 
 		// Execute the query to insert the new user and return the result
@@ -72,7 +72,7 @@ class Journal {
 		return formatJournalDate(res.rows[0]);
 	}
 
-	static async updateEntry(userId, title, entryText, entryDate, emotions = null) {
+	static async updateEntry(userId, title, entryText, entryDate, emotions = null, journalType) {
 		console.debug(
 			"updateEntry",
 			"userId=",
@@ -84,9 +84,11 @@ class Journal {
 			"entryDate=",
 			entryDate,
 			"emotions=",
-			emotions
+			emotions,
+			"journalType=",
+			journalType
 		);
-		if (!(userId && title && entryText && entryDate)) {
+		if (!(userId && title && entryText && entryDate && journalType)) {
 			throw new BadRequestError("Required information is missing");
 		}
 		// First, check to see if the journal entry exists for the given date and user ID
@@ -101,10 +103,10 @@ class Journal {
 		// Define the SQL query to update the existing journal entry
 		const query = {
 			text: `UPDATE journal_entries 
-				   SET title = $1, entry_text = $2, emotions = $3
-				   WHERE user_id = $4 AND entry_date = $5
-				   RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions`,
-			values: [title, entryText, emotions, userId, entryDate]
+				   SET title = $1, entry_text = $2, emotions = $3, journal_type = $4
+				   WHERE user_id = $5 AND entry_date = $6
+				   RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS journalType`,
+			values: [title, entryText, emotions, journalType, userId, entryDate]
 		};
 
 		// Execute the query to update the journal entry and return the result
