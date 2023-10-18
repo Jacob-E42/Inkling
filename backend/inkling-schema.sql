@@ -3,9 +3,7 @@ CREATE TABLE users (
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   email TEXT NOT NULL CHECK (position('@' IN email) > 1) UNIQUE,
-  password TEXT NOT NULL ,
-  interests text[] NOT NULL CHECK (cardinality(interests) > 0)
-
+  password TEXT NOT NULL 
 );
 
 CREATE TABLE journal_entries (
@@ -14,6 +12,7 @@ CREATE TABLE journal_entries (
   title TEXT NOT NULL,
   entry_text TEXT NOT NULL,
   entry_date DATE NOT NULL,
-  emotions JSON
+  emotions JSON,
+  journal_type text[] NOT NULL CHECK (cardinality(interests) > 0)
   UNIQUE(user_id, entry_date)
 );
