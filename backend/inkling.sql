@@ -16,3 +16,5 @@ CREATE DATABASE inkling_test;
 \connect inkling_test
 
 \i inkling-schema.sql
+
+-- psql.exe -h localhost -U yaako -d inkling -f inkling.sql
