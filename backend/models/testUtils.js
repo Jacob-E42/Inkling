@@ -24,28 +24,28 @@ async function commonBeforeAll() {
 		"My birthday",
 		"Today was my birthday and I had a great day.",
 		"2022-01-04",
-		'{"Gratitude Journaling"}'
+		"Gratitude Journaling"
 	);
 	await Journal.createEntry(
 		2,
 		"How to be more grateful",
 		"I would like to start being more grateful for the little things in life. As part of that I will try to appreciate whatever nice things happen to me unexpectedly.",
 		"2023-01-04",
-		'{"Gratitude Journaling"}'
+		"Gratitude Journaling"
 	);
 	await Journal.createEntry(
 		3,
 		"Habits",
 		"Today I did a third of my prescribed habits. Hopefully tomorrow I'll hit the ground running and do better.",
 		"2024-01-04",
-		'{"Gratitude Journaling"}'
+		"Gratitude Journaling"
 	);
 	await Journal.createEntry(
 		4,
 		"Front end",
 		"This is a test for the front end, it should be visible there",
 		"2023-01-04",
-		'{"Gratitude Journaling"}'
+		"Gratitude Journaling"
 	);
 }
 
