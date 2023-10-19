@@ -136,7 +136,7 @@ const JournalEntryPage = () => {
 					entryText={`Error: No journal with date: ${date}`}
 				/>
 			)}
-			{feedbackReceived && <Feedback />}
+			{feedbackReceived && <Feedback setFeedbackReceived={setFeedbackReceived} />}
 		</>
 	);
 };
