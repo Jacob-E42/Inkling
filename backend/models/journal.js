@@ -11,7 +11,7 @@ class Journal {
 	static async getById(id) {
 		// Define the SQL query
 		const query = {
-			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS journalType FROM journal_entries WHERE id = $1`,
+			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS "journalType" FROM journal_entries WHERE id = $1`,
 			values: [id]
 		};
 
@@ -33,7 +33,7 @@ class Journal {
 
 		// Define the SQL query
 		const query = {
-			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS journalType FROM journal_entries WHERE user_id = $1 AND entry_date = $2`,
+			text: `SELECT id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS "journalType" FROM journal_entries WHERE user_id = $1 AND entry_date = $2`,
 			values: [userId, entryDate]
 		};
 
