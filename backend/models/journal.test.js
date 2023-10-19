@@ -77,14 +77,15 @@ describe("Journal", () => {
 			const title = "Surprise Visit";
 			const entryText = "Out of nowhere, my uncle and aunt came over to my house today.";
 			const entryDate = "2022-08-04";
-
-			const result = await Journal.createEntry(userId, title, entryText, entryDate);
+			const journalType = "Gratitude Journaling";
+			const result = await Journal.createEntry(userId, title, entryText, entryDate, journalType);
 
 			expect(result).toBeDefined();
 			expect(result.title).toBe(title);
 			expect(result.userId).toBe(userId);
 			expect(result.entryText).toBe(entryText);
 			expect(result.entryDate).toEqual(entryDate);
+			expect(result.journalType).toBe(journalType);
 		});
 
 		it("should throw Database Error if Journal with the same date already exists", async () => {
@@ -92,14 +93,17 @@ describe("Journal", () => {
 			const title = "Surprise Visit";
 			const entryText = "Out of nowhere, my uncle and aunt came over to my house today.";
 			const entryDate = "2022-01-04";
+			const journalType = "Gratitude Journaling";
 
 			let result;
 			try {
-				result = await Journal.createEntry(user_id, title, entryText, entryDate);
+				result = await Journal.createEntry(user_id, title, entryText, entryDate, journalType);
 			} catch (error) {
 				console.log(error);
 				expect(error).toBeInstanceOf(DatabaseError);
-				expect(error.message).toBe('duplicate key value violates unique constraint "unique_user_date"');
+				expect(error.message).toBe(
+					'duplicate key value violates unique constraint "journal_entries_user_id_entry_date_key"'
+				);
 			}
 		});
 	});
@@ -113,20 +117,35 @@ describe("Journal", () => {
 		};
 
 		test("works", async function () {
-			let updatedJournal = await Journal.updateEntry(1, "Updated Title", "Updated entry text", "2022-01-04");
+			let updatedJournal = await Journal.updateEntry(
+				1,
+				"Updated Title",
+				"Updated entry text",
+				"2022-01-04",
+				null,
+				"Remorseful Journaling"
+			);
 			expect(updatedJournal).toEqual({
 				id: 1,
 				userId: 1,
 				title: "Updated Title",
 				entryText: "Updated entry text",
 				entryDate: "2022-01-04",
-				emotions: null // Expecting a JSON string here
+				emotions: null,
+				journalType: "Remorseful Journaling" // Expecting a JSON string here
 			});
 		});
 
 		test("not found if no such journal entry", async function () {
 			try {
-				const resp = await Journal.updateEntry(1, "New Title", "New Text", "2025-01-04");
+				const resp = await Journal.updateEntry(
+					1,
+					"New Title",
+					"New Text",
+					"2025-01-04",
+					null,
+					"Gratitude Journaling"
+				);
 				console.log("resp=", resp);
 				fail();
 			} catch (err) {
@@ -138,7 +157,7 @@ describe("Journal", () => {
 		test("bad request if no data", async function () {
 			expect.assertions(1);
 			try {
-				const resp = await Journal.updateEntry(1, null, null, "2022-01-04", null);
+				const resp = await Journal.updateEntry(1, null, null, "2022-01-04", null, null);
 				console.log("resp=", resp);
 				fail();
 			} catch (err) {

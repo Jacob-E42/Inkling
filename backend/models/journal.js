@@ -61,7 +61,7 @@ class Journal {
 		const query = {
 			text: `INSERT INTO journal_entries (user_id, title, entry_text, entry_date, journal_type)
                     VALUES ($1, $2, $3, $4, $5)
-                    RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", journal_type AS journalType`,
+                    RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", journal_type AS "journalType"`,
 			values: [userId, title, entry, entryDate, journalType]
 		};
 
@@ -105,7 +105,7 @@ class Journal {
 			text: `UPDATE journal_entries 
 				   SET title = $1, entry_text = $2, emotions = $3, journal_type = $4
 				   WHERE user_id = $5 AND entry_date = $6
-				   RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS journalType`,
+				   RETURNING id, user_id AS "userId", title, entry_text AS "entryText", entry_date AS "entryDate", emotions, journal_type AS "journalType"`,
 			values: [title, entryText, emotions, journalType, userId, entryDate]
 		};
 
@@ -115,7 +115,7 @@ class Journal {
 		if (res.rows.length === 0) {
 			throw new Error("Could not update journal entry");
 		}
-
+		// console.log(res.rows[0].journalType);
 		return formatJournalDate(res.rows[0]);
 	}
 }
