@@ -26,7 +26,7 @@ describe("User", () => {
 			const id = 1;
 			let result;
 			try {
-				result = await User.getByEmail("user1@user.com");
+				result = await User.getById(1);
 				console.log(result);
 			} catch (err) {
 				expect(err instanceof NotFoundError).toBeFalsy();
@@ -75,15 +75,13 @@ describe("User", () => {
 			const lastName = "Doe";
 			const email = "test@example.com";
 			const password = "password";
-			const interests = ["interest1", "interest2"];
 
-			const result = await User.register(firstName, lastName, email, password, interests);
+			const result = await User.register(firstName, lastName, email, password);
 
 			expect(result).toBeDefined();
 			expect(result.first_name).toBe(firstName);
 			expect(result.last_name).toBe(lastName);
 			expect(result.email).toBe(email);
-			expect(result.interests).toEqual(interests);
 		});
 
 		it("should throw BadRequestError if user with the same email already exists", async () => {
@@ -91,10 +89,9 @@ describe("User", () => {
 			const lastName = "Doe";
 			const email = "john@example.com";
 			const password = "password";
-			const interests = ["interest1", "interest2"];
 
 			try {
-				await User.register(firstName, lastName, email, password, interests);
+				await User.register(firstName, lastName, email, password);
 			} catch (error) {
 				expect(error).toBeInstanceOf(BadRequestError);
 				expect(error.message).toBe("User with this email already exists");
@@ -115,8 +112,7 @@ describe("User", () => {
 				id: 1,
 				firstName: "U1F",
 				lastName: "U1L",
-				email: "user1@user.com",
-				interests: ["interest1", "interest2"]
+				email: "user1@user.com"
 			});
 		});
 
@@ -146,8 +142,7 @@ describe("User", () => {
 		const updateData = {
 			firstName: "NewF",
 			lastName: "NewL",
-			email: "new@email.com",
-			interests: ["interest1", "interest3"]
+			email: "new@email.com"
 		};
 
 		test("works", async function () {
@@ -156,8 +151,7 @@ describe("User", () => {
 			expect(user).toEqual({
 				firstName: "NewF",
 				lastName: "NewL",
-				email: "new@email.com",
-				interests: ["interest1", "interest3"]
+				email: "new@email.com"
 			});
 		});
 
@@ -168,8 +162,7 @@ describe("User", () => {
 			expect(user).toEqual({
 				firstName: "U1F",
 				lastName: "U1L",
-				email: "user1@user.com",
-				interests: ["interest1", "interest2"]
+				email: "user1@user.com"
 			});
 			const found = await db.query("SELECT * FROM users WHERE email = 'user1@user.com'");
 			expect(found.rows.length).toEqual(1);

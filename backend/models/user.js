@@ -38,7 +38,7 @@ class User {
                     id,
                     first_name AS "firstName",
                     last_name AS "lastName",
-                    email, 
+                    email
                     FROM users WHERE email = $1`,
 			values: [email]
 		};
@@ -56,7 +56,7 @@ class User {
 
 	// Method to register a new user
 	// Throws a BadRequestError if the email already exists
-	static async register(firstName, lastName, email, password, interests) {
+	static async register(firstName, lastName, email, password) {
 		// Check for existing user
 		let existingUser;
 		try {
@@ -74,14 +74,13 @@ class User {
 			first_name: firstName,
 			last_name: lastName,
 			email,
-			password: hashedPassword,
-			interests
+			password: hashedPassword
 		};
 
 		// Define the SQL query to insert the new user
 		const query = {
 			text: `INSERT INTO users (first_name, last_name, email, password)
-                    VALUES ($1, $2, $3, $4, $5)
+                    VALUES ($1, $2, $3, $4)
                     RETURNING id, first_name, last_name, email`,
 			values: [newUser.first_name, newUser.last_name, newUser.email, newUser.password]
 		};
@@ -161,8 +160,7 @@ class User {
 						  RETURNING 
 									first_name AS "firstName",
 									last_name AS "lastName",
-									email,
-									interests`,
+									email`,
 			values: [...values, email]
 		};
 
