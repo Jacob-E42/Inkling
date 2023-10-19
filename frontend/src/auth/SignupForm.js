@@ -80,9 +80,9 @@ const SignupForm = () => {
 				};
 			}
 
-			console.log(data.interests);
-			if (data.interests.length < 1 || data.interests.length > 3) {
-				return { isValid: false, message: "Select at least one interest, but no more than 3." };
+			console.log(data.journal);
+			if (!data.journalType) {
+				return { isValid: false, message: "Select a Journal Type" };
 			}
 			return { isValid: true };
 		},
