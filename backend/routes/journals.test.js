@@ -33,7 +33,8 @@ describe("GET /journals/:journalId", function () {
 				title: "My birthday",
 				entryText: "Today was my birthday and I had a great day.",
 				entryDate: "2022-01-04",
-				emotions: null // Since emotions were not provided in the mock data
+				emotions: null, // Since emotions were not provided in the mock data
+				journalType: "Gratitude Journal"
 			}
 		});
 	});
@@ -69,7 +70,8 @@ describe("GET /journals/:entryDate", function () {
 				title: "My birthday",
 				entryText: "Today was my birthday and I had a great day.",
 				entryDate: "2022-01-04",
-				emotions: null
+				emotions: null,
+				journalType: "Gratitude Journal"
 			}
 		});
 	});

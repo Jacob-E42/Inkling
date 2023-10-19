@@ -42,7 +42,8 @@ router.get("/date/:entryDate", ensureCorrectUserByUserId, async function (req, r
 				userId,
 				`Journal Entry: ${entryDate}`,
 				`Start your entry here...`,
-				entryDate
+				entryDate,
+				`Daily Journal`
 			);
 			return res.json({ journal });
 		} else return next(err);

@@ -190,8 +190,7 @@ describe("GET /users/:email", function () {
 				id: expect.any(Number),
 				firstName: "U1F",
 				lastName: "U1L",
-				email: "user1@user.com",
-				interests: ["interest1", "interest2"]
+				email: "user1@user.com"
 			}
 		});
 	});
@@ -228,8 +227,7 @@ describe("PATCH /users/:username", () => {
 			user: {
 				firstName: "New",
 				lastName: "U1L",
-				email: "user1@user.com",
-				interests: ["interest1", "interest2"]
+				email: "user1@user.com"
 			}
 		});
 	});
@@ -282,8 +280,7 @@ describe("PATCH /users/:username", () => {
 			user: {
 				firstName: "U1F",
 				lastName: "U1L",
-				email: "user1@user.com",
-				interests: ["interest1", "interest2"]
+				email: "user1@user.com"
 			}
 		});
 		const isSuccessful = await User.authenticate("user1@user.com", "new-password");
