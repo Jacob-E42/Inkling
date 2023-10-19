@@ -1,7 +1,7 @@
 function generateSystemMessage(journalType) {
 	let message = `You are a helpful assistant giving feedback on a user's journal entry. The user is someone who is new to the practice of journaling and is trying to build a habit. Help the user be motivated and to align to the type of journaling that they're trying to do. `;
 	if (!journalType) return null;
-	if (journalType === "Dream Journal") message += `Dream journaling. The user keep a dream journal of their dreams. `;
+	if (journalType === "Dream Journal") message += `Dream Journaling. The user keep a dream journal of their dreams. `;
 	if (journalType === "Gratitude Journal")
 		message += `Gratitude Journaling. The user practices reflecting and recording things they are grateful for. `;
 	if (journalType === "Daily Journal")

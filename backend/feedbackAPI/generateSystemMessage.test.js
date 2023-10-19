@@ -43,7 +43,7 @@ describe("generateSystemMessage", () => {
 		expect(typeof message).toBe("string");
 		expect(message.length).toBeGreaterThanOrEqual(journalType.length);
 		expect(message).toContain(journalType);
-		expect(message).toContain("daily log");
+		expect(message).toContain("their dreams");
 
 		journalType = "Gratitude Journal";
 		message = generateSystemMessage(journalType);
@@ -56,7 +56,7 @@ describe("generateSystemMessage", () => {
 		message = generateSystemMessage(journalType);
 		expect(typeof message).toBe("string");
 		expect(message.length).toBeGreaterThanOrEqual(journalType.length);
-		expect(message).toContain(journalType);
+		expect(message).toContain("Stream of Consciousness Journal");
 		expect(message).toContain("as they come to mind");
 
 		journalType = "Reflective Journal";
