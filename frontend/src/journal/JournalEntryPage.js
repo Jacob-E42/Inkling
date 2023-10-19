@@ -95,7 +95,8 @@ const JournalEntryPage = () => {
 						currentJournal.userId,
 						data.title,
 						data.entryText,
-						currentJournal.entryDate
+						currentJournal.entryDate,
+						currentJournal.journalType
 					);
 					// console.log(updateJournal);
 					if (updateJournal) {
@@ -122,6 +123,7 @@ const JournalEntryPage = () => {
 					date={date}
 					title={currentJournal.title}
 					entryText={currentJournal.entryText}
+					jounalType={currentJournal.journalType}
 					setJournal={setCurrentJournal}
 					currentJournal={currentJournal}
 					editJournal={editJournal}
