@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, Form, FormGroup, Input, Label, FormFeedback, FormText } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label, FormText } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import "./auth.css";
@@ -176,7 +176,7 @@ const SignupForm = () => {
 				/>
 			</FormGroup>
 
-			<FormGroup className="journalingInterests">
+			{/* <FormGroup className="journalingInterests">
 				<p>Please select one to three types of journaling that you are interested in</p>
 				<p>Feedback for your journal entries will be tailored for your selection.</p>
 
@@ -275,7 +275,7 @@ const SignupForm = () => {
 					/>
 					<FormText>A journal for tracking tasks, events, and notes</FormText>
 				</FormGroup>
-			</FormGroup>
+			</FormGroup> */}
 
 			<Button type="submit">Submit</Button>
 
