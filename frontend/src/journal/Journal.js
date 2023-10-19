@@ -4,13 +4,14 @@ import Error from "../common/Error";
 import AlertContext from "../context_providers/AlertContext";
 import "./Journal.css";
 
-const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
+const Journal = ({ date, title, journalType, entryText, setJournal, editJournal }) => {
 	console.debug("Journal", date, "Title=", title, "entryText=", entryText);
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
 	const [tempJournal, setTempJournal] = useState({
 		title: title,
-		entryText: entryText
+		entryText: entryText,
+		journalType: journalType
 	});
 
 	useEffect(() => {
@@ -69,6 +70,24 @@ const Journal = ({ date, title, entryText, setJournal, editJournal }) => {
 									value={tempJournal.title}
 									onChange={handleChange}
 								/>
+							</FormGroup>
+						</Form>
+						<Form>
+							<FormGroup>
+								<Label for="journalType">Journal Type</Label>
+								<Input
+									type="select"
+									name="journalType"
+									id="journalType"
+									value={tempJournal.journalType}
+									onChange={handleChange}>
+									<option>Daily Journal</option>
+									<option>Gratitude Journal</option>
+									<option>Reflective Journal</option>
+									<option>Stream-of-Consciousness Journal</option>
+									<option>Bullet Journal</option>
+									<option>Dream Journal</option>
+								</Input>
 							</FormGroup>
 						</Form>
 					</header>
