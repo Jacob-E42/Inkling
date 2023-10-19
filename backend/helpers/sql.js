@@ -54,6 +54,10 @@ function objectDataToSql(dataToUpdate) {
 		dataToUpdate["last_name"] = dataToUpdate.lastName;
 		delete dataToUpdate.lastName;
 	}
+	if (dataToUpdate.journalType) {
+		dataToUpdate["journal_type"] = dataToUpdate.journalType;
+		delete dataToUpdate.journalType;
+	}
 	const keys = Object.keys(dataToUpdate);
 	if (keys.length === 0) throw new BadRequestError("No data");
 

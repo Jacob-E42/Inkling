@@ -24,4 +24,11 @@ describe("objectDataToSql", function () {
 			values: ["v1", "v2"]
 		});
 	});
+	test("works: journalType", function () {
+		const result = objectDataToSql({ f1: "v1", journalType: "v2" });
+		expect(result).toEqual({
+			setCols: '"f1"=$1, "journal_type"=$2',
+			values: ["v1", "v2"]
+		});
+	});
 });
