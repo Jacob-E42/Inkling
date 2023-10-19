@@ -2,7 +2,7 @@
 
 const jwt = require("jsonwebtoken");
 const { UnauthorizedError } = require("../expressError");
-const { authenticateJWT, ensureLoggedIn, ensureCorrectUser } = require("./authMiddleware");
+const { authenticateJWT, ensureLoggedIn, ensureCorrectUserByEmail } = require("./authMiddleware");
 const { SECRET_KEY } = require("../config");
 
 // Generate JWTs for testing purposes
@@ -78,8 +78,8 @@ describe("ensureLoggedIn", function () {
 	});
 });
 
-// Test suite for 'ensureCorrectUser' function
-describe("ensureCorrectUser", function () {
+// Test suite for 'ensureCorrectUserByEmail' function
+describe("ensureCorrectUserByEmail", function () {
 	// Test that the function correctly verifies when the correct user is accessing
 	test("works: same user", function () {
 		expect.assertions(1);
@@ -88,7 +88,7 @@ describe("ensureCorrectUser", function () {
 		const next = function (err) {
 			expect(err).toBeFalsy();
 		};
-		ensureCorrectUser(req, res, next);
+		ensureCorrectUserByEmail(req, res, next);
 	});
 
 	// Test that unauthorized access due to mismatched users is correctly identified
@@ -99,7 +99,7 @@ describe("ensureCorrectUser", function () {
 		const next = function (err) {
 			expect(err instanceof UnauthorizedError).toBeTruthy();
 		};
-		ensureCorrectUser(req, res, next);
+		ensureCorrectUserByEmail(req, res, next);
 	});
 
 	// Test that unauthorized access by an anonymous user is correctly identified
@@ -110,6 +110,6 @@ describe("ensureCorrectUser", function () {
 		const next = function (err) {
 			expect(err instanceof UnauthorizedError).toBeTruthy();
 		};
-		ensureCorrectUser(req, res, next);
+		ensureCorrectUserByEmail(req, res, next);
 	});
 });
