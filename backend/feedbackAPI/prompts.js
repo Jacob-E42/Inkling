@@ -10,7 +10,7 @@ const configuration = new Configuration({
 // console.log(configuration.apiKey);
 const openai = new OpenAIApi(configuration);
 
-async function getCompletion(entryText, interests, userId) {
+async function getCompletion(entryText, journalType, userId) {
 	if (!configuration || !openai) {
 		throw new ExpressError("openai instance or configuration are missing");
 	}
@@ -19,11 +19,11 @@ async function getCompletion(entryText, interests, userId) {
 		throw new ExpressError("OpenAI API key not configured, please follow instructions in README.md");
 	}
 
-	if (!entryText || !interests || !userId) {
+	if (!entryText || !journalType || !userId) {
 		throw new BadRequestError("Journal information is missing.");
 	}
 
-	const chatOptions = configureChat(entryText, interests, userId);
+	const chatOptions = configureChatOptions(entryText, journalType, userId);
 
 	try {
 		const chatCompletion = await openai.createChatCompletion({
@@ -43,24 +43,26 @@ async function getCompletion(entryText, interests, userId) {
 	}
 }
 
-function configureChat(entryText, interests, userId) {
+function configureChatOptions(entryText, journalType, userId) {
 	let model = "gpt-3.5-turbo";
 	let presence_penalty = null;
+	let frequency_penalty = 0.2;
 	let max_tokens = 4096;
 	let temperature = 1;
 	let n = 1;
-	let top_p = 1;
+	let top_p = 0.5;
 	let user = `${userId}`;
-	let messages = generateMessages(entryText, interests); // figure out how to hash this
+	let messages = generateMessages(entryText, journalType); // figure out how to hash this
+	if (!messages) return null;
 
-	return { model, presence_penalty, max_tokens, temperature, n, top_p, user, messages };
+	return { model, presence_penalty, frequency_penalty, max_tokens, temperature, n, top_p, user, messages };
 }
 
-function generateMessages(entryText, interests) {
+function generateMessages(entryText, journalType) {
 	if (entryText.length < 1) return null;
-	if (interests.length < 1) return null;
+	if (!journalType.length) return null;
 	let messages = [];
-	const systemMessage = generateSystemMessage(interests) || "";
+	const systemMessage = generateSystemMessage(journalType) || "";
 	messages.push({ role: "system", content: `${systemMessage}` });
 	messages.push({ role: "user", content: `${entryText}` });
 
@@ -68,4 +70,4 @@ function generateMessages(entryText, interests) {
 	return messages;
 }
 
-module.exports = { getCompletion, generateMessages };
+module.exports = { getCompletion, generateMessages, configureChatOptions };
