@@ -32,7 +32,7 @@ async function getCompletion(entryText, journalType, userId) {
 		throw new BadRequestError("Journal information is missing.");
 	}
 
-	if (entryText.length < 1) throw new BadRequestError("Journal entry text is missing.");
+	if (entryText.trim().length < 1) throw new BadRequestError("Journal entry text is missing.");
 	if (!JOURNAL_TYPES.includes(journalType)) throw new BadRequestError("Please enter a valid journal type");
 
 	const chatOptions = configureChatOptions(entryText, journalType, userId);
@@ -86,8 +86,9 @@ function generateMessages(entryText, journalType) {
 function getMaxTokens(messages) {
 	if (!messages) return null;
 	let messagesLength = messages[0].content.length + messages[1].content.length;
-	const appxTokens = messagesLength / 4 - 10;
-	return 4097 - appxTokens;
+	const appxTokens = parseInt(messagesLength / 4);
+	// console.log("messagesLength=", messagesLength, "tokens=", appxTokens);
+	return 4097 - appxTokens - 10;
 }
 
 module.exports = { getCompletion, generateMessages, configureChatOptions };
