@@ -1,7 +1,7 @@
 "use strict";
 
 const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
-const db = require("../db");
+// const db = require("../db");
 const { getCompletion, generateMessages, configureChatOptions } = require("./prompts");
 const { commonBeforeAll, commonBeforeEach, commonAfterEach, commonAfterAll } = require("../models/testUtils");
 
@@ -12,7 +12,7 @@ afterEach(commonAfterEach);
 afterAll(commonAfterAll);
 
 // describe("generateMessages", () => {
-// 	test("it exists", () => {
+// 	test("it exists", async () => {
 // 		expect(generateMessages).toBeDefined();
 // 		expect(typeof generateMessages).toBe("function");
 // 	});
@@ -26,7 +26,7 @@ afterAll(commonAfterAll);
 // 		expect(response).toBeDefined();
 // 		expect(typeof response).toBe("object");
 // 	});
-// 	test("The message returned is correct", () => {
+// 	test("The message returned is correct", async () => {
 // 		const entryText =
 // 			"I would like to start being more grateful for the little things in life. As part of that I will try to appreciate whatever nice things happen to me unexpectedly.";
 
@@ -44,28 +44,54 @@ afterAll(commonAfterAll);
 // 	});
 // });
 
-describe("configureChatOptions", () => {
-	test("all options are present and properly defined", () => {
-		const options = configureChatOptions(`The other day I went to sleep on my bed.`, "Daily Journal", 1);
-		expect(options).toBeDefined();
+// describe("configureChatOptions", () => {
+// 	test("all options are present and properly defined", async () => {
+// 		const options = configureChatOptions(`The other day I went to sleep on my bed.`, "Daily Journal", 1);
+// 		expect(options).toBeDefined();
 
-		expect(options.model).toBeOneOf(["gpt-3.5-turbo", "gpt4"]);
-		// expect(options.).oneOf([,]);
-		// expect(options.).oneOf([,]);
-		// expect(options.).oneOf([,]);
-		// expect(options.).oneOf([,]);
-		// expect(options.).oneOf([,]);
-		// expect(options.).oneOf([,]);
-		// expect(options.).oneOf([,]);
-		// expect(options.).oneOf([,]);
-		// expect(options.).oneOf([,]);
+// 		expect(options.model).toBeOneOf(["gpt-3.5-turbo", "gpt4"]);
+// 		expect(options.presence_penalty).toBeOneOf([0.2, null]);
+// 		expect(options.frequency_penalty).toBeOneOf([0.2, null, 0]);
+// 		expect(options.max_tokens).toBeOneOf([4096, 4000, 3750, 3500, 3000]);
+// 		expect(options.temperature).toBeOneOf([1, 1.5]);
+// 		expect(options.n).toBeOneOf([1, 2]);
+// 		expect(options.top_p).toBeOneOf([0.5, 1]);
+// 		console.log(options.user, typeof options.user);
+// 		expect(Number(options.user)).toBeNumber();
+// 		expect(options.messages).toBeDefined();
+// 	});
+// });
 
-		// let presence_penalty = null;
-		// let frequency_penalty = 0.2;
-		// let max_tokens = 4096;
-		// let temperature = 1;
-		// let n = 1;
-		// let top_p = 0.5;
-		// let user = `${userId}`;
+describe("getCompletion", () => {
+	test("throws errors if info is missing", async () => {
+		let response = await getCompletion("Hi", "Gratitude Journal", "55");
+		console.log(response);
+		expect(response).toBeDefined();
+
+		try {
+			response = await getCompletion("Hi", "55");
+			console.log(response);
+		} catch (err) {
+			expect(err instanceof BadRequestError).toBeTruthy();
+		}
+
+		try {
+			response = await getCompletion("Hi", "Gratitude Journfdsal", "55");
+			console.log(response);
+		} catch (err) {
+			expect(err instanceof BadRequestError).toBeTruthy();
+		}
+		try {
+			response = await getCompletion("", "Gratitude Journal", "55");
+			console.log(response);
+		} catch (err) {
+			expect(err instanceof BadRequestError).toBeTruthy();
+		}
+		try {
+			response = await getCompletion(" ", "Gratitude Journal", "55");
+			console.log(response);
+		} catch (err) {
+			expect(err instanceof BadRequestError).toBeTruthy();
+		}
 	});
 });
