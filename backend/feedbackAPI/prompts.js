@@ -10,6 +10,15 @@ const configuration = new Configuration({
 // console.log(configuration.apiKey);
 const openai = new OpenAIApi(configuration);
 
+const JOURNAL_TYPES = [
+	"Daily Journal",
+	"Gratitude Journal",
+	"Reflective Journal",
+	"Stream-of-Consciousness Journal",
+	"Bullet Journal",
+	"Dream Journal"
+];
+
 async function getCompletion(entryText, journalType, userId) {
 	if (!configuration || !openai) {
 		throw new ExpressError("openai instance or configuration are missing");
@@ -22,6 +31,9 @@ async function getCompletion(entryText, journalType, userId) {
 	if (!entryText || !journalType || !userId) {
 		throw new BadRequestError("Journal information is missing.");
 	}
+
+	if (entryText.length < 1) throw new BadRequestError("Journal entry text is missing.");
+	if (!JOURNAL_TYPES.includes(journalType)) throw new BadRequestError("Please enter a valid journal type");
 
 	const chatOptions = configureChatOptions(entryText, journalType, userId);
 
@@ -45,15 +57,17 @@ async function getCompletion(entryText, journalType, userId) {
 
 function configureChatOptions(entryText, journalType, userId) {
 	let model = "gpt-3.5-turbo";
-	let presence_penalty = null;
+	let presence_penalty = 0;
 	let frequency_penalty = 0.2;
-	let max_tokens = 4096;
+
 	let temperature = 1;
 	let n = 1;
 	let top_p = 0.5;
 	let user = `${userId}`;
 	let messages = generateMessages(entryText, journalType); // figure out how to hash this
 	if (!messages) return null;
+	let max_tokens = getMaxTokens(messages);
+	// console.log(max_tokens);
 
 	return { model, presence_penalty, frequency_penalty, max_tokens, temperature, n, top_p, user, messages };
 }
@@ -66,8 +80,14 @@ function generateMessages(entryText, journalType) {
 	messages.push({ role: "system", content: `${systemMessage}` });
 	messages.push({ role: "user", content: `${entryText}` });
 
-	console.log(messages.length);
 	return messages;
+}
+
+function getMaxTokens(messages) {
+	if (!messages) return null;
+	let messagesLength = messages[0].content.length + messages[1].content.length;
+	const appxTokens = messagesLength / 4 - 10;
+	return 4097 - appxTokens;
 }
 
 module.exports = { getCompletion, generateMessages, configureChatOptions };

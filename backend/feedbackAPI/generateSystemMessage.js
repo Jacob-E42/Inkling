@@ -13,7 +13,7 @@ function generateSystemMessage(journalType) {
 	if (journalType === "Bullet Journal") message += `The user will try to implement the bullet journal technique.`;
 
 	message += `Please be friendly and encouraging.`;
-	console.log("systemMessage", message, message.length);
+	// console.log("systemMessage", message, message.length);
 	return message;
 }
 
