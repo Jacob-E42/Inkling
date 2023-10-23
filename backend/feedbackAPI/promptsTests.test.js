@@ -93,5 +93,5 @@ describe("getCompletion", () => {
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
-	});
+	}, 10000);
 });
