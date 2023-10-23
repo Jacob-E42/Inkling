@@ -63,7 +63,7 @@ router.post("/", ensureCorrectUserByUserId, async function (req, res, next) {
 			throw new NotFoundError("The user id provided doesn't match any known user");
 		}
 		//desctructure for readability
-		const { title, entryText, entryDate } = req.body;
+		const { title, entryText, entryDate, journalType } = req.body;
 		const userId = req.params.userId;
 
 		// Check for existing user
@@ -75,7 +75,7 @@ router.post("/", ensureCorrectUserByUserId, async function (req, res, next) {
 			if (existingEntry) throw new BadRequestError("A journal entry written on this day already exists");
 		}
 
-		const journal = await Journal.createEntry(userId, title, entryText, entryDate);
+		const journal = await Journal.createEntry(userId, title, entryText, entryDate, journalType);
 		return res.json({ journal });
 	} catch (err) {
 		return next(err);
@@ -101,8 +101,15 @@ router.patch("/date/:entryDate", ensureCorrectUserByUserId, async function (req,
 		if (req.params.userId !== String(req.body.userId)) {
 			throw new NotFoundError("The user id provided doesn't match any known user");
 		}
-		const { title, entryText, emotions } = req.body;
-		const journal = await Journal.updateEntry(req.params.userId, title, entryText, req.params.entryDate, emotions);
+		const { title, entryText, emotions, journalType } = req.body;
+		const journal = await Journal.updateEntry(
+			req.params.userId,
+			title,
+			entryText,
+			req.params.entryDate,
+			emotions,
+			journalType
+		);
 		return res.json({ journal });
 	} catch (err) {
 		console.log(err);

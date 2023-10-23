@@ -4,14 +4,9 @@ const jsonschema = require("jsonschema");
 const receiveFeedbackSchema = require("../schema/receiveFeedbackSchema.json");
 const { BadRequestError, NotFoundError } = require("../expressError");
 const { generatePrompt, getCompletion } = require("../feedbackAPI/prompts");
-const {
-	ensureCorrectUser,
-	ensureCorrectUserByEmail,
-	ensureLoggedIn,
-	ensureCorrectUserByUserId
-} = require("../middleware/authMiddleware");
+const { ensureCorrectUserByUserId } = require("../middleware/authMiddleware");
 
-router.post("/", ensureLoggedIn, async function (req, res, next) {
+router.post("/", ensureCorrectUserByUserId, async function (req, res, next) {
 	console.debug("POST /feedback/ ");
 
 	try {
