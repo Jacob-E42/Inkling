@@ -26,7 +26,7 @@ app.use(authenticateJWT);
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/users/:userId/journals", journalRoutes);
-app.use("/feedback", feedbackRoutes);
+app.use("/feedback/:userId", feedbackRoutes);
 
 app.get("/", async (req, res, next) => {
 	try {
