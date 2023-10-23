@@ -26,8 +26,19 @@
 				"minimum": 0,
 				"maximum": 1
 			}
+		},
+		"journalType": {
+			"type": "string",
+			"enum": [
+				"Daily Journal",
+				"Gratitude Journal",
+				"Reflective Journal",
+				"Stream-of-Consciousness Journal",
+				"Bullet Journal",
+				"Dream Journal"
+			]
 		}
 	},
-	"required": ["title", "entryText", "entryDate"],
+	"required": ["title", "entryText", "entryDate", "journalType"],
 	"additionalProperties": false
 }
