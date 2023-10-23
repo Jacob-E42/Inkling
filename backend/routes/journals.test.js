@@ -111,230 +111,235 @@ describe("GET /journals/:entryDate", function () {
 
 /************************************** POST /journals/ */
 
-// describe("POST /journals/", function () {
-// 	test("works for correct user", async function () {
-// 		const newEntry = {
-// 			userId: 1,
-// 			title: "New Title",
-// 			entryText: "New Entry Text",
-// 			entryDate: "2025-01-05"
-// 		};
-// 		const resp = await request(app)
-// 			.post(`/users/1/journals`)
-// 			.send(newEntry)
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.body).toEqual({
-// 			journal: {
-// 				id: expect.any(Number),
-// 				userId: 1,
-// 				title: "New Title",
-// 				entryText: "New Entry Text",
-// 				entryDate: "2025-01-05",
-// 				emotions: null
-// 			}
-// 		});
-// 	});
+describe("POST /journals/", function () {
+	test("works for correct user", async function () {
+		const newEntry = {
+			userId: 1,
+			title: "New Title",
+			entryText: "New Entry Text",
+			entryDate: "2025-01-05",
+			journalType: "Gratitude Journal"
+		};
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send(newEntry)
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.body).toEqual({
+			journal: {
+				id: expect.any(Number),
+				userId: 1,
+				title: "New Title",
+				entryText: "New Entry Text",
+				entryDate: "2025-01-05",
+				journalType: "Gratitude Journal"
+			}
+		});
+	});
 
-// 	test("bad request with missing userId", async function () {
-// 		const resp = await request(app)
-// 			.post(`/users/1/journals`)
-// 			.send({
-// 				title: "New Title",
-// 				entry: "New Entry Text",
-// 				entryDate: "2025-01-05"
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(400);
-// 	});
+	test("bad request with missing userId", async function () {
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send({
+				title: "New Title",
+				entry: "New Entry Text",
+				entryDate: "2025-01-05"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+	});
 
-// 	test("bad request with missing data", async function () {
-// 		const resp = await request(app)
-// 			.post(`/users/1/journals`)
-// 			.send({
-// 				userId: 1,
-// 				title: "New Title"
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(400);
-// 	});
+	test("bad request with missing data", async function () {
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send({
+				userId: 1,
+				title: "New Title"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+	});
 
-// 	test("bad request with invalid data", async function () {
-// 		const resp = await request(app)
-// 			.post(`/users/1/journals`)
-// 			.send({
-// 				userId: 1,
-// 				title: "New Title",
-// 				entry: "New Entry Text",
-// 				entryDate: 2025
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(400);
-// 	});
+	test("bad request with invalid data", async function () {
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send({
+				userId: 1,
+				title: "New Title",
+				entry: "New Entry Text",
+				entryDate: 2025
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+	});
 
-// 	test("BadRequestError if Journal with the same date already exists", async () => {
-// 		const resp = await request(app)
-// 			.post(`/users/1/journals`)
-// 			.send({
-// 				user_id: 1,
-// 				title: "Surprise Visit",
-// 				entryText: "Out of nowhere, my uncle and aunt came over to my house today.",
-// 				entryDate: "2022-01-04"
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(400);
-// 	});
+	test("BadRequestError if Journal with the same date already exists", async () => {
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send({
+				user_id: 1,
+				title: "Surprise Visit",
+				entryText: "Out of nowhere, my uncle and aunt came over to my house today.",
+				entryDate: "2022-01-04"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+	});
 
-// 	test("unauth for anon", async function () {
-// 		const resp = await request(app).post(`/users/1/journals`).send({
-// 			userId: 1,
-// 			title: "New Title",
-// 			entry: "New Entry Text",
-// 			entryDate: "2025-01-05"
-// 		});
-// 		expect(resp.statusCode).toEqual(401);
-// 	});
+	test("unauth for anon", async function () {
+		const resp = await request(app).post(`/users/1/journals`).send({
+			userId: 1,
+			title: "New Title",
+			entry: "New Entry Text",
+			entryDate: "2025-01-05"
+		});
+		expect(resp.statusCode).toEqual(401);
+	});
 
-// 	test("unauth if userId doesn't match the user id of the user who has the provided token", async function () {
-// 		const resp = await request(app)
-// 			.post(`/users/1/journals`)
-// 			.send({
-// 				userId: 1,
-// 				title: "New Title",
-// 				entryText: "New Entry Text",
-// 				entryDate: "2025-01-05"
-// 			})
-// 			.set("authorization", `Bearer ${u2Token}`);
-// 		expect(resp.statusCode).toEqual(401);
-// 	});
+	test("unauth if userId doesn't match the user id of the user who has the provided token", async function () {
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send({
+				userId: 1,
+				title: "New Title",
+				entryText: "New Entry Text",
+				entryDate: "2025-01-05"
+			})
+			.set("authorization", `Bearer ${u2Token}`);
+		expect(resp.statusCode).toEqual(401);
+	});
 
-// 	test("not found if the userId doesn't match any user_id", async function () {
-// 		const resp = await request(app)
-// 			.post(`/users/1/journals`)
-// 			.send({
-// 				userId: 101,
-// 				title: "New Title",
-// 				entryText: "New Entry Text",
-// 				entryDate: "2025-01-05"
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(404);
-// 	});
-// });
+	test("not found if the userId doesn't match any user_id", async function () {
+		const resp = await request(app)
+			.post(`/users/1/journals`)
+			.send({
+				userId: 101,
+				title: "New Title",
+				entryText: "New Entry Text",
+				entryDate: "2025-01-05",
+				journalType: "Gratitude Journal"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(404);
+	});
+});
 
 // /************************************** PATCH /journals/date/:entryDate */
-// describe("PATCH /journals/date/:entryDate", function () {
-// 	test("works for correct user", async function () {
-// 		const updateData = {
-// 			userId: 1,
-// 			title: "Updated Title",
-// 			entryText: "Updated Entry Text",
-// 			emotions: { joy: 0.4, sad: 0.7 }
-// 		};
-// 		const resp = await request(app)
-// 			.patch(`/users/1/journals/date/2022-01-04`)
-// 			.send(updateData)
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.body).toEqual({
-// 			journal: {
-// 				id: expect.any(Number),
-// 				userId: 1,
-// 				title: "Updated Title",
-// 				entryText: "Updated Entry Text",
-// 				entryDate: "2022-01-04",
-// 				emotions: { joy: 0.4, sad: 0.7 }
-// 			}
-// 		});
-// 	});
-// 	test("bad request with missing data", async function () {
-// 		let resp = await request(app)
-// 			.patch(`/users/1/journals/date/2022-01-04`)
-// 			.send({
-// 				title: "Updated Title",
-// 				entryText: "Updated Entry Text",
-// 				emotions: { joy: 0.4, sad: 0.7 }
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(400);
-// 		resp = await request(app)
-// 			.patch(`/users/1/journals/date/2022-01-04`)
-// 			.send({
-// 				userId: 1,
-// 				entryText: "Updated Entry Text",
-// 				emotions: { joy: 0.4, sad: 0.7 }
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(400);
-// 		resp = await request(app)
-// 			.patch(`/users/1/journals/date/2022-01-04`)
-// 			.send({
-// 				userId: 1,
-// 				title: "Updated Title",
-// 				emotions: { joy: 0.4, sad: 0.7 }
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(400);
-// 	});
+describe("PATCH /journals/date/:entryDate", function () {
+	test("works for correct user", async function () {
+		const updateData = {
+			userId: 1,
+			title: "Updated Title",
+			entryText: "Updated Entry Text",
+			emotions: { joy: 0.4, sad: 0.7 },
+			journalType: "Daily Journal"
+		};
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send(updateData)
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.body).toEqual({
+			journal: {
+				id: expect.any(Number),
+				userId: 1,
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				entryDate: "2022-01-04",
+				emotions: { joy: 0.4, sad: 0.7 },
+				journalType: "Daily Journal"
+			}
+		});
+	});
+	test("bad request with missing data", async function () {
+		let resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+		resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				userId: 1,
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+		resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				userId: 1,
+				title: "Updated Title",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
+	});
 
-// 	test("bad request with invalid data", async function () {
-// 		const resp = await request(app)
-// 			.patch(`/users/1/journals/date/2022-01-04`)
-// 			.send({
-// 				title: "Updated Title",
-// 				entryText: "Updated Entry Text",
-// 				emotions: "happy"
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(400);
+	test("bad request with invalid data", async function () {
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: "happy"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(400);
 
-// 		let resp2 = await request(app)
-// 			.patch(`/users/1/journals/date/42`)
-// 			.send({
-// 				userId: 1,
-// 				title: "Updated Title",
-// 				entryText: "Updated Entry Text",
-// 				emotions: { joy: 0.4, sad: 0.7 }
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		// console.log(resp);
-// 		expect(resp2.statusCode).toEqual(400);
-// 	});
+		let resp2 = await request(app)
+			.patch(`/users/1/journals/date/42`)
+			.send({
+				userId: 1,
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		// console.log(resp);
+		expect(resp2.statusCode).toEqual(400);
+	});
 
-// 	test("unauth for anon", async function () {
-// 		const resp = await request(app)
-// 			.patch(`/users/1/journals/date/2022-01-04`)
-// 			.send({
-// 				title: "Updated Title",
-// 				entryText: "Updated Entry Text",
-// 				emotions: { joy: 0.4, sad: 0.7 }
-// 			});
-// 		expect(resp.statusCode).toEqual(401);
-// 	});
+	test("unauth for anon", async function () {
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			});
+		expect(resp.statusCode).toEqual(401);
+	});
 
-// 	test("unauth if userId doesn't match the user id of the user who has the provided token", async function () {
-// 		const resp = await request(app)
-// 			.patch(`/users/1/journals/date/2022-01-04`)
-// 			.send({
-// 				title: "Updated Title",
-// 				entryText: "Updated Entry Text",
-// 				emotions: { joy: 0.4, sad: 0.7 }
-// 			})
-// 			.set("authorization", `Bearer ${u2Token}`);
-// 		expect(resp.statusCode).toEqual(401);
-// 	});
+	test("unauth if userId doesn't match the user id of the user who has the provided token", async function () {
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2022-01-04`)
+			.send({
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 }
+			})
+			.set("authorization", `Bearer ${u2Token}`);
+		expect(resp.statusCode).toEqual(401);
+	});
 
-// 	test("not found if no journal entry for the given date", async function () {
-// 		const resp = await request(app)
-// 			.patch(`/users/1/journals/date/2030-01-05`)
-// 			.send({
-// 				userId: 1,
-// 				title: "Updated Title",
-// 				entryText: "Updated Entry Text",
-// 				emotions: { joy: 0.4, sad: 0.7 }
-// 			})
-// 			.set("authorization", `Bearer ${u1Token}`);
-// 		expect(resp.statusCode).toEqual(404);
-// 	});
-// });
+	test("not found if no journal entry for the given date", async function () {
+		const resp = await request(app)
+			.patch(`/users/1/journals/date/2030-01-05`)
+			.send({
+				userId: 1,
+				title: "Updated Title",
+				entryText: "Updated Entry Text",
+				emotions: { joy: 0.4, sad: 0.7 },
+				journalType: "Gratitude Journal"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(404);
+	});
+});
 
 /************************************** DELETE /journals/:username */
 
