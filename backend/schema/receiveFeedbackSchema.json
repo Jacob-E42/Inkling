@@ -31,8 +31,19 @@
 				"maximum": 1
 			}
 		},
-		"interests": { "type": "array", "items": { "type": "string" } }
+
+		"journalType": {
+			"type": "string",
+			"enum": [
+				"Daily Journal",
+				"Gratitude Journal",
+				"Reflective Journal",
+				"Stream-of-Consciousness Journal",
+				"Bullet Journal",
+				"Dream Journal"
+			]
+		}
 	},
-	"required": ["entryText", "interests", "id", "userId", "title", "entryDate"],
+	"required": ["entryText", "journalType", "id", "userId"],
 	"additionalProperties": false
 }
