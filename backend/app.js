@@ -4,35 +4,35 @@
 
 const express = require("express");
 const cors = require("cors");
-
 const { NotFoundError } = require("./expressError");
-
 const { authenticateJWT } = require("./middleware/authMiddleware");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const journalRoutes = require("./routes/journals");
 const feedbackRoutes = require("./routes/feedback");
-
 const morgan = require("morgan");
-// const { default: Feedback } = require("../frontend/src/feedback/Feedback");
 
+// Initialize the Express application
 const app = express();
 
+// Setup middleware
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(authenticateJWT);
-
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/users/:userId/journals", journalRoutes);
 app.use("/feedback/:userId", feedbackRoutes);
 
+// Define the root endpoint for the application
 app.get("/", async (req, res, next) => {
 	try {
 		console.debug("app /");
+		// Send a welcome message when the root endpoint is accessed
 		return res.send(" Inkling - Start journaling and unlock your potential - Sign Up / Log In");
 	} catch (err) {
+		// Pass any errors to the next middleware for error handling
 		next(err);
 	}
 });
