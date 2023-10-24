@@ -3,13 +3,15 @@ const { OPENAI_API_KEY } = require("../config");
 const { BadRequestError, ExpressError } = require("../expressError");
 const { generateSystemMessage } = require("./generateSystemMessage");
 
+// Set up the configuration for the OpenAI API
 const configuration = new Configuration({
 	apiKey: OPENAI_API_KEY
 });
 
-// console.log(configuration.apiKey);
+// Create an instance of the OpenAI API with the given configuration
 const openai = new OpenAIApi(configuration);
 
+// Define supported journal types
 const JOURNAL_TYPES = [
 	"Daily Journal",
 	"Gratitude Journal",
@@ -19,30 +21,33 @@ const JOURNAL_TYPES = [
 	"Dream Journal"
 ];
 
+// Function to get completion from the OpenAI API
 async function getCompletion(entryText, journalType, userId) {
+	// Check for necessary configurations and instances
 	if (!configuration || !openai) {
 		throw new ExpressError("openai instance or configuration are missing");
 	}
+	// Check if OpenAI API key is available
 	if (!configuration.apiKey) {
 		console.log(configuration, "apiKey=", process.env.OPENAI_API_KEY);
 		throw new ExpressError("OpenAI API key not configured, please follow instructions in README.md");
 	}
 
+	// Validate input parameters
 	if (!entryText || !journalType || !userId) {
 		throw new BadRequestError("Journal information is missing.");
 	}
-
 	if (entryText.trim().length < 1) throw new BadRequestError("Journal entry text is missing.");
 	if (!JOURNAL_TYPES.includes(journalType)) throw new BadRequestError("Please enter a valid journal type");
 
+	// Configure chat options for the OpenAI API request
 	const chatOptions = configureChatOptions(entryText, journalType, userId);
 
+	// Make the request to the OpenAI API
 	try {
 		const chatCompletion = await openai.createChatCompletion({
 			...chatOptions
 		});
-
-		// console.log(chatCompletion.data.choices[0], chatCompletion.data.choices[0].message.content);
 		return chatCompletion.data.choices[0].message.content;
 	} catch (error) {
 		if (error.response) {
@@ -55,39 +60,42 @@ async function getCompletion(entryText, journalType, userId) {
 	}
 }
 
+// Function to configure the chat options for OpenAI API request
 function configureChatOptions(entryText, journalType, userId) {
+	// Define default configuration options for the API
 	let model = "gpt-3.5-turbo";
 	let presence_penalty = 0;
 	let frequency_penalty = 0.2;
-
 	let temperature = 1;
 	let n = 1;
 	let top_p = 0.5;
 	let user = `${userId}`;
-	let messages = generateMessages(entryText, journalType); // figure out how to hash this
+	// Generate messages to be passed to the OpenAI API
+	let messages = generateMessages(entryText, journalType);
 	if (!messages) return null;
 	let max_tokens = getMaxTokens(messages);
-	// console.log(max_tokens);
-
 	return { model, presence_penalty, frequency_penalty, max_tokens, temperature, n, top_p, user, messages };
 }
 
+// Function to generate system and user messages
 function generateMessages(entryText, journalType) {
+	// Validate input parameters
 	if (entryText.length < 1) return null;
 	if (!journalType.length) return null;
 	let messages = [];
+
+	// Generate system message based on the journal type
 	const systemMessage = generateSystemMessage(journalType) || "";
 	messages.push({ role: "system", content: `${systemMessage}` });
 	messages.push({ role: "user", content: `${entryText}` });
-
 	return messages;
 }
 
+// Function to calculate maximum tokens available for OpenAI completion based on message length
 function getMaxTokens(messages) {
 	if (!messages) return null;
 	let messagesLength = messages[0].content.length + messages[1].content.length;
 	const appxTokens = parseInt(messagesLength / 4);
-	// console.log("messagesLength=", messagesLength, "tokens=", appxTokens);
 	return 4097 - appxTokens - 10;
 }
 
