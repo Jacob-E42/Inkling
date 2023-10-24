@@ -42,7 +42,7 @@ async function getCompletion(entryText, journalType, userId) {
 			...chatOptions
 		});
 
-		console.log(chatCompletion.data.choices[0], chatCompletion.data.choices[0].message.content);
+		// console.log(chatCompletion.data.choices[0], chatCompletion.data.choices[0].message.content);
 		return chatCompletion.data.choices[0].message.content;
 	} catch (error) {
 		if (error.response) {

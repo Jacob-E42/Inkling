@@ -1,15 +1,8 @@
 "use strict";
 
 const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
-// const db = require("../db");
-const { getCompletion, generateMessages, configureChatOptions } = require("./prompts");
-const { commonBeforeAll, commonBeforeEach, commonAfterEach, commonAfterAll } = require("../models/testUtils");
 
-// Setting up hooks to manage the database state before and after tests
-beforeAll(commonBeforeAll);
-beforeEach(commonBeforeEach);
-afterEach(commonAfterEach);
-afterAll(commonAfterAll);
+const { getCompletion, generateMessages, configureChatOptions } = require("./prompts");
 
 // describe("generateMessages", () => {
 // 	test("it exists", async () => {
@@ -63,35 +56,97 @@ afterAll(commonAfterAll);
 // });
 
 describe("getCompletion", () => {
-	test("throws errors if info is missing", async () => {
+	// test("throws errors if info is missing", async () => {
+	// 	try {
+	// 		let response = await getCompletion("Hi", "55");
+	// 		console.log(response);
+	// 	} catch (err) {
+	// 		expect(err instanceof BadRequestError).toBeTruthy();
+	// 	}
+
+	// 	try {
+	// 		response = await getCompletion("Hi", "Gratitude Journfdsal", "55");
+	// 		console.log(response);
+	// 	} catch (err) {
+	// 		expect(err instanceof BadRequestError).toBeTruthy();
+	// 	}
+	// 	try {
+	// 		response = await getCompletion("", "Gratitude Journal", "55");
+	// 		console.log(response);
+	// 	} catch (err) {
+	// 		expect(err instanceof BadRequestError).toBeTruthy();
+	// 	}
+	// 	try {
+	// 		response = await getCompletion(" ", "Gratitude Journal", "55");
+	// 		console.log(response);
+	// 	} catch (err) {
+	// 		expect(err instanceof BadRequestError).toBeTruthy();
+	// 	}
+	// }, 10000);
+
+	test("Works", async () => {
 		let response = await getCompletion("Hi", "Gratitude Journal", "55");
 		console.log(response);
-		expect(response).toBeDefined();
+		expect(typeof response).toBe("string");
+		expect(response.split(" ").length).toBeGreaterThan(1);
+	}, 15000);
 
-		try {
-			response = await getCompletion("Hi", "55");
-			console.log(response);
-		} catch (err) {
-			expect(err instanceof BadRequestError).toBeTruthy();
-		}
-
-		try {
-			response = await getCompletion("Hi", "Gratitude Journfdsal", "55");
-			console.log(response);
-		} catch (err) {
-			expect(err instanceof BadRequestError).toBeTruthy();
-		}
-		try {
-			response = await getCompletion("", "Gratitude Journal", "55");
-			console.log(response);
-		} catch (err) {
-			expect(err instanceof BadRequestError).toBeTruthy();
-		}
-		try {
-			response = await getCompletion(" ", "Gratitude Journal", "55");
-			console.log(response);
-		} catch (err) {
-			expect(err instanceof BadRequestError).toBeTruthy();
-		}
-	}, 10000);
+	test("Gratitude Journal", async () => {
+		let response = await getCompletion(
+			"Hi, I am grateful that my cat is really nice to me and that she is friendly",
+			"Gratitude Journal",
+			"55"
+		);
+		console.log(response);
+		expect(response).toContain("cat");
+		expect(response.length).toBeGreaterThan(750);
+	}, 15000);
+	test("Daily Journal", async () => {
+		let response = await getCompletion(
+			"Today I went to the gym for the first time. It went better than I expected",
+			"Daily Journal",
+			"55"
+		);
+		console.log(response);
+		expect(response).toContain("gym");
+		expect(response.length).toBeGreaterThan(750);
+	}, 15000);
+	test("Reflective Journal", async () => {
+		let response = await getCompletion(
+			"When I was a kid, my parents never let me have my own room. Now that I'm an adult I want to have 6 of them.",
+			"Reflective Journal",
+			"55"
+		);
+		console.log(response);
+		expect(response).toContain("room");
+		expect(response).toContain("childhood");
+		expect(response.length).toBeGreaterThan(750);
+	}, 15000);
+	test("Stream-of-Consciousness Journal", async () => {
+		let response = await getCompletion(
+			"Hi, I am blue. I am a melon. I am a gong. I am blue. I am departing. I am blue.",
+			"Stream-of-Consciousness Journal",
+			"55"
+		);
+		console.log(response);
+		expect(response).toContain("blue");
+		expect(response.length).toBeGreaterThan(750);
+	}, 15000);
+	test("Bullet Journal", async () => {
+		let response = await getCompletion("-walk the dog -brush my teeth -become the sun", "Bullet Journal", "55");
+		console.log(response);
+		expect(response).toContain("dog");
+		expect(response).toContain("sun");
+		expect(response.length).toBeGreaterThan(750);
+	}, 15000);
+	test("Dream Journal", async () => {
+		let response = await getCompletion(
+			"Hi, in my dream last night, I was eaten by a shark. Then, next thing I knew, I was the shark.",
+			"Dream Journal",
+			"55"
+		);
+		console.log(response);
+		expect(response).toContain("shark");
+		expect(response.length).toBeGreaterThan(750);
+	}, 15000);
 });
