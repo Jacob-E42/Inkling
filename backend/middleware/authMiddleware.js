@@ -67,6 +67,7 @@ function ensureCorrectUserByEmail(req, res, next) {
  * If not, it throws UnauthorizedError.
  */
 function ensureCorrectUserByUserId(req, res, next) {
+	console.debug("ensureCorrectUserByUserId");
 	try {
 		const user = res.locals.user;
 		// console.log("user:", user, "User ID from params:", req.params.userId, "user.id", user.id);
