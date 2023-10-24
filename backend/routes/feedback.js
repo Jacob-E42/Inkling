@@ -15,12 +15,10 @@ router.post("/", ensureCorrectUserByUserId, async function (req, res, next) {
 			const errs = validator.errors.map(e => e.stack);
 			throw new BadRequestError(errs);
 		}
-		// if (req.params.userId !== String(req.body.userId)) {
-		// 	throw new NotFoundError("The user id provided doesn't match any known user");
-		// }
+		if (String(req.body.userId) !== req.params.userId) throw new BadRequestError("Incorrect user ID");
 
 		const entryText = req.body.entryText || "";
-		const feedback = await getCompletion(entryText, req.body.interest, req.body.userId);
+		const feedback = await getCompletion(entryText, req.body.journalType, req.body.userId);
 		return res.json({ feedback });
 	} catch (err) {
 		return next(err);
