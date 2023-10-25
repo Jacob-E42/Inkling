@@ -8,7 +8,7 @@ const { ensureCorrectUserByUserId } = require("../middleware/authMiddleware");
 
 // Endpoint for creating feedback, with middleware to ensure the user making the request is correct
 router.post("/", ensureCorrectUserByUserId, async function (req, res, next) {
-	console.debug("POST /feedback/ ");
+	console.debug("POST /feedback/\n", req.body.id, req.body.journalType);
 
 	try {
 		// Validate the request body against the predefined JSON schema
