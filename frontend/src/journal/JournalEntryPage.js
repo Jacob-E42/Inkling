@@ -175,7 +175,7 @@ const JournalEntryPage = () => {
 		if (currentJournal && currentJournal.entryText && feedbackPending) {
 			fetchFeedback();
 		} else {
-			console.debug("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal.entryText);
+			console.debug("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
 			setMsg("uh oh spagetthi oh. ");
 		}
 		// eslint-disable-next-line
