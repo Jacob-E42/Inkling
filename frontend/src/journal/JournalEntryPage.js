@@ -23,18 +23,20 @@ const verifyDependentInfo = (date, user, api) => {
 };
 
 const validateJournalInfo = (id, userId, title, entryText, date, journalType) => {
-	if (!id || !userId || !title || !entryText || !date || !journalType) return false;
-	if (typeof id !== "number") return false;
-	if (typeof userId !== "number") return false;
-	if (typeof title !== "string") return false;
-	if (typeof date !== "string") return false;
-	if (typeof entryText !== "string") return false;
-	if (typeof journalType !== "string") return false;
-	if (entryText.trim().length < 1) return false;
-	if (date.length !== 10) return false;
-	if (!journalType.includes("Journal")) return false;
+	console.debug("validateJournalInfo", id, userId, title, entryText, date, journalType);
+	if (!id || !userId || !title || !entryText || !date || !journalType)
+		return { valid: false, error: "REQUIRED INFO IS MISSING" };
+	if (typeof id !== "number") return { valid: false, error: "ID IS NOT A NUMBER" };
+	if (typeof userId !== "number") return { valid: false, error: "USERID IS NOT A NUMBER" };
+	if (typeof title !== "string") return { valid: false, error: "TITLE IS NOT A STRING" };
+	if (typeof date !== "string") return { valid: false, error: "DATE IS NOT A STRING" };
+	if (typeof entryText !== "string") return { valid: false, error: "ENTRYTEXT IS NOT A STRING" };
+	if (typeof journalType !== "string") return { valid: false, error: "JOURNALTYPE IS NOT A STRING" };
+	if (entryText.trim().length < 1) return { valid: false, error: "ENTRYTEXT IS TOO SHORT" };
+	if (date.length !== 10) return { valid: false, error: "DATE IS WRONG LENGTH" };
+	if (!journalType.includes("Journal")) return { valid: false, error: "JOURNAL TYPE IS WRONG" };
 
-	return true;
+	return { valid: true };
 };
 
 const JournalEntryPage = () => {
@@ -64,7 +66,13 @@ const JournalEntryPage = () => {
 		"journal=",
 		currentJournal,
 		"journalLoaded=",
-		journalLoaded
+		journalLoaded,
+		"feedback=",
+		feedback,
+		"feedbackPending=",
+		feedbackPending,
+		"feedbackReceived=",
+		feedbackReceived
 	);
 
 	useEffect(() => {
@@ -109,9 +117,10 @@ const JournalEntryPage = () => {
 				setMsg("Creating a new journal entry failed!");
 				setColor("danger");
 			} else {
+				await setFeedbackPending(true);
 				try {
 					// console.log(currentJournal, data);
-					setFeedbackPending(true);
+
 					const updateJournal = await api.editJournalEntry(
 						currentJournal.userId,
 						data.title,
@@ -139,13 +148,14 @@ const JournalEntryPage = () => {
 		setFeedbackReceived(false);
 		const { id, userId, title, entryText, journalType } = currentJournal;
 		const validJournal = validateJournalInfo(id, userId, title, entryText, date, journalType);
-		if (validJournal) {
+		if (validJournal.valid) {
 			try {
-				const resp = await api.getFeedback(id, userId, title, entryText, date, journalType);
-				if (resp.feedback) {
+				console.debug("Journal is valid");
+				const feedback = await api.getFeedback(id, userId, entryText, journalType, title, date);
+				if (feedback) {
 					setMsg("Feedback Received!");
 					setColor("success");
-					setFeedback(resp.feedback);
+					setFeedback(feedback);
 					setFeedbackReceived(true);
 				}
 			} catch (err) {
@@ -153,13 +163,20 @@ const JournalEntryPage = () => {
 				setMsg("Loading Feedback Failed");
 				setColor("danger");
 			}
+		} else {
+			setMsg("Journal is NOT valid");
+			console.debug(validJournal.error);
 		}
 		setFeedbackPending(false);
 	}, [api, currentJournal, setMsg, setColor, date, setFeedback, setFeedbackReceived, setFeedbackPending]);
 
 	useEffect(() => {
+		console.debug("useEffect -> fetchFeedback()");
 		if (currentJournal && currentJournal.entryText && feedbackPending) {
 			fetchFeedback();
+		} else {
+			console.debug("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal.entryText);
+			setMsg("uh oh spagetthi oh. ");
 		}
 		// eslint-disable-next-line
 	}, [feedbackPending]);
@@ -187,12 +204,8 @@ const JournalEntryPage = () => {
 					entryText={`Error: No journal with date: ${date}`}
 				/>
 			)}
-			{feedbackReceived && (
-				<Feedback
-					setFeedbackReceived={setFeedbackReceived}
-					feedback={feedback}
-				/>
-			)}
+
+			{feedbackReceived && <Feedback feedback={feedback} />}
 		</>
 	);
 };
