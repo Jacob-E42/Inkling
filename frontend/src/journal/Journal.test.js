@@ -1,10 +1,8 @@
 import React from "react";
-import { render, screen, act } from "@testing-library/react";
-import { MemoryRouter, Route } from "react-router-dom";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 import { AlertProvider, ApiProvider, UserProvider } from "../mock";
 import Journal from "./Journal";
-import NoJournalEntry from "./NoJournalEntry";
-import JournalEntryPage from "./JournalEntryPage";
 
 test("Journal renders without crashing", () => {
 	render(
