@@ -4,7 +4,6 @@ import AlertContext from "./context_providers/AlertContext";
 import Request from "./api";
 import ApiRequest from "./api";
 import ApiContext from "./context_providers/ApiContext";
-import getCurrentDate from "./common/dateHelpers";
 
 const demoUser = {
 	id: 11,
@@ -98,4 +97,4 @@ const ApiProvider = ({ children }) => {
 // 	return <DateContext.Provider value={{ journalDate, setJournalDate }}>{children}</DateContext.Provider>;
 // };
 
-export { UserProvider, AnonUserProvider, AlertProvider, ApiProvider };
+export { UserProvider, AnonUserProvider, AlertProvider, ApiProvider, demoJournal };
