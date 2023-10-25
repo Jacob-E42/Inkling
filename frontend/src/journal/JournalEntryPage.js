@@ -44,10 +44,12 @@ const JournalEntryPage = () => {
 	const { api } = useContext(ApiContext);
 	const { setMsg, setColor } = useContext(AlertContext);
 	const allInfoDefined = verifyDependentInfo(date, user, api); //only verifies date, user, and qpi. Not setMsg, or setColor
+
 	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
-	const [feedbackReceived, setFeedbackReceived] = useLocalStorage("feedbackReceived", false);
+	const [feedbackPending, setFeedbackPending] = useLocalStorage("feedbackPending", false);
 	const [feedback, setFeedback] = useLocalStorage("feedback", null);
+	const [feedbackReceived, setFeedbackReceived] = useLocalStorage("feedbackReceived", false);
 
 	console.debug(
 		"JournalEntryPage",
@@ -74,7 +76,9 @@ const JournalEntryPage = () => {
 		// eslint-disable-next-line
 	}, [date, api]);
 
-	useEffect(() => {}, [currentJournal]);
+	// ?? This causes a rerender whenever currentJournal is updated. Currently only when loadJournalEntry or
+	// when editJournal are called.
+	// useEffect(() => {}, [currentJournal]);
 
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
@@ -107,6 +111,7 @@ const JournalEntryPage = () => {
 			} else {
 				try {
 					// console.log(currentJournal, data);
+					setFeedbackPending(true);
 					const updateJournal = await api.editJournalEntry(
 						currentJournal.userId,
 						data.title,
@@ -126,10 +131,10 @@ const JournalEntryPage = () => {
 				}
 			}
 		},
-		[currentJournal, setColor, setMsg, api, setJournalLoaded]
+		[currentJournal, setColor, setMsg, api, setJournalLoaded, setFeedbackPending]
 	);
 
-	const fetchFeedback = useCallback(async data => {
+	const fetchFeedback = useCallback(async () => {
 		console.debug("fetchFeedback");
 		setFeedbackReceived(false);
 		const { id, userId, title, entryText, journalType } = currentJournal;
@@ -140,8 +145,8 @@ const JournalEntryPage = () => {
 				if (resp.feedback) {
 					setMsg("Feedback Received!");
 					setColor("success");
-					setFeedbackReceived(true);
 					setFeedback(resp.feedback);
+					setFeedbackReceived(true);
 				}
 			} catch (err) {
 				console.error(err);
@@ -149,16 +154,15 @@ const JournalEntryPage = () => {
 				setColor("danger");
 			}
 		}
-	}, []);
+		setFeedbackPending(false);
+	}, [api, currentJournal, setMsg, setColor, date, setFeedback, setFeedbackReceived, setFeedbackPending]);
 
-	// useEffect(async () => {
-	// 	if (currentJournal.entryText) {
-	// 		setFeedbackReceived(false);
-
-	// 		await fetchFeedback();
-
-	// 	}
-	// }, [currentJournal.entryText]);
+	useEffect(() => {
+		if (currentJournal.entryText && feedbackPending) {
+			fetchFeedback();
+		}
+		// eslint-disable-next-line
+	}, [feedbackPending]);
 
 	if (!journalLoaded) return <LoadingSpinner />;
 	// console.log("this is annoying", currentJournal.title, currentJournal.entryText);
