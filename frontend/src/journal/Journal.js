@@ -5,7 +5,7 @@ import AlertContext from "../context_providers/AlertContext";
 import "./Journal.css";
 
 const Journal = ({ date, title, journalType, entryText, setJournal, editJournal }) => {
-	console.debug("Journal", date, "Title=", title, "entryText=", entryText);
+	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
 	const { setMsg, setColor } = useContext(AlertContext);
 	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
 	const [tempJournal, setTempJournal] = useState({
@@ -28,16 +28,16 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 
 	const handleChange = useCallback(
 		async e => {
-			console.debug("handleChange");
+			// console.debug("handleChange");
 			e.preventDefault();
 			const { name, value } = e.target;
 			setTempJournal(tempJournal => ({
 				...tempJournal,
 				[name]: value
 			}));
-			console.log(tempJournal);
+			// console.log(tempJournal);
 		},
-		[setTempJournal, tempJournal]
+		[setTempJournal]
 	);
 
 	const handleSubmit = useCallback(
@@ -45,14 +45,14 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 			console.debug("handleSubmit");
 			e.preventDefault();
 			console.log(tempJournal);
-			setJournal(tempJournal);
+			setJournal(journal => ({ ...journal, ...tempJournal }));
 
 			await editJournal(tempJournal);
 		},
 		[editJournal, setJournal, tempJournal]
 	);
 
-	console.log(title, tempJournal.title, entryText, tempJournal.entryText);
+	// console.log(title, tempJournal.title, entryText, tempJournal.entryText);
 	return (
 		<>
 			{allInfoPresent && (
