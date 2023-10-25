@@ -101,16 +101,8 @@ class ApiRequest {
 		let response = await this.#request(`users/${userId}/journals/`, { title, entryText, entryDate }, "post");
 		return response.journal;
 	}
-	async editJournalEntry(userId, title, entryText, entryDate, emotions = null) {
-		console.debug("editJournalEntry", userId, title, entryText, entryDate, emotions);
-		const data = { userId: userId, title: title, entryText: entryText, entryDate: entryDate, emotions: emotions };
-		console.log("1st log", data);
-		let response = await this.#request(`users/${userId}/journals/date/${entryDate}`, data, "patch");
-		console.log("2nd log", data, response);
-		return response.journal;
-	}
-	async getFeedback(journalId, userId, entryText, journalType, title = null, entryDate = null) {
-		console.debug("editJournalEntry", journalId, userId, entryText, journalType, title, entryDate);
+	async editJournalEntry(userId, title, entryText, entryDate, journalType) {
+		console.debug("editJournalEntry", userId, title, entryText, entryDate, journalType);
 		const data = {
 			userId: userId,
 			title: title,
@@ -118,10 +110,25 @@ class ApiRequest {
 			entryDate: entryDate,
 			journalType: journalType
 		};
-
-		let response = await this.#request(`feedback/${userId}`, data, "post");
-		console.log("response", response);
+		console.log("1st log", data);
+		let response = await this.#request(`users/${userId}/journals/date/${entryDate}`, data, "patch");
+		console.log("2nd log", data, response);
 		return response.journal;
+	}
+	async getFeedback(id, userId, entryText, journalType, title = null, entryDate = null) {
+		console.debug("getFeedback", id, userId, entryText, journalType, title, entryDate);
+		const data = {
+			id: id,
+			userId: userId,
+			title: title,
+			entryText: entryText,
+			entryDate: entryDate,
+			journalType: journalType
+		};
+
+		let response = await this.#request(`feedback/${userId}/`, data, "post");
+		console.log("response", response);
+		return response.feedback;
 	}
 }
 
