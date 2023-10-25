@@ -31,6 +31,44 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
           />
         </div>
       </form>
+      <form
+        class=""
+      >
+        <div
+          class="mb-3"
+        >
+          <label
+            class="form-label"
+            for="journalType"
+          >
+            Journal Type
+          </label>
+          <select
+            class="form-select"
+            id="journalType"
+            name="journalType"
+          >
+            <option>
+              Daily Journal
+            </option>
+            <option>
+              Gratitude Journal
+            </option>
+            <option>
+              Reflective Journal
+            </option>
+            <option>
+              Stream-of-Consciousness Journal
+            </option>
+            <option>
+              Bullet Journal
+            </option>
+            <option>
+              Dream Journal
+            </option>
+          </select>
+        </div>
+      </form>
     </header>
     <form
       class=""

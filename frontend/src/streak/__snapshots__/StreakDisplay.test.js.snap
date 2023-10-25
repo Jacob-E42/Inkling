@@ -7,238 +7,6 @@ exports[`StreakDisplay matches snapshot 1`] = `
   >
     <a
       class="day-link "
-      href="/journal/2023-08-27"
-    >
-      Sun
-      <br />
-      27
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-08-28"
-    >
-      Mon
-      <br />
-      28
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-08-29"
-    >
-      Tue
-      <br />
-      29
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-08-30"
-    >
-      Wed
-      <br />
-      30
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-08-31"
-    >
-      Thu
-      <br />
-      31
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-01"
-    >
-      Fri
-      <br />
-      01
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-02"
-    >
-      Sat
-      <br />
-      02
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-03"
-    >
-      Sun
-      <br />
-      03
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-04"
-    >
-      Mon
-      <br />
-      04
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-05"
-    >
-      Tue
-      <br />
-      05
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-06"
-    >
-      Wed
-      <br />
-      06
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-07"
-    >
-      Thu
-      <br />
-      07
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-08"
-    >
-      Fri
-      <br />
-      08
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-09"
-    >
-      Sat
-      <br />
-      09
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-10"
-    >
-      Sun
-      <br />
-      10
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-11"
-    >
-      Mon
-      <br />
-      11
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-12"
-    >
-      Tue
-      <br />
-      12
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-13"
-    >
-      Wed
-      <br />
-      13
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-14"
-    >
-      Thu
-      <br />
-      14
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-15"
-    >
-      Fri
-      <br />
-      15
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-16"
-    >
-      Sat
-      <br />
-      16
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-17"
-    >
-      Sun
-      <br />
-      17
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-18"
-    >
-      Mon
-      <br />
-      18
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-19"
-    >
-      Tue
-      <br />
-      19
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-20"
-    >
-      Wed
-      <br />
-      20
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-21"
-    >
-      Thu
-      <br />
-      21
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-22"
-    >
-      Fri
-      <br />
-      22
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-23"
-    >
-      Sat
-      <br />
-      23
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-24"
-    >
-      Sun
-      <br />
-      24
-    </a>
-    <a
-      class="day-link "
       href="/journal/2023-09-25"
     >
       Mon
@@ -246,12 +14,244 @@ exports[`StreakDisplay matches snapshot 1`] = `
       25
     </a>
     <a
-      class="day-link active"
+      class="day-link "
       href="/journal/2023-09-26"
     >
       Tue
       <br />
       26
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-09-27"
+    >
+      Wed
+      <br />
+      27
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-09-28"
+    >
+      Thu
+      <br />
+      28
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-09-29"
+    >
+      Fri
+      <br />
+      29
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-09-30"
+    >
+      Sat
+      <br />
+      30
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-01"
+    >
+      Sun
+      <br />
+      01
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-02"
+    >
+      Mon
+      <br />
+      02
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-03"
+    >
+      Tue
+      <br />
+      03
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-04"
+    >
+      Wed
+      <br />
+      04
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-05"
+    >
+      Thu
+      <br />
+      05
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-06"
+    >
+      Fri
+      <br />
+      06
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-07"
+    >
+      Sat
+      <br />
+      07
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-08"
+    >
+      Sun
+      <br />
+      08
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-09"
+    >
+      Mon
+      <br />
+      09
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-10"
+    >
+      Tue
+      <br />
+      10
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-11"
+    >
+      Wed
+      <br />
+      11
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-12"
+    >
+      Thu
+      <br />
+      12
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-13"
+    >
+      Fri
+      <br />
+      13
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-14"
+    >
+      Sat
+      <br />
+      14
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-15"
+    >
+      Sun
+      <br />
+      15
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-16"
+    >
+      Mon
+      <br />
+      16
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-17"
+    >
+      Tue
+      <br />
+      17
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-18"
+    >
+      Wed
+      <br />
+      18
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-19"
+    >
+      Thu
+      <br />
+      19
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-20"
+    >
+      Fri
+      <br />
+      20
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-21"
+    >
+      Sat
+      <br />
+      21
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-22"
+    >
+      Sun
+      <br />
+      22
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-23"
+    >
+      Mon
+      <br />
+      23
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-24"
+    >
+      Tue
+      <br />
+      24
+    </a>
+    <a
+      class="day-link active"
+      href="/journal/2023-10-25"
+    >
+      Wed
+      <br />
+      25
     </a>
   </div>
 </DocumentFragment>

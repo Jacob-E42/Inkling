@@ -15,16 +15,13 @@ exports[`SignupForm matches snapshot 1`] = `
         First Name
       </label>
       <input
-        aria-invalid="false"
         class="form-control"
         id="firstName"
         name="firstName"
         placeholder="Enter your first name"
+        required=""
         type="text"
         value=""
-      />
-      <div
-        class="inputError invalid-feedback"
       />
     </div>
     <div
@@ -37,16 +34,13 @@ exports[`SignupForm matches snapshot 1`] = `
         Last Name
       </label>
       <input
-        aria-invalid="false"
         class="form-control"
         id="lastName"
         name="lastName"
         placeholder="Enter your last name"
+        required=""
         type="text"
         value=""
-      />
-      <div
-        class="inputError invalid-feedback"
       />
     </div>
     <div
@@ -59,17 +53,14 @@ exports[`SignupForm matches snapshot 1`] = `
         Email
       </label>
       <input
-        aria-invalid="false"
         autocomplete="email"
         class="form-control"
         id="email"
         name="email"
         placeholder="Enter your email"
+        required=""
         type="email"
         value=""
-      />
-      <div
-        class="inputError invalid-feedback"
       />
     </div>
     <div
@@ -82,76 +73,15 @@ exports[`SignupForm matches snapshot 1`] = `
         Password
       </label>
       <input
-        aria-invalid="false"
         autocomplete="current-password"
         class="form-control"
         id="password"
         name="password"
         placeholder="Enter a password, at least 8 characters"
+        required=""
         type="password"
         value=""
       />
-      <div
-        class="inputError invalid-feedback"
-      />
-    </div>
-    <div
-      class="mb-3"
-    >
-      <p>
-        Please select one to three interests
-      </p>
-      <div
-        class="form-check"
-      >
-        <label
-          class="ml-2 form-check-label"
-          for="interest1"
-        >
-          Interest 1
-        </label>
-        <input
-          class="form-control-lg form-check-input"
-          id="interest1"
-          name="interests"
-          type="checkbox"
-          value="interest1"
-        />
-      </div>
-      <div
-        class="form-check"
-      >
-        <label
-          class="ml-2 form-check-label"
-          for="interest2"
-        >
-          Interest 2
-        </label>
-        <input
-          class="form-control-lg form-check-input"
-          id="interest2"
-          name="interests"
-          type="checkbox"
-          value="interest2"
-        />
-      </div>
-      <div
-        class="form-check"
-      >
-        <label
-          class="form-check-label"
-          for="interest3"
-        >
-          Interest 3
-        </label>
-        <input
-          class="form-control-lg form-check-input"
-          id="interest3"
-          name="interests"
-          type="checkbox"
-          value="interest3"
-        />
-      </div>
     </div>
     <button
       class="btn btn-secondary"
