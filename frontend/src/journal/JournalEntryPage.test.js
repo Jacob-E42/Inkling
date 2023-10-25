@@ -3,7 +3,7 @@ import { render, screen, act, fireEvent, waitFor } from "@testing-library/react"
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { AlertProvider, AnonUserProvider, ApiProvider, UserProvider } from "../mock";
 import JournalEntryPage from "./JournalEntryPage";
-import ApiRequest from "../api";
+// import ApiRequest from "../api";
 import axios from "axios";
 import getCurrentDate from "../../../backend/helpers/getCurrentDate";
 import { getPastDate } from "../common/dateHelpers";
@@ -23,7 +23,8 @@ const mockSuccessfulResponse = {
 			entryText:
 				"Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.",
 			entryDate: "2023-07-24",
-			emotions: null
+			emotions: null,
+			journalType: "Daily Journal"
 		}
 	}
 };
@@ -37,7 +38,8 @@ const mockSecondResponse = {
 			entryText:
 				"Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.",
 			entryDate: getPastDate(currentDate, 1),
-			emotions: null
+			emotions: null,
+			journalType: "Daily Journal"
 		}
 	}
 };
@@ -51,7 +53,8 @@ const mockUpdatedJournalResponse = {
 			entryText:
 				"Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.",
 			entryDate: "2023-07-24",
-			emotions: null
+			emotions: null,
+			journalType: "Gratitude Journal"
 		}
 	}
 };
@@ -64,7 +67,8 @@ const mockTodaysJournalResponse = {
 			title: "Baking adventure",
 			entryText: `This should only display text for the current date entry. Current date: ${currentDate}`,
 			entryDate: `${currentDate}`,
-			emotions: null
+			emotions: null,
+			journalType: "Daily Journal"
 		}
 	}
 };
@@ -80,16 +84,22 @@ const mockErrorResponse = {
 	}
 };
 
-// const mockErrorResponseForCurrentDate = {
-// 	response: {
-// 		status: 404,
-// 		data: {
-// 			error: {
-// 				message: `You needt to create a new entry`
-// 			}
-// 		}
-// 	}
-// };
+const mockErrorResponseForCurrentDate = {
+	response: {
+		status: 404,
+		data: {
+			error: {
+				message: `You need to create a new entry`
+			}
+		}
+	}
+};
+
+const mockFeedbackResponse = {
+	data: {
+		feedback: "This is Feedback"
+	}
+};
 
 describe("Successful journal fetch", () => {
 	beforeEach(() => {
@@ -280,32 +290,32 @@ describe("user can edit journal entry", () => {
 		});
 	});
 
-	// test("JournalEntryPage renders expected text", async () => {
-	// 	// eslint-disable-next-line testing-library/no-unnecessary-act
-	// 	await act(async () => {
-	// 		render(
-	// 			<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
-	// 				<UserProvider>
-	// 					<ApiProvider>
-	// 						<AlertProvider>
-	// 							<Routes>
-	// 								<Route
-	// 									path="/journal/:date"
-	// 									element={<JournalEntryPage />}
-	// 								/>
-	// 							</Routes>
-	// 						</AlertProvider>
-	// 					</ApiProvider>
-	// 				</UserProvider>
-	// 			</MemoryRouter>
-	// 		);
-	// 	});
+	test("JournalEntryPage renders expected text", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			render(
+				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+		});
 
-	// 	expect(screen.getByText("2023-07-04")).toBeInTheDocument();
-	// 	expect(screen.getByText("Journal Entry")).toBeInTheDocument();
-	// 	expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
-	// 	expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
-	// });
+		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
+		expect(screen.getByText("Journal Entry")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
+	});
 
 	test("JournalEntryPage changing text and submitting works", async () => {
 		// eslint-disable-next-line testing-library/no-unnecessary-act
@@ -429,5 +439,86 @@ describe("it renders new journal entry for current date", () => {
 		expect(screen.getByText(mockSecondResponse.data.journal.entryDate)).toBeInTheDocument();
 		expect(title.value).toBe(mockSecondResponse.data.journal.title);
 		expect(entryText.value).toBe(mockSecondResponse.data.journal.entryText);
+	});
+});
+
+describe("Receiving Feedback works", () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+		act(() => {
+			axios.mockImplementation(config => {
+				if (config.method === "get") {
+					return Promise.resolve(mockSuccessfulResponse);
+				}
+				if (config.method === "patch") {
+					return Promise.resolve(mockUpdatedJournalResponse);
+				}
+				if (config.method === "post") {
+					return Promise.resolve(mockFeedbackResponse);
+				} else return Promise.resolve(mockErrorResponse);
+			});
+		});
+	});
+
+	test("JournalEntryPage changing text and receiving feedback works", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			render(
+				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+		});
+
+		const title = screen.getByPlaceholderText("title");
+		const submitButton = screen.getByText("Submit");
+		const selectionMenu = screen.getByLabelText(`Journal Type`);
+		const gratitude = screen.getByText("Gratitude Journal");
+		// console.log(selectionMenu, gratitude);
+		expect(title.value).toBe("Baking adventure");
+
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			fireEvent.change(title, { target: { value: "Baking misadventure" } });
+			fireEvent.click(submitButton);
+			fireEvent.click(selectionMenu);
+			fireEvent.click(gratitude);
+		});
+
+		// console.log(mockApi.mock);
+
+		await waitFor(() => {
+			// Here you can check if some element that indicates loading is no longer in the document,
+			// or some other condition that indicates that your component has finished loading.
+			expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
+		});
+
+		await waitFor(() => {
+			expect(screen.getByText("Feedback")).toBeInTheDocument();
+		});
+
+		// expect(ApiRequest.editJournalEntry).toHaveBeenCalled();
+		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
+		expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
+		expect(
+			screen.getByText(
+				"Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun."
+			)
+		).toBeInTheDocument();
+		expect(title.value).toBe("Baking misadventure");
+		await waitFor(async () => {
+			expect(await screen.findByText("Feedback")).toBeInTheDocument();
+		});
 	});
 });
