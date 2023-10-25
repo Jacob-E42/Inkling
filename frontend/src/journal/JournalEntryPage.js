@@ -158,7 +158,7 @@ const JournalEntryPage = () => {
 	}, [api, currentJournal, setMsg, setColor, date, setFeedback, setFeedbackReceived, setFeedbackPending]);
 
 	useEffect(() => {
-		if (currentJournal.entryText && feedbackPending) {
+		if (currentJournal && currentJournal.entryText && feedbackPending) {
 			fetchFeedback();
 		}
 		// eslint-disable-next-line
