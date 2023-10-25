@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Feedback matches snapshot 1`] = `
+<DocumentFragment>
+  <h3>
+    Feedback
+  </h3>
+  <p>
+    Well Done! This is an example Feedback.
+  </p>
+</DocumentFragment>
+`;
+
+exports[`Feedback matches snapshot when rendered without props 1`] = `<DocumentFragment />`;
