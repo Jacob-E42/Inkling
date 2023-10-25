@@ -109,6 +109,20 @@ class ApiRequest {
 		console.log("2nd log", data, response);
 		return response.journal;
 	}
+	async getFeedback(journalId, userId, entryText, journalType, title = null, entryDate = null) {
+		console.debug("editJournalEntry", journalId, userId, entryText, journalType, title, entryDate);
+		const data = {
+			userId: userId,
+			title: title,
+			entryText: entryText,
+			entryDate: entryDate,
+			journalType: journalType
+		};
+
+		let response = await this.#request(`feedback/${userId}`, data, "post");
+		console.log("response", response);
+		return response.journal;
+	}
 }
 
 export default ApiRequest;
