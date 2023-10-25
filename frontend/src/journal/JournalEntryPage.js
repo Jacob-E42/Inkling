@@ -22,6 +22,21 @@ const verifyDependentInfo = (date, user, api) => {
 	return true;
 };
 
+const validateJournalInfo = (id, userId, title, entryText, date, journalType) => {
+	if (!id || !userId || !title || !entryText || !date || !journalType) return false;
+	if (typeof id !== "number") return false;
+	if (typeof userId !== "number") return false;
+	if (typeof title !== "string") return false;
+	if (typeof date !== "string") return false;
+	if (typeof entryText !== "string") return false;
+	if (typeof journalType !== "string") return false;
+	if (entryText.trim().length < 1) return false;
+	if (date.length !== 10) return false;
+	if (!journalType.includes("Journal")) return false;
+
+	return true;
+};
+
 const JournalEntryPage = () => {
 	let { date } = useParams("date");
 	if (!date) date = getCurrentDate();
@@ -32,6 +47,7 @@ const JournalEntryPage = () => {
 	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
 	const [feedbackReceived, setFeedbackReceived] = useLocalStorage("feedbackReceived", false);
+	const [feedback, setFeedback] = useLocalStorage("feedback", null);
 
 	console.debug(
 		"JournalEntryPage",
@@ -113,6 +129,37 @@ const JournalEntryPage = () => {
 		[currentJournal, setColor, setMsg, api, setJournalLoaded]
 	);
 
+	const fetchFeedback = useCallback(async data => {
+		console.debug("fetchFeedback");
+		setFeedbackReceived(false);
+		const { id, userId, title, entryText, journalType } = currentJournal;
+		const validJournal = validateJournalInfo(id, userId, title, entryText, date, journalType);
+		if (validJournal) {
+			try {
+				const resp = await api.getFeedback(id, userId, title, entryText, date, journalType);
+				if (resp.feedback) {
+					setMsg("Feedback Received!");
+					setColor("success");
+					setFeedbackReceived(true);
+					setFeedback(resp.feedback);
+				}
+			} catch (err) {
+				console.error(err);
+				setMsg("Loading Feedback Failed");
+				setColor("danger");
+			}
+		}
+	}, []);
+
+	// useEffect(async () => {
+	// 	if (currentJournal.entryText) {
+	// 		setFeedbackReceived(false);
+
+	// 		await fetchFeedback();
+
+	// 	}
+	// }, [currentJournal.entryText]);
+
 	if (!journalLoaded) return <LoadingSpinner />;
 	// console.log("this is annoying", currentJournal.title, currentJournal.entryText);
 	return (
@@ -136,7 +183,12 @@ const JournalEntryPage = () => {
 					entryText={`Error: No journal with date: ${date}`}
 				/>
 			)}
-			{feedbackReceived && <Feedback setFeedbackReceived={setFeedbackReceived} />}
+			{feedbackReceived && (
+				<Feedback
+					setFeedbackReceived={setFeedbackReceived}
+					feedback={feedback}
+				/>
+			)}
 		</>
 	);
 };
