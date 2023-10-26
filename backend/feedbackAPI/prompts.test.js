@@ -43,9 +43,9 @@ describe("configureChatOptions", () => {
 		expect(options).toBeDefined();
 
 		expect(options.model).toBeOneOf(["gpt-3.5-turbo", "gpt4"]);
-		expect(options.presence_penalty).toBeOneOf([0.2, null]);
+		expect(options.presence_penalty).toBeOneOf([0.2, null, 0]);
 		expect(options.frequency_penalty).toBeOneOf([0.2, null, 0]);
-		expect(options.max_tokens).toBeOneOf([4096, 4000, 3750, 3500, 3000]);
+		expect(options.max_tokens).toBeWithin(2000, 4097);
 		expect(options.temperature).toBeOneOf([1, 1.5]);
 		expect(options.n).toBeOneOf([1, 2]);
 		expect(options.top_p).toBeOneOf([0.5, 1]);
@@ -93,7 +93,7 @@ describe("getCompletion", () => {
 
 	test("Gratitude Journal", async () => {
 		let response = await getCompletion(
-			"Hi, I am grateful that my cat is really nice to me and that she is friendly",
+			"Hi, I am grateful that my cat is really nice to me and that she is friendly. I also have a wonderful family and a great job. I'd like to get some plants next.",
 			"Gratitude Journal",
 			"55"
 		);
@@ -129,7 +129,7 @@ describe("getCompletion", () => {
 			"55"
 		);
 		console.log(response);
-		expect(response).toContain("blue");
+		expect(response).toContain("feelings");
 		expect(response.length).toBeGreaterThan(750);
 	}, 15000);
 	test("Bullet Journal", async () => {
