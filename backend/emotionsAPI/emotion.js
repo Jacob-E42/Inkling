@@ -31,9 +31,11 @@ async function getNLU(entryText) {
 	const analyzeParams = {
 		text: `${entryText}`,
 		features: {
-			emotion: {
-				targets: ["apples", "oranges"]
-			}
+			emotion,
+			keywords: { limit: 10, sentiment: true, emotion: true },
+			concepts: { limit: 10 },
+			entities: { mentions: true, limit: 10, sentiment: true, emotion: true },
+			categories
 		}
 	};
 	try {
