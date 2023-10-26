@@ -19,8 +19,9 @@ function getDatabaseUri() {
 // Speed up bcrypt during tests, since the algorithm safety isn't being tested
 const BCRYPT_WORK_FACTOR = process.env.NODE_ENV === "test" ? 1 : 14;
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "apikey";
-const IBM_API_KEY = process.env.OPENAI_API_KEY || "ibmkey";
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "openaikey";
+const IBM_API_KEY = process.env.IBM_URL || "ibmkey";
+const IBM_URL = process.env.IBM_URL || "ibmurl";
 
 console.log("inkling Config:".green);
 console.log("SECRET_KEY:".yellow, SECRET_KEY);
@@ -36,5 +37,7 @@ module.exports = {
 	PORT,
 	BCRYPT_WORK_FACTOR,
 	getDatabaseUri,
-	OPENAI_API_KEY
+	OPENAI_API_KEY,
+	IBM_API_KEY,
+	IBM_URL
 };
