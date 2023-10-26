@@ -29,7 +29,6 @@ async function getCompletion(entryText, journalType, userId) {
 	}
 	// Check if OpenAI API key is available
 	if (!configuration.apiKey) {
-		console.log(configuration, "apiKey=", process.env.OPENAI_API_KEY);
 		throw new ExpressError("OpenAI API key not configured, please follow instructions in README.md");
 	}
 
