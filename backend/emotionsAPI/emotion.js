@@ -16,9 +16,17 @@ async function getNLU(entryText) {
 	if (
 		!naturalLanguageUnderstanding ||
 		!naturalLanguageUnderstanding.version ||
-		!naturalLanguageUnderstanding.authenticator ||
-		!naturalLanguageUnderstanding.serviceUrl
+		!naturalLanguageUnderstanding.authenticator
 	) {
+		console.log(
+			naturalLanguageUnderstanding,
+			"version=",
+			naturalLanguageUnderstanding.version,
+			"authenticator=",
+			naturalLanguageUnderstanding.authenticator,
+			"serviceUrl=",
+			naturalLanguageUnderstanding.serviceUrl
+		);
 		throw new ExpressError("NLU instance did not configure correctly");
 	}
 
@@ -31,17 +39,17 @@ async function getNLU(entryText) {
 	const analyzeParams = {
 		text: `${entryText}`,
 		features: {
-			emotion,
+			emotion: { document: true },
 			keywords: { limit: 10, sentiment: true, emotion: true },
 			concepts: { limit: 10 },
-			entities: { mentions: true, limit: 10, sentiment: true, emotion: true },
-			categories
+			entities: { mentions: true, limit: 10, sentiment: true, emotion: true }
+			// categories: { limit: 10, explanation: true }
 		}
 	};
 	try {
 		const analysisResults = await naturalLanguageUnderstanding.analyze(analyzeParams);
 		console.log(JSON.stringify(analysisResults, null, 2));
-		return analysisResults;
+		return analysisResults.result;
 	} catch (err) {
 		if (err.response) {
 			console.error(err.response.status, err.response.data);
