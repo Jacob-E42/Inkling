@@ -20,7 +20,7 @@ function getDatabaseUri() {
 const BCRYPT_WORK_FACTOR = process.env.NODE_ENV === "test" ? 1 : 14;
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "openaikey";
-const IBM_API_KEY = process.env.IBM_URL || "ibmkey";
+const IBM_API_KEY = process.env.IBM_API_KEY || "ibmkey";
 const IBM_URL = process.env.IBM_URL || "ibmurl";
 
 console.log("inkling Config:".green);
@@ -30,6 +30,7 @@ console.log("BCRYPT_WORK_FACTOR".yellow, BCRYPT_WORK_FACTOR);
 console.log("Database:".yellow, getDatabaseUri());
 console.log("OPENAI_API_KEY".yellow, OPENAI_API_KEY);
 console.log("IBM_API_KEY".yellow, IBM_API_KEY);
+console.log("IBM_URL".yellow, IBM_URL);
 console.log("---");
 
 module.exports = {
