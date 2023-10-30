@@ -48,7 +48,7 @@ async function getNLU(entryText) {
 	};
 	try {
 		const analysisResults = await naturalLanguageUnderstanding.analyze(analyzeParams);
-		console.log(JSON.stringify(analysisResults, null, 2));
+		// console.log(JSON.stringify(analysisResults, null, 2));
 		return analysisResults.result;
 	} catch (err) {
 		if (err.response) {
