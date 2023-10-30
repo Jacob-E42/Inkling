@@ -1,8 +1,10 @@
+// Import required modules and configurations for IBM Watson NLU service
 const { IBM_API_KEY, IBM_URL } = require("../config");
 const { BadRequestError, ExpressError } = require("../expressError");
 const NaturalLanguageUnderstandingV1 = require("ibm-watson/natural-language-understanding/v1");
 const { IamAuthenticator } = require("ibm-watson/auth");
 
+// Initialize the IBM Watson NLU service with the API key and service URL
 const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
 	version: "2022-04-07",
 	authenticator: new IamAuthenticator({
@@ -11,8 +13,9 @@ const naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
 	serviceUrl: `${IBM_URL}`
 });
 
+// Define the function to perform NLU analysis on given journal entry text
 async function getNLU(entryText) {
-	// Check for necessary configurations and instances
+	// Check if the NLU service instance and configuration are correctly set up
 	if (
 		!naturalLanguageUnderstanding ||
 		!naturalLanguageUnderstanding.version ||
@@ -30,12 +33,13 @@ async function getNLU(entryText) {
 		throw new ExpressError("NLU instance did not configure correctly");
 	}
 
-	// Validate input parameters
+	// Validate the entry text to ensure it's non-empty
 	if (!entryText) {
 		throw new BadRequestError("Journal information is missing.");
 	}
 	if (entryText.trim().length < 1) throw new BadRequestError("Journal entry text is missing.");
 
+	// Prepare parameters for NLU analysis, specifying the features to analyze
 	const analyzeParams = {
 		text: `${entryText}`,
 		features: {
@@ -46,11 +50,13 @@ async function getNLU(entryText) {
 			// categories: { limit: 10, explanation: true }
 		}
 	};
+
+	// Attempt to analyze the text using IBM Watson NLU
 	try {
 		const analysisResults = await naturalLanguageUnderstanding.analyze(analyzeParams);
-		// console.log(JSON.stringify(analysisResults, null, 2));
 		return analysisResults.result;
 	} catch (err) {
+		// Handle errors that may come from the NLU service request
 		if (err.response) {
 			console.error(err.response.status, err.response.data);
 			return err.response.data;
@@ -61,4 +67,5 @@ async function getNLU(entryText) {
 	}
 }
 
+// Export the getNLU function for use in other parts of the application
 module.exports = { getNLU };
