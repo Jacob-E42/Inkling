@@ -2,7 +2,6 @@
 
 const request = require("supertest");
 const app = require("../app");
-const getCurrentDate = require("../helpers/getCurrentDate");
 const {
 	commonBeforeAll,
 	commonBeforeEach,
@@ -117,17 +116,17 @@ describe("POST /feedback/", function () {
 		expect(resp.statusCode).toEqual(401);
 	});
 
-	// test("not found if the userId doesn't match any user_id", async function () {
-	// 	const userId = 101;
-	// 	const resp = await request(app)
-	// 		.post(`/feedback/${userId}`)
-	// 		.send({
-	// 			id: 1,
-	// 			userId: 101,
-	// 			entryText: "New Entry Text for Feedback",
-	// 			journalType: "Gratitude Journal"
-	// 		})
-	// 		.set("authorization", `Bearer ${u1Token}`);
-	// 	expect(resp.statusCode).toEqual(404); // This assumes that you will return a 404 if the userId isn't found, adjust accordingly.
-	// });
+	test("unauth if the userId doesn't match any user_id", async function () {
+		const userId = 101;
+		const resp = await request(app)
+			.post(`/feedback/${userId}`)
+			.send({
+				id: 1,
+				userId: 101,
+				entryText: "New Entry Text for Feedback",
+				journalType: "Gratitude Journal"
+			})
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(401); // This assumes that you will return a 404 if the userId isn't found, adjust accordingly.
+	});
 });

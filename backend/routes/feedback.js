@@ -3,7 +3,7 @@ const router = express.Router({ mergeParams: true });
 const jsonschema = require("jsonschema");
 const receiveFeedbackSchema = require("../schema/receiveFeedbackSchema.json");
 const { BadRequestError, NotFoundError } = require("../expressError");
-const { generatePrompt, getCompletion } = require("../feedbackAPI/prompts");
+const { getCompletion } = require("../feedbackAPI/prompts");
 const { ensureCorrectUserByUserId } = require("../middleware/authMiddleware");
 
 // Endpoint for creating feedback, with middleware to ensure the user making the request is correct
