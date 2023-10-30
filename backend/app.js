@@ -10,6 +10,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const journalRoutes = require("./routes/journals");
 const feedbackRoutes = require("./routes/feedback");
+const emotionsRoutes = require("./routes/emotions");
 const morgan = require("morgan");
 
 // Initialize the Express application
@@ -24,6 +25,7 @@ app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/users/:userId/journals", journalRoutes);
 app.use("/feedback/:userId", feedbackRoutes);
+app.use("/emotions/:userId", emotionsRoutes);
 
 // Define the root endpoint for the application
 app.get("/", async (req, res, next) => {
