@@ -130,6 +130,31 @@ class ApiRequest {
 		console.log("response", response);
 		return response.feedback;
 	}
+
+	async getEmotions(
+		id = null,
+		userId,
+		entryText,
+		journalType = null,
+		title = null,
+		entryDate = null,
+		emotions = null
+	) {
+		console.debug("getFeedback", id, userId, entryText, journalType, title, entryDate);
+		const data = {
+			id: id,
+			userId: userId,
+			title: title,
+			entryText: entryText,
+			entryDate: entryDate,
+			journalType: journalType,
+			emotions: emotions
+		};
+
+		let response = await this.#request(`emotions/${userId}/`, data, "post");
+		console.log("response", response);
+		return response.emotions;
+	}
 }
 
 export default ApiRequest;
