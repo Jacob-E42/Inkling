@@ -145,7 +145,7 @@ const JournalEntryPage = () => {
 				}
 			}
 		},
-		[currentJournal, setColor, setMsg, api, setJournalLoaded, setFeedbackPending]
+		[currentJournal, setColor, setMsg, api, setJournalLoaded, setFeedbackPending, setEmotionsPending]
 	);
 
 	const fetchFeedback = useCallback(async () => {
@@ -175,6 +175,17 @@ const JournalEntryPage = () => {
 		setFeedbackPending(false);
 	}, [api, currentJournal, setMsg, setColor, date, setFeedback, setFeedbackReceived, setFeedbackPending]);
 
+	useEffect(() => {
+		console.debug("useEffect -> fetchFeedback()");
+		if (currentJournal && currentJournal.entryText && feedbackPending) {
+			fetchFeedback();
+		} else {
+			console.debug("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
+			setMsg("An error occurred trying to load feedback.");
+		}
+		// eslint-disable-next-line
+	}, [feedbackPending]);
+
 	const fetchEmotions = useCallback(async () => {
 		console.debug("fetchEmotions");
 		setEmotionsReceived(false);
@@ -200,29 +211,18 @@ const JournalEntryPage = () => {
 			console.debug(validJournal.error);
 		}
 		setEmotionsReceived(true);
-	}, [api, currentJournal, setMsg, setColor, date, setFeedback, setFeedbackReceived, setFeedbackPending]);
-
-	useEffect(() => {
-		console.debug("useEffect -> fetchFeedback()");
-		if (currentJournal && currentJournal.entryText && feedbackPending) {
-			fetchFeedback();
-		} else {
-			console.debug("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
-			setMsg("An error occurred trying to load feedback.");
-		}
-		// eslint-disable-next-line
-	}, [feedbackPending]);
+	}, [api, currentJournal, setMsg, setColor, date, setCurrentJournal, setEmotionsReceived]);
 
 	useEffect(() => {
 		console.debug("useEffect -> fetchEmotions()");
-		if (currentJournal && currentJournal.entryText && feedbackPending) {
-			fetchFeedback();
+		if (currentJournal && currentJournal.entryText && emotionsPending) {
+			fetchEmotions();
 		} else {
-			console.debug("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
-			setMsg("An error occurred trying to load feedback.");
+			console.debug("Emotions Are NOT PENDING", emotionsPending, currentJournal?.entryText);
+			setMsg("An error occurred trying to load emotions.");
 		}
 		// eslint-disable-next-line
-	}, [feedbackPending]);
+	}, [emotionsPending]);
 
 	if (!journalLoaded) return <LoadingSpinner />;
 	// console.log("this is annoying", currentJournal.title, currentJournal.entryText);
@@ -249,6 +249,7 @@ const JournalEntryPage = () => {
 			)}
 
 			{feedbackReceived && <Feedback feedback={feedback} />}
+			{emotionsReceived && <Emotions emotions={currentJournal.emotions} />}
 		</>
 	);
 };
