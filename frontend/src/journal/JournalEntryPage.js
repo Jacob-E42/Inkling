@@ -185,7 +185,7 @@ const JournalEntryPage = () => {
 		if (currentJournal && currentJournal.entryText && feedbackPending) {
 			fetchFeedback();
 		} else {
-			console.debug("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
+			console.error("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
 			setMsg("An error occurred trying to load feedback.");
 			setColor("danger");
 		}
@@ -203,12 +203,12 @@ const JournalEntryPage = () => {
 					console.debug("Journal is valid");
 					const resp = await api.getEmotions(id, userId, entryText, journalType, title, date);
 					console.log(resp);
-					const emotions = resp.emotion.document.emotion;
-					if (emotions) {
+
+					if (resp) {
 						setMsg("Emotions Received!");
 						setColor("success");
 						const newJournal = currentJournal;
-						newJournal["emotions"] = emotions;
+						newJournal["emotions"] = resp;
 						setCurrentJournal(newJournal);
 						setEmotionsReceived(true);
 					}
@@ -231,8 +231,7 @@ const JournalEntryPage = () => {
 		if (currentJournal && currentJournal.entryText && emotionsPending) {
 			fetchEmotions();
 		} else {
-			console.debug("Emotions Are NOT PENDING", emotionsPending, currentJournal?.entryText);
-			setMsg("An error occurred trying to load emotions.");
+			console.error("Emotions Are NOT PENDING", emotionsPending, currentJournal?.entryText);
 		}
 		// eslint-disable-next-line
 	}, [emotionsPending]);
