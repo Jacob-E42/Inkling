@@ -1,19 +1,38 @@
-import React, { useContext } from "react";
-import AlertContext from "../context_providers/AlertContext";
-import "./Emotions.css";
+import React from "react";
+import "chart.js/auto";
+
+import { Doughnut } from "react-chartjs-2";
 
 const Emotions = ({ emotions }) => {
-	console.debug("Emotions", emotions);
-	const { setMsg, setColor } = useContext(AlertContext);
-	if (!emotions) {
-		setMsg("Emotions are missing!");
-		setColor("danger");
+	const totalEmotions = emotions.joy + emotions.sadness + emotions.anger + emotions.fear + emotions.disgust;
+	console.debug("Emotions", emotions, totalEmotions);
+	// const { setMsg, setColor } = useContext(AlertContext);
+
+	if (!emotions || !emotions.joy || !emotions.sadness || !emotions.anger || !emotions.fear || !emotions.disgust)
 		return <></>;
-	}
+	const data = {
+		labels: ["Joy", "Sadness", "Anger", "Fear", "Disgust"],
+		datasets: [
+			{
+				label: "Emotions",
+				data: [emotions.joy, emotions.sadness, emotions.anger, emotions.fear, emotions.disgust],
+				borderWidth: 1
+			}
+		]
+	};
+	const options = {};
+
 	return (
 		<>
-			<h3>Emotions</h3>
-			<p>{emotions}</p>
+			{emotions && (
+				<Doughnut
+					data={data}
+					options={options}
+					redraw={true}
+					fallbackContent={<h3>Emotions</h3>}
+					datasetIdKey={emotions.joy}
+				/>
+			)}
 		</>
 	);
 };
