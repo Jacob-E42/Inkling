@@ -11,6 +11,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { getCurrentDate } from "../common/dateHelpers";
 import StreakDisplay from "../streak/StreakDisplay";
 import Feedback from "../feedback/Feedback";
+import Emotions from "../emotions/Emotions";
 import "./Journal.css";
 
 const verifyDependentInfo = (date, user, api) => {
@@ -69,14 +70,14 @@ const JournalEntryPage = () => {
 		currentJournal,
 		"journalLoaded=",
 		journalLoaded,
-		"feedback=",
-		feedback,
 		"feedbackPending=",
 		feedbackPending,
 		"feedbackReceived=",
 		feedbackReceived,
 		"emotionsReceived=",
-		emotionsReceived
+		emotionsReceived,
+		"emotions=",
+		currentJournal.emotions
 	);
 
 	useEffect(() => {
@@ -148,30 +149,34 @@ const JournalEntryPage = () => {
 		[currentJournal, setColor, setMsg, api, setJournalLoaded, setFeedbackPending, setEmotionsPending]
 	);
 
-	const fetchFeedback = useCallback(async () => {
+	const fetchFeedback = useCallback(() => {
 		console.debug("fetchFeedback");
-		setFeedbackReceived(false);
-		const { id, userId, title, entryText, journalType } = currentJournal;
-		const validJournal = validateJournalInfo(id, userId, title, entryText, date, journalType);
-		if (validJournal.valid) {
-			try {
-				console.debug("Journal is valid");
-				const feedback = await api.getFeedback(id, userId, entryText, journalType, title, date);
-				if (feedback) {
-					setMsg("Feedback Received!");
-					setColor("success");
-					setFeedback(feedback);
-					setFeedbackReceived(true);
+		async function loadFeedback() {
+			setFeedbackReceived(false);
+			const { id, userId, title, entryText, journalType } = currentJournal;
+			const validJournal = validateJournalInfo(id, userId, title, entryText, date, journalType);
+			if (validJournal.valid) {
+				try {
+					console.debug("Journal is valid");
+					const feedback = await api.getFeedback(id, userId, entryText, journalType, title, date);
+					if (feedback) {
+						setMsg("Feedback Received!");
+						setColor("success");
+						setFeedback(feedback);
+						setFeedbackReceived(true);
+					}
+				} catch (err) {
+					console.error(err);
+					setMsg("Loading Feedback Failed");
+					setColor("danger");
 				}
-			} catch (err) {
-				console.error(err);
-				setMsg("Loading Feedback Failed");
-				setColor("danger");
+			} else {
+				setMsg("Journal is NOT valid");
+				console.debug(validJournal.error);
 			}
-		} else {
-			setMsg("Journal is NOT valid");
-			console.debug(validJournal.error);
 		}
+		loadFeedback();
+
 		setFeedbackPending(false);
 	}, [api, currentJournal, setMsg, setColor, date, setFeedback, setFeedbackReceived, setFeedbackPending]);
 
@@ -182,39 +187,47 @@ const JournalEntryPage = () => {
 		} else {
 			console.debug("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
 			setMsg("An error occurred trying to load feedback.");
+			setColor("danger");
 		}
 		// eslint-disable-next-line
 	}, [feedbackPending]);
 
-	const fetchEmotions = useCallback(async () => {
+	const fetchEmotions = useCallback(() => {
 		console.debug("fetchEmotions");
-		setEmotionsReceived(false);
-		const { id, userId, title, entryText, journalType, emotions } = currentJournal;
-		const validJournal = validateJournalInfo(id, userId, title, entryText, date, journalType);
-		if (validJournal.valid) {
-			try {
-				console.debug("Journal is valid");
-				const resp = await api.getEmotions(id, userId, entryText, journalType, title, date, emotions);
-				if (resp) {
-					setMsg("Feedback Received!");
-					setColor("success");
-					setCurrentJournal(currentJournal => ({ ...currentJournal, resp }));
-					setEmotionsReceived(true);
+		async function loadEmotions() {
+			setEmotionsReceived(false);
+			const { id, userId, title, entryText, journalType } = currentJournal;
+			const validJournal = validateJournalInfo(id, userId, title, entryText, date, journalType);
+			if (validJournal.valid) {
+				try {
+					console.debug("Journal is valid");
+					const resp = await api.getEmotions(id, userId, entryText, journalType, title, date);
+					console.log(resp);
+					const emotions = resp.emotion.document.emotion;
+					if (emotions) {
+						setMsg("Emotions Received!");
+						setColor("success");
+						const newJournal = currentJournal;
+						newJournal["emotions"] = emotions;
+						setCurrentJournal(newJournal);
+						setEmotionsReceived(true);
+					}
+				} catch (err) {
+					console.error(err);
+					setMsg("Loading Emotions Failed");
+					setColor("danger");
 				}
-			} catch (err) {
-				console.error(err);
-				setMsg("Loading Emotions Failed");
-				setColor("danger");
+			} else {
+				setMsg("Journal is NOT valid");
+				console.debug(validJournal.error);
 			}
-		} else {
-			setMsg("Journal is NOT valid");
-			console.debug(validJournal.error);
 		}
-		setEmotionsReceived(true);
-	}, [api, currentJournal, setMsg, setColor, date, setCurrentJournal, setEmotionsReceived]);
+		loadEmotions();
+		setEmotionsPending(false);
+	}, [api, currentJournal, setMsg, setColor, date, setCurrentJournal, setEmotionsReceived, setEmotionsPending]);
 
 	useEffect(() => {
-		console.debug("useEffect -> fetchEmotions()");
+		console.debug("useEffect -> fetch Emotions()");
 		if (currentJournal && currentJournal.entryText && emotionsPending) {
 			fetchEmotions();
 		} else {
