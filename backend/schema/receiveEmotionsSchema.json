@@ -44,6 +44,6 @@
 			]
 		}
 	},
-	"required": ["entryText", "userId"],
+	"required": ["entryText", "userId", "title", "entryDate", "journalType"],
 	"additionalProperties": false
 }
