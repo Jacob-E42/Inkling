@@ -24,7 +24,7 @@ function App() {
 	const [color, setColor] = useLocalStorage("color", "primary");
 	let api = useRef(null);
 
-	console.debug("App", "infoLoaded=", infoLoaded, "user=", user, "token=", token, "apiRequest=", api, "msg=", msg);
+	// console.debug("App", "infoLoaded=", infoLoaded, "user=", user, "token=", token, "apiRequest=", api, "msg=", msg);
 
 	useEffect(() => {
 		if (token) {

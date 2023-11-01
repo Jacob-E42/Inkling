@@ -12,7 +12,7 @@ import { useNavigate, Link } from "react-router-dom";
 import LoadingSpinner from "../common/LoadingSpinner";
 
 const StreakDisplay = ({ date }) => {
-	console.debug("StreakDisplay", date);
+	// console.debug("StreakDisplay", date);
 	const navigate = useNavigate();
 	if (!useValidateDate(date)) navigate(`journal/${getCurrentDate()}`);
 	const [daysArray, setDaysArray] = useLocalStorage("datesToRender", [date]);
