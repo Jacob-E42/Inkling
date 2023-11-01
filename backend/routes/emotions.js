@@ -5,6 +5,7 @@ const receiveEmotionsSchema = require("../schema/receiveEmotionsSchema.json");
 const { BadRequestError, NotFoundError } = require("../expressError");
 const { getNLU } = require("../emotionsAPI/emotion");
 const { ensureCorrectUserByUserId } = require("../middleware/authMiddleware");
+const Journal = require("../models/journal");
 
 router.post("/", ensureCorrectUserByUserId, async function (req, res, next) {
 	console.debug("POST /feedback/\n", req.body.id);
@@ -22,10 +23,13 @@ router.post("/", ensureCorrectUserByUserId, async function (req, res, next) {
 		// Check if the user ID in the request body matches the user ID in the request parameters
 		if (String(req.body.userId) !== req.params.userId) throw new BadRequestError("Incorrect user ID");
 
-		const entryText = req.body.entryText || "";
+		const { userId, title, entryText, entryDate, journalType } = req.body;
 
 		// Retrieve emotions for the given entry text
-		const emotions = await getNLU(entryText, req.body.userId);
+		const resp = await getNLU(entryText, req.body.userId);
+		const emotions = resp.emotion.document.emotion;
+		console.log(emotions);
+		if (resp) await Journal.updateEntry(userId, title, entryText, entryDate, emotions, journalType);
 		return res.json({ emotions });
 	} catch (err) {
 		return next(err);
