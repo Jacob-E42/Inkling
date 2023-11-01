@@ -7,54 +7,6 @@ exports[`StreakDisplay matches snapshot 1`] = `
   >
     <a
       class="day-link "
-      href="/journal/2023-09-25"
-    >
-      Mon
-      <br />
-      25
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-26"
-    >
-      Tue
-      <br />
-      26
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-27"
-    >
-      Wed
-      <br />
-      27
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-28"
-    >
-      Thu
-      <br />
-      28
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-29"
-    >
-      Fri
-      <br />
-      29
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-09-30"
-    >
-      Sat
-      <br />
-      30
-    </a>
-    <a
-      class="day-link "
       href="/journal/2023-10-01"
     >
       Sun
@@ -246,12 +198,60 @@ exports[`StreakDisplay matches snapshot 1`] = `
       24
     </a>
     <a
-      class="day-link active"
+      class="day-link "
       href="/journal/2023-10-25"
     >
       Wed
       <br />
       25
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-26"
+    >
+      Thu
+      <br />
+      26
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-27"
+    >
+      Fri
+      <br />
+      27
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-28"
+    >
+      Sat
+      <br />
+      28
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-29"
+    >
+      Sun
+      <br />
+      29
+    </a>
+    <a
+      class="day-link "
+      href="/journal/2023-10-30"
+    >
+      Mon
+      <br />
+      30
+    </a>
+    <a
+      class="day-link active"
+      href="/journal/2023-10-31"
+    >
+      Tue
+      <br />
+      31
     </a>
   </div>
 </DocumentFragment>

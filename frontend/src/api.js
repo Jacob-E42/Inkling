@@ -140,7 +140,7 @@ class ApiRequest {
 		entryDate = null,
 		emotions = null
 	) {
-		console.debug("getFeedback", id, userId, entryText, journalType, title, entryDate);
+		console.debug("getEmotions", id, userId, entryText, journalType, title, entryDate, emotions);
 		const data = {
 			id: id,
 			userId: userId,
@@ -152,7 +152,7 @@ class ApiRequest {
 		};
 
 		let response = await this.#request(`emotions/${userId}/`, data, "post");
-		console.log("response", response);
+		console.log("emotions=", response);
 		return response.emotions;
 	}
 }
