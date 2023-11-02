@@ -77,7 +77,7 @@ const JournalEntryPage = () => {
 		"emotionsReceived=",
 		emotionsReceived,
 		"emotions=",
-		currentJournal.emotions
+		currentJournal?.emotions
 	);
 
 	useEffect(() => {
