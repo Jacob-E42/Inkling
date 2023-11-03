@@ -101,6 +101,14 @@ const mockFeedbackResponse = {
 	}
 };
 
+const mockEmotionsResponse = {
+	joy: 0.02,
+	anger: 0.4,
+	sadness: 0.32,
+	fear: 0.11,
+	disgust: 0.11
+};
+
 describe("Successful journal fetch", () => {
 	beforeEach(() => {
 		jest.clearAllMocks();
@@ -519,6 +527,72 @@ describe("Receiving Feedback works", () => {
 		expect(title.value).toBe("Baking misadventure");
 		await waitFor(async () => {
 			expect(await screen.findByText("Feedback")).toBeInTheDocument();
+		});
+	});
+});
+
+describe("emotions work", () => {
+	beforeEach(() => {
+		jest.clearAllMocks();
+		act(() => {
+			axios.mockImplementation(config => {
+				if (config.method === "get") {
+					return Promise.resolve(mockSuccessfulResponse);
+				}
+				if (config.method === "patch") {
+					return Promise.resolve(mockUpdatedJournalResponse);
+				}
+				if (config.method === "post") {
+					return Promise.resolve(mockEmotionsResponse);
+				} else return Promise.resolve(mockErrorResponse);
+			});
+		});
+	});
+
+	test("JournalEntryPage changing text and emotions works", async () => {
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			render(
+				<MemoryRouter initialEntries={["/journal/2023-07-04"]}>
+					<UserProvider>
+						<ApiProvider>
+							<AlertProvider>
+								<Routes>
+									<Route
+										path="/journal/:date"
+										element={<JournalEntryPage />}
+									/>
+								</Routes>
+							</AlertProvider>
+						</ApiProvider>
+					</UserProvider>
+				</MemoryRouter>
+			);
+		});
+
+		const title = screen.getByPlaceholderText("title");
+		const entryText = screen.getByPlaceholderText("Start your entry here...");
+		const submitButton = screen.getByText("Submit");
+		expect(title.value).toBe("Baking adventure");
+
+		// eslint-disable-next-line testing-library/no-unnecessary-act
+		await act(async () => {
+			fireEvent.change(entryText, {
+				target: {
+					value: "I am so fed up with my life. I wish I didn't have to do anything. I hate anything and everything."
+				}
+			});
+			fireEvent.click(submitButton);
+		});
+
+		await waitFor(() => {
+			expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
+		});
+
+		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
+		expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
+		await waitFor(async () => {
+			expect(await screen.findByText("Emotions")).toBeInTheDocument();
 		});
 	});
 });
