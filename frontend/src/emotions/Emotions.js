@@ -5,7 +5,7 @@ import { Doughnut } from "react-chartjs-2";
 
 const Emotions = ({ emotions }) => {
 	if (!emotions || !emotions.joy || !emotions.sadness || !emotions.anger || !emotions.fear || !emotions.disgust)
-		return <></>;
+		return null;
 	console.debug("Emotions", emotions);
 	const totalEmotions = emotions.joy + emotions.sadness + emotions.anger + emotions.fear + emotions.disgust;
 
@@ -27,11 +27,11 @@ const Emotions = ({ emotions }) => {
 
 	return (
 		<>
+			<h3>Emotions</h3>
 			{emotions && (
 				<Doughnut
 					data={data}
 					options={options}
-					fallbackContent={<h3>Emotions</h3>}
 					datasetIdKey={totalEmotions}
 					width={400}
 					height={400}
