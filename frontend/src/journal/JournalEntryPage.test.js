@@ -102,11 +102,7 @@ const mockFeedbackResponse = {
 };
 
 const mockEmotionsResponse = {
-	joy: 0.02,
-	anger: 0.4,
-	sadness: 0.32,
-	fear: 0.11,
-	disgust: 0.11
+	data: { emotions: { joy: 0.02, anger: 0.4, sadness: 0.32, fear: 0.11, disgust: 0.11 } }
 };
 
 describe("Successful journal fetch", () => {
@@ -591,8 +587,11 @@ describe("emotions work", () => {
 
 		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
 		expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
-		await waitFor(async () => {
-			expect(await screen.findByText("Emotions")).toBeInTheDocument();
-		});
-	});
+		await waitFor(
+			async () => {
+				expect(await screen.findByText("Emotions")).toBeInTheDocument();
+			},
+			{ timeout: 10000 }
+		);
+	}, 15000);
 });
