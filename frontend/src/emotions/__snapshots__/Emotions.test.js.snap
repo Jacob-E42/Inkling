@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Emotions matches snapshot 1`] = `<DocumentFragment />`;
+
+exports[`Emotions matches snapshot when rendered without props 1`] = `<DocumentFragment />`;
