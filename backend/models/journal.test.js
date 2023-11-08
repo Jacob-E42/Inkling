@@ -71,6 +71,61 @@ describe("Journal", () => {
 		});
 	});
 
+	describe("getDatesRange", () => {
+		const mockUserId = 1;
+
+		// Mock the Journal.getByDate method
+		beforeAll(() => {
+			spyOn(Journal, "getByDate").and.callFake((userId, date) => {
+				if (date === "2022-01-04") {
+					// Simulate finding a journal entry for this date
+					return new Journal({ id: 123, entryDate: date });
+				} else {
+					// Simulate no journal entry found for other dates
+					throw new NotFoundError();
+				}
+			});
+		});
+
+		it("should retrieve an array of journal existences by date range", async () => {
+			const dateRange = ["2022-01-04", "2022-01-05"];
+			const result = await Journal.getDatesRange(mockUserId, dateRange);
+			console.log(result);
+
+			expect(result).toBeDefined();
+			expect(Array.isArray(result)).toBe(true);
+			expect(result).toEqual([
+				{ date: "2022-01-04", exists: true },
+				{ date: "2022-01-05", exists: false }
+			]);
+		});
+
+		it("should return error if any of the dates are not handled correctly", async () => {
+			// Include a date that would cause a different error in the range
+			const dateRangeWithError = ["2022-01-04", "2022-01-05", "error-date"];
+
+			spyOn(Journal, "getByDate").and.callFake((userId, date) => {
+				if (date === "error-date") {
+					throw new ExpressError("Invalid date format", 400);
+				}
+				return Journal.getByDate.calls.mostRecent().returnValue;
+			});
+
+			try {
+				await Journal.getDatesRange(mockUserId, dateRangeWithError);
+				fail("Expected method to throw");
+			} catch (err) {
+				expect(err instanceof ExpressError).toBeTruthy();
+				expect(err.message).toBe("One or more of the dates wasn't handled correctly");
+			}
+		});
+
+		// Clean up the mock
+		afterAll(() => {
+			Journal.getByDate.and.callThrough();
+		});
+	});
+
 	describe("createEntry", () => {
 		it("should create a new Journal entry", async () => {
 			const userId = 1;
