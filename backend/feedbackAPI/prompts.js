@@ -41,7 +41,7 @@ async function getCompletion(entryText, journalType, userId) {
 
 	// Configure chat options for the OpenAI API request
 	const chatOptions = configureChatOptions(entryText, journalType, userId);
-
+	console.debug("MAX TOKENS --->", chatOptions.max_tokens);
 	// Make the request to the OpenAI API
 	try {
 		const chatCompletion = await openai.createChatCompletion({
@@ -62,17 +62,17 @@ async function getCompletion(entryText, journalType, userId) {
 // Function to configure the chat options for OpenAI API request
 function configureChatOptions(entryText, journalType, userId) {
 	// Define default configuration options for the API
-	let model = "gpt-3.5-turbo";
-	let presence_penalty = 0;
-	let frequency_penalty = 0.2;
-	let temperature = 1;
-	let n = 1;
-	let top_p = 0.5;
-	let user = `${userId}`;
+	const model = "gpt-3.5-turbo";
+	const presence_penalty = 0;
+	const frequency_penalty = 0.2;
+	const temperature = 1;
+	const n = 1;
+	const top_p = 0.5;
+	const user = `${userId}`;
 	// Generate messages to be passed to the OpenAI API
-	let messages = generateMessages(entryText, journalType);
+	const messages = generateMessages(entryText, journalType);
 	if (!messages) return null;
-	let max_tokens = getMaxTokens(messages);
+	const max_tokens = getMaxTokens(messages);
 	return { model, presence_penalty, frequency_penalty, max_tokens, temperature, n, top_p, user, messages };
 }
 
@@ -94,7 +94,8 @@ function generateMessages(entryText, journalType) {
 function getMaxTokens(messages) {
 	if (!messages) return null;
 	let messagesLength = messages[0].content.length + messages[1].content.length;
-	const appxTokens = parseInt(messagesLength / 4);
+	const appxTokens = parseInt(messagesLength / 4.25);
+	console.log(messagesLength, appxTokens);
 	return 4097 - appxTokens - 10;
 }
 
