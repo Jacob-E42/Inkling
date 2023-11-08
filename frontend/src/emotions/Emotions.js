@@ -6,7 +6,7 @@ import { Doughnut } from "react-chartjs-2";
 const Emotions = ({ emotions }) => {
 	if (!emotions || !emotions.joy || !emotions.sadness || !emotions.anger || !emotions.fear || !emotions.disgust)
 		return null;
-	console.debug("Emotions", emotions);
+	// console.debug("Emotions", emotions);
 	const totalEmotions = emotions.joy + emotions.sadness + emotions.anger + emotions.fear + emotions.disgust;
 
 	const data = {

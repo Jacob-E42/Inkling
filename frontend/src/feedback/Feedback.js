@@ -9,7 +9,7 @@ const Feedback = ({ feedback }) => {
 	if (!feedback) {
 		setMsg("Feedback is missing!");
 		setColor("danger");
-		return <></>;
+		return null;
 	}
 	return (
 		<>

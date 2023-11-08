@@ -1,12 +1,10 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import Error from "../common/Error";
-import AlertContext from "../context_providers/AlertContext";
 import "./Journal.css";
 
 const Journal = ({ date, title, journalType, entryText, setJournal, editJournal }) => {
 	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
-	const { setMsg, setColor } = useContext(AlertContext);
+
 	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
 	const [tempJournal, setTempJournal] = useState({
 		title: title,
@@ -20,11 +18,6 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 			entryText: entryText
 		});
 	}, [title, entryText]);
-
-	if (!allInfoPresent) {
-		setMsg("Required information is missing");
-		setColor("danger");
-	}
 
 	const handleChange = useCallback(
 		async e => {
@@ -51,7 +44,9 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 		},
 		[editJournal, setJournal, tempJournal]
 	);
-
+	if (!allInfoPresent) {
+		return null;
+	}
 	// console.log(title, tempJournal.title, entryText, tempJournal.entryText);
 	return (
 		<>
@@ -111,13 +106,6 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 						</Button>
 					</Form>
 				</div>
-			)}
-
-			{!allInfoPresent && (
-				<Error
-					msg="Required info is missing"
-					color="danger"
-				/>
 			)}
 		</>
 	);
