@@ -3,6 +3,7 @@
 const db = require("../db");
 const { NotFoundError, BadRequestError, UnauthorizedError, ExpressError } = require("../expressError");
 const { objectDataToSql } = require("../helpers/sql");
+const { isDate, parseISO } = require("date-fns");
 const formatJournalDate = require("../helpers/formatJournalDate");
 
 class Journal {
@@ -56,17 +57,28 @@ class Journal {
 		console.debug("getDatesRange", userId, dateRange);
 		let journalsByDate = [];
 
-		for (let date in dateRange) {
+		for (let date of dateRange) {
 			let journalByDate = { date, exists: false };
-			let resp = await this.getByDate(userId, date);
-			if (resp instanceof NotFoundError) journalByDate.exists = false;
-			else if (resp instanceof Journal && resp.id && resp.entryDate === date) journalByDate.exists = true;
-			else journalByDate.exists = false;
-			journalByDate.push(journalByDate);
+			if (!isDate(parseISO(date))) {
+				journalByDate.date = false;
+				exists = false;
+				continue;
+			}
+			let resp;
+			try {
+				resp = await this.getByDate(userId, date);
+			} catch (err) {
+			} finally {
+				console.debug("resp", resp);
+				if (resp && resp.id && resp.entryDate === date) journalByDate.exists = true;
+			}
+
+			journalsByDate.push(journalByDate);
 		}
 
 		if (journalsByDate.length !== dateRange.length)
 			return new ExpressError("One or more of the dates wasn't handled correctly", 500);
+		console.debug(journalsByDate);
 		return journalsByDate;
 	}
 	// Method to register a new user
