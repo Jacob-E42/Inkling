@@ -46,7 +46,7 @@ class Journal {
 			console.log(`No journal with date: ${entryDate}`);
 			throw new NotFoundError(`Error: No journal with date: ${entryDate}`);
 		} else {
-			console.log("else clause");
+			console.log("journal found");
 			// If the journal is found, return it
 			return formatJournalDate(journal);
 		}
@@ -54,18 +54,20 @@ class Journal {
 
 	static async getDatesRange(userId, dateRange) {
 		console.debug("getDatesRange", userId, dateRange);
-		let possibleJournals = [];
+		let journalsByDate = [];
 
 		for (let date in dateRange) {
+			let journalByDate = { date, exists: false };
 			let resp = await this.getByDate(userId, date);
-			if (resp instanceof NotFoundError) possibleJournals.push(null);
-			else if (resp instanceof Journal && journal.id) possibleJournals.push(resp);
-			else possibleJournals.push(false);
+			if (resp instanceof NotFoundError) journalByDate.exists = false;
+			else if (resp instanceof Journal && resp.id && resp.entryDate === date) journalByDate.exists = true;
+			else journalByDate.exists = false;
+			journalByDate.push(journalByDate);
 		}
 
-		if (possibleJournals.length !== dateRange.length)
+		if (journalsByDate.length !== dateRange.length)
 			return new ExpressError("One or more of the dates wasn't handled correctly", 500);
-		return possibleJournals;
+		return journalsByDate;
 	}
 	// Method to register a new user
 	// Throws a BadRequestError if the email already exists
