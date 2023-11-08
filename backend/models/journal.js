@@ -1,7 +1,7 @@
 //models/Journal.js
 
 const db = require("../db");
-const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
+const { NotFoundError, BadRequestError, UnauthorizedError, ExpressError } = require("../expressError");
 const { objectDataToSql } = require("../helpers/sql");
 const formatJournalDate = require("../helpers/formatJournalDate");
 
@@ -29,7 +29,7 @@ class Journal {
 	// Method to retrieve a journal by its ID
 	// Throws a NotFoundError if the journal is not found
 	static async getByDate(userId, entryDate) {
-		console.debug("getByDate", userId, entryDate);
+		// console.debug("getByDate", userId, entryDate);
 
 		// Define the SQL query
 		const query = {
@@ -40,7 +40,7 @@ class Journal {
 		// Execute the query
 		const res = await db.query(query);
 		const journal = res.rows[0];
-		console.log("journal=", journal);
+		// console.log("journal=", journal);
 
 		if (!journal) {
 			console.log(`No journal with date: ${entryDate}`);
@@ -52,6 +52,21 @@ class Journal {
 		}
 	}
 
+	static async getDatesRange(userId, dateRange) {
+		console.debug("getDatesRange", userId, dateRange);
+		let possibleJournals = [];
+
+		for (let date in dateRange) {
+			let resp = await this.getByDate(userId, date);
+			if (resp instanceof NotFoundError) possibleJournals.push(null);
+			else if (resp instanceof Journal && journal.id) possibleJournals.push(resp);
+			else possibleJournals.push(false);
+		}
+
+		if (possibleJournals.length !== dateRange.length)
+			return new ExpressError("One or more of the dates wasn't handled correctly", 500);
+		return possibleJournals;
+	}
 	// Method to register a new user
 	// Throws a BadRequestError if the email already exists
 	static async createEntry(userId, title, entry, entryDate, journalType) {
