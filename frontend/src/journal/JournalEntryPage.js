@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Journal from "./Journal";
 import NoJournalEntry from "./NoJournalEntry";
-import Error from "../common/Error";
 import LoadingSpinner from "../common/LoadingSpinner";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
@@ -85,7 +84,10 @@ const JournalEntryPage = () => {
 
 		if (!allInfoDefined) {
 			setJournalLoaded(false);
-		} else loadJournalEntry();
+		} else {
+			setFeedback(null);
+			loadJournalEntry();
+		}
 		// eslint-disable-next-line
 	}, [date, api]);
 
@@ -98,13 +100,12 @@ const JournalEntryPage = () => {
 		try {
 			// console.log("date=", date, "api=", api);
 			const resp = await api.getJournalEntryByDate(user.id, date);
-			// console.debug("Here is the RESPONSE", resp);
-			if (typeof resp !== "object") throw new Error("Response returned was invalid");
-
-			await setCurrentJournal(resp);
+			console.debug("Here is the RESPONSE", resp);
+			if (typeof resp !== "object" || resp.status === 404) throw new Error("Response returned was invalid");
+			setCurrentJournal(resp);
 			await setJournalLoaded(true);
 		} catch (err) {
-			console.error(err);
+			console.error(err, err.status);
 			setMsg(err.message);
 			setColor("danger");
 			setCurrentJournal(null);
@@ -159,12 +160,12 @@ const JournalEntryPage = () => {
 				try {
 					console.debug("Journal is valid");
 					const feedback = await api.getFeedback(id, userId, entryText, journalType, title, date);
-					if (feedback) {
+					if (feedback && !feedback.error) {
 						setMsg("Feedback Received!");
 						setColor("success");
 						setFeedback(feedback);
 						setFeedbackReceived(true);
-					}
+					} else throw feedback.error;
 				} catch (err) {
 					console.error(err);
 					setMsg("Loading Feedback Failed");
@@ -185,7 +186,7 @@ const JournalEntryPage = () => {
 		if (currentJournal && currentJournal.entryText && feedbackPending) {
 			fetchFeedback();
 		} else {
-			console.error("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
+			console.warn("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
 			setMsg("An error occurred trying to load feedback.");
 			setColor("danger");
 		}
@@ -231,13 +232,14 @@ const JournalEntryPage = () => {
 		if (currentJournal && currentJournal.entryText && emotionsPending) {
 			fetchEmotions();
 		} else {
-			console.error("Emotions Are NOT PENDING", emotionsPending, currentJournal?.entryText);
+			console.warn("Emotions Are NOT PENDING", emotionsPending, currentJournal?.entryText);
 		}
 		// eslint-disable-next-line
 	}, [emotionsPending]);
 
 	if (!journalLoaded) return <LoadingSpinner />;
-	// console.log("this is annoying", currentJournal.title, currentJournal.entryText);
+	console.log("test allInfoDefined & currentJournal", allInfoDefined, currentJournal);
+
 	return (
 		<>
 			<StreakDisplay date={date} />
@@ -260,10 +262,15 @@ const JournalEntryPage = () => {
 				/>
 			)}
 
-			{feedbackReceived && <Feedback feedback={feedback} />}
-			{emotionsReceived && <Emotions emotions={currentJournal.emotions} />}
+			{feedbackReceived && currentJournal && <Feedback feedback={feedback} />}
+			{emotionsReceived && currentJournal && <Emotions emotions={currentJournal?.emotions} />}
 		</>
 	);
 };
 
 export default JournalEntryPage;
+
+// Development Practices
+// The way you use the library can have a bigger impact on performance than the library itself. For instance,
+// lazy loading components, optimizing re-renders,
+//  and properly managing state can lead to significant performance improvements regardless of the UI library you choose.
