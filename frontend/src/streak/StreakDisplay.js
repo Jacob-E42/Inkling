@@ -25,33 +25,7 @@ const StreakDisplay = ({ date }) => {
 		setSlidesLoaded(true);
 	}, [date, setDaysArray, setSlidesLoaded]);
 
-	// const daySlides = datesToRender.map((day, index) => {
-	// 	return (
-	// 		<DayBlock
-	// 			day={day}
-	// 			key={index}
-	// 		/>
-	// 	);
-	// });
-	// console.log(datesToRender, datesToRender.length, typeof daySlides);
-
 	if (!slidesLoaded) return <LoadingSpinner />;
-
-	// const totalSlides = datesToRender.length;
-
-	// const settings = {
-	// 	accessability: true,
-	// 	arrows: true,
-	// 	centerMode: false,
-	// 	className: "Slider",
-	// 	dots: true,
-	// 	infinite: false,
-	// 	initialSlide: datesToRender.length - 1,
-	// 	slide: "div",
-	// 	speed: 500,
-	// 	slidesToShow: process.env.NODE_ENV === "test" ? totalSlides : 10,
-	// 	slidesToScroll: 3
-	// };
 
 	return (
 		<div className="streak-container">
@@ -67,13 +41,6 @@ const StreakDisplay = ({ date }) => {
 			))}
 		</div>
 	);
-
-	// return (
-	// 	<div className="StreakDisplay">
-
-	// 		<Slider {...settings}>{daySlides}</Slider>
-	// 	</div>
-	// );
 };
 
 export default StreakDisplay;
