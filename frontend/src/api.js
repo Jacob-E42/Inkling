@@ -28,10 +28,10 @@ class ApiRequest {
 			if (error.response) {
 				// The request was made, and the server responded with a status code
 				// that falls outside the range of 2xx
-				console.error(error.response.status, error.response.data); // Here's where you'll find the backend's error message
-				// const errorMessage = error.response.data.error.message;
-
-				throw new ApiError(error.response.data, error.response.status);
+				console.error(error.response.status, error.response.data.error.message || error.response.message); // Here's where you'll find the backend's error message
+				const errorMessage = error.response.data.error.message || error.response.message;
+				console.warn(errorMessage);
+				throw new ApiError(errorMessage, error.response.status);
 			} else if (error.request) {
 				// The request was made, but no response was received
 				console.error("No response received:", error.request);
@@ -83,15 +83,11 @@ class ApiRequest {
 		if (!userId || !date) throw Error("Either userId or date is missing");
 		try {
 			let response = await this.#request(`users/${userId}/journals/date/${date}`);
-			console.log(response);
+			console.log("Journal->", response);
 
 			return response.journal;
 		} catch (err) {
-			if (err instanceof ApiError) {
-				console.log(err.message, err.status);
-				throw new ApiError(err.message, err.status);
-			}
-			console.log(err);
+			console.log(err, err.message);
 			throw err;
 		}
 	}
@@ -110,9 +106,9 @@ class ApiRequest {
 			entryDate: entryDate,
 			journalType: journalType
 		};
-		console.log("1st log", data);
+
 		let response = await this.#request(`users/${userId}/journals/date/${entryDate}`, data, "patch");
-		console.log("2nd log", data, response);
+		console.log("editedJournal", response, data);
 		return response.journal;
 	}
 	async getFeedback(id, userId, entryText, journalType, title = null, entryDate = null) {
@@ -127,7 +123,7 @@ class ApiRequest {
 		};
 
 		let response = await this.#request(`feedback/${userId}/`, data, "post");
-		console.log("response", response);
+		// console.log("response", response);
 		return response.feedback;
 	}
 
@@ -152,7 +148,7 @@ class ApiRequest {
 		};
 
 		let response = await this.#request(`emotions/${userId}/`, data, "post");
-		console.log("emotions=", response);
+		// console.log("emotions=", response);
 		return response.emotions;
 	}
 }
