@@ -52,26 +52,15 @@ router.get("/date/:entryDate", ensureCorrectUserByUserId, async function (req, r
 
 router.get("/date/:dateRange", ensureCorrectUserByUserId, async function (req, res, next) {
 	console.debug("/journals/date/dateRange GET");
-	const { userId } = req.params;
+	const { userId, dateRange } = req.params;
 	console.log(`User ID is: ${userId}`);
 	try {
-		const journal = await Journal.getByDate(userId, entryDate);
-		console.log("journals/", journal);
-		return res.json({ journal });
+		const journalsByDate = await Journal.getDatesRange(userId, dateRange);
+		console.log("journals/", journalsByDate);
+		return res.json({ journalsByDate });
 	} catch (err) {
 		console.log("error=", err);
-		const currentDate = new Date().toISOString().slice(0, 10);
-		const isToday = currentDate === entryDate;
-		if (err instanceof NotFoundError && isToday) {
-			const journal = await Journal.createEntry(
-				userId,
-				`Journal Entry: ${entryDate}`,
-				`Start your entry here...`,
-				entryDate,
-				`Daily Journal`
-			);
-			return res.json({ journal });
-		} else return next(err);
+		return next(err);
 	}
 });
 
