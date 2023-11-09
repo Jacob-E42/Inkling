@@ -102,13 +102,4 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Journal matches snapshot when rendered without props 1`] = `
-<DocumentFragment>
-  <div
-    class="alert alert-danger fade"
-    role="alert"
-  >
-    Required info is missing
-  </div>
-</DocumentFragment>
-`;
+exports[`Journal matches snapshot when rendered without props 1`] = `<DocumentFragment />`;
