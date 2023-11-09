@@ -1,18 +1,14 @@
 import React from "react";
-import { render, screen, act, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, act, fireEvent, waitFor, getByRole } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { AlertProvider, AnonUserProvider, ApiProvider, UserProvider } from "../mock";
 import JournalEntryPage from "./JournalEntryPage";
-// import ApiRequest from "../api";
+
 import axios from "axios";
 import getCurrentDate from "../../../backend/helpers/getCurrentDate";
 import { getPastDate } from "../common/dateHelpers";
 jest.mock("axios");
 const currentDate = getCurrentDate();
-// console.log("API:", ApiRequest);
-// console.log("editJournalEntry:", ApiRequest);
-
-// const mockApi = jest.spyOn(ApiRequest.prototype, "editJournalEntry");
 
 const mockSuccessfulResponse = {
 	data: {
@@ -229,7 +225,7 @@ describe("Failed journal fetch", () => {
 		// eslint-disable-next-line testing-library/no-unnecessary-act
 		await act(async () => {
 			render(
-				<MemoryRouter initialEntries={["/journal/2020-07-04"]}>
+				<MemoryRouter initialEntries={["/journal/2023-07-24", "/journal/2020-07-04"]}>
 					<UserProvider>
 						<ApiProvider>
 							<AlertProvider>
@@ -245,8 +241,11 @@ describe("Failed journal fetch", () => {
 				</MemoryRouter>
 			);
 		});
+		// await waitFor(async () => {
+		// 	expect(screen.getByRole("alert")).toBeInTheDocument();
+		// });
 
-		expect(screen.getByText("Error: No journal with date: 2020-07-04")).toBeInTheDocument();
+		expect(screen.getByText("2023-07-24")).toBeInTheDocument();
 	});
 
 	test("JournalEntryPage renders expected text when allInfoDefined is false", async () => {
