@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Journal from "./Journal";
 import NoJournalEntry from "./NoJournalEntry";
 import LoadingSpinner from "../common/LoadingSpinner";
@@ -46,7 +46,7 @@ const JournalEntryPage = () => {
 	const { api } = useContext(ApiContext);
 	const { setMsg, setColor } = useContext(AlertContext);
 	const allInfoDefined = verifyDependentInfo(date, user, api); //only verifies date, user, and qpi. Not setMsg, or setColor
-
+	const navigate = useNavigate();
 	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
 	const [feedbackPending, setFeedbackPending] = useLocalStorage("feedbackPending", false);
@@ -108,10 +108,13 @@ const JournalEntryPage = () => {
 			console.error(err, err.status);
 			setMsg(err.message);
 			setColor("danger");
-			setCurrentJournal(null);
 			if (err.status === 404) {
 				setJournalLoaded(true);
-			} else setJournalLoaded(false);
+				navigate(-1);
+				return;
+			}
+			setCurrentJournal(null);
+			setJournalLoaded(false);
 		}
 	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded]);
 
