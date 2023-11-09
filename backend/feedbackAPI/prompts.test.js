@@ -149,4 +149,4 @@ describe("getCompletion", () => {
 		expect(response).toContain("shark");
 		expect(response.length).toBeGreaterThan(750);
 	}, 20000);
-});
+}, 60000);
