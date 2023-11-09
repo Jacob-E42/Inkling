@@ -97,7 +97,7 @@ describe("getCompletion", () => {
 			"Gratitude Journal",
 			"55"
 		);
-		console.log(response);
+		// console.log(response);
 		expect(response).toContain("cat");
 		expect(response.length).toBeGreaterThan(750);
 	}, 15000);
@@ -107,7 +107,7 @@ describe("getCompletion", () => {
 			"Daily Journal",
 			"55"
 		);
-		console.log(response);
+		// console.log(response);
 		expect(response).toContain("gym");
 		expect(response.length).toBeGreaterThan(750);
 	}, 15000);
@@ -117,7 +117,7 @@ describe("getCompletion", () => {
 			"Reflective Journal",
 			"55"
 		);
-		console.log(response);
+		// console.log(response);
 		expect(response).toContain("room");
 		expect(response).toContain("childhood");
 		expect(response.length).toBeGreaterThan(750);
@@ -128,13 +128,13 @@ describe("getCompletion", () => {
 			"Stream-of-Consciousness Journal",
 			"55"
 		);
-		console.log(response);
+		// console.log(response);
 		expect(response).toContain("feelings");
 		expect(response.length).toBeGreaterThan(750);
 	}, 15000);
 	test("Bullet Journal", async () => {
 		let response = await getCompletion("-walk the dog -brush my teeth -become the sun", "Bullet Journal", "55");
-		console.log(response);
+		// console.log(response);
 		expect(response).toContain("dog");
 		expect(response).toContain("sun");
 		expect(response.length).toBeGreaterThan(750);
@@ -145,7 +145,7 @@ describe("getCompletion", () => {
 			"Dream Journal",
 			"55"
 		);
-		console.log(response);
+		// console.log(response);
 		expect(response).toContain("shark");
 		expect(response.length).toBeGreaterThan(750);
 	}, 15000);
