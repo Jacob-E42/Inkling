@@ -29,5 +29,8 @@
 	},
 	"scripts": {
 		"test": "cross-env NODE_ENV=test jest"
+	},
+	"engines": {
+		"node": ">=14.13.1"
 	}
 }
