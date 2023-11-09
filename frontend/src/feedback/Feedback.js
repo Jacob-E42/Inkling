@@ -7,8 +7,6 @@ const Feedback = ({ feedback }) => {
 	// console.debug("Feedback", feedback);
 	const { setMsg, setColor } = useContext(AlertContext);
 	if (!feedback) {
-		setMsg("Feedback is missing!");
-		setColor("danger");
 		return null;
 	}
 	return (
