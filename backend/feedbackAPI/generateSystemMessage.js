@@ -7,7 +7,7 @@ function generateSystemMessage(journalType) {
 		message += `The user practices reflecting and recording things they are grateful for. `;
 	if (journalType === "Daily Journal") message += `Help the user keep a daily log of the day's events.`;
 	if (journalType === "Stream-of-Consciousness Journal")
-		message += `The user will try to write their thoughts, feelings and impressions as they come to mind.`;
+		message += ` The user will try to write their thoughts, feelings and impressions as they come to mind.`;
 	if (journalType === "Reflective Journal")
 		message += `The user records and analyzes personal thoughts, feelings and experiences to learn and grow from past experiences, identify important learning events and gain insight into your inner life`;
 	if (journalType === "Bullet Journal") message += `The user will try to implement the bullet journal technique.`;
