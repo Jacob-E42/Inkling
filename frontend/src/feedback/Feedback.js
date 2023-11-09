@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
-// import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import AlertContext from "../context_providers/AlertContext";
+import React from "react";
+
 import "./Feedback.css";
 
 const Feedback = ({ feedback }) => {
 	// console.debug("Feedback", feedback);
-	const { setMsg, setColor } = useContext(AlertContext);
+
 	if (!feedback) {
 		return null;
 	}

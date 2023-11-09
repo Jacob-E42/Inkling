@@ -116,7 +116,7 @@ const JournalEntryPage = () => {
 			setCurrentJournal(null);
 			setJournalLoaded(false);
 		}
-	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded]);
+	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded, navigate]);
 
 	const editJournal = useCallback(
 		async data => {
