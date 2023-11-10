@@ -1,15 +1,12 @@
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require("openai");
+
 const { OPENAI_API_KEY } = require("../config");
+console.log("OpenAI", OpenAI, OPENAI_API_KEY);
 const { BadRequestError, ExpressError } = require("../expressError");
 const { generateSystemMessage } = require("./generateSystemMessage");
 
-// Set up the configuration for the OpenAI API
-const configuration = new Configuration({
-	apiKey: OPENAI_API_KEY
-});
-
 // Create an instance of the OpenAI API with the given configuration
-const openai = new OpenAIApi(configuration);
+const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 // Define supported journal types
 const JOURNAL_TYPES = [
@@ -24,11 +21,11 @@ const JOURNAL_TYPES = [
 // Function to get completion from the OpenAI API
 async function getCompletion(entryText, journalType, userId) {
 	// Check for necessary configurations and instances
-	if (!configuration || !openai) {
+	if (!openai) {
 		throw new ExpressError("openai instance or configuration are missing");
 	}
 	// Check if OpenAI API key is available
-	if (!configuration.apiKey) {
+	if (!openai.apiKey) {
 		throw new ExpressError("OpenAI API key not configured, please follow instructions in README.md");
 	}
 
