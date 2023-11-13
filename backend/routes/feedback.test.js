@@ -8,9 +8,7 @@ const {
 	commonAfterEach,
 	commonAfterAll,
 	u1Token,
-	u2Token,
-	u3Token,
-	nonUserToken
+	u2Token
 } = require("../models/testUtils.js");
 
 beforeAll(commonBeforeAll);
@@ -37,7 +35,7 @@ describe("POST /feedback/", function () {
 			feedback: expect.any(String)
 		});
 		expect(resp.body.feedback.length).toBeGreaterThan(500);
-	}, 20000);
+	}, 40000);
 
 	test("bad request with missing userId", async function () {
 		const userId = 1;

@@ -8,7 +8,7 @@ describe("createToken", () => {
 	};
 
 	it("should create a valid JWT token", () => {
-		const token = createToken(user);
+		const token = createToken(user, 1);
 		expect(token).toBeDefined();
 
 		// Verify the token using the secret key
