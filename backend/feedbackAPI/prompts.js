@@ -1,7 +1,5 @@
 const OpenAI = require("openai");
-
 const { OPENAI_API_KEY } = require("../config");
-console.log("OpenAI", OpenAI, OPENAI_API_KEY);
 const { BadRequestError, ExpressError } = require("../expressError");
 const { generateSystemMessage } = require("./generateSystemMessage");
 
@@ -41,10 +39,11 @@ async function getCompletion(entryText, journalType, userId) {
 	// console.debug("MAX TOKENS --->", chatOptions.max_tokens);
 	// Make the request to the OpenAI API
 	try {
-		const chatCompletion = await openai.createChatCompletion({
+		const chatCompletion = await openai.chat.completions.create({
 			...chatOptions
 		});
-		return chatCompletion.data.choices[0].message.content;
+		// console.log(chatCompletion.choices);
+		return chatCompletion.choices[0].message.content;
 	} catch (error) {
 		if (error.response) {
 			console.error(error.response.status, error.response.data);
