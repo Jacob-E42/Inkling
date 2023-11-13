@@ -15,7 +15,7 @@ describe("generateMessages", () => {
 			"I would like to start being more grateful for the little things in life. As part of that I will try to appreciate whatever nice things happen to me unexpectedly.";
 
 		const response = generateMessages(entryText, "Gratitude Journal");
-		console.log(response);
+		// console.log(response);
 		expect(response).toBeDefined();
 		expect(typeof response).toBe("object");
 	});
@@ -49,7 +49,7 @@ describe("configureChatOptions", () => {
 		expect(options.temperature).toBeOneOf([1, 1.5]);
 		expect(options.n).toBeOneOf([1, 2]);
 		expect(options.top_p).toBeOneOf([0.5, 1]);
-		console.log(options.user, typeof options.user);
+		// console.log(options.user, typeof options.user);
 		expect(Number(options.user)).toBeNumber();
 		expect(options.messages).toBeDefined();
 	});
@@ -59,26 +59,26 @@ describe("getCompletion", () => {
 	test("throws errors if info is missing", async () => {
 		try {
 			let response = await getCompletion("Hi", "55");
-			console.log(response);
+			// console.log(response);
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
 
 		try {
 			response = await getCompletion("Hi", "Gratitude Journfdsal", "55");
-			console.log(response);
+			// console.log(response);
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
 		try {
 			response = await getCompletion("", "Gratitude Journal", "55");
-			console.log(response);
+			// console.log(response);
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
 		try {
 			response = await getCompletion(" ", "Gratitude Journal", "55");
-			console.log(response);
+			// console.log(response);
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
@@ -89,7 +89,7 @@ describe("getCompletion", () => {
 		console.log(response);
 		expect(typeof response).toBe("string");
 		expect(response.split(" ").length).toBeGreaterThan(1);
-	}, 20000);
+	}, 30000);
 
 	test("Gratitude Journal", async () => {
 		let response = await getCompletion(
@@ -97,10 +97,10 @@ describe("getCompletion", () => {
 			"Gratitude Journal",
 			"55"
 		);
-		// console.log(response);
+		console.log(response);
 		expect(response).toContain("cat");
 		expect(response.length).toBeGreaterThan(750);
-	}, 20000);
+	}, 60000);
 	test("Daily Journal", async () => {
 		let response = await getCompletion(
 			"Today I went to the gym for the first time. It went better than I expected",
@@ -110,7 +110,7 @@ describe("getCompletion", () => {
 		// console.log(response);
 		expect(response).toContain("gym");
 		expect(response.length).toBeGreaterThan(750);
-	}, 20000);
+	}, 45000);
 	test("Reflective Journal", async () => {
 		let response = await getCompletion(
 			"When I was a kid, my parents never let me have my own room. Now that I'm an adult I want to have 6 of them.",
@@ -121,7 +121,7 @@ describe("getCompletion", () => {
 		expect(response).toContain("room");
 		expect(response).toContain("childhood");
 		expect(response.length).toBeGreaterThan(750);
-	}, 20000);
+	}, 45000);
 	test("Stream-of-Consciousness Journal", async () => {
 		let response = await getCompletion(
 			"Hi, I am blue. I am a melon. I am a gong. I am blue. I am departing. I am blue.",
@@ -131,14 +131,18 @@ describe("getCompletion", () => {
 		// console.log(response);
 		expect(response).toContain("feelings");
 		expect(response.length).toBeGreaterThan(750);
-	}, 20000);
+	}, 45000);
 	test("Bullet Journal", async () => {
-		let response = await getCompletion("-walk the dog -brush my teeth -become the sun", "Bullet Journal", "55");
+		let response = await getCompletion(
+			"-walk the dog -brush my teeth -become the sun -feed the dog",
+			"Bullet Journal",
+			"55"
+		);
 		// console.log(response);
 		expect(response).toContain("dog");
 		expect(response).toContain("sun");
 		expect(response.length).toBeGreaterThan(750);
-	}, 20000);
+	}, 45000);
 	test("Dream Journal", async () => {
 		let response = await getCompletion(
 			"Hi, in my dream last night, I was eaten by a shark. Then, next thing I knew, I was the shark.",
@@ -148,5 +152,5 @@ describe("getCompletion", () => {
 		// console.log(response);
 		expect(response).toContain("shark");
 		expect(response.length).toBeGreaterThan(750);
-	}, 20000);
-}, 60000);
+	}, 45000);
+}, 100000);
