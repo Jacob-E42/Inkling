@@ -22,18 +22,22 @@ describe("POST /emotions/", function () {
 		const emotionsRequest = {
 			id: 1,
 			userId: userId,
-			entryText: "I felt very happy today because I spent time with my family."
+			entryText: "I felt very happy today because I spent time with my family.",
+			title: "journal title",
+			entryDate: "2022-01-04",
+			journalType: "Gratitude Journal"
 		};
 		const resp = await request(app)
 			.post(`/emotions/${userId}`)
 			.send(emotionsRequest)
 			.set("authorization", `Bearer ${u1Token}`);
-		console.log(resp.body.emotions.emotion.document.emotion);
+		console.log(resp.body);
+		console.log(resp.body.emotions);
 		expect(resp.body).toEqual({
 			emotions: expect.any(Object) // Assuming the response is an object containing emotion data.
 		});
-		expect(resp.body.emotions.emotion.document.emotion).toBeDefined();
-		expect(resp.body.emotions.emotion.document.emotion.joy).toEqual(expect.any(Number));
+		expect(resp.body.emotions).toBeDefined();
+		expect(resp.body.emotions.joy).toEqual(expect.any(Number));
 	}, 20000);
 
 	test("bad request with missing userId", async function () {
