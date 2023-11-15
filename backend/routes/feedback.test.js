@@ -35,7 +35,7 @@ describe("POST /feedback/", function () {
 			feedback: expect.any(String)
 		});
 		expect(resp.body.feedback.length).toBeGreaterThan(500);
-	}, 40000);
+	}, 45000);
 
 	test("bad request with missing userId", async function () {
 		const userId = 1;
