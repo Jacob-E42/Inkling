@@ -121,9 +121,9 @@ class Journal {
 			throw new BadRequestError("Required information is missing");
 		}
 		// First, check to see if the journal entry exists for the given date and user ID
-		let existingEntry;
+
 		try {
-			existingEntry = await this.getByDate(userId, entryDate);
+			let existingEntry = await this.getByDate(userId, entryDate);
 		} catch (err) {
 			console.error(err);
 			if (err instanceof NotFoundError) throw err;
