@@ -58,13 +58,7 @@ const SignupForm = () => {
 
 	const validateForm = useCallback(
 		async data => {
-			if (
-				!data.firstName.trim() ||
-				!data.lastName.trim() ||
-				!data.email.trim() ||
-				!data.password.trim() ||
-				!data.interests
-			) {
+			if (!data.firstName.trim() || !data.lastName.trim() || !data.email.trim() || !data.password.trim()) {
 				return { isValid: false, message: "Required information is missing" };
 			}
 
@@ -80,10 +74,6 @@ const SignupForm = () => {
 				};
 			}
 
-			console.log(data.journal);
-			if (!data.journalType) {
-				return { isValid: false, message: "Select a Journal Type" };
-			}
 			return { isValid: true };
 		},
 		[isValidEmail, isValidPassword]
@@ -175,107 +165,6 @@ const SignupForm = () => {
 					required
 				/>
 			</FormGroup>
-
-			{/* <FormGroup className="journalingInterests">
-				<p>Please select one to three types of journaling that you are interested in</p>
-				<p>Feedback for your journal entries will be tailored for your selection.</p>
-
-				<FormGroup>
-					<Label
-						for="Dream Journaling"
-						className="ml-2">
-						Dream Journaling
-					</Label>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="Dream Journaling"
-						value="Dream Journaling"
-						onChange={handleChange}
-					/>
-					<FormText>A journal to record and help interpret your dreams</FormText>
-				</FormGroup>
-
-				<FormGroup>
-					<Label
-						for="Gratitude Journaling"
-						className="ml-2">
-						Gratitude Journaling
-					</Label>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="Gratitude Journaling"
-						value="Gratitude Journaling"
-						onChange={handleChange}
-					/>
-					<FormText>A journal for noting down things you are grateful for</FormText>
-				</FormGroup>
-
-				<FormGroup>
-					<Label
-						for="Daily Journal"
-						className="ml-2">
-						Daily Journal
-					</Label>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="Daily Journal"
-						value="Daily Journal"
-						onChange={handleChange}
-					/>
-					<FormText>A journal for daily events and thoughts</FormText>
-				</FormGroup>
-
-				<FormGroup>
-					<Label
-						for="Stream-of-consciousness Journaling"
-						className="ml-2">
-						Stream-of-consciousness Journaling
-					</Label>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="Stream-of-consciousness Journaling"
-						value="Stream-of-consciousness Journaling"
-						onChange={handleChange}
-					/>
-					<FormText>A journal for free-flowing thoughts and ideas</FormText>
-				</FormGroup>
-
-				<FormGroup>
-					<Label
-						for="Reflective Journaling"
-						className="ml-2">
-						Reflective Journaling
-					</Label>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="Reflective Journaling"
-						value="Reflective Journaling"
-						onChange={handleChange}
-					/>
-					<FormText>A journal for reflection and introspection</FormText>
-				</FormGroup>
-
-				<FormGroup>
-					<Label
-						for="Bullet Journaling"
-						className="ml-2">
-						Bullet Journaling
-					</Label>
-					<Input
-						type="checkbox"
-						name="interests"
-						id="Bullet Journaling"
-						value="Bullet Journaling"
-						onChange={handleChange}
-					/>
-					<FormText>A journal for tracking tasks, events, and notes</FormText>
-				</FormGroup>
-			</FormGroup> */}
 
 			<Button type="submit">Submit</Button>
 
