@@ -9,7 +9,6 @@ const Homepage = () => {
 
 	return (
 		<Container>
-			<p>User: {user ? user.firstName : "no user"}</p>
 			<h1 className="mt-5">Inkling</h1>
 			<p className="lead">A cool slogan here</p>
 			<div className="d-flex justify-content-center">
