@@ -5,6 +5,7 @@ import { getCurrentDate, getDateRange, getDayOfWeek } from "../common/dateHelper
 import { format, parseISO } from "date-fns";
 import { useNavigate, Link } from "react-router-dom";
 import LoadingSpinner from "../common/LoadingSpinner";
+import "./Streak.css";
 
 const StreakDisplay = ({ date }) => {
 	// console.debug("StreakDisplay", date);
