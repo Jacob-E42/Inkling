@@ -85,7 +85,7 @@ const SignupForm = () => {
 			console.debug("handleSubmit");
 
 			const { isValid, message } = await validateForm(formData);
-			console.log(isValid);
+			console.log("form inputs are valid:", isValid);
 			if (isValid) {
 				try {
 					const result = await signup(formData);
@@ -93,13 +93,12 @@ const SignupForm = () => {
 					if (result.success) {
 						console.log("Form submitted:", formData);
 						setColor("success");
-						console.log(result.error);
 						setMsg("You signed up!");
 						navigate("/profile");
 					} else {
 						setColor("danger");
 						console.log(result.error);
-						setMsg(result.error);
+						setMsg(result.error.message);
 					}
 				} catch (err) {
 					console.error(err);
