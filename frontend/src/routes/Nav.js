@@ -14,7 +14,7 @@ const Nav = ({ logout }) => {
 	return (
 		<nav className="nav">
 			<NavLink to="/">Inkling</NavLink>
-			<NavLink to="/journal">Journal</NavLink>
+
 			{!user && (
 				<>
 					<NavLink to="/login">Login</NavLink>
@@ -24,7 +24,7 @@ const Nav = ({ logout }) => {
 
 			{user && (
 				<>
-					<NavLink to="/journal">Today's Journal</NavLink>
+					<NavLink to="/journal">Journal</NavLink>
 					<NavLink to="/profile">{firstName}</NavLink>
 
 					<button
