@@ -110,9 +110,9 @@ function App() {
 					console.log(apiInstance.getCurrentUser);
 					return { success: true };
 				} else throw new Error("Log in token in missing");
-			} catch (errors) {
-				console.error("login failed", errors);
-				return { success: false, errors };
+			} catch (error) {
+				console.error("login failed", error);
+				return { success: false, error };
 			}
 		},
 		[setToken, setLoginPending] // useCallback dependency array
