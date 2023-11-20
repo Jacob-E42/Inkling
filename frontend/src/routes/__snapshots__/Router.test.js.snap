@@ -20,12 +20,6 @@ exports[`Router matches snapshot 1`] = `
     </a>
     <a
       class=""
-      href="/journal"
-    >
-      Today's Journal
-    </a>
-    <a
-      class=""
       href="/profile"
     >
       Testfirst
@@ -39,9 +33,6 @@ exports[`Router matches snapshot 1`] = `
   <div
     class="container"
   >
-    <p>
-      User: testfirst
-    </p>
     <h1
       class="mt-5"
     >

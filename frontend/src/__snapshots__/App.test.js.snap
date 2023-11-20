@@ -17,12 +17,6 @@ exports[`App matches snapshot 1`] = `
       </a>
       <a
         class=""
-        href="/journal"
-      >
-        Journal
-      </a>
-      <a
-        class=""
         href="/login"
       >
         Login
@@ -37,9 +31,6 @@ exports[`App matches snapshot 1`] = `
     <div
       class="container"
     >
-      <p>
-        User: no user
-      </p>
       <h1
         class="mt-5"
       >
