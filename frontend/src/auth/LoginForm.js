@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Input, Label, FormFeedback } from "reactstrap"
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import useForm from "../hooks/useForm";
+import AlertContext from "../context_providers/AlertContext";
 
 const LoginForm = () => {
 	console.debug("LoginForm");
@@ -11,11 +12,9 @@ const LoginForm = () => {
 		email: "",
 		password: ""
 	});
-	const [errors, setErrors] = useState({});
+
 	const navigate = useNavigate();
-
-	console.debug("LoginForm", "errors=", errors);
-
+	const { setMsg, setColor } = useContext(AlertContext);
 	const isValidEmail = useCallback(email => {
 		// Perform email validation here
 		// You can use regular expressions or other validation libraries
@@ -32,45 +31,48 @@ const LoginForm = () => {
 
 	const validateForm = useCallback(
 		async data => {
-			const validationErrors = {};
-
 			if (!data.email.trim()) {
-				validationErrors.email = "Email is required";
+				return { isValid: false, message: "Email is missing" };
 			} else if (!isValidEmail(data.email)) {
-				validationErrors.email = "Invalid email address";
+				return { isValid: false, message: "Invalid email address" };
 			}
 
 			if (!data.password.trim()) {
-				validationErrors.password = "Password is required";
+				return { isValid: false, message: "Password is missing" };
 			} else if (!isValidPassword(data.password)) {
-				validationErrors.password =
-					"Password must be at least 8 characters long and contain at least one letter and one number";
+				return {
+					isValid: false,
+					message:
+						"Password must be at least 8 characters long and contain at least one letter and one number"
+				};
 			}
-
-			setErrors(validationErrors); // Updating the state with the constructed errors object
 		},
-		[setErrors, isValidEmail, isValidPassword]
+		[isValidEmail, isValidPassword]
 	);
 
 	const handleSubmit = useCallback(
 		async e => {
 			e.preventDefault();
 			console.debug("handleSubmit");
-			await validateForm(formData);
-			if (Object.keys(errors).length === 0) {
+			const { isValid } = await validateForm(formData);
+			if (isValid) {
 				try {
 					const result = await login(formData);
 					if (result.success) {
 						console.log("Form submitted:", formData);
-						setErrors({});
+
 						navigate("/journal");
 					}
 				} catch (err) {
 					console.error(err);
 				}
+			} else {
+				console.error(isValid.message);
+				setColor("danger");
+				setMsg(`${isValid.message}`);
 			}
 		},
-		[login, formData, errors, validateForm, navigate]
+		[login, formData, validateForm, navigate]
 	);
 
 	return (
@@ -85,9 +87,8 @@ const LoginForm = () => {
 					placeholder="Enter your email"
 					value={formData.email}
 					onChange={handleChange}
-					invalid={!!errors.email}
 				/>
-				<FormFeedback className="inputError">{errors.email}</FormFeedback>
+				{/* <FormFeedback className="inputError">{errors.email}</FormFeedback> */}
 			</FormGroup>
 			<FormGroup>
 				<Label for="password">Password</Label>
@@ -99,9 +100,8 @@ const LoginForm = () => {
 					placeholder="Enter your password"
 					value={formData.password}
 					onChange={handleChange}
-					invalid={!!errors.password}
 				/>
-				<FormFeedback className="inputError">{errors.password}</FormFeedback>
+				{/* <FormFeedback className="inputError">{errors.password}</FormFeedback> */}
 			</FormGroup>
 			<Button type="submit">Submit</Button>
 
