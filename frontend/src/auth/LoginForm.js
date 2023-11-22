@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useState } from "react";
-import { Button, Form, FormGroup, Input, Label, FormFeedback } from "reactstrap";
+import React, { useCallback, useContext } from "react";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import useForm from "../hooks/useForm";
@@ -8,13 +8,14 @@ import AlertContext from "../context_providers/AlertContext";
 const LoginForm = () => {
 	console.debug("LoginForm");
 	const { login } = useContext(UserContext);
+	const { setMsg, setColor } = useContext(AlertContext);
 	const [formData, handleChange] = useForm({
 		email: "",
 		password: ""
 	});
 
 	const navigate = useNavigate();
-	const { setMsg, setColor } = useContext(AlertContext);
+
 	const isValidEmail = useCallback(email => {
 		// Perform email validation here
 		// You can use regular expressions or other validation libraries
@@ -72,7 +73,7 @@ const LoginForm = () => {
 				setMsg(`${isValid.message}`);
 			}
 		},
-		[login, formData, validateForm, navigate]
+		[login, formData, validateForm, navigate, setMsg, setColor]
 	);
 
 	return (
