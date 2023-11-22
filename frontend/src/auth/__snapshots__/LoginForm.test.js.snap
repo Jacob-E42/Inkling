@@ -15,7 +15,6 @@ exports[`LoginForm matches snapshot 1`] = `
         Email
       </label>
       <input
-        aria-invalid="false"
         autocomplete="email"
         class="form-control"
         id="email"
@@ -23,9 +22,6 @@ exports[`LoginForm matches snapshot 1`] = `
         placeholder="Enter your email"
         type="email"
         value=""
-      />
-      <div
-        class="inputError invalid-feedback"
       />
     </div>
     <div
@@ -38,7 +34,6 @@ exports[`LoginForm matches snapshot 1`] = `
         Password
       </label>
       <input
-        aria-invalid="false"
         autocomplete="current-password"
         class="form-control"
         id="password"
@@ -46,9 +41,6 @@ exports[`LoginForm matches snapshot 1`] = `
         placeholder="Enter your password"
         type="password"
         value=""
-      />
-      <div
-        class="inputError invalid-feedback"
       />
     </div>
     <button

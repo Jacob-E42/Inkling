@@ -5,9 +5,6 @@ exports[`Homepage matches snapshot 1`] = `
   <div
     class="container"
   >
-    <p>
-      User: testfirst
-    </p>
     <h1
       class="mt-5"
     >
