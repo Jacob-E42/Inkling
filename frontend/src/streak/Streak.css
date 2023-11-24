@@ -1,38 +1,34 @@
-/* .StreakSlider {
-	border: solid 1px;
-	margin: 20px;
-}
-
-.slick-arrow {
-	color: black;
-	background-color: black;
-	margin: 5px;
-}
-
-.slick-dots {
-	margin: 20px;
-}
-
-.DayBlock {
-	border: solid 1px;
-} */
-
 .streak-container {
 	display: flex;
 	overflow-x: auto;
-	gap: 5px;
+	gap: 20px;
+	padding: 10px 0; /* Vertical padding */
 }
 
 .day-link {
-	padding: 5px;
-	border: 1px solid transparent;
-	transition: border-color 0.2s;
+	text-decoration: none;
 }
 
-.day-link:hover {
-	border-color: #333; /* Change as per your theme */
+.day-button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 10px;
+	padding: 10px;
+	min-width: 60px;
+	background-color: #57a0d3; /* Carolina Blue */
 }
 
-.day-link.active {
-	border: 1px solid #333; /* Highlight the active date */
+.day-button.current-day {
+	background-color: #ffaa4c; /* Bright Yellow (Crayola) */
+}
+
+.day-button.inactive-day {
+	background-color: #fff0f5; /* Lavender Blush */
+}
+
+.day-button.today {
+	box-shadow: 0px 0px 5px 0px rgba(10, 7, 4, 0.5); /* Subtle shadow for today's date */
+	background-color: #9a9395;
 }
