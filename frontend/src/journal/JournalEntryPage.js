@@ -86,6 +86,7 @@ const JournalEntryPage = () => {
 			setJournalLoaded(false);
 		} else {
 			setFeedback(null);
+			setCurrentJournal(null);
 			loadJournalEntry();
 		}
 		// eslint-disable-next-line
