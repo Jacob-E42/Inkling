@@ -9,8 +9,6 @@ import UserContext from "./context_providers/UserContext";
 import AlertContext from "./context_providers/AlertContext";
 import ApiContext from "./context_providers/ApiContext";
 import { BrowserRouter } from "react-router-dom";
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
 	// Use custom hook to persist user and token in localStorage. Initialize infoLoaded, msg and color states
