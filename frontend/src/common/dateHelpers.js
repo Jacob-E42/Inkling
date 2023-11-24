@@ -1,4 +1,13 @@
-import { eachDayOfInterval, format, parseISO, subDays, getDay, differenceInCalendarDays, addDays } from "date-fns";
+import {
+	eachDayOfInterval,
+	format,
+	parseISO,
+	subDays,
+	getDay,
+	differenceInCalendarDays,
+	addDays,
+	isToday
+} from "date-fns";
 
 // Return today's date in format "yyyy-mm-dd"
 function getCurrentDate() {
@@ -74,4 +83,19 @@ function getFutureDate(dateString, num) {
 	return format(fututeDate, "yyyy-MM-dd");
 }
 
-export { getPreviousNumDays, getDayOfWeek, getCurrentDate, getNextNumDays, getDateRange, getPastDate, getFutureDate };
+function isCurrentDate(dateString) {
+	const currentDate = parseISO(dateString);
+
+	return isToday(currentDate);
+}
+
+export {
+	getPreviousNumDays,
+	getDayOfWeek,
+	getCurrentDate,
+	getNextNumDays,
+	getDateRange,
+	getPastDate,
+	getFutureDate,
+	isCurrentDate
+};
