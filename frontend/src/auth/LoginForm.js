@@ -1,5 +1,5 @@
 import React, { useCallback, useContext } from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, TextField, Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import useForm from "../hooks/useForm";
@@ -78,40 +78,51 @@ const LoginForm = () => {
 	);
 
 	return (
-		<Form onSubmit={handleSubmit}>
-			<FormGroup>
-				<Label for="email">Email</Label>
-				<Input
-					type="email"
-					name="email"
-					id="email"
-					autoComplete="email"
-					placeholder="Enter your email"
-					value={formData.email}
-					onChange={handleChange}
-				/>
-			</FormGroup>
-			<FormGroup>
-				<Label for="password">Password</Label>
-				<Input
-					type="password"
-					name="password"
-					id="password"
-					autoComplete="current-password"
-					placeholder="Enter your password"
-					value={formData.password}
-					onChange={handleChange}
-				/>
-			</FormGroup>
-			<Button type="submit">Submit</Button>
-
+		<Box
+			component="form"
+			onSubmit={handleSubmit}
+			noValidate
+			sx={{ mt: 1 }}>
+			<TextField
+				margin="normal"
+				required
+				fullWidth
+				id="email"
+				label="Email Address"
+				name="email"
+				autoComplete="email"
+				autoFocus
+				value={formData.email}
+				onChange={handleChange}
+			/>
+			<TextField
+				margin="normal"
+				required
+				fullWidth
+				name="password"
+				label="Password"
+				type="password"
+				id="password"
+				autoComplete="current-password"
+				value={formData.password}
+				onChange={handleChange}
+			/>
 			<Button
-				type="button"
-				tag={Link}
-				to="/">
+				type="submit"
+				fullWidth
+				variant="contained"
+				sx={{ mt: 3, mb: 2 }}>
+				Submit
+			</Button>
+			<Button
+				component={Link}
+				to="/"
+				fullWidth
+				variant="outlined"
+				sx={{ mt: 3, mb: 2 }}>
 				Back
 			</Button>
-		</Form>
+		</Box>
 	);
 };
 
