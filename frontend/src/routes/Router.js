@@ -6,7 +6,7 @@ import LoginForm from "../auth/LoginForm";
 import Nav from "./Nav";
 import SignupForm from "../auth/SignupForm";
 import Profile from "../profile/Profile";
-import AlertComponent from "../common/AlertComponent";
+import AlertComponent from "../common/Alert";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
 import JournalEntryPage from "../journal/JournalEntryPage";
