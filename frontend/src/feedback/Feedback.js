@@ -1,19 +1,18 @@
 import React from "react";
-
+import { Typography, Box } from "@mui/material";
 import "./Feedback.css";
 
-const Feedback = ({ feedback }) => {
-	// console.debug("Feedback", feedback);
-
-	if (!feedback) {
-		return null;
-	}
+function Feedback({ feedback }) {
 	return (
-		<>
-			<h3>Feedback</h3>
-			<p>{feedback}</p>
-		</>
+		<Box sx={{ my: 2 }}>
+			<Typography
+				variant="h6"
+				gutterBottom>
+				Feedback
+			</Typography>
+			<Typography variant="body1">{feedback}</Typography>
+		</Box>
 	);
-};
+}
 
 export default Feedback;
