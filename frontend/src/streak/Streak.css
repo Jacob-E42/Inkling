@@ -28,7 +28,7 @@
 	background-color: #fff0f5; /* Lavender Blush */
 }
 
-.day-button.today {
+.day-link.today {
 	box-shadow: 0px 0px 5px 0px rgba(10, 7, 4, 0.5); /* Subtle shadow for today's date */
 	background-color: #9a9395;
 }
