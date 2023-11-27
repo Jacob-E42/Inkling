@@ -1,10 +1,13 @@
 import React from "react";
 import "./LoadingSpinner.css";
-
-/** Loading message used by components that fetch API data. */
+import { CircularProgress, Box } from "@mui/material";
 
 function LoadingSpinner() {
-	return <div className="LoadingSpinner">Loading...</div>;
+	return (
+		<Box sx={{ display: "flex", justifyContent: "center", p: 3 }}>
+			<CircularProgress />
+		</Box>
+	);
 }
 
 export default LoadingSpinner;
