@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { Button, TextField, Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import "./auth.css";
@@ -113,67 +113,73 @@ const SignupForm = () => {
 	);
 
 	return (
-		<Form onSubmit={handleSubmit}>
-			<FormGroup>
-				<Label for="firstName">First Name</Label>
-				<Input
-					type="text"
-					name="firstName"
-					id="firstName"
-					placeholder="Enter your first name"
-					value={formData.firstName}
-					onChange={handleChange}
-					required
-				/>
-			</FormGroup>
-			<FormGroup>
-				<Label for="lastName">Last Name</Label>
-				<Input
-					type="text"
-					name="lastName"
-					id="lastName"
-					placeholder="Enter your last name"
-					value={formData.lastName}
-					onChange={handleChange}
-					required
-				/>
-			</FormGroup>
-			<FormGroup>
-				<Label for="email">Email</Label>
-				<Input
-					type="email"
-					name="email"
-					id="email"
-					autoComplete="email"
-					placeholder="Enter your email"
-					value={formData.email}
-					onChange={handleChange}
-					required
-				/>
-			</FormGroup>
-			<FormGroup>
-				<Label for="password">Password</Label>
-				<Input
-					type="password"
-					name="password"
-					id="password"
-					autoComplete="current-password"
-					placeholder="Enter a password, at least 8 characters"
-					value={formData.password}
-					onChange={handleChange}
-					required
-				/>
-			</FormGroup>
-
-			<Button type="submit">Submit</Button>
-
+		<Box
+			component="form"
+			onSubmit={handleSubmit}
+			noValidate
+			sx={{ mt: 1 }}>
+			<TextField
+				margin="normal"
+				required
+				fullWidth
+				id="firstName"
+				label="First Name"
+				name="firstName"
+				autoComplete="firstName"
+				autoFocus
+				value={formData.firstName}
+				onChange={handleChange}
+			/>
+			<TextField
+				margin="normal"
+				required
+				fullWidth
+				id="lastName"
+				label="Last Name"
+				name="lastName"
+				autoComplete="lastName"
+				value={formData.lastName}
+				onChange={handleChange}
+			/>
+			<TextField
+				margin="normal"
+				required
+				fullWidth
+				id="email"
+				label="Email Address"
+				name="email"
+				autoComplete="email"
+				value={formData.email}
+				onChange={handleChange}
+			/>
+			<TextField
+				margin="normal"
+				required
+				fullWidth
+				name="password"
+				label="Password"
+				type="password"
+				id="password"
+				autoComplete="current-password"
+				value={formData.password}
+				onChange={handleChange}
+			/>
 			<Button
-				type="button"
-				tag={Link}
-				to="/">
+				type="submit"
+				fullWidth
+				variant="contained"
+				sx={{ mt: 3, mb: 2 }}>
+				Sign Up
+			</Button>
+			<Button
+				component={Link}
+				to="/"
+				fullWidth
+				variant="outlined"
+				sx={{ mt: 1 }}>
 				Back
 			</Button>
-		</Form>
+		</Box>
 	);
 };
 
