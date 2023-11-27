@@ -90,7 +90,6 @@ const LoginForm = () => {
 					value={formData.email}
 					onChange={handleChange}
 				/>
-				{/* <FormFeedback className="inputError">{errors.email}</FormFeedback> */}
 			</FormGroup>
 			<FormGroup>
 				<Label for="password">Password</Label>
@@ -103,7 +102,6 @@ const LoginForm = () => {
 					value={formData.password}
 					onChange={handleChange}
 				/>
-				{/* <FormFeedback className="inputError">{errors.password}</FormFeedback> */}
 			</FormGroup>
 			<Button type="submit">Submit</Button>
 
