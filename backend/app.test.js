@@ -25,6 +25,6 @@ test("not found for site 404 (test stack print)", async () => {
 });
 
 //db.end() is not a function
-afterAll(function () {
-	db.end();
+afterAll(async function () {
+	await db.end();
 });
