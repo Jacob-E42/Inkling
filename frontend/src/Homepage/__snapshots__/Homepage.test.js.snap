@@ -3,32 +3,40 @@
 exports[`Homepage matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="container"
+    class="MuiBox-root css-ilk07l"
   >
-    <h1
-      class="mt-5"
+    <h2
+      class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-i1hrn3-MuiTypography-root"
     >
       Inkling
-    </h1>
-    <p
-      class="lead"
+    </h2>
+    <h5
+      class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
     >
       A cool slogan here
-    </p>
+    </h5>
     <div
-      class="d-flex justify-content-center"
+      class="MuiBox-root css-zvn4vt"
     >
       <a
-        class="mr-3 btn btn-primary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
         href="/signup"
+        tabindex="0"
       >
         Sign Up
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
       </a>
       <a
-        class="btn btn-secondary"
+        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1l9sosn-MuiButtonBase-root-MuiButton-root"
         href="/login"
+        tabindex="0"
       >
         Log In
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
       </a>
     </div>
   </div>
