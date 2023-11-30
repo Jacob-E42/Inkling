@@ -126,6 +126,7 @@ const SignupForm = () => {
 				label="First Name"
 				name="firstName"
 				autoComplete="firstName"
+				placeholder="Enter your first name"
 				autoFocus
 				value={formData.firstName}
 				onChange={handleChange}
@@ -138,6 +139,7 @@ const SignupForm = () => {
 				label="Last Name"
 				name="lastName"
 				autoComplete="lastName"
+				placeholder="Enter your last name"
 				value={formData.lastName}
 				onChange={handleChange}
 			/>
@@ -147,6 +149,7 @@ const SignupForm = () => {
 				fullWidth
 				id="email"
 				label="Email Address"
+				placeholder="Enter your email"
 				name="email"
 				autoComplete="email"
 				value={formData.email}
@@ -159,6 +162,7 @@ const SignupForm = () => {
 				name="password"
 				label="Password"
 				type="password"
+				placeholder="Enter a password, at least 8 characters"
 				id="password"
 				autoComplete="current-password"
 				value={formData.password}

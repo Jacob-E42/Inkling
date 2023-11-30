@@ -91,6 +91,7 @@ const LoginForm = () => {
 				label="Email Address"
 				name="email"
 				autoComplete="email"
+				placeholder="Enter your email"
 				autoFocus
 				value={formData.email}
 				onChange={handleChange}
@@ -104,6 +105,7 @@ const LoginForm = () => {
 				type="password"
 				id="password"
 				autoComplete="current-password"
+				placeholder="Enter your password"
 				value={formData.password}
 				onChange={handleChange}
 			/>
