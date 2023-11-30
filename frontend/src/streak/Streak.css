@@ -1,39 +1,3 @@
-<<<<<<< HEAD
-.streak-container {
-	display: flex;
-	overflow-x: auto;
-	gap: 20px;
-	padding: 10px 0; /* Vertical padding */
-}
-
-.day-link {
-	text-decoration: none;
-}
-
-.day-button {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	border-radius: 10px;
-	padding: 10px;
-	min-width: 60px;
-	background-color: #57a0d3; /* Carolina Blue */
-}
-
-.day-button.current-day {
-	background-color: #ffaa4c; /* Bright Yellow (Crayola) */
-}
-
-.day-button.inactive-day {
-	background-color: #fff0f5; /* Lavender Blush */
-}
-
-.day-button.today {
-	box-shadow: 0px 0px 5px 0px rgba(10, 7, 4, 0.5); /* Subtle shadow for today's date */
-	background-color: #9a9395;
-}
-=======
 .streak-container {
 	display: flex;
 	overflow-x: auto;
@@ -68,4 +32,3 @@
 	box-shadow: 0px 0px 5px 0px rgba(10, 7, 4, 0.5); /* Subtle shadow for today's date */
 	background-color: #9a9395;
 }
->>>>>>> ee1447b1ebd5cb1399f06bc802ae2160a9b25b36
