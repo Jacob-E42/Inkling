@@ -36,7 +36,9 @@ const StreakDisplay = ({ date }) => {
 				<Link
 					key={day}
 					to={`/journal/${day}`}
-					className={`day-link ${day === date ? "current-day" : ""} ${isCurrentDate(day) ? "today" : ""}`}
+					className={`day-link ${day === date ? "current-day" : ""} ${
+						isCurrentDate(day) ? "today" : `${day} not-today`
+					}`}
 					ref={day === getCurrentDate() ? currentDayRef : null}>
 					<Button
 						variant="contained"

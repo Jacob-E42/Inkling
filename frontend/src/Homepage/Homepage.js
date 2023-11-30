@@ -1,5 +1,6 @@
+
 import React, { useContext } from "react";
-import { Button, Container } from "reactstrap";
+import { Button, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 
@@ -8,26 +9,32 @@ const Homepage = () => {
 	console.debug("Homepage", "user=", user);
 
 	return (
-		<Container>
-			<h1 className="mt-5">Inkling</h1>
-			<p className="lead">A cool slogan here</p>
-			<div className="d-flex justify-content-center">
+		<Box sx={{ my: 4, textAlign: "center" }}>
+			<Typography
+				variant="h2"
+				gutterBottom>
+				Inkling
+			</Typography>
+			<Typography variant="h5">A cool slogan here</Typography>
+			<Box sx={{ "& > *": { m: 1 } }}>
 				<Button
+					variant="contained"
 					color="primary"
-					className="mr-3"
-					tag={Link}
+					component={Link}
 					to="/signup">
 					Sign Up
 				</Button>
 				<Button
+					variant="outlined"
 					color="secondary"
-					tag={Link}
+					component={Link}
 					to="/login">
 					Log In
 				</Button>
-			</div>
-		</Container>
+			</Box>
+		</Box>
 	);
 };
 
 export default Homepage;
+

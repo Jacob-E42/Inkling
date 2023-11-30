@@ -1,5 +1,6 @@
+
 import React, { useCallback, useContext } from "react";
-import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Container, Button, TextField, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import useForm from "../hooks/useForm";
 import UserContext from "../context_providers/UserContext";
@@ -36,71 +37,83 @@ const Profile = ({ logout }) => {
 	);
 
 	return (
-		<Container>
-			This is profile
-			<p>User: {user ? user.firstName : "No user"}</p>
+		<Container maxWidth="sm">
+			<Typography
+				variant="h5"
+				sx={{ mt: 4 }}>
+				This is profile
+			</Typography>
+			<Typography sx={{ mb: 2 }}>User: {user ? user.firstName : "No user"}</Typography>
 			{user && (
-				<Form
+				<Box
+					component="form"
 					onSubmit={handleSubmit}
-					className="profile-container">
-					<FormGroup className="profile-item">
-						<Label for="firstName">First Name</Label>
-						<Input
-							type="text"
-							name="firstName"
-							id="firstName"
-							value={form.firstName}
-							onChange={handleChange}
-						/>
-					</FormGroup>
-					<FormGroup className="profile-item">
-						<Label for="lastName">Last Name</Label>
-						<Input
-							type="text"
-							name="lastName"
-							id="lastName"
-							value={form.lastName}
-							onChange={handleChange}
-						/>
-					</FormGroup>
-					<FormGroup className="profile-item">
-						<Label for="email">Email</Label>
-						<Input
-							type="email"
-							name="email"
-							id="email"
-							value={form.email}
-							onChange={handleChange}
-						/>
-					</FormGroup>
-					<FormGroup className="profile-item">
-						<Label for="password">Password</Label>
-						<Input
-							type="password"
-							name="password"
-							id="password"
-							placeholder="Enter new password, if you want it changed"
-							value={form.password}
-							onChange={handleChange}
-						/>
-					</FormGroup>
-
+					noValidate
+					sx={{ mt: 1 }}>
+					<TextField
+						margin="normal"
+						fullWidth
+						id="firstName"
+						label="First Name"
+						name="firstName"
+						value={form.firstName}
+						onChange={handleChange}
+					/>
+					<TextField
+						margin="normal"
+						fullWidth
+						id="lastName"
+						label="Last Name"
+						name="lastName"
+						value={form.lastName}
+						onChange={handleChange}
+					/>
+					<TextField
+						margin="normal"
+						fullWidth
+						id="email"
+						label="Email"
+						name="email"
+						type="email"
+						value={form.email}
+						onChange={handleChange}
+					/>
+					<TextField
+						margin="normal"
+						fullWidth
+						name="password"
+						label="Password"
+						type="password"
+						id="password"
+						placeholder="Enter new password, if you want it changed"
+						value={form.password}
+						onChange={handleChange}
+					/>
 					<Button
 						type="submit"
-						color="primary">
+						fullWidth
+						variant="contained"
+						sx={{ mt: 3, mb: 2 }}>
 						Submit
 					</Button>
 					<Button
-						type="button"
-						tag={Link}
-						to="/">
+						component={Link}
+						to="/"
+						fullWidth
+						variant="outlined"
+						sx={{ mt: 1 }}>
 						Back
 					</Button>
-				</Form>
+				</Box>
 			)}
-			<button onClick={logout}>Logout</button>
+			<Button
+				onClick={logout}
+				sx={{ mt: 2 }}>
+				Logout
+			</Button>
 		</Container>
 	);
 };
 
 export default Profile;
+

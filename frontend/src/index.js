@@ -6,15 +6,19 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import { ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "media-match";
-
+import theme from "./theme";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<React.StrictMode>
-		<App />
+		<ThemeProvider theme={theme}>
+			<CssBaseline /> {/* This resets the browser default styles */}
+			<App />
+		</ThemeProvider>
 	</React.StrictMode>
 );
 
