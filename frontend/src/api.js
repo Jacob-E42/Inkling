@@ -55,6 +55,7 @@ class ApiRequest {
 	async login(data) {
 		console.debug("API-login");
 		const response = await this.#request("auth/login", data, "post");
+		console.log(response);
 		return response.token;
 	}
 

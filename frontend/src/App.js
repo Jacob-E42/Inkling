@@ -154,7 +154,7 @@ function App() {
 			<UserContext.Provider value={{ user, setUser, signup, login, logout, updateUser, loginPending }}>
 				<ApiContext.Provider value={{ api: api.current }}>
 					<AlertContext.Provider value={{ msg, setMsg, color, setColor }}>
-						<div className="App">
+						<div>
 							<Router />
 						</div>
 					</AlertContext.Provider>
