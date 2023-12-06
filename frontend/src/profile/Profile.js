@@ -14,9 +14,10 @@ const Profile = ({ logout }) => {
 	const [form, handleChange] = useForm({
 		firstName: user.firstName,
 		lastName: user.lastName,
-		email: user.email
+		email: user.email,
+		password: ""
 	});
-
+	console.debug("Form", form);
 	// Handle form submission
 	const handleSubmit = useCallback(
 		async event => {
@@ -39,9 +40,9 @@ const Profile = ({ logout }) => {
 			<Typography
 				variant="h5"
 				sx={{ mt: 4 }}>
-				This is profile
+				Profile
 			</Typography>
-			<Typography sx={{ mb: 2 }}>User: {user ? user.firstName : "No user"}</Typography>
+			{/* <Typography sx={{ mb: 2 }}>User: {user ? user.firstName : "No user"}</Typography> */}
 			{user && (
 				<Box
 					component="form"
@@ -83,7 +84,7 @@ const Profile = ({ logout }) => {
 						label="Password"
 						type="password"
 						id="password"
-						placeholder="Enter new password, if you want it changed"
+						autoComplete="current-password"
 						value={form.password}
 						onChange={handleChange}
 					/>
