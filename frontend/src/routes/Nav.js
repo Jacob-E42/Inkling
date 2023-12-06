@@ -26,16 +26,6 @@ const Nav = ({ logout }) => {
 					/>
 				</IconButton>
 
-				<NavLink
-					to="/journal"
-					style={{ textDecoration: "none", color: "inherit" }}>
-					<Typography
-						variant="h6"
-						style={{ textAlign: "center" }}>
-						Journal
-					</Typography>
-				</NavLink>
-
 				{!user ? (
 					<>
 						<NavLink
@@ -51,6 +41,15 @@ const Nav = ({ logout }) => {
 					</>
 				) : (
 					<>
+						<NavLink
+							to="/journal"
+							style={{ textDecoration: "none", color: "inherit" }}>
+							<Typography
+								variant="h6"
+								style={{ textAlign: "center" }}>
+								Journal
+							</Typography>
+						</NavLink>
 						<NavLink
 							to="/profile"
 							style={{ textDecoration: "none", color: "inherit" }}>
