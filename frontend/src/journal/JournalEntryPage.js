@@ -108,7 +108,7 @@ const JournalEntryPage = () => {
 		} catch (err) {
 			console.error(err, err.status);
 			setMsg(err.message);
-			setColor("danger");
+			setColor("error");
 			if (err.status === 404) {
 				setJournalLoaded(true);
 				navigate(-1);
@@ -125,7 +125,7 @@ const JournalEntryPage = () => {
 			setJournalLoaded(false);
 			if (!currentJournal) {
 				setMsg("Creating a new journal entry failed!");
-				setColor("danger");
+				setColor("error");
 			} else {
 				await setFeedbackPending(true);
 				await setEmotionsPending(true);
@@ -173,7 +173,7 @@ const JournalEntryPage = () => {
 				} catch (err) {
 					console.error(err);
 					setMsg("Loading Feedback Failed");
-					setColor("danger");
+					setColor("error");
 				}
 			} else {
 				setMsg("Journal is NOT valid");
@@ -192,7 +192,7 @@ const JournalEntryPage = () => {
 		} else {
 			console.warn("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
 			setMsg("An error occurred trying to load feedback.");
-			setColor("danger");
+			setColor("error");
 		}
 		// eslint-disable-next-line
 	}, [feedbackPending]);
@@ -220,7 +220,7 @@ const JournalEntryPage = () => {
 				} catch (err) {
 					console.error(err);
 					setMsg("Loading Emotions Failed");
-					setColor("danger");
+					setColor("error");
 				}
 			} else {
 				setMsg("Journal is NOT valid");
