@@ -1,4 +1,3 @@
-
 import React, { useCallback, useContext } from "react";
 import { Container, Button, TextField, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -15,8 +14,7 @@ const Profile = ({ logout }) => {
 	const [form, handleChange] = useForm({
 		firstName: user.firstName,
 		lastName: user.lastName,
-		email: user.email,
-		interests: user.interests
+		email: user.email
 	});
 
 	// Handle form submission
@@ -116,4 +114,3 @@ const Profile = ({ logout }) => {
 };
 
 export default Profile;
-
