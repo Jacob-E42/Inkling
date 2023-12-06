@@ -96,7 +96,7 @@ const SignupForm = () => {
 						setMsg("You signed up!");
 						navigate("/profile");
 					} else {
-						setColor("danger");
+						setColor("error");
 						console.log(result.error);
 						setMsg(result.error.message);
 					}
@@ -105,7 +105,7 @@ const SignupForm = () => {
 				}
 			} else {
 				console.error(message);
-				setColor("danger");
+				setColor("error");
 				setMsg(`${message}`);
 			}
 		},

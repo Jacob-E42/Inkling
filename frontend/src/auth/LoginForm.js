@@ -70,7 +70,7 @@ const LoginForm = () => {
 				}
 			} else {
 				console.error(isValid.message);
-				setColor("danger");
+				setColor("error");
 				setMsg(`${isValid.message}`);
 			}
 		},
