@@ -5,7 +5,8 @@ import AlertContext from "../context_providers/AlertContext";
 function Alert({ msg, color = "success" }) {
 	const { setMsg } = useContext(AlertContext);
 	console.debug("Alert", "messages=", msg, "color=", color);
-
+	const acceptedColors = ["success", "warning", "info", "error"];
+	if (!acceptedColors.includes(color)) color = "info";
 	// State to control the visibility of the alert message
 	const [visible, setVisible] = useState(true);
 
