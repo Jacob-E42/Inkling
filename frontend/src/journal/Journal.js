@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import "./Journal.css";
+import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Box, Typography } from "@mui/material";
 
 const Journal = ({ date, title, journalType, entryText, setJournal, editJournal }) => {
 	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
@@ -51,61 +50,73 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 	return (
 		<>
 			{allInfoPresent && (
-				<div className="JournalEntry">
-					<header>
-						<h2>{date}</h2>
-						<Form>
-							<FormGroup>
-								<Label for="title">Title</Label>
-								<Input
-									type="text"
-									name="title"
-									id="title"
-									placeholder="title"
-									value={tempJournal.title}
-									onChange={handleChange}
-								/>
-							</FormGroup>
-						</Form>
-						<Form>
-							<FormGroup>
-								<Label for="journalType">Journal Type</Label>
-								<Input
-									type="select"
-									name="journalType"
-									id="journalType"
-									value={tempJournal.journalType}
-									onChange={handleChange}>
-									<option>Daily Journal</option>
-									<option>Gratitude Journal</option>
-									<option>Reflective Journal</option>
-									<option>Stream-of-Consciousness Journal</option>
-									<option>Bullet Journal</option>
-									<option>Dream Journal</option>
-								</Input>
-							</FormGroup>
-						</Form>
-					</header>
+				<Box sx={{ bgcolor: "background.default", p: 3 }}>
+					<Typography
+						variant="h2"
+						gutterBottom>
+						{date}
+					</Typography>
+					<Box
+						component="form"
+						noValidate
+						onSubmit={handleSubmit}
+						sx={{ mt: 1 }}>
+						<TextField
+							fullWidth
+							margin="normal"
+							id="title"
+							label="Title"
+							name="title"
+							value={tempJournal.title}
+							onChange={handleChange}
+							variant="outlined"
+						/>
 
-					<Form onSubmit={handleSubmit}>
-						<FormGroup>
-							<Label for="entry">Journal Entry</Label>
-							<Input
-								type="textarea"
-								name="entryText"
-								id="entry"
-								placeholder="Start your entry here..."
-								value={tempJournal.entryText}
+						<FormControl
+							fullWidth
+							margin="normal">
+							<InputLabel id="journalType-label">Journal Type</InputLabel>
+							<Select
+								labelId="journalType-label"
+								id="journalType"
+								name="journalType"
+								value={tempJournal.journalType}
 								onChange={handleChange}
-							/>
-						</FormGroup>
+								label="Journal Type">
+								<MenuItem value="Daily Journal">Daily Journal</MenuItem>
+								<MenuItem value="Gratitude Journal">Gratitude Journal</MenuItem>
+								<MenuItem value="Reflective Journal">Reflective Journal</MenuItem>
+								<MenuItem value="Stream-of-Consciousness Journal">
+									Stream-of-Consciousness Journal
+								</MenuItem>
+								<MenuItem value="Bullet Journal">Bullet Journal</MenuItem>
+								<MenuItem value="Dream Journal">Dream Journal</MenuItem>
+							</Select>
+						</FormControl>
+
+						<TextField
+							fullWidth
+							margin="normal"
+							id="entry"
+							label="Journal Entry"
+							name="entryText"
+							multiline
+							rows={4}
+							value={tempJournal.entryText}
+							onChange={handleChange}
+							variant="outlined"
+							placeholder="Start your entry here..."
+						/>
+
 						<Button
 							type="submit"
-							color="success">
+							variant="contained"
+							color="primary"
+							sx={{ mt: 3, mb: 2 }}>
 							Submit
 						</Button>
-					</Form>
-				</div>
+					</Box>
+				</Box>
 			)}
 		</>
 	);
