@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Navigate } from "react-router-dom";
 import Journal from "./Journal";
-import NoJournalEntry from "./NoJournalEntry";
 import LoadingSpinner from "../common/LoadingSpinner";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
@@ -11,7 +10,6 @@ import { getCurrentDate } from "../common/dateHelpers";
 import StreakDisplay from "../streak/StreakDisplay";
 import Feedback from "../feedback/Feedback";
 import Emotions from "../emotions/Emotions";
-import "./Journal.css";
 
 const verifyDependentInfo = (date, user, api) => {
 	if (!(date && user && api)) return false;
@@ -259,10 +257,9 @@ const JournalEntryPage = () => {
 				/>
 			)}
 			{allInfoDefined && !currentJournal && date && (
-				<NoJournalEntry
-					date={date}
-					title={`Error: No journal with date: ${date}`}
-					entryText={`Error: No journal with date: ${date}`}
+				<Navigate
+					to={-1}
+					replace
 				/>
 			)}
 
