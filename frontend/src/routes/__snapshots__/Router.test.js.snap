@@ -2,34 +2,69 @@
 
 exports[`Router matches snapshot 1`] = `
 <DocumentFragment>
-  <nav
-    class="nav"
+  <header
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-hip9hq-MuiPaper-root-MuiAppBar-root"
   >
-    <a
-      aria-current="page"
-      class="active"
-      href="/"
+    <div
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
+      style="justify-content: space-between;"
     >
-      Inkling
-    </a>
-    <a
-      class=""
-      href="/journal"
-    >
-      Journal
-    </a>
-    <a
-      class=""
-      href="/profile"
-    >
-      Testfirst
-    </a>
-    <button
-      class="link-button"
-    >
-      Log Out
-    </button>
-  </nav>
+      <button
+        aria-label="inkling-logo"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeMedium css-1d6w9lk-MuiButtonBase-root-MuiIconButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <img
+          alt="Inkling Logo"
+          height="auto"
+          src="inkling.png"
+          width="100"
+        />
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+      <a
+        class=""
+        href="/journal"
+        style="text-decoration: none;"
+      >
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+          style="text-align: center;"
+        >
+          Journal
+        </h6>
+      </a>
+      <a
+        class=""
+        href="/profile"
+        style="text-decoration: none;"
+      >
+        <button
+          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1y942vo-MuiButtonBase-root-MuiButton-root"
+          tabindex="0"
+          type="button"
+        >
+          Testfirst
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+      </a>
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1y942vo-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        Log Out
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </header>
   <div
     class="MuiBox-root css-ilk07l"
   >
