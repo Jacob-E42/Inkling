@@ -1,6 +1,4 @@
-
 import React from "react";
-import "./LoadingSpinner.css";
 import { CircularProgress, Box } from "@mui/material";
 
 function LoadingSpinner() {
@@ -12,4 +10,3 @@ function LoadingSpinner() {
 }
 
 export default LoadingSpinner;
-

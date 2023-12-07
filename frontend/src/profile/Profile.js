@@ -42,7 +42,7 @@ const Profile = ({ logout }) => {
 				sx={{ mt: 4 }}>
 				Profile
 			</Typography>
-			{/* <Typography sx={{ mb: 2 }}>User: {user ? user.firstName : "No user"}</Typography> */}
+
 			{user && (
 				<Box
 					component="form"

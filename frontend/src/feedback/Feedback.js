@@ -1,7 +1,5 @@
-
 import React from "react";
 import { Typography, Box } from "@mui/material";
-import "./Feedback.css";
 
 function Feedback({ feedback }) {
 	return (
@@ -17,4 +15,3 @@ function Feedback({ feedback }) {
 }
 
 export default Feedback;
-

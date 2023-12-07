@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useState } from "react";
 import { Button, TextField, Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
-import "./auth.css";
 import AlertContext from "../context_providers/AlertContext";
 
 const SignupForm = () => {
