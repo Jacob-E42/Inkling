@@ -15,7 +15,7 @@ const theme = createTheme({
 			primary: "#343434" // Jet
 		},
 		background: {
-			default: "#FFF0F5" // Lavender Blush
+			default: "#f8f9fa" // Lavender Blush
 		}
 	},
 	typography: {
