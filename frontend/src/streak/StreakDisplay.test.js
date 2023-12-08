@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import { AlertProvider, UserProvider } from "../mock";
 import StreakDisplay from "./StreakDisplay";
 import { getCurrentDate, getPastDate } from "../common/dateHelpers";
-import { parseISO, subDays } from "date-fns";
+window.HTMLElement.prototype.scrollIntoView = function () {};
 
 test("StreakDisplay renders without crashing", () => {
 	render(
