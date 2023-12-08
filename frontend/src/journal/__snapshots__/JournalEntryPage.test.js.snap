@@ -59,14 +59,14 @@ exports[`Failed journal fetch JournalEntryPage renders expected text when allInf
 exports[`Successful journal fetch JournalEntryPage rendered correctly, matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="streak-container"
+    style="display: flex; overflow-x: auto; gap: 20px; padding: 10px 0px;"
   >
     <a
-      class="day-link  2023-06-04 not-today"
       href="/journal/2023-06-04"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -86,11 +86,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-05 not-today"
       href="/journal/2023-06-05"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -110,11 +110,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-06 not-today"
       href="/journal/2023-06-06"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -134,11 +134,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-07 not-today"
       href="/journal/2023-06-07"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -158,11 +158,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-08 not-today"
       href="/journal/2023-06-08"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -182,11 +182,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-09 not-today"
       href="/journal/2023-06-09"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -206,11 +206,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-10 not-today"
       href="/journal/2023-06-10"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -230,11 +230,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-11 not-today"
       href="/journal/2023-06-11"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -254,11 +254,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-12 not-today"
       href="/journal/2023-06-12"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -278,11 +278,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-13 not-today"
       href="/journal/2023-06-13"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -302,11 +302,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-14 not-today"
       href="/journal/2023-06-14"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -326,11 +326,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-15 not-today"
       href="/journal/2023-06-15"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -350,11 +350,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-16 not-today"
       href="/journal/2023-06-16"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -374,11 +374,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-17 not-today"
       href="/journal/2023-06-17"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -398,11 +398,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-18 not-today"
       href="/journal/2023-06-18"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -422,11 +422,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-19 not-today"
       href="/journal/2023-06-19"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -446,11 +446,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-20 not-today"
       href="/journal/2023-06-20"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -470,11 +470,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-21 not-today"
       href="/journal/2023-06-21"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -494,11 +494,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-22 not-today"
       href="/journal/2023-06-22"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -518,11 +518,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-23 not-today"
       href="/journal/2023-06-23"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -542,11 +542,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-24 not-today"
       href="/journal/2023-06-24"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -566,11 +566,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-25 not-today"
       href="/journal/2023-06-25"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -590,11 +590,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-26 not-today"
       href="/journal/2023-06-26"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -614,11 +614,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-27 not-today"
       href="/journal/2023-06-27"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -638,11 +638,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-28 not-today"
       href="/journal/2023-06-28"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -662,11 +662,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-29 not-today"
       href="/journal/2023-06-29"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -686,11 +686,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-06-30 not-today"
       href="/journal/2023-06-30"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -710,11 +710,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-01 not-today"
       href="/journal/2023-07-01"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -734,11 +734,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-02 not-today"
       href="/journal/2023-07-02"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -758,11 +758,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-03 not-today"
       href="/journal/2023-07-03"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -782,11 +782,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link current-day 2023-07-04 not-today"
       href="/journal/2023-07-04"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button current-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button current-day css-eoyctj-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -806,11 +806,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-05 not-today"
       href="/journal/2023-07-05"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -830,11 +830,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-06 not-today"
       href="/journal/2023-07-06"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -854,11 +854,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-07 not-today"
       href="/journal/2023-07-07"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -878,11 +878,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-08 not-today"
       href="/journal/2023-07-08"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -902,11 +902,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-09 not-today"
       href="/journal/2023-07-09"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -926,11 +926,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-10 not-today"
       href="/journal/2023-07-10"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -950,11 +950,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-11 not-today"
       href="/journal/2023-07-11"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -974,11 +974,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-12 not-today"
       href="/journal/2023-07-12"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -998,11 +998,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-13 not-today"
       href="/journal/2023-07-13"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1022,11 +1022,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-14 not-today"
       href="/journal/2023-07-14"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1046,11 +1046,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-15 not-today"
       href="/journal/2023-07-15"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1070,11 +1070,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-16 not-today"
       href="/journal/2023-07-16"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1094,11 +1094,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-17 not-today"
       href="/journal/2023-07-17"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1118,11 +1118,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-18 not-today"
       href="/journal/2023-07-18"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1142,11 +1142,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-19 not-today"
       href="/journal/2023-07-19"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1166,11 +1166,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-20 not-today"
       href="/journal/2023-07-20"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1190,11 +1190,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-21 not-today"
       href="/journal/2023-07-21"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1214,11 +1214,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-22 not-today"
       href="/journal/2023-07-22"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1238,11 +1238,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-23 not-today"
       href="/journal/2023-07-23"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1262,11 +1262,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-24 not-today"
       href="/journal/2023-07-24"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1286,11 +1286,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-25 not-today"
       href="/journal/2023-07-25"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1310,11 +1310,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-26 not-today"
       href="/journal/2023-07-26"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1334,11 +1334,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-27 not-today"
       href="/journal/2023-07-27"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1358,11 +1358,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-28 not-today"
       href="/journal/2023-07-28"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1382,11 +1382,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-29 not-today"
       href="/journal/2023-07-29"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1406,11 +1406,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-30 not-today"
       href="/journal/2023-07-30"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1430,11 +1430,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-07-31 not-today"
       href="/journal/2023-07-31"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1454,11 +1454,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-08-01 not-today"
       href="/journal/2023-08-01"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1478,11 +1478,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-08-02 not-today"
       href="/journal/2023-08-02"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1502,11 +1502,11 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </button>
     </a>
     <a
-      class="day-link  2023-08-03 not-today"
       href="/journal/2023-08-03"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
       <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-sghohy-MuiButtonBase-root-MuiButton-root"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
         tabindex="0"
         type="button"
       >
@@ -1557,6 +1557,7 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
             class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
             id="title"
             name="title"
+            placeholder="title"
             type="text"
             value="Baking adventure"
           />

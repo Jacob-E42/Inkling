@@ -8,13 +8,8 @@ exports[`Profile matches snapshot 1`] = `
     <h5
       class="MuiTypography-root MuiTypography-h5 css-1jhmvk3-MuiTypography-root"
     >
-      This is profile
+      Profile
     </h5>
-    <p
-      class="MuiTypography-root MuiTypography-body1 css-z2eky3-MuiTypography-root"
-    >
-      User: testfirst
-    </p>
     <form
       class="MuiBox-root css-164r41r"
       novalidate=""
@@ -143,10 +138,10 @@ exports[`Profile matches snapshot 1`] = `
         >
           <input
             aria-invalid="false"
+            autocomplete="current-password"
             class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
             id="password"
             name="password"
-            placeholder="Enter new password, if you want it changed"
             type="password"
             value=""
           />

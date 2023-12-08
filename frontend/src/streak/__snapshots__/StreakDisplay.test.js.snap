@@ -3,255 +3,751 @@
 exports[`StreakDisplay matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="streak-container"
+    style="display: flex; overflow-x: auto; gap: 20px; padding: 10px 0px;"
   >
     <a
-      class="day-link "
-      href="/journal/2023-10-21"
-    >
-      Sat
-      <br />
-      21
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-22"
-    >
-      Sun
-      <br />
-      22
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-23"
-    >
-      Mon
-      <br />
-      23
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-24"
-    >
-      Tue
-      <br />
-      24
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-25"
-    >
-      Wed
-      <br />
-      25
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-26"
-    >
-      Thu
-      <br />
-      26
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-27"
-    >
-      Fri
-      <br />
-      27
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-28"
-    >
-      Sat
-      <br />
-      28
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-29"
-    >
-      Sun
-      <br />
-      29
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-30"
-    >
-      Mon
-      <br />
-      30
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-10-31"
-    >
-      Tue
-      <br />
-      31
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-11-01"
-    >
-      Wed
-      <br />
-      01
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-11-02"
-    >
-      Thu
-      <br />
-      02
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-11-03"
-    >
-      Fri
-      <br />
-      03
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-11-04"
-    >
-      Sat
-      <br />
-      04
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-11-05"
-    >
-      Sun
-      <br />
-      05
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-11-06"
-    >
-      Mon
-      <br />
-      06
-    </a>
-    <a
-      class="day-link "
-      href="/journal/2023-11-07"
-    >
-      Tue
-      <br />
-      07
-    </a>
-    <a
-      class="day-link "
       href="/journal/2023-11-08"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Wed
-      <br />
-      08
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Wed
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          08
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-09"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Thu
-      <br />
-      09
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Thu
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          09
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-10"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Fri
-      <br />
-      10
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Fri
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          10
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-11"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Sat
-      <br />
-      11
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Sat
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          11
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-12"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Sun
-      <br />
-      12
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Sun
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          12
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-13"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Mon
-      <br />
-      13
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Mon
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          13
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-14"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Tue
-      <br />
-      14
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Tue
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          14
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-15"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Wed
-      <br />
-      15
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Wed
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          15
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-16"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Thu
-      <br />
-      16
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Thu
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          16
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-17"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Fri
-      <br />
-      17
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Fri
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          17
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-18"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Sat
-      <br />
-      18
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Sat
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          18
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link "
       href="/journal/2023-11-19"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Sun
-      <br />
-      19
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Sun
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          19
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
     <a
-      class="day-link active"
       href="/journal/2023-11-20"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
     >
-      Mon
-      <br />
-      20
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Mon
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          20
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-21"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Tue
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          21
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-22"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Wed
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          22
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-23"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Thu
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          23
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-24"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Fri
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          24
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-25"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Sat
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          25
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-26"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Sun
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          26
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-27"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Mon
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          27
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-28"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Tue
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          28
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-29"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Wed
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          29
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-11-30"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Thu
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          30
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-12-01"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Fri
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          01
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-12-02"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Sat
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          02
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-12-03"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Sun
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          03
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-12-04"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Mon
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          04
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-12-05"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Tue
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          05
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-12-06"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Wed
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          06
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-12-07"
+      style="text-decoration: none; box-shadow: none; background-color: inherit;"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button inactive-day css-1qgflze-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Thu
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          07
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </a>
+    <a
+      href="/journal/2023-12-08"
+      style="text-decoration: none; box-shadow: 0px 0px 5px 0px rgba(10, 7, 4, 0.5); background-color: rgb(154, 147, 149);"
+    >
+      <button
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium day-button current-day css-eoyctj-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-caption css-1sn4lm3-MuiTypography-root"
+        >
+          Fri
+        </span>
+        <h6
+          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
+        >
+          08
+        </h6>
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
     </a>
   </div>
 </DocumentFragment>

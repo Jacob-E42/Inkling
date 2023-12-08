@@ -3,99 +3,171 @@
 exports[`Journal matches snapshot when rendered correctly 1`] = `
 <DocumentFragment>
   <div
-    class="JournalEntry"
+    class="MuiBox-root css-10v1rem"
   >
-    <header>
-      <h2>
-        2023-07-04
-      </h2>
-      <form
-        class=""
+    <h2
+      class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-i1hrn3-MuiTypography-root"
+    >
+      2023-07-04
+    </h2>
+    <form
+      class="MuiBox-root css-164r41r"
+      novalidate=""
+    >
+      <div
+        class="MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth MuiTextField-root css-17vbkzs-MuiFormControl-root-MuiTextField-root"
       >
-        <div
-          class="mb-3"
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
+          for="title"
+          id="title-label"
         >
-          <label
-            class="form-label"
-            for="title"
-          >
-            Title
-          </label>
+          Title
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+        >
           <input
-            class="form-control"
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
             id="title"
             name="title"
             placeholder="title"
             type="text"
             value="Baking adventure"
           />
-        </div>
-      </form>
-      <form
-        class=""
-      >
-        <div
-          class="mb-3"
-        >
-          <label
-            class="form-label"
-            for="journalType"
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
           >
-            Journal Type
-          </label>
-          <select
-            class="form-select"
-            id="journalType"
-            name="journalType"
-          >
-            <option>
-              Daily Journal
-            </option>
-            <option>
-              Gratitude Journal
-            </option>
-            <option>
-              Reflective Journal
-            </option>
-            <option>
-              Stream-of-Consciousness Journal
-            </option>
-            <option>
-              Bullet Journal
-            </option>
-            <option>
-              Dream Journal
-            </option>
-          </select>
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                Title
+              </span>
+            </legend>
+          </fieldset>
         </div>
-      </form>
-    </header>
-    <form
-      class=""
-    >
+      </div>
       <div
-        class="mb-3"
+        class="MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-1iledgx-MuiFormControl-root"
       >
         <label
-          class="form-label"
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="false"
+          id="journalType-label"
+        >
+          Journal Type
+        </label>
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+        >
+          <div
+            aria-controls=":r1:"
+            aria-expanded="false"
+            aria-haspopup="listbox"
+            aria-labelledby="journalType-label journalType"
+            class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+            id="journalType"
+            role="combobox"
+            tabindex="0"
+          >
+            <span
+              class="notranslate"
+            >
+              ​
+            </span>
+          </div>
+          <input
+            aria-hidden="true"
+            aria-invalid="false"
+            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+            name="journalType"
+            tabindex="-1"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-hfutr2-MuiSvgIcon-root-MuiSelect-icon"
+            data-testid="ArrowDropDownIcon"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-yjsfm1"
+            >
+              <span>
+                Journal Type
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <div
+        class="MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth MuiTextField-root css-17vbkzs-MuiFormControl-root-MuiTextField-root"
+      >
+        <label
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
           for="entry"
+          id="entry-label"
         >
           Journal Entry
         </label>
-        <textarea
-          class="form-control"
-          id="entry"
-          name="entryText"
-          placeholder="Start your entry here..."
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl MuiInputBase-multiline css-8ewcdo-MuiInputBase-root-MuiOutlinedInput-root"
         >
-           Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.
-        </textarea>
+          <textarea
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input"
+            id="entry"
+            name="entryText"
+            placeholder="Start your entry here..."
+            rows="4"
+            style="height: 0px; overflow: hidden;"
+          >
+             Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.
+          </textarea>
+          <textarea
+            aria-hidden="true"
+            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMultiline css-1sqnrkk-MuiInputBase-input-MuiOutlinedInput-input"
+            readonly=""
+            style="visibility: hidden; position: absolute; overflow: hidden; height: 0px; top: 0px; left: 0px; transform: translateZ(0); padding-top: 0px; padding-bottom: 0px; width: 100%;"
+            tabindex="-1"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-14lo706"
+            >
+              <span>
+                Journal Entry
+              </span>
+            </legend>
+          </fieldset>
+        </div>
       </div>
       <button
-        class="btn btn-success"
+        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1n7zltw-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
         type="submit"
       >
         Submit
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
       </button>
     </form>
   </div>

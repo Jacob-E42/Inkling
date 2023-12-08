@@ -3,11 +3,10 @@
 exports[`Router matches snapshot 1`] = `
 <DocumentFragment>
   <header
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-hip9hq-MuiPaper-root-MuiAppBar-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiAppBar-root MuiAppBar-colorPrimary MuiAppBar-positionStatic css-k3os1w-MuiPaper-root-MuiAppBar-root"
   >
     <div
-      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-hyum1k-MuiToolbar-root"
-      style="justify-content: space-between;"
+      class="MuiToolbar-root MuiToolbar-gutters MuiToolbar-regular css-8vsink-MuiToolbar-root"
     >
       <button
         aria-label="inkling-logo"
@@ -28,11 +27,10 @@ exports[`Router matches snapshot 1`] = `
       <a
         class=""
         href="/journal"
-        style="text-decoration: none;"
+        style="text-decoration: none; margin: 0px 1rem;"
       >
         <h6
-          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
-          style="text-align: center;"
+          class="MuiTypography-root MuiTypography-h6 css-1kgxqm0-MuiTypography-root"
         >
           Journal
         </h6>
@@ -40,29 +38,19 @@ exports[`Router matches snapshot 1`] = `
       <a
         class=""
         href="/profile"
-        style="text-decoration: none;"
+        style="text-decoration: none; margin: 0px 1rem;"
       >
-        <button
-          class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1y942vo-MuiButtonBase-root-MuiButton-root"
-          tabindex="0"
-          type="button"
+        <p
+          class="MuiTypography-root MuiTypography-body1 css-1mdftu-MuiTypography-root"
         >
           Testfirst
-          <span
-            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-          />
-        </button>
+        </p>
       </a>
-      <button
-        class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1y942vo-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
-        type="button"
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-1b65cwv-MuiTypography-root"
       >
         Log Out
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </button>
+      </p>
     </div>
   </header>
   <div
