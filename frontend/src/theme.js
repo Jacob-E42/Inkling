@@ -56,8 +56,10 @@ const theme = createTheme({
 				body1: {
 					fontSize: "1rem",
 					color: "#343434"
+				},
+				h6: {
+					fontSize: "1rem"
 				}
-				// Additional typography variants...
 			}
 		},
 		MuiCard: {
