@@ -26,7 +26,6 @@ const theme = createTheme({
 		body1: {
 			textAlign: "center"
 		}
-		// Add more typography styles as needed
 	},
 	components: {
 		MuiButton: {
@@ -95,6 +94,30 @@ const theme = createTheme({
 				root: {
 					backgroundColor: "#00A6A6", // Persian Green
 					color: "#FFF0F5" // Lavender Blush
+				}
+			}
+		},
+		MuiCssBaseline: {
+			styleOverrides: `
+                body {
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                }
+                code {
+                    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+                }
+            `
+		},
+		MuiFormControl: {
+			styleOverrides: {
+				root: {
+					// Set default width for all forms
+					maxWidth: "sm",
+					// "@media (min-width: 600px)": {
+					// 	// sm breakpoint
+					// 	width: "400px"
+					// },
+					margin: "auto" // Center the form
 				}
 			}
 		}
