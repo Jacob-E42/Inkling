@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material/";
 import InklingLogo from "./inkling.png";
 import UserContext from "../context_providers/UserContext";
-import "./Nav.css";
 
 const Nav = ({ logout }) => {
 	const { user } = useContext(UserContext);
@@ -12,8 +11,19 @@ const Nav = ({ logout }) => {
 	if (user) firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1);
 
 	return (
-		<AppBar position="static">
-			<Toolbar style={{ justifyContent: "space-between" }}>
+		<AppBar
+			position="static"
+			sx={{
+				padding: "0 1rem" /* Some padding on the sides */,
+				boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.2)"
+			}}>
+			<Toolbar
+				sx={{
+					justifyContent: "space-between",
+					height: "3rem",
+					padding: "0 1rem",
+					margin: "0 1rem"
+				}}>
 				<IconButton
 					edge="start"
 					color="inherit"
@@ -29,13 +39,13 @@ const Nav = ({ logout }) => {
 				{!user ? (
 					<>
 						<NavLink
-							color="inherit"
-							to={"/login"}>
+							to={"/login"}
+							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
 							<Button color="inherit">Login</Button>
 						</NavLink>
 						<NavLink
 							to={"/signup"}
-							color="inherit">
+							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
 							<Button color="inherit">Signup</Button>
 						</NavLink>
 					</>
@@ -43,23 +53,31 @@ const Nav = ({ logout }) => {
 					<>
 						<NavLink
 							to="/journal"
-							style={{ textDecoration: "none", color: "inherit" }}>
+							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
 							<Typography
 								variant="h6"
-								style={{ textAlign: "center" }}>
+								textAlign="center">
 								Journal
 							</Typography>
 						</NavLink>
 						<NavLink
 							to="/profile"
-							style={{ textDecoration: "none", color: "inherit" }}>
-							<Button color="inherit">{firstName}</Button>
+							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
+							<Typography color="inherit">{firstName}</Typography>
 						</NavLink>
-						<Button
+						<Typography
 							color="inherit"
-							onClick={logout}>
+							onClick={logout}
+							sx={{
+								textDecoration: "none",
+								color: "inherit",
+								fontSize: "1rem",
+								background: "none",
+								border: "none",
+								padding: "0"
+							}}>
 							Log Out
-						</Button>
+						</Typography>
 					</>
 				)}
 			</Toolbar>
