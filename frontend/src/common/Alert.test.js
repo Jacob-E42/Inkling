@@ -1,12 +1,12 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import AlertComponent from "./AlertComponent";
+import Alert from "./Alert";
 import { AlertProvider } from "../mock";
 
 test("Alert renders without crashing", () => {
 	render(
 		<AlertProvider>
-			<AlertComponent />
+			<Alert />
 		</AlertProvider>
 	);
 });
@@ -14,7 +14,7 @@ test("Alert renders without crashing", () => {
 test("Alert matches snapshot for success", () => {
 	const { asFragment } = render(
 		<AlertProvider>
-			<AlertComponent msg={"I did it!"} />
+			<Alert msg={"I did it!"} />
 		</AlertProvider>
 	);
 	expect(asFragment()).toMatchSnapshot();
@@ -23,7 +23,7 @@ test("Alert matches snapshot for success", () => {
 test("Alert matches snapshot for danger", () => {
 	const { asFragment } = render(
 		<AlertProvider>
-			<AlertComponent
+			<Alert
 				color="danger"
 				msg="You did not enter the correct information"
 			/>
