@@ -67,6 +67,7 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 							id="title"
 							label="Title"
 							name="title"
+							placeholder="title"
 							value={tempJournal.title}
 							onChange={handleChange}
 							variant="outlined"
