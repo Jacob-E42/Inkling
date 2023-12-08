@@ -83,6 +83,7 @@ function getFutureDate(dateString, num) {
 	return format(fututeDate, "yyyy-MM-dd");
 }
 
+// Takes a datestring and returns whether that date is today
 function isCurrentDate(dateString) {
 	const currentDate = parseISO(dateString);
 
