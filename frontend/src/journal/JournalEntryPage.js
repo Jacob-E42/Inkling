@@ -109,11 +109,10 @@ const JournalEntryPage = () => {
 			setColor("error");
 			if (err.status === 404) {
 				setJournalLoaded(true);
-				navigate(-1);
-				return;
+			} else {
+				setJournalLoaded(false);
 			}
 			setCurrentJournal(null);
-			setJournalLoaded(false);
 		}
 	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded, navigate]);
 
@@ -240,7 +239,8 @@ const JournalEntryPage = () => {
 	}, [emotionsPending]);
 
 	if (!journalLoaded) return <LoadingSpinner />;
-	console.log("test allInfoDefined & currentJournal", allInfoDefined, currentJournal);
+
+	console.log("test allInfoDefined & currentJournal", allInfoDefined, currentJournal, journalLoaded);
 
 	return (
 		<>
@@ -258,7 +258,7 @@ const JournalEntryPage = () => {
 			)}
 			{allInfoDefined && !currentJournal && date && (
 				<Navigate
-					to={-1}
+					to={`/journal/${getCurrentDate()}`}
 					replace
 				/>
 			)}
