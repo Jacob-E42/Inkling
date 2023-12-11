@@ -109,6 +109,37 @@ describe("GET /journals/:entryDate", function () {
 	});
 });
 
+/****************************************GET /journals/entryDate/quickcheck */
+describe("GET /journals/:entryDate/quickcheck", function () {
+	test("works for correct user and date", async function () {
+		const resp = await request(app)
+			.get(`/users/1/journals/date/2022-01-04/quickcheck`)
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.body).toEqual(true);
+		expect(resp.statusCode).toEqual(200);
+	});
+
+	test("unauth for other users", async function () {
+		const resp = await request(app)
+			.get(`/users/1/journals/date/2022-01-04/quickcheck`)
+			.set("authorization", `Bearer ${u2Token}`);
+		expect(resp.statusCode).toEqual(401);
+	});
+
+	test("unauth for anon", async function () {
+		const resp = await request(app).get(`/users/1/journals/date/2022-01-04/quickcheck`);
+		expect(resp.statusCode).toEqual(401);
+	});
+
+	test("returns false if journal not found for the given date", async function () {
+		const resp = await request(app)
+			.get(`/users/1/journals/date/2025-01-04/quickcheck`)
+			.set("authorization", `Bearer ${u1Token}`);
+		expect(resp.statusCode).toEqual(200);
+		expect(resp.body).toEqual(false);
+	});
+});
+
 /************************************** POST /journals/ */
 
 describe("POST /journals/", function () {
