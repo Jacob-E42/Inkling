@@ -76,9 +76,9 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 						<FormControl
 							fullWidth
 							margin="normal">
-							<InputLabel id="journalType-label">Journal Type</InputLabel>
+							<InputLabel id="journalType">Journal Type</InputLabel>
 							<Select
-								labelId="journalType-label"
+								labelId="journalType"
 								id="journalType"
 								name="journalType"
 								value={tempJournal.journalType}
