@@ -93,6 +93,20 @@ class ApiRequest {
 		}
 	}
 
+	async quickCheckJournalEntry(userId, date) {
+		console.debug("quickCheckJournalEntry", userId, date);
+		if (!userId || !date) throw Error("Either userId or date is missing");
+		try {
+			let response = await this.#request(`users/${userId}/journals/date/${date}/quickcheck`);
+			console.log("Journal->", response);
+
+			return response.journal;
+		} catch (err) {
+			console.log(err, err.message);
+			throw err;
+		}
+	}
+
 	async createJournalEntry(userId, title, entryText, entryDate) {
 		console.debug("createJournalEntry", userId, title, entryText, entryDate);
 		let response = await this.#request(`users/${userId}/journals/`, { title, entryText, entryDate }, "post");
