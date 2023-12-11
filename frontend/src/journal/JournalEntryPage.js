@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import Journal from "./Journal";
 import LoadingSpinner from "../common/LoadingSpinner";
@@ -52,6 +52,7 @@ const JournalEntryPage = () => {
 	const [feedbackReceived, setFeedbackReceived] = useLocalStorage("feedbackReceived", false);
 	const [emotionsReceived, setEmotionsReceived] = useLocalStorage("emotionsReceived", false);
 	const [emotionsPending, setEmotionsPending] = useLocalStorage("setEmotionsPending", false);
+	const lastVisitedPage = useRef(getCurrentDate());
 
 	console.debug(
 		"JournalEntryPage",
@@ -103,6 +104,7 @@ const JournalEntryPage = () => {
 			if (typeof resp !== "object" || resp.status === 404) throw new Error("Response returned was invalid");
 			setCurrentJournal(resp);
 			await setJournalLoaded(true);
+			lastVisitedPage.current = date;
 		} catch (err) {
 			console.error(err, err.status);
 			setMsg(err.message);
@@ -244,7 +246,11 @@ const JournalEntryPage = () => {
 
 	return (
 		<>
-			<StreakDisplay date={date} />
+			<StreakDisplay
+				date={date}
+				userId={user.id}
+				api={api}
+			/>
 			{allInfoDefined && currentJournal && (
 				<Journal
 					date={date}
@@ -258,7 +264,7 @@ const JournalEntryPage = () => {
 			)}
 			{allInfoDefined && !currentJournal && date && (
 				<Navigate
-					to={`/journal/${getCurrentDate()}`}
+					to={`/journal/${lastVisitedPage.current}`}
 					replace
 				/>
 			)}
