@@ -50,6 +50,23 @@ router.get("/date/:entryDate", ensureCorrectUserByUserId, async function (req, r
 	}
 });
 
+router.get("/date/:entryDate/quickcheck", ensureCorrectUserByUserId, async function (req, res, next) {
+	console.debug("/journals/date/entryDate/quickcheck GET");
+	const { entryDate, userId } = req.params;
+	// console.log(`Entry date:`, entryDate, `User ID is: ${userId}`);
+	try {
+		const journal = await Journal.getByDate(userId, entryDate);
+		console.log("journals/", journal);
+		return res.json(true);
+	} catch (err) {
+		console.log("error=", err);
+
+		if (err instanceof NotFoundError) {
+			return res.json(false);
+		} else return next(err);
+	}
+});
+
 router.get("/date/:dateRange", ensureCorrectUserByUserId, async function (req, res, next) {
 	console.debug("/journals/date/dateRange GET");
 	const { userId, dateRange } = req.params;
