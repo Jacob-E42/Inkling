@@ -50,7 +50,7 @@ router.get("/date/:entryDate", ensureCorrectUserByUserId, async function (req, r
 	}
 });
 
-router.get("/date/:entryDate/quickcheck", ensureCorrectUserByUserId, async function (req, res, next) {
+router.get("/date/:entryDate/quickCheck", ensureCorrectUserByUserId, async function (req, res, next) {
 	console.debug("/journals/date/entryDate/quickcheck GET");
 	const { entryDate, userId } = req.params;
 	// console.log(`Entry date:`, entryDate, `User ID is: ${userId}`);
@@ -67,14 +67,15 @@ router.get("/date/:entryDate/quickcheck", ensureCorrectUserByUserId, async funct
 	}
 });
 
-router.get("/date/:dateRange", ensureCorrectUserByUserId, async function (req, res, next) {
-	console.debug("/journals/date/dateRange GET");
-	const { userId, dateRange } = req.params;
-	console.log(`User ID is: ${userId}`);
+router.get("/dateRange/quickCheck", ensureCorrectUserByUserId, async function (req, res, next) {
+	console.debug("/journals/dateRange GET");
+	const { userId } = req.params;
+	const { dateRange } = req.body;
+	console.log(`User ID is: ${userId}`, `date range is: ${dateRange}`);
 	try {
-		const journalsByDate = await Journal.getDatesRange(userId, dateRange);
-		console.log("journals/", journalsByDate);
-		return res.json({ journalsByDate });
+		const areJournalEntries = await Journal.getDatesRange(userId, dateRange);
+		console.log("journals/", areJournalEntries);
+		return res.json({ areJournalEntries });
 	} catch (err) {
 		console.log("error=", err);
 		return next(err);
