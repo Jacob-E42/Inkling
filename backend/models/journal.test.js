@@ -82,8 +82,8 @@ describe("Journal", () => {
 			expect(result).toBeDefined();
 			expect(Array.isArray(result)).toBe(true);
 			expect(result).toEqual([
-				{ date: "2022-01-04", exists: true },
-				{ date: "2022-01-05", exists: false }
+				{ date: "2022-01-04", isJournal: true },
+				{ date: "2022-01-05", isJournal: false }
 			]);
 		});
 
@@ -97,9 +97,9 @@ describe("Journal", () => {
 				expect(result).toBeDefined();
 				expect(Array.isArray(result)).toBe(true);
 				expect(result).toEqual([
-					{ date: "2022-01-04", exists: true },
-					{ date: "2022-01-05", exists: false },
-					{ date: false, exists: false }
+					{ date: "2022-01-04", isJournal: true },
+					{ date: "2022-01-05", isJournal: false },
+					{ date: false, isJournal: false }
 				]);
 			} catch (err) {
 				expect(err instanceof ExpressError).toBeFalsy();
