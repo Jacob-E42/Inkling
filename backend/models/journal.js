@@ -55,13 +55,14 @@ class Journal {
 
 	static async getDatesRange(userId, dateRange) {
 		console.debug("getDatesRange", userId, dateRange);
+		if (!userId || !dateRange) throw new BadRequestError("Required information is missing!");
 		let journalsByDate = [];
 
 		for (let date of dateRange) {
-			let journalByDate = { date, exists: false };
+			let journalByDate = { date, isJournal: false };
 			if (!isDate(parseISO(date))) {
 				journalByDate.date = false;
-				exists = false;
+				isJournal = false;
 				continue;
 			}
 			let resp;
@@ -70,7 +71,7 @@ class Journal {
 			} catch (err) {
 			} finally {
 				console.debug("resp", resp);
-				if (resp && resp.id && resp.entryDate === date) journalByDate.exists = true;
+				if (resp && resp.id && resp.entryDate === date) journalByDate.isJournal = true;
 			}
 
 			journalsByDate.push(journalByDate);
