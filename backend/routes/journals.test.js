@@ -140,12 +140,12 @@ describe("GET /journals/:entryDate/quickCheck", function () {
 	});
 });
 
-/****************************************GET /journals/date/dateRange/quickCheck */
-describe("GET /journals/date/dateRange/quickCheck", function () {
+/**************************************** POST/journals/date/dateRange/quickCheck */
+describe("POST /journals/date/dateRange/quickCheck", function () {
 	const dateRange = ["2022-01-04", "2022-01-05", "2022-01-06"];
 	test("works for correct user and date", async function () {
 		const resp = await request(app)
-			.get(`/users/1/journals/dateRange/quickCheck`)
+			.post(`/users/1/journals/dateRange/quickCheck`)
 			.send({ dateRange })
 			.set("authorization", `Bearer ${u1Token}`);
 		expect(resp.body.areJournalEntries).toEqual([
@@ -158,14 +158,14 @@ describe("GET /journals/date/dateRange/quickCheck", function () {
 
 	test("unauth for other users", async function () {
 		const resp = await request(app)
-			.get(`/users/1/journals/dateRange/quickCheck`)
+			.post(`/users/1/journals/dateRange/quickCheck`)
 			.send({ dateRange })
 			.set("authorization", `Bearer ${u2Token}`);
 		expect(resp.statusCode).toEqual(401);
 	});
 
 	test("unauth for anon", async function () {
-		const resp = await request(app).get(`/users/1/journals/dateRange/quickCheck`).send({ dateRange });
+		const resp = await request(app).post(`/users/1/journals/dateRange/quickCheck`).send({ dateRange });
 		expect(resp.statusCode).toEqual(401);
 	});
 });
