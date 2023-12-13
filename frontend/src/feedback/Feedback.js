@@ -2,6 +2,7 @@ import React from "react";
 import { Typography, Box } from "@mui/material";
 
 function Feedback({ feedback }) {
+	if (!feedback) return null;
 	return (
 		<Box sx={{ my: 2 }}>
 			<Typography
