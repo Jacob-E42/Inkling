@@ -67,11 +67,12 @@ router.get("/date/:entryDate/quickCheck", ensureCorrectUserByUserId, async funct
 	}
 });
 
-router.get("/dateRange/quickCheck", ensureCorrectUserByUserId, async function (req, res, next) {
+router.post("/dateRange/quickCheck", ensureCorrectUserByUserId, async function (req, res, next) {
 	console.debug("/journals/dateRange GET");
 	const { userId } = req.params;
 	const { dateRange } = req.body;
-	console.log(`User ID is: ${userId}`, `date range is: ${dateRange}`);
+
+	// console.log(`User ID is: ${userId}`, `\nDate range is: ${dateRange}`);
 	try {
 		const areJournalEntries = await Journal.getDatesRange(userId, dateRange);
 		console.log("journals/", areJournalEntries);
