@@ -108,11 +108,11 @@ class ApiRequest {
 	}
 
 	async quickCheckJournalEntriesBatch(userId, dateRange) {
-		console.debug("quickCheckJournalEntry", userId, dateRange);
+		console.debug("quickCheckJournalEntriesBatch", userId, dateRange);
 		if (!userId || !dateRange) throw Error("Either userId or date range is missing");
 		try {
-			let response = await this.#request(`users/${userId}/journals/dateRange/quickcheck`, { dateRange });
-			console.log("Journal->", response);
+			let response = await this.#request(`users/${userId}/journals/dateRange/quickcheck`, { dateRange }, "post");
+			// console.log("Journal->", response);
 
 			return response.areJournalEntries;
 		} catch (err) {
