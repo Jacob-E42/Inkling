@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef } from "react";
-import { useNavigate, useParams, Navigate } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import Journal from "./Journal";
 import LoadingSpinner from "../common/LoadingSpinner";
 import UserContext from "../context_providers/UserContext";
@@ -10,32 +10,7 @@ import { getCurrentDate } from "../common/dateHelpers";
 import StreakDisplay from "../streak/StreakDisplay";
 import Feedback from "../feedback/Feedback";
 import Emotions from "../emotions/Emotions";
-
-const verifyDependentInfo = (date, user, api) => {
-	if (!(date && user && api)) return false;
-	if (typeof date !== "string") return false;
-	if (date.length < 10) return false;
-	if (typeof user !== "object") return false;
-	if (typeof api !== "object") return false;
-	return true;
-};
-
-const validateJournalInfo = (id, userId, title, entryText, date, journalType) => {
-	console.debug("validateJournalInfo", id, userId, title, entryText, date, journalType);
-	if (!id || !userId || !title || !entryText || !date || !journalType)
-		return { valid: false, error: "REQUIRED INFO IS MISSING" };
-	if (typeof id !== "number") return { valid: false, error: "ID IS NOT A NUMBER" };
-	if (typeof userId !== "number") return { valid: false, error: "USERID IS NOT A NUMBER" };
-	if (typeof title !== "string") return { valid: false, error: "TITLE IS NOT A STRING" };
-	if (typeof date !== "string") return { valid: false, error: "DATE IS NOT A STRING" };
-	if (typeof entryText !== "string") return { valid: false, error: "ENTRYTEXT IS NOT A STRING" };
-	if (typeof journalType !== "string") return { valid: false, error: "JOURNALTYPE IS NOT A STRING" };
-	if (entryText.trim().length < 1) return { valid: false, error: "ENTRYTEXT IS TOO SHORT" };
-	if (date.length !== 10) return { valid: false, error: "DATE IS WRONG LENGTH" };
-	if (!journalType.includes("Journal")) return { valid: false, error: "JOURNAL TYPE IS WRONG" };
-
-	return { valid: true };
-};
+import { validateDateUserAndApi, validateJournalInfo } from "../common/validations";
 
 const JournalEntryPage = () => {
 	let { date } = useParams("date");
@@ -43,8 +18,8 @@ const JournalEntryPage = () => {
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
 	const { setMsg, setColor } = useContext(AlertContext);
-	const allInfoDefined = verifyDependentInfo(date, user, api); //only verifies date, user, and qpi. Not setMsg, or setColor
-	const navigate = useNavigate();
+	const allInfoDefined = validateDateUserAndApi(date, user, api); //only verifies date, user, and qpi. Not setMsg, or setColor
+	// const navigate = useNavigate();
 	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
 	const [feedbackPending, setFeedbackPending] = useLocalStorage("feedbackPending", false);
@@ -54,29 +29,29 @@ const JournalEntryPage = () => {
 	const [emotionsPending, setEmotionsPending] = useLocalStorage("setEmotionsPending", false);
 	const lastVisitedPage = useRef(getCurrentDate());
 
-	console.debug(
-		"JournalEntryPage",
-		"date=",
-		date,
-		"user=",
-		user,
-		"api=",
-		api,
-		"allInfoDefined=",
-		allInfoDefined,
-		"journal=",
-		currentJournal,
-		"journalLoaded=",
-		journalLoaded,
-		"feedbackPending=",
-		feedbackPending,
-		"feedbackReceived=",
-		feedbackReceived,
-		"emotionsReceived=",
-		emotionsReceived,
-		"emotions=",
-		currentJournal?.emotions
-	);
+	// console.debug(
+	// 	"JournalEntryPage",
+	// 	"date=",
+	// 	date,
+	// 	"user=",
+	// 	user,
+	// 	"api=",
+	// 	api,
+	// 	"allInfoDefined=",
+	// 	allInfoDefined,
+	// 	"journal=",
+	// 	currentJournal,
+	// 	"journalLoaded=",
+	// 	journalLoaded,
+	// 	"feedbackPending=",
+	// 	feedbackPending,
+	// 	"feedbackReceived=",
+	// 	feedbackReceived,
+	// 	"emotionsReceived=",
+	// 	emotionsReceived,
+	// 	"emotions=",
+	// 	currentJournal?.emotions
+	// );
 
 	useEffect(() => {
 		console.debug("useEffect - JournalEntryPage", "date=", date, "currentJournal=", currentJournal);
@@ -100,7 +75,7 @@ const JournalEntryPage = () => {
 		try {
 			// console.log("date=", date, "api=", api);
 			const resp = await api.getJournalEntryByDate(user.id, date);
-			console.debug("Here is the RESPONSE", resp);
+			// console.debug("Here is the RESPONSE", resp);
 			if (typeof resp !== "object" || resp.status === 404) throw new Error("Response returned was invalid");
 			setCurrentJournal(resp);
 			await setJournalLoaded(true);
@@ -116,7 +91,7 @@ const JournalEntryPage = () => {
 			}
 			setCurrentJournal(null);
 		}
-	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded, navigate]);
+	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded]);
 
 	const editJournal = useCallback(
 		async data => {
@@ -242,7 +217,15 @@ const JournalEntryPage = () => {
 
 	if (!journalLoaded) return <LoadingSpinner />;
 
-	console.log("test allInfoDefined & currentJournal", allInfoDefined, currentJournal, journalLoaded);
+	console.log(
+		"test",
+		"allInfoDefined",
+		allInfoDefined,
+		"currentJournal",
+		currentJournal,
+		"journalloaded:",
+		journalLoaded
+	);
 
 	return (
 		<>
