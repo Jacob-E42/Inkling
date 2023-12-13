@@ -19,19 +19,4 @@ exports[`Feedback matches snapshot 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Feedback matches snapshot when rendered without props 1`] = `
-<DocumentFragment>
-  <div
-    class="MuiBox-root css-1ebprri"
-  >
-    <h6
-      class="MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom css-18k87ye-MuiTypography-root"
-    >
-      Feedback
-    </h6>
-    <p
-      class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-    />
-  </div>
-</DocumentFragment>
-`;
+exports[`Feedback matches snapshot when rendered without props 1`] = `<DocumentFragment />`;
