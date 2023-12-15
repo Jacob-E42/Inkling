@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useRef } from "react";
-import { useParams, Navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Journal from "./Journal";
 import LoadingSpinner from "../common/LoadingSpinner";
 import UserContext from "../context_providers/UserContext";
@@ -11,15 +11,18 @@ import StreakDisplay from "../streak/StreakDisplay";
 import Feedback from "../feedback/Feedback";
 import Emotions from "../emotions/Emotions";
 import { validateDateUserAndApi, validateJournalInfo } from "../common/validations";
+// import useValidateDate from "../hooks/useValidateDate";
 
 const JournalEntryPage = () => {
 	let { date } = useParams("date");
 	if (!date) date = getCurrentDate();
+	const lastVisitedPage = useRef(getCurrentDate());
+	const dateHasJournalEntry = useRef(false);
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
 	const { setMsg, setColor } = useContext(AlertContext);
 	const allInfoDefined = validateDateUserAndApi(date, user, api); //only verifies date, user, and qpi. Not setMsg, or setColor
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const [currentJournal, setCurrentJournal] = useLocalStorage("currentJournal", null);
 	const [journalLoaded, setJournalLoaded] = useLocalStorage("journalLoaded", false);
 	const [feedbackPending, setFeedbackPending] = useLocalStorage("feedbackPending", false);
@@ -27,7 +30,6 @@ const JournalEntryPage = () => {
 	const [feedbackReceived, setFeedbackReceived] = useLocalStorage("feedbackReceived", false);
 	const [emotionsReceived, setEmotionsReceived] = useLocalStorage("emotionsReceived", false);
 	const [emotionsPending, setEmotionsPending] = useLocalStorage("setEmotionsPending", false);
-	const lastVisitedPage = useRef(getCurrentDate());
 
 	// console.debug(
 	// 	"JournalEntryPage",
@@ -54,11 +56,9 @@ const JournalEntryPage = () => {
 	// );
 
 	useEffect(() => {
-		console.debug("useEffect - JournalEntryPage", "date=", date, "currentJournal=", currentJournal);
-
-		if (!allInfoDefined) {
-			setJournalLoaded(false);
-		} else {
+		// console.debug("useEffect - JournalEntryPage", "date=", date, "currentJournal=", currentJournal);
+		setJournalLoaded(false);
+		if (allInfoDefined) {
 			setFeedback(null);
 			setCurrentJournal(null);
 			loadJournalEntry();
@@ -73,25 +73,27 @@ const JournalEntryPage = () => {
 	const loadJournalEntry = useCallback(async () => {
 		console.debug("loadJournalEntry");
 		try {
-			// console.log("date=", date, "api=", api);
 			const resp = await api.getJournalEntryByDate(user.id, date);
 			// console.debug("Here is the RESPONSE", resp);
-			if (typeof resp !== "object" || resp.status === 404) throw new Error("Response returned was invalid");
+
 			setCurrentJournal(resp);
 			await setJournalLoaded(true);
 			lastVisitedPage.current = date;
+			// dateHasJournalEntry.current = true;
 		} catch (err) {
-			console.error(err, err.status);
+			console.error(err, err.status, "lastVisitedPage:", lastVisitedPage.current);
 			setMsg(err.message);
 			setColor("error");
-			if (err.status === 404) {
-				setJournalLoaded(true);
-			} else {
-				setJournalLoaded(false);
-			}
+			// if (err.status === 404) {
+			// 	setJournalLoaded(true);
+			// } else {
+			// 	setJournalLoaded(false);
+			// }
+			// dateHasJournalEntry.current = false;
 			setCurrentJournal(null);
+			navigate(`/journal/${lastVisitedPage.current}`);
 		}
-	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded]);
+	}, [setMsg, setColor, api, date, user, setCurrentJournal, setJournalLoaded, navigate]);
 
 	const editJournal = useCallback(
 		async data => {
@@ -164,7 +166,7 @@ const JournalEntryPage = () => {
 		if (currentJournal && currentJournal.entryText && feedbackPending) {
 			fetchFeedback();
 		} else {
-			console.warn("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
+			// console.warn("FEEDBACK IS NOT PENDING", feedbackPending, currentJournal?.entryText);
 			setMsg("An error occurred trying to load feedback.");
 			setColor("error");
 		}
@@ -210,12 +212,23 @@ const JournalEntryPage = () => {
 		if (currentJournal && currentJournal.entryText && emotionsPending) {
 			fetchEmotions();
 		} else {
-			console.warn("Emotions Are NOT PENDING", emotionsPending, currentJournal?.entryText);
+			// console.warn("Emotions Are NOT PENDING", emotionsPending, currentJournal?.entryText);
 		}
 		// eslint-disable-next-line
 	}, [emotionsPending]);
 
-	if (!journalLoaded) return <LoadingSpinner />;
+	// const quickCheckJournal = useCallback(async () => {
+	// 	return await api.quickCheckJournalEntry(user.id, date);
+	// }, [user.id, api, date]);
+
+	// const quickCheckMultipleJournals = useCallback(
+	// 	async dateRange => {
+	// 		return await api.quickCheckJournalEntriesBatch(user.id, dateRange);
+	// 	},
+	// 	[user.id, api]
+	// );
+
+	if (!journalLoaded || !currentJournal) return <LoadingSpinner />;
 
 	console.log(
 		"test",
@@ -229,11 +242,13 @@ const JournalEntryPage = () => {
 
 	return (
 		<>
-			<StreakDisplay
-				date={date}
-				userId={user.id}
-				api={api}
-			/>
+			{/* {allInfoDefined && !currentJournal && date && (
+				<Navigate
+					to={`/journal/${lastVisitedPage.current}`}
+					replace
+				/>
+			)} */}
+			<StreakDisplay date={date} />
 			{allInfoDefined && currentJournal && (
 				<Journal
 					date={date}
@@ -245,13 +260,6 @@ const JournalEntryPage = () => {
 					editJournal={editJournal}
 				/>
 			)}
-			{allInfoDefined && !currentJournal && date && (
-				<Navigate
-					to={`/journal/${lastVisitedPage.current}`}
-					replace
-				/>
-			)}
-
 			{feedbackReceived && currentJournal && <Feedback feedback={feedback} />}
 			{emotionsReceived && currentJournal && <Emotions emotions={currentJournal?.emotions} />}
 		</>
