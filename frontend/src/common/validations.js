@@ -7,6 +7,14 @@ function validateDateUserIdAndApi(date, userId, api) {
 	return true;
 }
 
+function validateDate(date) {
+	if (!date) return false;
+	if (typeof date !== "string") return false;
+	if (date.length < 10) return false;
+
+	return true;
+}
+
 const validateDateUserAndApi = (date, user, api) => {
 	if (!(date && user && api)) return false;
 	if (typeof date !== "string") return false;
@@ -33,4 +41,4 @@ const validateJournalInfo = (id, userId, title, entryText, date, journalType) =>
 	return { valid: true };
 };
 
-export { validateDateUserAndApi, validateDateUserIdAndApi, validateJournalInfo };
+export { validateDateUserAndApi, validateDateUserIdAndApi, validateJournalInfo, validateDate };
