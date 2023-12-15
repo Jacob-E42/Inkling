@@ -13,15 +13,15 @@ class ApiRequest {
 	}
 
 	async #request(endpoint, data = {}, method = "get") {
-		console.debug("API Call:", endpoint, data, method, this.token);
+		// console.debug("API Call:", endpoint, data, method, this.token);
 
 		const url = `${this.BASE_URL}/${endpoint}`;
 		const headers = { Authorization: `Bearer ${this.token}` };
 		const params = method === "get" ? data : {};
-		console.log(url, method, data, params, headers);
+		// console.log(url, method, data, params, headers);
 		try {
 			const response = await axios({ url, method, data, params, headers });
-			console.log("response", response.data);
+			// console.log("response", response.data);
 			return response.data;
 		} catch (error) {
 			console.log(error);
@@ -108,7 +108,7 @@ class ApiRequest {
 	}
 
 	async quickCheckJournalEntriesBatch(userId, dateRange) {
-		console.debug("quickCheckJournalEntriesBatch", userId, dateRange);
+		// console.debug("quickCheckJournalEntriesBatch", userId, dateRange);
 		if (!userId || !dateRange) throw Error("Either userId or date range is missing");
 		try {
 			let response = await this.#request(`users/${userId}/journals/dateRange/quickcheck`, { dateRange }, "post");
@@ -137,11 +137,11 @@ class ApiRequest {
 		};
 
 		let response = await this.#request(`users/${userId}/journals/date/${entryDate}`, data, "patch");
-		console.log("editedJournal", response, data);
+		// console.log("editedJournal", response, data);
 		return response.journal;
 	}
 	async getFeedback(id, userId, entryText, journalType, title = null, entryDate = null) {
-		console.debug("getFeedback", id, userId, entryText, journalType, title, entryDate);
+		// console.debug("getFeedback", id, userId, entryText, journalType, title, entryDate);
 		const data = {
 			id: id,
 			userId: userId,
@@ -152,7 +152,7 @@ class ApiRequest {
 		};
 
 		let response = await this.#request(`feedback/${userId}/`, data, "post");
-		// console.log("response", response);
+		console.log("Feedback->", response);
 		return response.feedback;
 	}
 
@@ -165,7 +165,7 @@ class ApiRequest {
 		entryDate = null,
 		emotions = null
 	) {
-		console.debug("getEmotions", id, userId, entryText, journalType, title, entryDate, emotions);
+		// console.debug("getEmotions", id, userId, entryText, journalType, title, entryDate, emotions);
 		const data = {
 			id: id,
 			userId: userId,
