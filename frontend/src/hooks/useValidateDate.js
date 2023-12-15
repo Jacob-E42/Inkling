@@ -3,9 +3,10 @@ import { getCurrentDate } from "../common/dateHelpers";
 import { isAfter, parseISO } from "date-fns";
 import AlertContext from "../context_providers/AlertContext";
 
-const useValidateDate = date => {
+const useValidateDate = async date => {
+	// console.debug("useValidateDate", date, api, userId);
 	const { setMsg, setColor } = useContext(AlertContext);
-	if (!date) throw new Error("A date is missing!");
+	if (!date) return false;
 
 	const today = getCurrentDate();
 	const fututeDate = isAfter(parseISO(date), parseISO(today));
@@ -16,6 +17,7 @@ const useValidateDate = date => {
 	}
 	if (typeof date !== "string") return false;
 	if (date.length < 10) return false;
+
 	return true;
 };
 
