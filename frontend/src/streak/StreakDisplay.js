@@ -1,21 +1,21 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import { Button, Typography } from "@mui/material";
 import useLocalStorage from "../hooks/useLocalStorage";
-import useValidateDate from "../hooks/useVerifyDate";
 import { getCurrentDate, getDateRange, getDayOfWeek, isCurrentDate } from "../common/dateHelpers";
 import { format, parseISO } from "date-fns";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoadingSpinner from "../common/LoadingSpinner";
-import { validateDateUserIdAndApi } from "../common/validations";
+import { validateDate } from "../common/validations";
+import ApiContext from "../context_providers/ApiContext";
+import UserContext from "../context_providers/UserContext";
 
-const StreakDisplay = ({ date, userId, api }) => {
-	// console.debug("StreakDisplay", date, userId, api);
-	const allInfoPresent = validateDateUserIdAndApi(date, userId, api);
+const StreakDisplay = ({ date }) => {
+	// console.debug("StreakDisplay", date);
+	const allInfoPresent = validateDate(date);
 	const currentDayRef = useRef(null);
-	const navigate = useNavigate();
-
-	if (!useValidateDate(date)) navigate(`journal/${getCurrentDate()}`);
-
+	const { user } = useContext(UserContext);
+	const isDateValid = useRef(true);
+	const { api } = useContext(ApiContext);
 	const [daysArray, setDaysArray] = useLocalStorage("datesToRender", [{ date, isJournal: true }]);
 	const [slidesLoaded, setSlidesLoaded] = useLocalStorage("slidesLoaded", false);
 
@@ -28,30 +28,26 @@ const StreakDisplay = ({ date, userId, api }) => {
 	const loadSlides = useCallback(async () => {
 		console.debug("loadSlides");
 		const dateRange = getDateRange(date);
-
-		const dates = await api.quickCheckJournalEntriesBatch(userId, dateRange);
-		// console.debug("Dates:", dates);
-		setDaysArray(dates);
-		// console.log(daysArray.length, dateRange.length, dates.length);
-		setSlidesLoaded(true);
-	}, [api, date, userId, setDaysArray, setSlidesLoaded]);
+		try {
+			const dates = await api.quickCheckJournalEntriesBatch(user.id, dateRange);
+			console.debug("Dates:", dates);
+			setDaysArray(dates);
+			// console.log(daysArray.length, dateRange.length, dates.length);
+			setSlidesLoaded(true);
+		} catch (err) {
+			console.error(err, date);
+		}
+	}, [date, setDaysArray, setSlidesLoaded, api, user]);
 
 	useEffect(() => {
 		setSlidesLoaded(false);
+
 		loadSlides();
-	}, [date, userId, api, loadSlides]);
+		// eslint-disable-next-line
+	}, [date, loadSlides]);
 
-	// const doDatesHaveEntries = datesArray => {
-	// 	const datesHaveEntries = [];
-	// 	for (let date in datesArray) {
-	// 		const isJournalEntry = api.quickCheckJournalEntry(userId, date);
-	// 		datesHaveEntries.push({ date, isJournal: isJournalEntry });
-	// 	}
-	// 	return datesHaveEntries;
-	// };
-
-	if (!allInfoPresent) return null;
-	console.log(date, userId, api, slidesLoaded, daysArray);
+	if (!allInfoPresent || !isDateValid.current) return null;
+	// console.log("StreakDisplay Info: ", date, user.id, api, slidesLoaded, daysArray);
 	if (!slidesLoaded) return <LoadingSpinner />;
 
 	return (
