@@ -17,7 +17,7 @@ const JournalEntryPage = () => {
 	let { date } = useParams("date");
 	if (!date) date = getCurrentDate();
 	const lastVisitedPage = useRef(getCurrentDate());
-	const dateHasJournalEntry = useRef(false);
+	// const dateHasJournalEntry = useRef(false);
 	const { user } = useContext(UserContext);
 	const { api } = useContext(ApiContext);
 	const { setMsg, setColor } = useContext(AlertContext);
