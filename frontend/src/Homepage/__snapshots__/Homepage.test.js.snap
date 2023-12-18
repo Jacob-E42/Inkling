@@ -3,41 +3,45 @@
 exports[`Homepage matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="MuiBox-root css-ilk07l"
+    class="MuiBox-root css-15em960"
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-i1hrn3-MuiTypography-root"
-    >
-      Inkling
-    </h2>
-    <h5
-      class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
-    >
-      A cool slogan here
-    </h5>
     <div
-      class="MuiBox-root css-zvn4vt"
+      class="MuiBox-root css-1cl7zdz"
     >
-      <a
-        class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
-        href="/signup"
-        tabindex="0"
+      <img
+        alt="Inkling Logo"
+        src="/logos/inkling_homepage_logo.png"
+        style="max-width: 100%; max-height: 300px; height: auto; margin-bottom: 30px;"
+      />
+      <h5
+        class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
       >
-        Sign Up
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </a>
-      <a
-        class="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1l9sosn-MuiButtonBase-root-MuiButton-root"
-        href="/login"
-        tabindex="0"
+        Capture Your Thoughts, Discover Your Insights
+      </h5>
+      <div
+        class="MuiBox-root css-zvn4vt"
       >
-        Log In
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </a>
+        <a
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+          href="/signup"
+          tabindex="0"
+        >
+          Sign Up
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </a>
+        <a
+          class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
+          href="/login"
+          tabindex="0"
+        >
+          Log In
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </a>
+      </div>
     </div>
   </div>
 </DocumentFragment>

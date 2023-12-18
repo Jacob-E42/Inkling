@@ -123,9 +123,10 @@ describe("Successful journal fetch", () => {
 				if (config.method === "get") {
 					return Promise.resolve(mockSuccessfulResponse);
 				}
-				if (config.method === "post") {
-					return Promise.resolve(mockAreJournalEntriesResponse);
-				} else return Promise.resolve(mockErrorResponse);
+				// if (config.method === "post") {
+				// 	return Promise.resolve(mockAreJournalEntriesResponse);
+				// }
+				else return Promise.resolve(mockErrorResponse);
 			});
 		});
 	});
