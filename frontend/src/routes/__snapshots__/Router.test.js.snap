@@ -65,12 +65,14 @@ exports[`Router matches snapshot 1`] = `
         style="max-width: 100%; max-height: 300px; height: auto; margin-bottom: 30px;"
       />
       <h5
-        class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-h5 css-1wrm3bs-MuiTypography-root"
       >
-        Capture Your Thoughts, Discover Your Insights
+        Capture Your Thoughts, 
+        <br />
+        Discover Your Insights
       </h5>
       <div
-        class="MuiBox-root css-zvn4vt"
+        class="MuiBox-root css-74kdtm"
       >
         <a
           class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
