@@ -23,6 +23,10 @@ const theme = createTheme({
 		h1: {
 			textAlign: "center"
 		},
+		h5: {
+			textAlign: "center"
+		},
+		h6: { textAlign: "center" },
 		body1: {
 			textAlign: "center"
 		}
@@ -34,16 +38,48 @@ const theme = createTheme({
 					// Applied to every Button component
 					borderRadius: "8px",
 					textTransform: "none",
-					padding: "10px 20px"
+					padding: "10px 20px",
+					margin: "5px" // Adds spacing around the buttons
 				},
 				containedPrimary: {
 					// Specifically for primary variant
-					"backgroundColor": "#FFAA4C", // Bright Yellow
+					"backgroundColor": "#00A6A6", // Use primary color
 					"&:hover": {
-						backgroundColor: "#DD9933" // Darkened yellow
+						backgroundColor: "#008080" // Slightly shaded on hover
+					},
+					"color": "white"
+				},
+				containedSecondary: {
+					// Specifically for secondary variant
+					"backgroundColor": "#57A0D3", // Use secondary color
+					"&:hover": {
+						backgroundColor: "#3a8db3" // Slightly shaded on hover
+					},
+					"color": "white"
+				},
+				containedTertiary: {
+					// Add a style for tertiary buttons
+					"backgroundColor": "#FFAA4C", // Use tertiary color
+					"&:hover": {
+						backgroundColor: "#DD9933" // Slightly shaded on hover
 					}
+				},
+				text: {
+					"&:hover": {
+						textDecoration: "none",
+
+						backgroundColor: "#008080"
+					},
+					"&.active": {
+						color: "#DD9933" // active link color
+						// other active styles
+					},
+					"textAlign": "center",
+					"textDecoration": "none",
+					"color": "white",
+					// "margin": "0 1rem",
+					"fontSize": "1.5rem"
 				}
-				// Add more styles for other variants if needed
 			}
 		},
 		MuiTypography: {
@@ -56,6 +92,9 @@ const theme = createTheme({
 				body1: {
 					fontSize: "1rem",
 					color: "#343434"
+				},
+				h5: {
+					marginBottom: 1
 				},
 				h6: {
 					fontSize: "1rem"
@@ -114,12 +153,12 @@ const theme = createTheme({
 			styleOverrides: {
 				root: {
 					// Set default width for all forms
-					maxWidth: "sm",
-					// "@media (min-width: 600px)": {
-					// 	// sm breakpoint
-					// 	width: "400px"
-					// },
-					margin: "auto" // Center the form
+					"maxWidth": "sm",
+					"@media (min-width: 600px)": {
+						// sm breakpoint
+						width: "400px"
+					},
+					"margin": "auto" // Center the form
 				}
 			}
 		}
