@@ -37,16 +37,14 @@ const Homepage = () => {
 					gutterBottom>
 					Inkling
 				</Typography> */}
-				<Typography
-					variant="h5"
-					sx={{ textAlign: "center", mb: 1 }}>
+				<Typography variant="h5">
 					Capture Your Thoughts, <br />
 					Discover Your Insights
 				</Typography>
 				<Box sx={{ "& > *": { m: 1.25 } }}>
 					<Button
 						variant="contained"
-						color="primary"
+						color="secondary"
 						component={Link}
 						to="/signup">
 						Sign Up
