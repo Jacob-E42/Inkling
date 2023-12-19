@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { AppBar, Toolbar, IconButton, Typography, Button } from "@mui/material/";
+import { Link } from "react-router-dom";
+import MuiLink from "@mui/material/Link";
+import { AppBar, Toolbar, IconButton, Typography, Button, Box } from "@mui/material/";
 import InklingLogo from "./inkling.png";
 import UserContext from "../context_providers/UserContext";
 
@@ -24,6 +25,7 @@ const Nav = ({ logout }) => {
 					padding: "0 1rem",
 					margin: "0 1rem"
 				}}>
+				{/* Left Section: Logo */}
 				<IconButton
 					edge="start"
 					color="inherit"
@@ -36,50 +38,58 @@ const Nav = ({ logout }) => {
 					/>
 				</IconButton>
 
-				{!user ? (
-					<>
-						<NavLink
-							to={"/login"}
-							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
-							<Button color="inherit">Login</Button>
-						</NavLink>
-						<NavLink
-							to={"/signup"}
-							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
-							<Button color="inherit">Signup</Button>
-						</NavLink>
-					</>
-				) : (
-					<>
-						<NavLink
+				{/* Center Section: Journal Link when Logged In */}
+				{user && (
+					<Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
+						<MuiLink
 							to="/journal"
+							component={Link}
 							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
-							<Typography
-								variant="h6"
-								textAlign="center">
-								Journal
-							</Typography>
-						</NavLink>
-						<NavLink
-							to="/profile"
-							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
-							<Typography color="inherit">{firstName}</Typography>
-						</NavLink>
-						<Typography
-							color="inherit"
-							onClick={logout}
-							sx={{
-								textDecoration: "none",
-								color: "inherit",
-								fontSize: "1rem",
-								background: "none",
-								border: "none",
-								padding: "0"
-							}}>
-							Log Out
-						</Typography>
-					</>
+							<Button variant="text">Journal</Button>
+						</MuiLink>
+					</Box>
 				)}
+
+				{/* Right Section: Navigation Buttons */}
+				<Box
+					sx={{
+						display: "flex",
+						textDecoration: "none",
+						color: "inherit",
+						fontSize: "2rem",
+						background: "none",
+						border: "none"
+					}}>
+					{!user ? (
+						// Login and Signup when logged out
+						<>
+							<MuiLink
+								to={"/login"}
+								component={Link}>
+								<Button variant="text">Login</Button>
+							</MuiLink>
+							<MuiLink
+								to={"/signup"}
+								component={Link}>
+								<Button variant="text">Signup</Button>
+							</MuiLink>
+						</>
+					) : (
+						// Profile and Log Out when logged in
+						<>
+							<MuiLink
+								to="/profile"
+								component={Link}>
+								<Button variant="text">{firstName}</Button>
+							</MuiLink>
+							<Button
+								variant="text"
+								onClick={logout}>
+								Log Out
+							</Button>
+						</>
+					)}
+				</Box>
 			</Toolbar>
 		</AppBar>
 	);
