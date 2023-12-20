@@ -26,7 +26,11 @@ const StreakDisplay = ({ date }) => {
 	}, [date, setSlidesLoaded]);
 
 	const loadSlides = useCallback(async () => {
-		console.debug("loadSlides");
+		console.debug("loadSlides", api);
+		if (!api) {
+			console.warn("api missing", api, user);
+			return;
+		}
 		const dateRange = getDateRange(date);
 		try {
 			const dates = await api.quickCheckJournalEntriesBatch(user.id, dateRange);
