@@ -35,7 +35,7 @@ function App() {
 	// Load user info from the token if it exists. Called on first render and whenever the token changes
 	useEffect(
 		function loadUserInfo() {
-			console.debug("App useEffect loadUserInfo", "token=", token);
+			console.debug("App -> useEffect - loadUserInfo", "token=", token);
 
 			async function getCurrentUser() {
 				console.debug("getCurrentUser");
