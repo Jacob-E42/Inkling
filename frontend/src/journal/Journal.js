@@ -14,9 +14,10 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 	useEffect(() => {
 		setTempJournal({
 			title: title,
-			entryText: entryText
+			entryText: entryText,
+			journalType: journalType
 		});
-	}, [title, entryText]);
+	}, [title, entryText, journalType]);
 
 	const handleChange = useCallback(
 		async e => {
@@ -50,28 +51,29 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 	return (
 		<>
 			{allInfoPresent && (
-				<Box sx={{ bgcolor: "background.default", p: 3 }}>
-					<Typography
-						variant="h2"
-						gutterBottom>
-						{date}
-					</Typography>
-					<Box
-						component="form"
-						noValidate
-						onSubmit={handleSubmit}
-						sx={{ mt: 1 }}>
-						<TextField
-							fullWidth
-							margin="normal"
-							id="title"
-							label="Title"
-							name="title"
-							placeholder="title"
-							value={tempJournal.title}
-							onChange={handleChange}
-							variant="outlined"
-						/>
+				<Box
+					component="form"
+					noValidate
+					onSubmit={handleSubmit}
+					sx={{ bgcolor: "background.default", p: 3 }}>
+					<TextField
+						fullWidth
+						margin="normal"
+						id="title"
+						label="Title"
+						name="title"
+						placeholder="title"
+						value={tempJournal.title}
+						onChange={handleChange}
+						variant="outlined"
+						gutterBottom
+					/>
+					<Box sx={{ mt: 1 }}>
+						<Typography
+							variant="h2"
+							gutterBottom>
+							{date}
+						</Typography>
 
 						<FormControl
 							fullWidth
@@ -81,9 +83,11 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 								labelId="journalType"
 								id="journalType"
 								name="journalType"
+								defaultValue={""}
 								value={tempJournal.journalType}
 								onChange={handleChange}
 								label="Journal Type">
+								<MenuItem value="">None</MenuItem>
 								<MenuItem value="Daily Journal">Daily Journal</MenuItem>
 								<MenuItem value="Gratitude Journal">Gratitude Journal</MenuItem>
 								<MenuItem value="Reflective Journal">Reflective Journal</MenuItem>
