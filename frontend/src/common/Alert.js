@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Alert as MuiAlert, Snackbar } from "@mui/material";
+import { Alert as MuiAlert } from "@mui/material";
 import AlertContext from "../context_providers/AlertContext";
 
 function Alert({ msg, color = "success" }) {
@@ -17,17 +17,14 @@ function Alert({ msg, color = "success" }) {
 	}, [setVisible, setMsg]);
 
 	return (
-		<Snackbar
+		<MuiAlert
 			open={visible}
 			autoHideDuration={6000}
-			onClose={onDismiss}>
-			<MuiAlert
-				onClose={onDismiss}
-				severity={color}
-				sx={{ width: "100%" }}>
-				{msg}
-			</MuiAlert>
-		</Snackbar>
+			onClose={onDismiss}
+			severity={color}
+			sx={{ width: "100%" }}>
+			{msg}
+		</MuiAlert>
 	);
 }
 
