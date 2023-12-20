@@ -9,6 +9,7 @@ import { getPastDate, getCurrentDate, getDateRange } from "../common/dateHelpers
 jest.mock("axios");
 window.HTMLElement.prototype.scrollIntoView = function () {};
 
+const fixedDate = "2023-11-01";
 const today = getCurrentDate();
 const pastDate45Days = getPastDate(today, 45);
 const pastDate15Days = getPastDate(today, 15);
@@ -90,7 +91,7 @@ describe("StreakDisplay", () => {
 					<UserProvider>
 						<ApiProvider>
 							<AlertProvider>
-								<StreakDisplay date={today} />
+								<StreakDisplay date={fixedDate} />
 							</AlertProvider>
 						</ApiProvider>
 					</UserProvider>
