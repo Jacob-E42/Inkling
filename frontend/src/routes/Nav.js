@@ -10,8 +10,7 @@ const Nav = ({ logout }) => {
 
 	let firstName;
 	if (user) firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1);
-	console.log("User state:", user);
-	console.log("Image source:", "logos/horz_bluewhite_quill.png");
+
 	return (
 		<AppBar
 			position="static"
