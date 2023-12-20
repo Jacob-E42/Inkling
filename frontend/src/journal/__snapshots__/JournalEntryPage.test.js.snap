@@ -58,7 +58,6 @@ exports[`Failed journal fetch JournalEntryPage renders expected text when allInf
 
 exports[`Successful journal fetch JournalEntryPage rendered correctly, matches snapshot 1`] = `
 <DocumentFragment>
-  type: Daily Journal
   <div
     class="MuiBox-root css-11xpnnz"
   >
