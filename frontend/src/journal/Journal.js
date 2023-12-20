@@ -66,7 +66,6 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 						value={tempJournal.title}
 						onChange={handleChange}
 						variant="outlined"
-						gutterBottom
 					/>
 					<Box sx={{ mt: 1 }}>
 						<Typography
