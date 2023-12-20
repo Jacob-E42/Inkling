@@ -30,7 +30,7 @@ const StreakDisplay = ({ date }) => {
 		const dateRange = getDateRange(date);
 		try {
 			const dates = await api.quickCheckJournalEntriesBatch(user.id, dateRange);
-			console.debug("Dates:", dates);
+			// console.debug("Dates:", dates);
 			setDaysArray(dates);
 			// console.log(daysArray.length, dateRange.length, dates.length);
 			setSlidesLoaded(true);
