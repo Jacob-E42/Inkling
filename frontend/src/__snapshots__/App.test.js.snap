@@ -17,7 +17,7 @@ exports[`App matches snapshot 1`] = `
         >
           <img
             alt="Inkling Logo"
-            src="logos/horz_bluewhite_quill.png"
+            src="/logos/horz_bluewhite_quill.png"
             style="height: 100%; width: auto;"
           />
           <span

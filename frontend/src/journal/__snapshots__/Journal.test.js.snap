@@ -2,55 +2,55 @@
 
 exports[`Journal matches snapshot when rendered correctly 1`] = `
 <DocumentFragment>
-  <div
+  <form
     class="MuiBox-root css-10v1rem"
+    novalidate=""
   >
-    <h2
-      class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-i1hrn3-MuiTypography-root"
+    <div
+      class="MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth MuiTextField-root css-17vbkzs-MuiFormControl-root-MuiTextField-root"
     >
-      2023-07-04
-    </h2>
-    <form
-      class="MuiBox-root css-164r41r"
-      novalidate=""
-    >
-      <div
-        class="MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth MuiTextField-root css-17vbkzs-MuiFormControl-root-MuiTextField-root"
+      <label
+        class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+        data-shrink="true"
+        for="title"
+        id="title-label"
       >
-        <label
-          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
-          data-shrink="true"
-          for="title"
-          id="title-label"
+        Title
+      </label>
+      <div
+        class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
+      >
+        <input
+          aria-invalid="false"
+          class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
+          id="title"
+          name="title"
+          placeholder="title"
+          type="text"
+          value="Baking adventure"
+        />
+        <fieldset
+          aria-hidden="true"
+          class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
         >
-          Title
-        </label>
-        <div
-          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-md26zr-MuiInputBase-root-MuiOutlinedInput-root"
-        >
-          <input
-            aria-invalid="false"
-            class="MuiInputBase-input MuiOutlinedInput-input css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            id="title"
-            name="title"
-            placeholder="title"
-            type="text"
-            value="Baking adventure"
-          />
-          <fieldset
-            aria-hidden="true"
-            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          <legend
+            class="css-14lo706"
           >
-            <legend
-              class="css-14lo706"
-            >
-              <span>
-                Title
-              </span>
-            </legend>
-          </fieldset>
-        </div>
+            <span>
+              Title
+            </span>
+          </legend>
+        </fieldset>
       </div>
+    </div>
+    <div
+      class="MuiBox-root css-164r41r"
+    >
+      <h2
+        class="MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom css-i1hrn3-MuiTypography-root"
+      >
+        2023-07-04
+      </h2>
       <div
         class="MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-1iledgx-MuiFormControl-root"
       >
@@ -74,7 +74,7 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
             role="combobox"
             tabindex="0"
           >
-            Daily Journal
+            Gratitude Journal
           </div>
           <input
             aria-hidden="true"
@@ -82,7 +82,7 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
             class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
             name="journalType"
             tabindex="-1"
-            value="Daily Journal"
+            value="Gratitude Journal"
           />
           <svg
             aria-hidden="true"
@@ -165,8 +165,8 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
           class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
         />
       </button>
-    </form>
-  </div>
+    </div>
+  </form>
 </DocumentFragment>
 `;
 
