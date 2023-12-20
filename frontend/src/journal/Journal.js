@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Box, Typography } from "@mui/material";
+import { validateJournalInfoPresent } from "../common/validations";
 
 const Journal = ({ date, title, journalType, entryText, setJournal, editJournal }) => {
-	// console.debug("Journal", date, "Title=", title, "entryText=", entryText);
+	// console.debug("Journal", "journalType=", journalType);
 
-	let allInfoPresent = date && (title || title === "") && (entryText || entryText === "");
+	let allInfoPresent = validateJournalInfoPresent(date, title, entryText, journalType);
 	const [tempJournal, setTempJournal] = useState({
 		title: title,
 		entryText: entryText,
@@ -21,7 +22,7 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 
 	const handleChange = useCallback(
 		async e => {
-			// console.debug("handleChange");
+			// console.debug("handleChange", tempJournal);
 			e.preventDefault();
 			const { name, value } = e.target;
 			setTempJournal(tempJournal => ({
@@ -35,9 +36,9 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 
 	const handleSubmit = useCallback(
 		async e => {
-			console.debug("handleSubmit");
+			// console.debug("handleSubmit", tempJournal);
 			e.preventDefault();
-			console.log(tempJournal);
+
 			setJournal(journal => ({ ...journal, ...tempJournal }));
 
 			await editJournal(tempJournal);
@@ -82,11 +83,9 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 								labelId="journalType"
 								id="journalType"
 								name="journalType"
-								defaultValue={""}
-								value={tempJournal.journalType}
 								onChange={handleChange}
+								value={tempJournal.journalType}
 								label="Journal Type">
-								<MenuItem value="">None</MenuItem>
 								<MenuItem value="Daily Journal">Daily Journal</MenuItem>
 								<MenuItem value="Gratitude Journal">Gratitude Journal</MenuItem>
 								<MenuItem value="Reflective Journal">Reflective Journal</MenuItem>
