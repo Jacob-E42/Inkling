@@ -89,6 +89,7 @@ const LoginForm = () => {
 				fullWidth
 				id="email"
 				label="Email Address"
+				type="email"
 				name="email"
 				autoComplete="email"
 				placeholder="Enter your email"
@@ -111,7 +112,6 @@ const LoginForm = () => {
 			/>
 			<Button
 				type="submit"
-				fullWidth
 				variant="contained"
 				sx={{ mt: 3, mb: 2 }}>
 				Submit
@@ -119,7 +119,6 @@ const LoginForm = () => {
 			<Button
 				component={Link}
 				to="/"
-				fullWidth
 				variant="outlined"
 				sx={{ mt: 3, mb: 2 }}>
 				Back
