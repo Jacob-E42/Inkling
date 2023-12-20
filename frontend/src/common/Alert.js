@@ -16,17 +16,6 @@ function Alert({ msg, color = "success" }) {
 		setMsg("");
 	}, [setVisible, setMsg]);
 
-	// return (
-	// 	<Alert
-	// 		// Set the color of the alert message
-	// 		color={color}
-	// 		// Specify if the alert is visible or hidden
-	// 		isOpen={visible}
-	// 		// Function to toggle the visibility of the alert
-	// 		toggle={onDismiss}>
-	// 		{msg}
-	// 	</Alert>
-	// );
 	return (
 		<Snackbar
 			open={visible}
