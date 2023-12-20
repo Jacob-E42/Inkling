@@ -201,7 +201,10 @@ describe("Successful journal fetch", () => {
 				</MemoryRouter>
 			);
 		});
+		const journalType = screen.getByRole("combobox");
 
+		expect(journalType).toBeInTheDocument();
+		expect(journalType).toHaveTextContent("Daily Journal");
 		expect(screen.getByText("2023-07-24")).toBeInTheDocument();
 		expect(screen.getByLabelText("Journal Entry")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
@@ -543,13 +546,11 @@ describe("Receiving Feedback works", () => {
 
 		const entryText = screen.getByLabelText("Journal Entry");
 		const submitButton = screen.getByText("Submit");
-		const selectionMenu = screen.getByLabelText(`Journal Type`);
+		// const selectionMenu = screen.getByLabelText(`Journal Type`);
+		expect(screen.queryByText("Feedback")).not.toBeInTheDocument();
 
 		// eslint-disable-next-line testing-library/no-unnecessary-act
 		await act(async () => {
-			fireEvent.click(selectionMenu);
-			selectionMenu.value = "Gratitude Journal";
-
 			fireEvent.click(submitButton);
 		});
 
@@ -608,6 +609,7 @@ describe("emotions work", () => {
 
 		const entryText = screen.getByPlaceholderText("Start your entry here...");
 		const submitButton = screen.getByText("Submit");
+		expect(screen.queryByText("Emotions")).not.toBeInTheDocument();
 
 		// eslint-disable-next-line testing-library/no-unnecessary-act
 		await act(async () => {
