@@ -84,7 +84,7 @@ class ApiRequest {
 		if (!userId || !date) throw Error("Either userId or date is missing");
 		try {
 			let response = await this.#request(`users/${userId}/journals/date/${date}`);
-			console.log("Journal->", response);
+			// console.log("Journal->", response);
 
 			return response.journal;
 		} catch (err) {
@@ -98,7 +98,7 @@ class ApiRequest {
 		if (!userId || !date) throw Error("Either userId or date is missing");
 		try {
 			let response = await this.#request(`users/${userId}/journals/date/${date}/quickcheck`);
-			console.log("Journal->", response);
+			// console.log("Journal->", response);
 
 			return response;
 		} catch (err) {
