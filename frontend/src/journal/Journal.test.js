@@ -23,7 +23,8 @@ test("Journal matches snapshot when rendered correctly", async () => {
 		title: "Baking adventure",
 		date: "2023-07-04",
 		entryText:
-			" Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun."
+			" Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.",
+		journalType: "Gratitude Journal"
 	};
 	// let asFragment;
 	// eslint-disable-next-line testing-library/no-unnecessary-act
@@ -37,6 +38,7 @@ test("Journal matches snapshot when rendered correctly", async () => {
 							date={currentJournal.date}
 							entryText={currentJournal.entryText}
 							title={currentJournal.title}
+							journalType={currentJournal.journalType}
 						/>
 					</AlertProvider>
 				</ApiProvider>
