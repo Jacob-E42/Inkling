@@ -74,7 +74,7 @@ const JournalEntryPage = () => {
 		console.debug("loadJournalEntry");
 		try {
 			const resp = await api.getJournalEntryByDate(user.id, date);
-			// console.debug("Here is the RESPONSE", resp);
+			// console.debug("Here is the loaded journal entry", resp);
 
 			setCurrentJournal(resp);
 			await setJournalLoaded(true);
@@ -200,6 +200,7 @@ const JournalEntryPage = () => {
 				}
 			} else {
 				setMsg("Journal is NOT valid");
+				setColor("error");
 				console.debug(validJournal.error);
 			}
 		}
@@ -230,31 +231,17 @@ const JournalEntryPage = () => {
 
 	if (!journalLoaded || !currentJournal) return <LoadingSpinner />;
 
-	console.log(
-		"test",
-		"allInfoDefined",
-		allInfoDefined,
-		"currentJournal",
-		currentJournal,
-		"journalloaded:",
-		journalLoaded
-	);
+	// console.log("test", "allInfoDefined", allInfoDefined, "currentJournal", currentJournal);
 
 	return (
 		<>
-			{/* {allInfoDefined && !currentJournal && date && (
-				<Navigate
-					to={`/journal/${lastVisitedPage.current}`}
-					replace
-				/>
-			)} */}
 			<StreakDisplay date={date} />
 			{allInfoDefined && currentJournal && (
 				<Journal
 					date={date}
 					title={currentJournal.title}
 					entryText={currentJournal.entryText}
-					jounalType={currentJournal.journalType}
+					journalType={currentJournal.journalType}
 					setJournal={setCurrentJournal}
 					currentJournal={currentJournal}
 					editJournal={editJournal}
