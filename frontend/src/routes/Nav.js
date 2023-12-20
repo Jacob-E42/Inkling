@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import MuiLink from "@mui/material/Link";
-import { AppBar, Toolbar, IconButton, Typography, Button, Box } from "@mui/material/";
-import InklingLogo from "./inkling.png";
+import { AppBar, Toolbar, IconButton, Button, Box } from "@mui/material/";
+// import InklingLogo from "./horz_bluewhite_quill.png";
 import UserContext from "../context_providers/UserContext";
 
 const Nav = ({ logout }) => {
@@ -10,7 +10,8 @@ const Nav = ({ logout }) => {
 
 	let firstName;
 	if (user) firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1);
-
+	console.log("User state:", user);
+	console.log("Image source:", "logos/horz_bluewhite_quill.png");
 	return (
 		<AppBar
 			position="static"
@@ -29,11 +30,11 @@ const Nav = ({ logout }) => {
 				<IconButton
 					edge="start"
 					color="inherit"
-					aria-label="inkling-logo">
+					aria-label="inkling-logo"
+					sx={{ padding: 0, height: "100%" }}>
 					<img
-						src={InklingLogo}
-						width={100}
-						height={"auto"}
+						src="/logos/horz_bluewhite_quill.png"
+						style={{ maxwidth: "100%", maxheight: "100%", height: "100%", width: "auto" }}
 						alt="Inkling Logo"
 					/>
 				</IconButton>
@@ -43,8 +44,7 @@ const Nav = ({ logout }) => {
 					<Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
 						<MuiLink
 							to="/journal"
-							component={Link}
-							style={{ textDecoration: "none", color: "inherit", margin: "0 1rem" }}>
+							component={Link}>
 							<Button variant="text">Journal</Button>
 						</MuiLink>
 					</Box>
