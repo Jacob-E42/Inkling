@@ -23,6 +23,13 @@ const validateDateUserAndApi = (date, user, api) => {
 	if (typeof api !== "object") return false;
 	return true;
 };
+const validateJournalInfoPresent = (date, title, entryText, journalType) => {
+	if (!date) return false;
+	if (!journalType || typeof journalType !== "string") return false;
+	if (!title && title !== "") return false;
+	if (!entryText && entryText !== "") return false;
+	return true;
+};
 
 const validateJournalInfo = (id, userId, title, entryText, date, journalType) => {
 	console.debug("validateJournalInfo", id, userId, title, entryText, date, journalType);
@@ -41,4 +48,10 @@ const validateJournalInfo = (id, userId, title, entryText, date, journalType) =>
 	return { valid: true };
 };
 
-export { validateDateUserAndApi, validateDateUserIdAndApi, validateJournalInfo, validateDate };
+export {
+	validateDateUserAndApi,
+	validateDateUserIdAndApi,
+	validateJournalInfo,
+	validateDate,
+	validateJournalInfoPresent
+};
