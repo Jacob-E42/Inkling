@@ -23,7 +23,7 @@ const Homepage = () => {
 					maxWidth: 500
 				}}>
 				<img
-					src="/logos/inkling_homepage_logo.png" // Replace with your image path
+					src="/logos/standing_multicolored_quill.png" // Replace with your image path
 					alt="Inkling Logo"
 					style={{
 						maxWidth: "100%", // Ensures the image is responsive
