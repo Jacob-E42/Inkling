@@ -11,52 +11,53 @@ exports[`App matches snapshot 1`] = `
       >
         <button
           aria-label="inkling-logo"
-          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeMedium css-1d6w9lk-MuiButtonBase-root-MuiIconButton-root"
+          class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart MuiIconButton-sizeMedium css-dldopz-MuiButtonBase-root-MuiIconButton-root"
           tabindex="0"
           type="button"
         >
           <img
             alt="Inkling Logo"
-            height="auto"
-            src="inkling.png"
-            width="100"
+            src="logos/horz_bluewhite_quill.png"
+            style="height: 100%; width: auto;"
           />
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           />
         </button>
-        <a
-          class=""
-          href="/login"
-          style="text-decoration: none; margin: 0px 1rem;"
+        <div
+          class="MuiBox-root css-10i4tu7"
         >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1y942vo-MuiButtonBase-root-MuiButton-root"
-            tabindex="0"
-            type="button"
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
+            href="/login"
           >
-            Login
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
-          </button>
-        </a>
-        <a
-          class=""
-          href="/signup"
-          style="text-decoration: none; margin: 0px 1rem;"
-        >
-          <button
-            class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit MuiButton-root MuiButton-text MuiButton-textInherit MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorInherit css-1y942vo-MuiButtonBase-root-MuiButton-root"
-            tabindex="0"
-            type="button"
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              Login
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </a>
+          <a
+            class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways css-1xylxj1-MuiTypography-root-MuiLink-root"
+            href="/signup"
           >
-            Signup
-            <span
-              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-            />
-          </button>
-        </a>
+            <button
+              class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+              tabindex="0"
+              type="button"
+            >
+              Signup
+              <span
+                class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+              />
+            </button>
+          </a>
+        </div>
       </div>
     </header>
     <div
@@ -67,11 +68,11 @@ exports[`App matches snapshot 1`] = `
       >
         <img
           alt="Inkling Logo"
-          src="/logos/inkling_homepage_logo.png"
+          src="/logos/standing_multicolored_quill.png"
           style="max-width: 100%; max-height: 300px; height: auto; margin-bottom: 30px;"
         />
         <h5
-          class="MuiTypography-root MuiTypography-h5 css-1wrm3bs-MuiTypography-root"
+          class="MuiTypography-root MuiTypography-h5 css-ag7rrr-MuiTypography-root"
         >
           Capture Your Thoughts, 
           <br />
@@ -81,7 +82,7 @@ exports[`App matches snapshot 1`] = `
           class="MuiBox-root css-74kdtm"
         >
           <a
-            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-sghohy-MuiButtonBase-root-MuiButton-root"
+            class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium css-zcbmsk-MuiButtonBase-root-MuiButton-root"
             href="/signup"
             tabindex="0"
           >

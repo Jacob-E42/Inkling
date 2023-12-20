@@ -55,8 +55,8 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
         class="MuiFormControl-root MuiFormControl-marginNormal MuiFormControl-fullWidth css-1iledgx-MuiFormControl-root"
       >
         <label
-          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
-          data-shrink="false"
+          class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
+          data-shrink="true"
           id="journalType"
         >
           Journal Type
@@ -74,11 +74,7 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
             role="combobox"
             tabindex="0"
           >
-            <span
-              class="notranslate"
-            >
-              ​
-            </span>
+            Daily Journal
           </div>
           <input
             aria-hidden="true"
@@ -86,7 +82,7 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
             class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
             name="journalType"
             tabindex="-1"
-            value=""
+            value="Daily Journal"
           />
           <svg
             aria-hidden="true"
@@ -104,7 +100,7 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
             class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
           >
             <legend
-              class="css-yjsfm1"
+              class="css-14lo706"
             >
               <span>
                 Journal Type
