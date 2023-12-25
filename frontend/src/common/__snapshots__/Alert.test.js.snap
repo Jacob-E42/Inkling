@@ -3,8 +3,7 @@
 exports[`Alert matches snapshot for danger 1`] = `
 <DocumentFragment>
   <div
-    autohideduration="6000"
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-standardInfo MuiAlert-standard css-1s5e7vt-MuiPaper-root-MuiAlert-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-standardInfo MuiAlert-standard css-f0zorf-MuiPaper-root-MuiAlert-root"
     open=""
     role="alert"
   >
@@ -61,8 +60,7 @@ exports[`Alert matches snapshot for danger 1`] = `
 exports[`Alert matches snapshot for success 1`] = `
 <DocumentFragment>
   <div
-    autohideduration="6000"
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-standardSuccess MuiAlert-standard css-frvpmh-MuiPaper-root-MuiAlert-root"
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-standardSuccess MuiAlert-standard css-f4e9n7-MuiPaper-root-MuiAlert-root"
     open=""
     role="alert"
   >
