@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useContext, useState, useEffect } from "react";
 import { Alert as MuiAlert } from "@mui/material";
 import AlertContext from "../context_providers/AlertContext";
 
@@ -16,13 +16,36 @@ function Alert({ msg, color = "success" }) {
 		setMsg("");
 	}, [setVisible, setMsg]);
 
+	// Automatically hide the alert after a set duration
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			onDismiss();
+		}, 6000);
+
+		return () => clearTimeout(timer);
+	}, [onDismiss]);
+
+	if (!visible) return null;
+
 	return (
 		<MuiAlert
 			open={visible}
-			autoHideDuration={6000}
 			onClose={onDismiss}
 			severity={color}
-			sx={{ width: "100%" }}>
+			sx={{
+				"width": "100%",
+				"display": "flex",
+				"alignItems": "center",
+				"& .MuiAlert-message": {
+					flex: 1 // Allow message to grow and take available space
+				},
+				"& .MuiAlert-action": {
+					// Reduce the space taken by the action part
+					paddingLeft: 0,
+					paddingRight: 0
+				},
+				"fontSize": "1.2rem"
+			}}>
 			{msg}
 		</MuiAlert>
 	);
