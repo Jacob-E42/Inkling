@@ -75,7 +75,6 @@ const StreakDisplay = ({ date }) => {
 						ref={date === getCurrentDate() ? currentDayRef : null}>
 						<Button
 							variant="contained"
-							className={`day-button ${date === date ? "current-day" : "inactive-day"}`}
 							sx={{
 								"display": "flex",
 								"flexDirection": "column",
@@ -84,7 +83,7 @@ const StreakDisplay = ({ date }) => {
 								"borderRadius": "10px",
 								"padding": "10px",
 								"minWidth": "60px",
-								"backgroundColor": date === date ? "#ffaa4c" : "#57a0d3",
+								"backgroundColor": "#ffaa4c",
 								"&:hover": {
 									backgroundColor: "#FFAA4C"
 								}
