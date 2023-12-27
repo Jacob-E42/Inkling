@@ -6,7 +6,7 @@ exports[`SignupForm matches snapshot 1`] = `
     class="MuiBox-root css-dk5vet"
   >
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-1rv3ei8-MuiFormControl-root-MuiTextField-root"
+      class="MuiFormControl-root MuiTextField-root css-1h4vd0k-MuiFormControl-root-MuiTextField-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-focused Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
@@ -51,7 +51,7 @@ exports[`SignupForm matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-1rv3ei8-MuiFormControl-root-MuiTextField-root"
+      class="MuiFormControl-root MuiTextField-root css-1h4vd0k-MuiFormControl-root-MuiTextField-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
@@ -96,7 +96,7 @@ exports[`SignupForm matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-1rv3ei8-MuiFormControl-root-MuiTextField-root"
+      class="MuiFormControl-root MuiTextField-root css-1h4vd0k-MuiFormControl-root-MuiTextField-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
@@ -141,7 +141,7 @@ exports[`SignupForm matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-1rv3ei8-MuiFormControl-root-MuiTextField-root"
+      class="MuiFormControl-root MuiTextField-root css-1h4vd0k-MuiFormControl-root-MuiTextField-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary Mui-required MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-sizeMedium MuiInputLabel-outlined css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root"
@@ -186,7 +186,7 @@ exports[`SignupForm matches snapshot 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root css-1d1jiby"
+      class="MuiBox-root css-ao3vfd"
     >
       <button
         class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium css-1nlb0pt-MuiButtonBase-root-MuiButton-root"
