@@ -110,9 +110,29 @@ const theme = createTheme({
 				}
 			}
 		},
+		MuiFormControl: {
+			styleOverrides: {
+				root: {
+					// Set default width for all forms
+					// "maxWidth": "sm",
+					// "@media (min-width: 600px)": {
+					// 	// sm breakpoint
+					// 	width: "400px"
+					// },
+					// "margin": "auto" // Center the form
+				}
+			}
+		},
 		MuiTextField: {
 			styleOverrides: {
 				root: {
+					// Increased specificity
+					"&&": {
+						width: "75%",
+						my: 1,
+						mx: "auto",
+						color: "red"
+					},
 					"& label.Mui-focused": {
 						color: "#00A6A6" // Persian Green
 					},
@@ -148,19 +168,6 @@ const theme = createTheme({
                     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
                 }
             `
-		},
-		MuiFormControl: {
-			styleOverrides: {
-				root: {
-					// Set default width for all forms
-					"maxWidth": "sm",
-					"@media (min-width: 600px)": {
-						// sm breakpoint
-						width: "400px"
-					},
-					"margin": "auto" // Center the form
-				}
-			}
 		}
 	}
 });
