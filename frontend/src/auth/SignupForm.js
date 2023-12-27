@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, TextField, Box } from "@mui/material";
+import { Button, TextField, Box, Grid } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
@@ -115,12 +115,10 @@ const SignupForm = () => {
 		<Box
 			component="form"
 			onSubmit={handleSubmit}
-			noValidate
-			sx={{ mt: 1 }}>
+			// noValidate
+			sx={{ m: 2, width: "100%", display: "flex", justifyContent: "space-between", flexDirection: "column" }}>
 			<TextField
-				margin="normal"
 				required
-				fullWidth
 				id="firstName"
 				label="First Name"
 				name="firstName"
@@ -130,10 +128,10 @@ const SignupForm = () => {
 				value={formData.firstName}
 				onChange={handleChange}
 			/>
+
 			<TextField
-				margin="normal"
+				// margin="normal"
 				required
-				fullWidth
 				id="lastName"
 				label="Last Name"
 				name="lastName"
@@ -141,11 +139,12 @@ const SignupForm = () => {
 				placeholder="Enter your last name"
 				value={formData.lastName}
 				onChange={handleChange}
+				sx={{ width: "75%", my: 1, mx: "auto" }}
 			/>
+
 			<TextField
-				margin="normal"
+				// margin="normal"
 				required
-				fullWidth
 				id="email"
 				label="Email Address"
 				placeholder="Enter your email"
@@ -154,10 +153,10 @@ const SignupForm = () => {
 				value={formData.email}
 				onChange={handleChange}
 			/>
+
 			<TextField
-				margin="normal"
+				// margin="normal"
 				required
-				fullWidth
 				name="password"
 				label="Password"
 				type="password"
@@ -167,21 +166,35 @@ const SignupForm = () => {
 				value={formData.password}
 				onChange={handleChange}
 			/>
-			<Button
-				type="submit"
-				fullWidth
-				variant="contained"
-				sx={{ mt: 3, mb: 2 }}>
-				Sign Up
-			</Button>
-			<Button
-				component={Link}
-				to="/"
-				fullWidth
-				variant="outlined"
-				sx={{ mt: 1 }}>
-				Back
-			</Button>
+
+			<Box
+				sx={{
+					my: 1,
+					mx: "auto",
+					width: "75%",
+					display: "flex", // Enable flexbox
+					justifyContent: "space-between" // Space out buttons
+				}}>
+				<Button
+					type="submit"
+					variant="contained"
+					sx={{
+						width: "calc(50% - 8px)", // Half width minus a small margin
+						mr: 1 // Margin right for spacing
+					}}>
+					Sign Up
+				</Button>
+				<Button
+					component={Link}
+					to="/"
+					variant="outlined"
+					sx={{
+						width: "calc(50% - 8px)", // Half width minus a small margin
+						ml: 1 // Margin left for spacing
+					}}>
+					Back
+				</Button>
+			</Box>
 		</Box>
 	);
 };
