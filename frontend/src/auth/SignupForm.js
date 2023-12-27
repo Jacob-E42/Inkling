@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
-import { Button, TextField, Box, Grid } from "@mui/material";
+import { Button, TextField, Box } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../context_providers/UserContext";
 import AlertContext from "../context_providers/AlertContext";
@@ -127,6 +127,7 @@ const SignupForm = () => {
 				autoFocus
 				value={formData.firstName}
 				onChange={handleChange}
+				sx={{ width: "75%", my: 1, mx: "auto" }}
 			/>
 
 			<TextField
@@ -152,6 +153,7 @@ const SignupForm = () => {
 				autoComplete="email"
 				value={formData.email}
 				onChange={handleChange}
+				sx={{ width: "75%", my: 1, mx: "auto" }}
 			/>
 
 			<TextField
@@ -165,6 +167,7 @@ const SignupForm = () => {
 				autoComplete="current-password"
 				value={formData.password}
 				onChange={handleChange}
+				sx={{ width: "75%", my: 1, mx: "auto" }}
 			/>
 
 			<Box
