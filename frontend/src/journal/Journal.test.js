@@ -48,7 +48,7 @@ test("Journal matches snapshot when rendered correctly", async () => {
 	// asFragment = view.asFragment;
 	// });
 
-	expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
+	expect(screen.getByPlaceholderText("Title")).toBeInTheDocument();
 	expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
 	expect(asFragment()).toMatchSnapshot();
 });
