@@ -135,6 +135,7 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 						label="Journal Text"
 						name="entryText"
 						multiline
+						minRows={6}
 						value={tempJournal.entryText}
 						onChange={handleChange}
 						variant="outlined"
