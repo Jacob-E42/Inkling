@@ -103,7 +103,7 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
           class="MuiInputBase-input MuiInput-input css-1x51dt5-MuiInputBase-input-MuiInput-input"
           id="title"
           name="title"
-          placeholder="title"
+          placeholder="Title"
           type="text"
           value="Baking adventure"
         />
@@ -113,7 +113,7 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       class="MuiBox-root css-1p6qyh7"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1pkksm0-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-mwmyol-MuiTypography-root"
       >
         Date: 2023-07-24
       </h5>
@@ -165,7 +165,7 @@ exports[`Successful journal fetch JournalEntryPage rendered correctly, matches s
       </div>
     </div>
     <div
-      class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-15uqmw7-MuiFormControl-root-MuiTextField-root"
+      class="MuiFormControl-root MuiFormControl-marginNormal MuiTextField-root css-ql5stx-MuiFormControl-root-MuiTextField-root"
     >
       <label
         class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
