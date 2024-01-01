@@ -72,7 +72,7 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 						id="title"
 						label="Title"
 						name="title"
-						placeholder="title"
+						placeholder="Title"
 						value={tempJournal.title}
 						onChange={handleChange}
 						variant="standard"
@@ -100,7 +100,7 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 						<Typography
 							variant="h5"
 							gutterBottom
-							sx={{ marginRight: 2, pr: 1, borderRight: ".8px solid black" }}>
+							sx={{ marginRight: 2, pr: 1 }}>
 							Date: {date}
 						</Typography>
 
@@ -139,7 +139,7 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 						onChange={handleChange}
 						variant="outlined"
 						placeholder="Start your entry here..."
-						sx={{ width: "75%", mt: 3, mx: "auto" }}
+						sx={{ width: "75%", mt: 3, mx: "auto", border: "none" }}
 					/>
 
 					<Button
