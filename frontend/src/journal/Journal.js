@@ -54,30 +54,57 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 			{allInfoPresent && (
 				<Box
 					component="form"
-					noValidate
 					onSubmit={handleSubmit}
-					sx={{ bgcolor: "background.default", p: 3 }}>
+					sx={{
+						"bgcolor": "background.default",
+						"p": 3,
+						"width": "100%",
+						"display": "flex",
+						"justifyContent": "space-between",
+						"flexDirection": "column",
+						"fontFamily": "Roboto",
+						"& .MuiFormControl-root": {
+							border: "none"
+						}
+					}}>
 					<TextField
-						fullWidth
-						margin="normal"
+						type="text"
 						id="title"
 						label="Title"
 						name="title"
 						placeholder="title"
 						value={tempJournal.title}
 						onChange={handleChange}
-						variant="outlined"
+						variant="standard"
+						sx={{
+							"width": "75%",
+							"my": 1,
+							"mx": "auto",
+							"textAlign": "center",
+							"& .MuiInputBase-input": {
+								fontSize: "1.5rem",
+								border: "none"
+							},
+							"fontFamily": "Roboto"
+						}}
 					/>
-					<Box sx={{ mt: 1 }}>
+					<Box
+						sx={{
+							display: "flex",
+							alignItems: "center",
+							width: "75%",
+							my: 1,
+							mx: "auto",
+							fontFamily: "Roboto"
+						}}>
 						<Typography
-							variant="h2"
-							gutterBottom>
-							{date}
+							variant="h5"
+							gutterBottom
+							sx={{ marginRight: 2, pr: 1, borderRight: ".8px solid black" }}>
+							Date: {date}
 						</Typography>
 
-						<FormControl
-							fullWidth
-							margin="normal">
+						<FormControl sx={{ maxWidth: "25%" }}>
 							<InputLabel id="journalType">Journal Type</InputLabel>
 							<Select
 								labelId="journalType"
@@ -85,7 +112,11 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 								name="journalType"
 								onChange={handleChange}
 								value={tempJournal.journalType}
-								label="Journal Type">
+								label="Journal Type"
+								variant="standard"
+								sx={{
+									fontSize: "1.2rem"
+								}}>
 								<MenuItem value="Daily Journal">Daily Journal</MenuItem>
 								<MenuItem value="Gratitude Journal">Gratitude Journal</MenuItem>
 								<MenuItem value="Reflective Journal">Reflective Journal</MenuItem>
@@ -96,29 +127,28 @@ const Journal = ({ date, title, journalType, entryText, setJournal, editJournal 
 								<MenuItem value="Dream Journal">Dream Journal</MenuItem>
 							</Select>
 						</FormControl>
-
-						<TextField
-							fullWidth
-							margin="normal"
-							id="entry"
-							label="Journal Entry"
-							name="entryText"
-							multiline
-							rows={4}
-							value={tempJournal.entryText}
-							onChange={handleChange}
-							variant="outlined"
-							placeholder="Start your entry here..."
-						/>
-
-						<Button
-							type="submit"
-							variant="contained"
-							color="primary"
-							sx={{ mt: 3, mb: 2 }}>
-							Submit
-						</Button>
 					</Box>
+
+					<TextField
+						margin="normal"
+						id="entry"
+						label="Journal Text"
+						name="entryText"
+						multiline
+						value={tempJournal.entryText}
+						onChange={handleChange}
+						variant="outlined"
+						placeholder="Start your entry here..."
+						sx={{ width: "75%", mt: 3, mx: "auto" }}
+					/>
+
+					<Button
+						type="submit"
+						variant="contained"
+						color="secondary"
+						sx={{ width: "25%", mt: 3, mb: 2, mx: "auto" }}>
+						Submit
+					</Button>
 				</Box>
 			)}
 		</>
