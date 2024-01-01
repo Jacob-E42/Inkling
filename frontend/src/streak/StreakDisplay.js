@@ -10,7 +10,7 @@ import ApiContext from "../context_providers/ApiContext";
 import UserContext from "../context_providers/UserContext";
 
 const StreakDisplay = ({ date }) => {
-	// console.debug("StreakDisplay", date);
+	console.debug("StreakDisplay", date);
 	const allInfoPresent = validateDate(date);
 	const currentDayRef = useRef(null);
 	const { user } = useContext(UserContext);
@@ -20,13 +20,14 @@ const StreakDisplay = ({ date }) => {
 	const [slidesLoaded, setSlidesLoaded] = useLocalStorage("slidesLoaded", false);
 
 	useEffect(() => {
+		console.debug(currentDayRef.current, date);
 		if (currentDayRef.current) {
 			currentDayRef.current.scrollIntoView({ behavior: "auto", block: "nearest", inline: "start" });
 		}
-	}, [date, setSlidesLoaded]);
+	}, [date, daysArray]);
 
 	const loadSlides = useCallback(async () => {
-		console.debug("loadSlides", api);
+		// console.debug("loadSlides", api);
 		if (!api) {
 			console.warn("api missing", api, user);
 			return;
