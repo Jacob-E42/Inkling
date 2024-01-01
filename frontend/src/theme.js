@@ -137,11 +137,16 @@ const theme = createTheme({
 						borderBottomColor: "#00A6A6 "
 					},
 					"& .MuiOutlinedInput-root": {
+						"&:not(:hover):not(:focus) fieldset": {
+							border: "none"
+						},
 						"&:hover fieldset": {
 							borderColor: "#57A0D3" // Carolina Blue
+							// border: "none"
 						},
 						"&.Mui-focused fieldset": {
 							borderColor: "#00A6A6"
+							// border: "none"
 						}
 					}
 				}
