@@ -207,7 +207,7 @@ describe("Successful journal fetch", () => {
 		expect(journalType).toHaveTextContent("Daily Journal");
 		expect(screen.getByText("Date: 2023-07-24")).toBeInTheDocument();
 		expect(screen.getByLabelText("Journal Text")).toBeInTheDocument();
-		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("Title")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
 	});
 });
@@ -445,7 +445,7 @@ describe("user can edit journal entry", () => {
 
 		expect(screen.getByText("Date: 2023-07-04")).toBeInTheDocument();
 		expect(screen.getByLabelText("Journal Text")).toBeInTheDocument();
-		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
+		expect(screen.getByPlaceholderText("Title")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
 	});
 
@@ -470,7 +470,7 @@ describe("user can edit journal entry", () => {
 			);
 		});
 
-		const title = screen.getByPlaceholderText("title");
+		const title = screen.getByPlaceholderText("Title");
 		const submitButton = screen.getByText("Submit");
 
 		expect(title.value).toBe("Baking adventure");
