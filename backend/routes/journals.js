@@ -38,13 +38,7 @@ router.get("/date/:entryDate", ensureCorrectUserByUserId, async function (req, r
 		const currentDate = new Date().toISOString().slice(0, 10);
 		const isToday = currentDate === entryDate;
 		if (err instanceof NotFoundError && isToday) {
-			const journal = await Journal.createEntry(
-				userId,
-				`Journal Entry: ${entryDate}`,
-				`Start your entry here...`,
-				entryDate,
-				`Daily Journal`
-			);
+			const journal = await Journal.createEntry(userId, ` `, ` `, entryDate, `Daily Journal`);
 			return res.json({ journal });
 		} else return next(err);
 	}
