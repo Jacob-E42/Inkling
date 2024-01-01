@@ -31,15 +31,15 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
       </div>
     </div>
     <div
-      class="MuiBox-root css-140xlwo"
+      class="MuiBox-root css-1p6qyh7"
     >
       <h5
-        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1a9x10v-MuiTypography-root"
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-1pkksm0-MuiTypography-root"
       >
         Date: 2023-07-04
       </h5>
       <div
-        class="MuiFormControl-root css-19xmn3-MuiFormControl-root"
+        class="MuiFormControl-root css-1vvxkm2-MuiFormControl-root"
       >
         <label
           class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiFormLabel-filled MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1jy569b-MuiFormLabel-root-MuiInputLabel-root"
@@ -105,7 +105,6 @@ exports[`Journal matches snapshot when rendered correctly 1`] = `
           id="entry"
           name="entryText"
           placeholder="Start your entry here..."
-          rows="6"
           style="height: 0px; overflow: hidden;"
         >
            Yesterday I tried baking for the first time like I've always wanted to. It was a complete disaster, but at least it was fun.
