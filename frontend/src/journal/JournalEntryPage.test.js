@@ -205,8 +205,8 @@ describe("Successful journal fetch", () => {
 
 		expect(journalType).toBeInTheDocument();
 		expect(journalType).toHaveTextContent("Daily Journal");
-		expect(screen.getByText("2023-07-24")).toBeInTheDocument();
-		expect(screen.getByLabelText("Journal Entry")).toBeInTheDocument();
+		expect(screen.getByText("Date: 2023-07-24")).toBeInTheDocument();
+		expect(screen.getByLabelText("Journal Text")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
 	});
@@ -258,8 +258,8 @@ describe("it renders new journal entry for current date", () => {
 			);
 		});
 
-		expect(screen.getAllByText(`${currentDate}`)[0]).toBeInTheDocument();
-		expect(screen.getByLabelText("Journal Entry")).toBeInTheDocument();
+		expect(screen.getAllByText(`Date: ${currentDate}`)[0]).toBeInTheDocument();
+		expect(screen.getByLabelText("Journal Text")).toBeInTheDocument();
 	});
 
 	test("JournalEntryPage renders correct title and entry text after switching days", async () => {
@@ -285,7 +285,7 @@ describe("it renders new journal entry for current date", () => {
 				</MemoryRouter>
 			);
 		});
-		const currentDateElement = screen.getAllByText(`${currentDate}`)[0];
+		const currentDateElement = screen.getAllByText(`Date: ${currentDate}`)[0];
 
 		expect(currentDateElement).toBeInTheDocument();
 
@@ -297,10 +297,10 @@ describe("it renders new journal entry for current date", () => {
 		});
 
 		const title = screen.getByLabelText("Title");
-		const entryText = screen.getByLabelText("Journal Entry");
+		const entryText = screen.getByLabelText("Journal Text");
 
 		expect(currentDateElement).not.toBeInTheDocument();
-		expect(screen.getByText(mockSecondResponse.data.journal.entryDate)).toBeInTheDocument();
+		expect(screen.getByText(`Date: ${mockSecondResponse.data.journal.entryDate}`)).toBeInTheDocument();
 		expect(title.value).toBe(mockSecondResponse.data.journal.title);
 		expect(entryText.value).toBe(mockSecondResponse.data.journal.entryText);
 	});
@@ -373,7 +373,7 @@ describe("Failed journal fetch", () => {
 		});
 
 		await waitFor(() => {
-			expect(screen.getByText(`${currentDate}`)).toBeInTheDocument();
+			expect(screen.getByText(`Date: ${currentDate}`)).toBeInTheDocument();
 		});
 	});
 
@@ -443,8 +443,8 @@ describe("user can edit journal entry", () => {
 			);
 		});
 
-		expect(screen.getByText("2023-07-04")).toBeInTheDocument();
-		expect(screen.getByLabelText("Journal Entry")).toBeInTheDocument();
+		expect(screen.getByText("Date: 2023-07-04")).toBeInTheDocument();
+		expect(screen.getByLabelText("Journal Text")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("title")).toBeInTheDocument();
 		expect(screen.getByPlaceholderText("Start your entry here...")).toBeInTheDocument();
 	});
@@ -544,7 +544,7 @@ describe("Receiving Feedback works", () => {
 			);
 		});
 
-		const entryText = screen.getByLabelText("Journal Entry");
+		const entryText = screen.getByLabelText("Journal Text");
 		const submitButton = screen.getByText("Submit");
 		// const selectionMenu = screen.getByLabelText(`Journal Type`);
 		expect(screen.queryByText("Feedback")).not.toBeInTheDocument();
