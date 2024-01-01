@@ -15,7 +15,7 @@ const theme = createTheme({
 			primary: "#343434" // Jet
 		},
 		background: {
-			default: "#f8f9fa" // Lavender Blush
+			default: "#f7f8f8" // A light gray
 		}
 	},
 	typography: {
@@ -94,7 +94,8 @@ const theme = createTheme({
 					color: "#343434"
 				},
 				h5: {
-					marginBottom: 1
+					marginBottom: 1,
+					fontWeight: "normal"
 				},
 				h6: {
 					fontSize: "1rem"
@@ -119,25 +120,21 @@ const theme = createTheme({
 					// 	// sm breakpoint
 					// 	width: "400px"
 					// },
-					// "margin": "auto" // Center the form
+					margin: "auto" // Center the form
 				}
 			}
 		},
 		MuiTextField: {
 			styleOverrides: {
 				root: {
-					// Increased specificity
-					"&&": {
-						width: "75%",
-						my: 1,
-						mx: "auto",
-						color: "red"
-					},
 					"& label.Mui-focused": {
 						color: "#00A6A6" // Persian Green
 					},
 					"& .MuiInput-underline:after": {
 						borderBottomColor: "#00A6A6"
+					},
+					"& .MuiInput-underline:before": {
+						borderBottomColor: "#00A6A6 "
 					},
 					"& .MuiOutlinedInput-root": {
 						"&:hover fieldset": {
@@ -146,6 +143,21 @@ const theme = createTheme({
 						"&.Mui-focused fieldset": {
 							borderColor: "#00A6A6"
 						}
+					}
+				}
+			}
+		},
+		MuiInput: {
+			styleOverrides: {
+				underline: {
+					"&:before": {
+						borderBottom: "none"
+					},
+					"&:after": {
+						borderBottom: "none"
+					},
+					"&:hover:not(.Mui-disabled):before": {
+						borderBottom: "none"
 					}
 				}
 			}
