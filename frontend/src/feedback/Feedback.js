@@ -4,13 +4,17 @@ import { Typography, Box } from "@mui/material";
 function Feedback({ feedback }) {
 	if (!feedback) return null;
 	return (
-		<Box sx={{ my: 2 }}>
+		<Box sx={{ my: 3, mx: "auto", width: "75%", fontFamily: "Roboto" }}>
 			<Typography
-				variant="h6"
+				variant="h4"
 				gutterBottom>
 				Feedback
 			</Typography>
-			<Typography variant="body1">{feedback}</Typography>
+			<Typography
+				variant="subtitle2"
+				sx={{ fontSize: "16px", textAlign: "left" }}>
+				{feedback}
+			</Typography>
 		</Box>
 	);
 }
