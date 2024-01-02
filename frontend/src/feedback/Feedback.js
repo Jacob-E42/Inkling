@@ -1,8 +1,11 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
+import LoadingSpinner from "../common/LoadingSpinner";
 
-function Feedback({ feedback }) {
-	if (!feedback) return null;
+function Feedback({ feedback, feedbackPending }) {
+	// console.debug("Feedback");
+	if (!feedback && !feedbackPending) return null;
+	else if (feedbackPending) return <LoadingSpinner />;
 	return (
 		<Box sx={{ my: 3, mx: "auto", width: "75%", fontFamily: "Roboto" }}>
 			<Typography
