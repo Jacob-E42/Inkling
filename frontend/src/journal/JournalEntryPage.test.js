@@ -289,7 +289,9 @@ describe("it renders new journal entry for current date", () => {
 
 		expect(currentDateElement).toBeInTheDocument();
 
-		const prevDay = screen.getByText(new RegExp(`${mockSecondResponse.data.journal.entryDate.slice(-2)}`, "i"));
+		const prevDay = screen.getAllByText(
+			new RegExp(`${mockSecondResponse.data.journal.entryDate.slice(-2)}`, "i")
+		)[0];
 
 		// eslint-disable-next-line testing-library/no-unnecessary-act
 		await act(async () => {
@@ -587,6 +589,7 @@ describe("emotions work", () => {
 	});
 
 	test("JournalEntryPage changing text and emotions works", async () => {
+		console.log("START TEST: changing emotions work ----------------------->");
 		// eslint-disable-next-line testing-library/no-unnecessary-act
 		await act(async () => {
 			render(
