@@ -230,12 +230,8 @@ const JournalEntryPage = () => {
 					editJournal={editJournal}
 				/>
 			)}
-			{feedbackReceived && currentJournal && (
-				<Feedback
-					feedback={feedback}
-					feedbackPending={feedbackPending.current}
-				/>
-			)}
+			{feedbackPending && !feedbackReceived && <LoadingSpinner />}
+			{feedbackReceived && currentJournal && <Feedback feedback={feedback} />}
 			{emotionsReceived && currentJournal && <Emotions emotions={currentJournal?.emotions} />}
 		</>
 	);
