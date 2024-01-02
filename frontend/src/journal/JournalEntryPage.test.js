@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, act, fireEvent, waitFor, getByRole } from "@testing-library/react";
+import { render, screen, act, fireEvent, waitFor, getByRole, getByPlaceholderText } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { AlertProvider, AnonUserProvider, ApiProvider, UserProvider } from "../mock";
 import JournalEntryPage from "./JournalEntryPage";
@@ -155,6 +155,7 @@ describe("Successful journal fetch", () => {
 	});
 
 	test("JournalEntryPage rendered correctly, matches snapshot", async () => {
+		console.log("BEGIN TEST: renders correctly and matches snapshot---------------->");
 		let asFragment;
 		// eslint-disable-next-line testing-library/no-unnecessary-act
 		await act(async () => {
@@ -178,6 +179,12 @@ describe("Successful journal fetch", () => {
 		});
 
 		expect(asFragment()).toMatchSnapshot();
+		const title = screen.getByPlaceholderText("Title");
+		expect(title.value).toBe("Baking adventure");
+		expect(screen.getByText("Date: 2023-07-24")).toBeInTheDocument();
+		expect(screen.getByText("Daily Journal")).toBeInTheDocument();
+		const regex = /Yesterday I tried baking for the first time/i;
+		expect(screen.getByText(regex)).toBeInTheDocument();
 	});
 
 	test("JournalEntryPage renders expected text", async () => {
@@ -581,7 +588,9 @@ describe("emotions work", () => {
 					config.url === `http://localhost:3001/users/11/journals/dateRange/quickcheck`
 				) {
 					return Promise.resolve(mockAreJournalEntriesResponse);
-				} else if (config.method === "post" && config.url === `http://localhost:3001/emotions/11/`)
+				} else if (config.method === "post" && config.url === `http://localhost:3001/feedback/11/`)
+					return Promise.resolve(mockFeedbackResponse);
+				else if (config.method === "post" && config.url === `http://localhost:3001/emotions/11/`)
 					return Promise.resolve(mockEmotionsResponse);
 				else return Promise.resolve(mockErrorResponse);
 			});
