@@ -20,7 +20,7 @@ const StreakDisplay = ({ date }) => {
 	const [slidesLoaded, setSlidesLoaded] = useLocalStorage("slidesLoaded", false);
 
 	useEffect(() => {
-		console.debug(currentDayRef.current, date);
+		// console.debug(currentDayRef.current, date);
 		if (currentDayRef.current) {
 			currentDayRef.current.scrollIntoView({ behavior: "auto", block: "nearest", inline: "start" });
 		}

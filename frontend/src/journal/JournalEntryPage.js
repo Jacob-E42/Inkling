@@ -183,7 +183,7 @@ const JournalEntryPage = () => {
 				try {
 					console.debug("Journal is valid");
 					const resp = await api.getEmotions(id, userId, entryText, journalType, title, date);
-					console.log(resp);
+					// console.log(resp);
 
 					if (resp) {
 						setMsg("Emotions Received!");
@@ -218,17 +218,6 @@ const JournalEntryPage = () => {
 		// eslint-disable-next-line
 	}, [emotionsPending]);
 
-	// const quickCheckJournal = useCallback(async () => {
-	// 	return await api.quickCheckJournalEntry(user.id, date);
-	// }, [user.id, api, date]);
-
-	// const quickCheckMultipleJournals = useCallback(
-	// 	async dateRange => {
-	// 		return await api.quickCheckJournalEntriesBatch(user.id, dateRange);
-	// 	},
-	// 	[user.id, api]
-	// );
-
 	if (!journalLoaded || !currentJournal) return <LoadingSpinner />;
 
 	// console.log("test", "allInfoDefined", allInfoDefined, "currentJournal", currentJournal);
@@ -247,7 +236,12 @@ const JournalEntryPage = () => {
 					editJournal={editJournal}
 				/>
 			)}
-			{feedbackReceived && currentJournal && <Feedback feedback={feedback} />}
+			{feedbackReceived && currentJournal && (
+				<Feedback
+					feedback={feedback}
+					feedbackPending={feedbackPending}
+				/>
+			)}
 			{emotionsReceived && currentJournal && <Emotions emotions={currentJournal?.emotions} />}
 		</>
 	);
