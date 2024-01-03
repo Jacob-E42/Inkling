@@ -3,7 +3,7 @@
 const db = require("../db");
 const { NotFoundError, BadRequestError, UnauthorizedError, ExpressError } = require("../expressError");
 const { objectDataToSql } = require("../helpers/sql");
-const { isDate, parseISO } = require("date-fns");
+const { isDate, parseISO, isAfter, isEqual } = require("date-fns");
 const { formatJournalDate } = require("../helpers/formatJournalDate");
 
 class Journal {
@@ -53,10 +53,19 @@ class Journal {
 		}
 	}
 
-	static async getDatesRange(userId, dateRange) {
-		console.debug("getDatesRange", userId, dateRange);
-		if (!userId || !dateRange) throw new BadRequestError("Required information is missing!");
+	static async getDatesRange(userId, dateRange, createdAt) {
+		console.debug("getDatesRange", userId, dateRange, createdAt);
+		if (!userId || !dateRange || !createdAt) throw new BadRequestError("Required information is missing!");
 		let journalsByDate = [];
+
+		createdAt = parseISO(createdAt);
+
+		if (dateRange)
+			dateRange = dateRange.filter(dateString => {
+				const date = parseISO(dateString);
+				console.log(date, dateString, createdAt, isEqual(date, createdAt), isAfter(date, createdAt));
+				return isEqual(date, createdAt) || isAfter(date, createdAt);
+			});
 
 		for (let date of dateRange) {
 			let journalByDate = { date, isJournal: false };
