@@ -5,6 +5,7 @@ const journalCreateSchema = require("../schema/journalCreateSchema");
 const journalUpdateSchema = require("../schema/journalUpdateSchema");
 const { BadRequestError, NotFoundError } = require("../expressError");
 const Journal = require("../models/journal");
+const User = require("../models/user");
 const {
 	ensureCorrectUser,
 	ensureCorrectUserByEmail,
@@ -68,7 +69,9 @@ router.post("/dateRange/quickCheck", ensureCorrectUserByUserId, async function (
 
 	// console.log(`User ID is: ${userId}`, `\nDate range is: ${dateRange}`);
 	try {
-		const areJournalEntries = await Journal.getDatesRange(userId, dateRange);
+		const createdAt = await User.getCreatedAtById(userId);
+
+		const areJournalEntries = await Journal.getDatesRange(userId, dateRange, createdAt);
 		console.log("journals/", areJournalEntries);
 		return res.json({ areJournalEntries });
 	} catch (err) {
