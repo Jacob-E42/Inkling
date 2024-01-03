@@ -5,4 +5,11 @@ function formatJournalDate(journal) {
 	journal.entryDate = formattedDate;
 	return journal;
 }
-module.exports = formatJournalDate;
+function formatDate(date) {
+	if (!date) throw new Error("A database result must be provided");
+
+	const formattedDate = date.toISOString().split("T")[0];
+
+	return formattedDate;
+}
+module.exports = { formatJournalDate, formatDate };
