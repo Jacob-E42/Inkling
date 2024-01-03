@@ -75,9 +75,9 @@ describe("Journal", () => {
 		const userId = 1;
 
 		it("should retrieve an array of journal existences by date range", async () => {
+			// console.log("BEGIN TEST: should retrieve range by dates------------>");
 			const dateRange = ["2022-01-04", "2022-01-05"];
-			const result = await Journal.getDatesRange(userId, dateRange);
-			console.debug(result);
+			const result = await Journal.getDatesRange(userId, dateRange, "2022-01-01");
 
 			expect(result).toBeDefined();
 			expect(Array.isArray(result)).toBe(true);
@@ -92,7 +92,7 @@ describe("Journal", () => {
 			const dateRangeWithError = ["2022-01-04", "2022-01-05", "error-date"];
 
 			try {
-				const result = await Journal.getDatesRange(userId, dateRangeWithError);
+				const result = await Journal.getDatesRange(userId, dateRangeWithError, "2022-01-01");
 
 				expect(result).toBeDefined();
 				expect(Array.isArray(result)).toBe(true);
@@ -104,6 +104,16 @@ describe("Journal", () => {
 			} catch (err) {
 				expect(err instanceof ExpressError).toBeFalsy();
 			}
+		});
+
+		it("should only return dates after the user was created", async () => {
+			const dateRange = ["2021-01-04", "2022-01-05"];
+			const result = await Journal.getDatesRange(userId, dateRange, "2022-01-01");
+			console.debug(result);
+
+			expect(result).toBeDefined();
+			expect(Array.isArray(result)).toBe(true);
+			expect(result).toEqual([{ date: "2022-01-05", isJournal: false }]);
 		});
 	});
 
@@ -201,62 +211,6 @@ describe("Journal", () => {
 			}
 		});
 	});
-
-	// describe("updateEntry", function () {
-	// 	const updateData = {
-	// 		firstName: "NewF",
-	// 		lastName: "NewL",
-	// 		date: "new@date.com",
-	// 		interests: ["interest1", "interest3"]
-	// 	};
-
-	// 	test("works", async function () {
-	// 		let Journal = await Journal.update("Journal1@Journal.com", updateData);
-	// 		console.log(Journal);
-	// 		expect(Journal).toEqual({
-	// 			firstName: "NewF",
-	// 			lastName: "NewL",
-	// 			date: "new@date.com",
-	// 			interests: ["interest1", "interest3"]
-	// 		});
-	// 	});
-
-	// 	test("works: set password", async function () {
-	// 		let Journal = await Journal.update("Journal1@Journal.com", {
-	// 			password: "newfht55"
-	// 		});
-	// 		expect(Journal).toEqual({
-	// 			firstName: "U1F",
-	// 			lastName: "U1L",
-	// 			date: "Journal1@Journal.com",
-	// 			interests: ["interest1", "interest2"]
-	// 		});
-	// 		const found = await db.query("SELECT * FROM Journals WHERE date = 'Journal1@Journal.com'");
-	// 		expect(found.rows.length).toEqual(1);
-	// 		expect(found.rows[0].password.startsWith("$2b$")).toEqual(true);
-	// 	});
-
-	// 	test("not found if no such Journal", async function () {
-	// 		try {
-	// 			await Journal.update("nope@date.com", {
-	// 				firstName: "test"
-	// 			});
-	// 			fail();
-	// 		} catch (err) {
-	// 			expect(err instanceof NotFoundError).toBeTruthy();
-	// 		}
-	// 	});
-
-	// 	test("bad request if no data", async function () {
-	// 		expect.assertions(1);
-	// 		try {
-	// 			await Journal.update("Journal1@Journal.com", {});
-	// 			fail();
-	// 		} catch (err) {
-	// 			expect(err instanceof BadRequestError).toBeTruthy();
-	// 		}
-	// 	});
-	// });
 
 	/************************************** remove */
 
