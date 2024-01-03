@@ -6,6 +6,7 @@ const db = require("../db");
 const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
 const { BCRYPT_WORK_FACTOR } = require("../config.js");
 const { objectDataToSql } = require("../helpers/sql");
+const { formatDate } = require("../helpers/formatJournalDate.js");
 
 // Define the User class
 class User {
@@ -52,6 +53,27 @@ class User {
 
 		// If the user is found, return it
 		return user;
+	}
+
+	// Method to retrieve a user's created_at date by their id
+	// Throws a NotFoundError if the user is not found
+	static async getCreatedAtById(id) {
+		console.debug("getCreatedAtById", id);
+		// Define the SQL query
+		const query = {
+			text: "SELECT created_at AS createdAt FROM users WHERE id = $1",
+			values: [id]
+		};
+
+		// Execute the query
+		const res = await db.query(query);
+		const createdAt = res.rows[0].createdat;
+		console.log(res, createdAt);
+		// If no user is found, throw an error
+		if (!createdAt) throw new NotFoundError(`No user with id: ${id}}`);
+
+		// If the user is found, return it
+		return formatDate(createdAt);
 	}
 
 	// Method to register a new user
