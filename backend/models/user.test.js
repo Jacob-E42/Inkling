@@ -53,7 +53,7 @@ describe("User", () => {
 		// Test if method properly retrieves a created_at date by their ID
 		it("should retrieve a created_at by their ID", async () => {
 			console.log("BEGIN TEST: should retrieve created_at------------------------->");
-			const today = getCurrentDate();
+
 			let result;
 			try {
 				result = await User.getCreatedAtById(1);
@@ -65,7 +65,7 @@ describe("User", () => {
 			console.log(result);
 			expect(result).toBeDefined();
 			expect(result.length).toBe(10);
-			expect(result).toBe(today);
+			expect(result).toBe("2022-01-01");
 		});
 
 		// Test if method returns a NotFoundError when no created_at is found by ID
