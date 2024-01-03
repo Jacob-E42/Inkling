@@ -14,10 +14,12 @@ async function commonBeforeAll() {
 	await db.query("SELECT setval('users_id_seq', 1, false)");
 	await db.query("SELECT setval('journal_entries_id_seq', 1, false)");
 
-	await User.register("U1F", "U1L", "user1@user.com", "password1", "2022-01-01");
-	await User.register("U2F", "U2L", "user2@user.com", "password2", "2022-01-01");
-	await User.register("U3F", "U3L", "user3@user.com", "password3", "2022-01-01");
-	await User.register("testfirst", "testlast", "test@test.net", "zoomfoog42", "2022-01-01");
+	await User.register("U1F", "U1L", "user1@user.com", "password1");
+	await User.register("U2F", "U2L", "user2@user.com", "password2");
+	await User.register("U3F", "U3L", "user3@user.com", "password3");
+	await User.register("testfirst", "testlast", "test@test.net", "zoomfoog42");
+
+	await User.update("user1@user.com", { created_at: "2022-01-01" });
 
 	await Journal.createEntry(
 		1,
