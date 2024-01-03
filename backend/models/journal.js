@@ -4,7 +4,7 @@ const db = require("../db");
 const { NotFoundError, BadRequestError, UnauthorizedError, ExpressError } = require("../expressError");
 const { objectDataToSql } = require("../helpers/sql");
 const { isDate, parseISO } = require("date-fns");
-const formatJournalDate = require("../helpers/formatJournalDate");
+const { formatJournalDate } = require("../helpers/formatJournalDate");
 
 class Journal {
 	// Method to retrieve a journal by its ID
@@ -62,7 +62,7 @@ class Journal {
 			let journalByDate = { date, isJournal: false };
 			if (!isDate(parseISO(date))) {
 				journalByDate.date = false;
-				isJournal = false;
+
 				continue;
 			}
 			let resp;
