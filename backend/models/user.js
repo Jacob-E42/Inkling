@@ -68,7 +68,7 @@ class User {
 		// Execute the query
 		const res = await db.query(query);
 		const createdAt = res.rows[0].createdat;
-		console.log(res, createdAt);
+
 		// If no user is found, throw an error
 		if (!createdAt) throw new NotFoundError(`No user with id: ${id}}`);
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
-import LoadingSpinner from "../common/LoadingSpinner";
 
 function Feedback({ feedback }) {
 	// console.debug("Feedback");
