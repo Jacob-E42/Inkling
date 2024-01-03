@@ -81,147 +81,147 @@ describe("User", () => {
 
 	// Similar blocks for getByEmail, register, and authenticate methods
 
-	// describe("getByEmail", () => {
-	// 	it("should retrieve a user by their email", async () => {
-	// 		const email = "user1@user.com";
-	// 		const result = await User.getByEmail(email);
+	describe("getByEmail", () => {
+		it("should retrieve a user by their email", async () => {
+			const email = "user1@user.com";
+			const result = await User.getByEmail(email);
 
-	// 		expect(result).toBeDefined();
+			expect(result).toBeDefined();
 
-	// 		expect(result.email).toBe(email);
-	// 	});
+			expect(result.email).toBe(email);
+		});
 
-	// 	it("should should return NotFoundError if user with that email doesn't exist", async () => {
-	// 		try {
-	// 			await User.getByEmail("thiswontwork@email.com");
-	// 			fail();
-	// 		} catch (err) {
-	// 			expect(err instanceof NotFoundError).toBeTruthy();
-	// 		}
-	// 	});
-	// });
+		it("should should return NotFoundError if user with that email doesn't exist", async () => {
+			try {
+				await User.getByEmail("thiswontwork@email.com");
+				fail();
+			} catch (err) {
+				expect(err instanceof NotFoundError).toBeTruthy();
+			}
+		});
+	});
 
-	// describe("register", () => {
-	// 	it("should register a new user", async () => {
-	// 		const firstName = "John";
-	// 		const lastName = "Doe";
-	// 		const email = "test@example.com";
-	// 		const password = "password";
+	describe("register", () => {
+		it("should register a new user", async () => {
+			const firstName = "John";
+			const lastName = "Doe";
+			const email = "test@example.com";
+			const password = "password";
 
-	// 		const result = await User.register(firstName, lastName, email, password);
+			const result = await User.register(firstName, lastName, email, password);
 
-	// 		expect(result).toBeDefined();
-	// 		expect(result.first_name).toBe(firstName);
-	// 		expect(result.last_name).toBe(lastName);
-	// 		expect(result.email).toBe(email);
-	// 	});
+			expect(result).toBeDefined();
+			expect(result.first_name).toBe(firstName);
+			expect(result.last_name).toBe(lastName);
+			expect(result.email).toBe(email);
+		});
 
-	// 	it("should throw BadRequestError if user with the same email already exists", async () => {
-	// 		const firstName = "John";
-	// 		const lastName = "Doe";
-	// 		const email = "john@example.com";
-	// 		const password = "password";
+		it("should throw BadRequestError if user with the same email already exists", async () => {
+			const firstName = "John";
+			const lastName = "Doe";
+			const email = "john@example.com";
+			const password = "password";
 
-	// 		try {
-	// 			await User.register(firstName, lastName, email, password);
-	// 		} catch (error) {
-	// 			expect(error).toBeInstanceOf(BadRequestError);
-	// 			expect(error.message).toBe("User with this email already exists");
-	// 		}
-	// 	});
-	// });
+			try {
+				await User.register(firstName, lastName, email, password);
+			} catch (error) {
+				expect(error).toBeInstanceOf(BadRequestError);
+				expect(error.message).toBe("User with this email already exists");
+			}
+		});
+	});
 
-	// describe("authenticate", function () {
-	// 	test("works", async function () {
-	// 		let res;
-	// 		try {
-	// 			res = await User.authenticate("user1@user.com", "password1");
-	// 		} catch (err) {
-	// 			console.error(err);
-	// 		}
+	describe("authenticate", function () {
+		test("works", async function () {
+			let res;
+			try {
+				res = await User.authenticate("user1@user.com", "password1");
+			} catch (err) {
+				console.error(err);
+			}
 
-	// 		expect(res).toEqual({
-	// 			id: 1,
-	// 			firstName: "U1F",
-	// 			lastName: "U1L",
-	// 			email: "user1@user.com"
-	// 		});
-	// 	});
+			expect(res).toEqual({
+				id: 1,
+				firstName: "U1F",
+				lastName: "U1L",
+				email: "user1@user.com"
+			});
+		});
 
-	// 	test("unauth if no such user", async function () {
-	// 		try {
-	// 			await User.authenticate("horseface@test.com", "password");
-	// 			fail();
-	// 		} catch (err) {
-	// 			expect(err instanceof UnauthorizedError).toBeTruthy();
-	// 		}
-	// 	});
+		test("unauth if no such user", async function () {
+			try {
+				await User.authenticate("horseface@test.com", "password");
+				fail();
+			} catch (err) {
+				expect(err instanceof UnauthorizedError).toBeTruthy();
+			}
+		});
 
-	// 	test("unauth if wrong password", async function () {
-	// 		try {
-	// 			await User.authenticate("user1@user.com", "wrong");
-	// 			fail();
-	// 		} catch (err) {
-	// 			// console.log(err);
-	// 			expect(err instanceof UnauthorizedError).toBeTruthy();
-	// 		}
-	// 	});
-	// });
+		test("unauth if wrong password", async function () {
+			try {
+				await User.authenticate("user1@user.com", "wrong");
+				fail();
+			} catch (err) {
+				// console.log(err);
+				expect(err instanceof UnauthorizedError).toBeTruthy();
+			}
+		});
+	});
 
 	/************************************** update */
 
-	// describe("update", function () {
-	// 	const updateData = {
-	// 		firstName: "NewF",
-	// 		lastName: "NewL",
-	// 		email: "new@email.com"
-	// 	};
+	describe("update", function () {
+		const updateData = {
+			firstName: "NewF",
+			lastName: "NewL",
+			email: "new@email.com"
+		};
 
-	// 	test("works", async function () {
-	// 		let user = await User.update("user1@user.com", updateData);
-	// 		console.log(user);
-	// 		expect(user).toEqual({
-	// 			firstName: "NewF",
-	// 			lastName: "NewL",
-	// 			email: "new@email.com"
-	// 		});
-	// 	});
+		test("works", async function () {
+			let user = await User.update("user1@user.com", updateData);
+			console.log(user);
+			expect(user).toEqual({
+				firstName: "NewF",
+				lastName: "NewL",
+				email: "new@email.com"
+			});
+		});
 
-	// 	test("works: set password", async function () {
-	// 		let user = await User.update("user1@user.com", {
-	// 			password: "newfht55"
-	// 		});
-	// 		expect(user).toEqual({
-	// 			firstName: "U1F",
-	// 			lastName: "U1L",
-	// 			email: "user1@user.com"
-	// 		});
-	// 		const found = await db.query("SELECT * FROM users WHERE email = 'user1@user.com'");
-	// 		expect(found.rows.length).toEqual(1);
-	// 		expect(found.rows[0].password.startsWith("$2b$")).toEqual(true);
-	// 	});
+		test("works: set password", async function () {
+			let user = await User.update("user1@user.com", {
+				password: "newfht55"
+			});
+			expect(user).toEqual({
+				firstName: "U1F",
+				lastName: "U1L",
+				email: "user1@user.com"
+			});
+			const found = await db.query("SELECT * FROM users WHERE email = 'user1@user.com'");
+			expect(found.rows.length).toEqual(1);
+			expect(found.rows[0].password.startsWith("$2b$")).toEqual(true);
+		});
 
-	// 	test("not found if no such user", async function () {
-	// 		try {
-	// 			await User.update("nope@email.com", {
-	// 				firstName: "test"
-	// 			});
-	// 			fail();
-	// 		} catch (err) {
-	// 			expect(err instanceof NotFoundError).toBeTruthy();
-	// 		}
-	// 	});
+		test("not found if no such user", async function () {
+			try {
+				await User.update("nope@email.com", {
+					firstName: "test"
+				});
+				fail();
+			} catch (err) {
+				expect(err instanceof NotFoundError).toBeTruthy();
+			}
+		});
 
-	// 	test("bad request if no data", async function () {
-	// 		expect.assertions(1);
-	// 		try {
-	// 			await User.update("user1@user.com", {});
-	// 			fail();
-	// 		} catch (err) {
-	// 			expect(err instanceof BadRequestError).toBeTruthy();
-	// 		}
-	// 	});
-	// });
+		test("bad request if no data", async function () {
+			expect.assertions(1);
+			try {
+				await User.update("user1@user.com", {});
+				fail();
+			} catch (err) {
+				expect(err instanceof BadRequestError).toBeTruthy();
+			}
+		});
+	});
 
 	/************************************** remove */
 
