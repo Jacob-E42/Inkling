@@ -15,7 +15,6 @@ describe("generateMessages", () => {
 			"I would like to start being more grateful for the little things in life. As part of that I will try to appreciate whatever nice things happen to me unexpectedly.";
 
 		const response = generateMessages(entryText, "Gratitude Journal");
-		// console.log(response);
 		expect(response).toBeDefined();
 		expect(typeof response).toBe("object");
 	});
@@ -24,7 +23,6 @@ describe("generateMessages", () => {
 			"I would like to start being more grateful for the little things in life. As part of that I will try to appreciate whatever nice things happen to me unexpectedly.";
 
 		const response = generateMessages(entryText, "Gratitude Journal");
-		// console.log(response);
 
 		expect(response.length).toBe(2);
 		expect(response[0].role).toBeDefined();
@@ -49,7 +47,6 @@ describe("configureChatOptions", () => {
 		expect(options.temperature).toBeOneOf([1, 1.5]);
 		expect(options.n).toBeOneOf([1, 2]);
 		expect(options.top_p).toBeOneOf([0.5, 1]);
-		// console.log(options.user, typeof options.user);
 		expect(Number(options.user)).toBeNumber();
 		expect(options.messages).toBeDefined();
 	});
@@ -59,26 +56,22 @@ describe("getCompletion", () => {
 	test("throws errors if info is missing", async () => {
 		try {
 			let response = await getCompletion("Hi", "55");
-			// console.log(response);
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
 
 		try {
 			response = await getCompletion("Hi", "Gratitude Journfdsal", "55");
-			// console.log(response);
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
 		try {
 			response = await getCompletion("", "Gratitude Journal", "55");
-			// console.log(response);
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
 		try {
 			response = await getCompletion(" ", "Gratitude Journal", "55");
-			// console.log(response);
 		} catch (err) {
 			expect(err instanceof BadRequestError).toBeTruthy();
 		}
@@ -86,7 +79,6 @@ describe("getCompletion", () => {
 
 	test("Works", async () => {
 		let response = await getCompletion("Hi", "Gratitude Journal", "55");
-		console.log(response);
 		expect(typeof response).toBe("string");
 		expect(response.split(" ").length).toBeGreaterThan(1);
 	}, 30000);
@@ -97,7 +89,6 @@ describe("getCompletion", () => {
 			"Gratitude Journal",
 			"55"
 		);
-		console.log(response);
 		expect(response).toContain("cat");
 		expect(response.length).toBeGreaterThan(750);
 	}, 60000);
@@ -107,7 +98,6 @@ describe("getCompletion", () => {
 			"Daily Journal",
 			"55"
 		);
-		// console.log(response);
 		expect(response).toContain("gym");
 		expect(response.length).toBeGreaterThan(750);
 	}, 45000);
@@ -117,7 +107,6 @@ describe("getCompletion", () => {
 			"Reflective Journal",
 			"55"
 		);
-		// console.log(response);
 		expect(response).toContain("room");
 		expect(response).toContain("childhood");
 		expect(response.length).toBeGreaterThan(750);
@@ -128,7 +117,6 @@ describe("getCompletion", () => {
 			"Stream-of-Consciousness Journal",
 			"55"
 		);
-		// console.log(response);
 		expect(response).toContain("feelings");
 		expect(response.length).toBeGreaterThan(750);
 	}, 45000);
@@ -138,7 +126,6 @@ describe("getCompletion", () => {
 			"Bullet Journal",
 			"55"
 		);
-		// console.log(response);
 		expect(response).toContain("dog");
 		expect(response).toContain("sun");
 		expect(response.length).toBeGreaterThan(750);
@@ -149,7 +136,6 @@ describe("getCompletion", () => {
 			"Dream Journal",
 			"55"
 		);
-		// console.log(response);
 		expect(response).toContain("shark");
 		expect(response.length).toBeGreaterThan(750);
 	}, 45000);

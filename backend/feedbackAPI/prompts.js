@@ -36,13 +36,13 @@ async function getCompletion(entryText, journalType, userId) {
 
 	// Configure chat options for the OpenAI API request
 	const chatOptions = configureChatOptions(entryText, journalType, userId);
-	// console.debug("MAX TOKENS --->", chatOptions.max_tokens);
+
 	// Make the request to the OpenAI API
 	try {
 		const chatCompletion = await openai.chat.completions.create({
 			...chatOptions
 		});
-		// console.log(chatCompletion.choices);
+
 		return chatCompletion.choices[0].message.content;
 	} catch (error) {
 		if (error.response) {
@@ -91,7 +91,6 @@ function getMaxTokens(messages) {
 	if (!messages) return null;
 	let messagesLength = messages[0].content.length + messages[1].content.length;
 	const appxTokens = parseInt(messagesLength / 4.25);
-	// console.log(messagesLength, appxTokens);
 	return 4097 - appxTokens - 10;
 }
 

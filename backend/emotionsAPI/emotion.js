@@ -21,15 +21,6 @@ async function getNLU(entryText) {
 		!naturalLanguageUnderstanding.version ||
 		!naturalLanguageUnderstanding.authenticator
 	) {
-		console.log(
-			naturalLanguageUnderstanding,
-			"version=",
-			naturalLanguageUnderstanding.version,
-			"authenticator=",
-			naturalLanguageUnderstanding.authenticator,
-			"serviceUrl=",
-			naturalLanguageUnderstanding.serviceUrl
-		);
 		throw new ExpressError("NLU instance did not configure correctly");
 	}
 
