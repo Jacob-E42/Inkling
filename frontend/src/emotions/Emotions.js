@@ -26,7 +26,7 @@ const Emotions = ({ emotions }) => {
 	};
 
 	return (
-		<Box sx={{ maxWidth: "50vw", mx: "auto", my: 4 }}>
+		<Box sx={{ maxWidth: "40vw", mx: "auto", my: 4 }}>
 			<Typography
 				variant="h6"
 				gutterBottom>
